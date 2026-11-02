@@ -35,7 +35,7 @@ PASTE-MANIFEST.md    generated: every block, its URL, and the paste order
 - **The sidebar is one synced pattern in WordPress** (pattern 612, `SIDEBAR_PATTERN` in `ytconf.py`), placed at the top of every page and essay. `01-sidebar.html` deploys into that pattern, so a sidebar change is one write.
 - **A page deploy replaces only the inside of the page's one Custom HTML block.** The pattern reference, the block's name and anything else on the page are kept. A page with more than one HTML block is refused until you merge them by hand.
 - **It touches only the URLs listed in `generators/ytconf.py`, the essay blocks and the sidebar pattern.** Everything is looked up before the first write, so a missing page stops the run with nothing written. It never creates pages.
-- **It never changes a page's status.** A new essay is created as a **draft** in its category; you publish it in WordPress.
+- **It never changes an existing page's status.** A new essay is created **published** in its category, so merging an essay puts it live (`NEW_POST_STATUS` in `ytconf.py`; set it to `draft` to review in WordPress first).
 - **Every write is read back.** If WordPress stored something different (a security plugin stripping scripts, say), the page is restored to its previous content and the run fails.
 - Unchanged pages are skipped, so a rerun is harmless.
 - **The only removal is `RETIRED` in `ytconf.py`:** old pages listed there by WordPress ID are moved to the Trash (restorable for 30 days), and only if that ID still has the listed address. Add a page there to retire it; the plan shows it as `TRASH` first.
@@ -60,7 +60,7 @@ To switch publishing off, delete the `WP_APP_PASSWORD` secret, or revoke the app
 1. Add its entry to `YOAST` in `generators/yoast.py`.
 2. Write `generators/rewrite/NN-<slug>.py`; copy an existing spec for the shape.
 3. Run it, then `bash generators/build.sh`. The `/writing` hub regenerates from the essays automatically.
-4. Open a pull request and merge it. The deploy creates the essay as a **draft** in its category and updates `/writing`. Review the draft in WordPress and publish it.
+4. Open a pull request and merge it. The deploy publishes the essay in its category and updates `/writing`. Merging is publishing, so read the essay before you merge.
 
 Every outside claim in an essay links to a primary source that was actually read. Section 5 of `HANDOVER-V4.md` has the details and the linking rules.
 
