@@ -96,11 +96,21 @@ def find(wp, kind, path, f):
     if f in C.WP_IDS:
         return wp.call("GET", "%s/%d" % (kind, C.WP_IDS[f]), query={"context": "edit"})
     if path == "/":
-        s = wp.call("GET", "settings")
-        pid = s.get("page_on_front") if isinstance(s, dict) else None
-        if not pid:
-            raise SystemExit("cannot find the front page; add its ID to ytconf.WP_IDS['%s']" % f)
-        return wp.call("GET", "pages/%d" % pid, query={"context": "edit"})
+        # The front page is the one page whose permalink is the site root.
+        # Found from the page list, because /settings needs admin rights and
+        # security plugins often block it.
+        hits, n = [], 1
+        while True:
+            got = wp.call("GET", "pages", query={"status": STATUSES, "context": "edit",
+                                                 "per_page": 100, "page": n})
+            hits += [h for h in got if path_of(h.get("link", "")) == "/"]
+            if len(got) < 100:
+                break
+            n += 1
+        if len(hits) != 1:
+            raise SystemExit("found %d pages at the site root; add the front page ID to "
+                             "ytconf.WP_IDS['%s']" % (len(hits), f))
+        return hits[0]
     slug = path.rstrip("/").split("/")[-1]
     hits = wp.call("GET", kind, query={"slug": slug, "status": STATUSES, "context": "edit", "per_page": 20})
     hits = [h for h in hits if path_of(h.get("link", "")) == path]
