@@ -53,6 +53,8 @@ Manual runs: **Actions → checks → Run workflow** offers `plan` or `apply`, f
 4. **Optional, Yoast fields:** in WordPress, Plugins → Add New → Upload Plugin → `wordpress/yt-yoast-rest.zip` → Install Now → Activate. Then set `YOAST_REST = True` in `generators/ytconf.py` (or add a repository variable `YOAST_REST` = `1`). From then on the deploy also sets each page's SEO title, description and focus keyphrase from `generators/yoast.py`. Without it, you paste those three fields by hand.
 5. **Optional, approval:** Settings → Environments → `production` → Required reviewers. Each deploy then waits for you to click Approve.
 
+After every merge, `tidy-branches.yml` deletes branches whose pull request has been merged (and the live-audit screenshots branch). Branches with open pull requests are never touched.
+
 To switch publishing off, delete the `WP_APP_PASSWORD` secret, or revoke the application password in WordPress. The checks keep running and you paste blocks by hand again.
 
 ## Writing an essay
