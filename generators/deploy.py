@@ -225,6 +225,8 @@ def main():
 
     wp = WP(url, user, pw)
     use_yoast = os.environ.get("YOAST_REST") == "1"
+    if getattr(C, "YOAST_REST", False):
+        use_yoast = True
     changed = skipped = created = 0
     # Find every target before writing anything, so a missing page stops the
     # run before the first write rather than halfway through.

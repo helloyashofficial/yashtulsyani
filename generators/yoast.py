@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-stoics-meant-by-what-is-up-to-us": dict(
+        focus="what is up to us",
+        title="What is up to us: Epictetus on control and other people",
+        desc="What Epictetus meant by what is up to us, read from the Handbook itself, and what the distinction means, and misses, when the thing at stake is love."),
     "what-attachment-styles-actually-measure": dict(
         focus="attachment styles",
         title="Attachment styles: what the research actually measures",
