@@ -40,6 +40,7 @@ ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">the essay o
 
 POST = dict(
     slug="what-it-means-to-call-time-the-fourth-dimension", num=44, cat="Fourth dimension", read="auto",
+    date="2026-11-02",
     gen="rewrite/44-what-it-means-to-call-time-the-fourth-dimension.py",
     title="What it means to call time the fourth dimension, and what it does not",
     dek="In 1908 a mathematician told a room of scientists that space and time on their own would become mere shadows. What he meant is precise, it has been measured, and it is stranger and more modest than the version that travels.",

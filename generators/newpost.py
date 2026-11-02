@@ -174,6 +174,14 @@ def build(spec, write=True):
     # single-space pattern matched nothing and six posts shipped labelled
     # with the template's slug.
     out = must(r"(ESSAY\s{2}·\s{2})[a-z0-9-]+", lambda m: m.group(1) + spec["slug"], out, "header slug")
+    # Publication date, baked so the /writing card and the essay agree before
+    # any script runs. Same format the essay's script upgrades to: 02 Nov 2026.
+    if not spec.get("date"):
+        sys.exit("spec has no date: add date=\"YYYY-MM-DD\" (the day it is published)")
+    import datetime
+    pubd = datetime.date.fromisoformat(spec["date"])
+    shown = "%02d %s %d" % (pubd.day, ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][pubd.month - 1], pubd.year)
+    out = must(r"(<span data-yt-date>)[^<]*(</span>)", lambda m: m.group(1) + shown + m.group(2), out, "date")
     tail = ("     Regenerate with generators/%s\n"
             "     FOCUS KEYPHRASE : %s\n"
             "     SEO TITLE       : %s  [%d chars]\n"

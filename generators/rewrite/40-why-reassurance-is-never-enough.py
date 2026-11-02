@@ -21,6 +21,7 @@ PHYS = '<a href="/writing/what-the-observer-effect-actually-says">what the obser
 
 POST = dict(
     slug="why-reassurance-is-never-enough", num=40, cat="Relationships", read="auto",
+    date="2026-10-24",
     gen="rewrite/40-why-reassurance-is-never-enough.py",
     title="Why reassurance is never enough, and what to do instead",
     dek="Asking someone to promise they still love you works for about an hour. The relief is real, which is exactly why the question comes back, and why it slowly changes the relationship it was meant to protect.",

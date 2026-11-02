@@ -36,7 +36,7 @@
       <a class="yt-post__chip" href="/writing">Writing</a> · <span data-yt-cat>Psychology</span>
     </div>
 
-    <div class="yt-post__meta"><span data-yt-date>Oct 2026</span><span data-yt-updated></span> · <span data-yt-read>12 min read</span></div>
+    <div class="yt-post__meta"><span data-yt-date>02 Nov 2026</span><span data-yt-updated></span> · <span data-yt-read>12 min read</span></div>
 
     <h1 class="yt-post__title">What attachment styles actually measure, and what they cannot tell you</h1>
     <p class="yt-post__dek">Secure, anxious, avoidant: the labels are everywhere, and they began as a newspaper quiz. The research has since moved a long way from boxes, and what it found is more useful than any label.</p>
@@ -416,25 +416,15 @@
     for(var i = 0; i < els.length; i++){ els[i].textContent = text; }
   }
 
-  function yoastReadTime(){
-    /* Yoast publishes its own estimate as <meta name="twitter:data2">, e.g.
-       "12 minutes". Prefer it so this page, the blog hub card and Yoast's own
-       meta all state the same number. The build-time count differed because
-       it measured the article body while Yoast measures the whole content
-       area, and two figures for one post is worse than either being slightly
-       off. Falls back to the baked value if the tag is absent. */
-    var m = document.querySelector('meta[name="twitter:data2"]');
-    if(!m){ return ''; }
-    var v = m.getAttribute('content');
-    if(!v){ return ''; }
-    var n = String(v).match(/(\d+)/);
-    if(!n){ return ''; }
-    return n[1] + ' min read';
-  }
+  /* Reading time is NOT taken from Yoast. On this site every post begins
+     with the sidebar synced pattern, and Yoast counts that pattern's code as
+     words, so its estimate (twitter:data2) came out two to three times too
+     long (a live audit on 3 Nov 2026 found 24 to 29 minutes for essays of
+     2,000 to 2,700 words). The baked value is the body at 225 words a minute,
+     and the /writing card shows the same figure. */
 
   function start(){
     setAll('[data-yt-cat]', category());
-    setAll('[data-yt-read]', yoastReadTime());
 
     var pub = metaOf('article:published_time');
     setAll('[data-yt-date]', fmt(pub));

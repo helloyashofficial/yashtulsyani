@@ -31,6 +31,7 @@ ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">attachment
 
 POST = dict(
     slug="what-the-stoics-meant-by-what-is-up-to-us", num=43, cat="Philosophy", read="auto",
+    date="2026-11-02",
     gen="rewrite/43-what-the-stoics-meant-by-what-is-up-to-us.py",
     title="What the Stoics meant by what is up to us, and what it means for love",
     dek="Epictetus opened his Handbook by dividing the world in two: what is up to us, and what is not. Other people, and how they feel about us, sit on the far side of that line. Read closely, that is less cold than it sounds.",
