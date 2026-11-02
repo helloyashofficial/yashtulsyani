@@ -28,7 +28,7 @@ Safety, in order of importance:
   - Only URLs mapped in ytconf (PAGES, PRIVATE), essay blocks and RETIRED are touched.
     A page that cannot be found is an error; pages are never created.
   - Status is never changed on an existing page or post. A new essay is
-    created as a DRAFT; you publish it in WordPress.
+    created with ytconf.NEW_POST_STATUS (publish: it goes live on merge).
   - The only removal is ytconf.RETIRED: listed old pages are moved to the
     Trash (never deleted outright), and only if the ID still has the listed
     path.
@@ -294,16 +294,16 @@ def main():
                                  "ytconf.WP_IDS) and rerun. Pages are never created automatically." % path)
             title = field(src, r'<h1 class="yt-post__title">(.*?)</h1>')
             cat = field(src, r"<span data-yt-cat>(.*?)</span>")
-            data.update({"title": title, "slug": slug, "status": "draft"})
+            data.update({"title": title, "slug": slug, "status": C.NEW_POST_STATUS})
             data["content"] = content = sidebar_ref() + "\n\n" + block(src)
             if not apply:
-                print("  CREATE draft post %s  (%s)" % (path, cat))
+                print("  CREATE %s post %s  (%s)" % (C.NEW_POST_STATUS, path, cat))
                 created += 1
                 continue
             data["categories"] = [category_id(wp, cat)]
             res = wp.call("POST", "posts", data)
             created += 1
-            print("  created draft post %s, id %d. Publish it in WordPress." % (path, res["id"]))
+            print("  created %s post %s, id %d, in %s" % (res.get("status"), path, res["id"], cat))
         else:
             same = False
             if inner is not None:
@@ -331,8 +331,10 @@ def main():
         stored = back.get("content", {}).get("raw", "")
         if stored.strip() != content.strip():
             # Put the page back the way it was before failing, so a stripped
-            # write never stays live. A new draft is left as a draft.
-            note = "the new draft was left unpublished"
+            # write never stays live. A new post is switched to draft.
+            note = "the new post was switched to draft so a damaged version is not live"
+            if cur is None:
+                wp.call("POST", "posts/%d" % res["id"], {"status": "draft"})
             if cur is not None:
                 wp.call("POST", "%s/%d" % (kind, cur["id"]), {"content": cur.get("content", {}).get("raw", "")})
                 note = "its previous content was restored"

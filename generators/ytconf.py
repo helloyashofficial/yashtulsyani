@@ -33,7 +33,7 @@ PERSON_ID = url("/about") + "#yash"
 CLUSTERS = {
     "Relationships": "why-reassurance-is-never-enough",
     "Philosophy": None,
-    "Psychology": None,
+    "Psychology": "what-attachment-styles-actually-measure",
     "Physics and time": "what-the-observer-effect-actually-says",
     "Fourth dimension": None,
 }
@@ -82,6 +82,10 @@ WP_IDS = {
 # and essay (read from the live site, 2 Nov 2026). 01-sidebar.html deploys
 # into it; pages keep their reference to it.
 SIDEBAR_PATTERN = 612
+
+# Status for a new essay. "publish" makes it live on merge (Yash's choice,
+# 2 Nov 2026); "draft" would wait for someone to publish it in WordPress.
+NEW_POST_STATUS = "publish"
 
 # Old WordPress pages to retire: WordPress page ID -> the path it must have.
 # Every deploy moves these to the Trash (restorable there for 30 days), but

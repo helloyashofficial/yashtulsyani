@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-attachment-styles-actually-measure": dict(
+        focus="attachment styles",
+        title="Attachment styles: what the research actually measures",
+        desc="Attachment styles from the original studies: two dimensions, not types, weak links to childhood, and scores that shift by relationship and over time."),
 }
 
 # Pages, keyed by block file.

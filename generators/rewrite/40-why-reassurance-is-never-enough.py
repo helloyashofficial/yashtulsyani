@@ -38,7 +38,7 @@ POST = dict(
             "The distinction that matters is not between asking and not asking. People in close relationships check in with each other all the time, and they should. The distinction is between a question that wants information and a question that wants a feeling. The first is answered once. The second is answered, felt, and then needed again, sometimes within the hour.",
             "HTML:" + K.callout("definition", "Excessive reassurance seeking",
                 "<p>The research term for the pattern: persistently asking others whether you are worthy or whether they care, even after they have said so. The word that does the work is excessive. It describes a repetition, not a single conversation.</p>"),
-            "This essay is about the second kind of question. It follows the argument of " + BOOK1 + ", which calls the pattern the validation loop, and it sets that argument against what the research actually supports.",
+            "This essay is about the second kind of question. It follows the argument of " + BOOK1 + ", which calls the pattern the validation loop, and it sets that argument against what the research actually supports. It is about a behaviour, not an attachment category; the research on those is set out in <a href=\"/writing/what-attachment-styles-actually-measure\">what attachment styles actually measure</a>.",
         ]),
         ("Why it works, for about an hour", [
             "The first thing to say about reassurance is that it works. That is not a weakness in the argument; it is the whole problem. If asking did nothing, nobody would keep asking.",
@@ -143,6 +143,7 @@ POST = dict(
     ],
     related=[
         ("what-the-observer-effect-actually-says", "What the observer effect actually says, and what it does not", "Physics and time"),
+        ("what-attachment-styles-actually-measure", "What attachment styles actually measure, and what they cannot tell you", "Psychology"),
     ],
 )
 
