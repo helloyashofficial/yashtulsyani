@@ -63,8 +63,8 @@ PAGES = {
     "26-now.html": "/now",
     "27-contact.html": "/contact",
 }
+# Private, noindex pages built here. None at present.
 PRIVATE = {
-    "30-system.html": "/system",
 }
 
 # ---------------------------------------------------------------- deploy
@@ -72,9 +72,8 @@ PRIVATE = {
 # API. It only ever touches the URLs mapped in PAGES, PRIVATE and the essay
 # blocks; anything else on the site is left alone.
 
-# Pages are found by their URL path. The front page has no path of its own,
-# so its WordPress page ID is looked up from the site's settings, or given
-# here. Fill in an ID for any page the lookup cannot find.
+# Pages are found by their URL path. The front page is the one page whose
+# link is the site root. Fill in an ID for any page the lookup cannot find.
 WP_IDS = {
     # "02-home.html": 123,
 }
@@ -84,5 +83,14 @@ WP_IDS = {
 # is how the sidebar reaches single posts. Set this to False only if the
 # theme already injects the sidebar on posts, or it will appear twice.
 SIDEBAR_IN_POSTS = True
+
+# Old WordPress pages to retire: WordPress page ID -> the path it must have.
+# Every deploy moves these to the Trash (restorable there for 30 days), but
+# only if the ID still has that path, so a wrong ID never trashes the wrong
+# page. Already trashed or deleted pages are skipped.
+RETIRED = {
+    623: "/insights",           # the old blog hub, replaced by /writing
+    923: "/life-system-rpg",    # Life System experiment, dropped 2 Nov 2026
+}
 
 # Category IDs are looked up by name and created if missing.

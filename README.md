@@ -14,7 +14,6 @@ generators/          the build: checks, schema, Yoast data, essay pipeline
   rewrite/           one spec file per essay; edit these, never the essay blocks
   templates/         the block every essay is built from
 qa/                  browser tests: layout, contrast, accessibility, widgets
-system/              the Life System engine and its tests
 HANDOVER-V4.md       the full technical handover: read this before changing anything
 PASTE-MANIFEST.md    generated: every block, its URL, and the paste order
 ```
@@ -24,7 +23,7 @@ PASTE-MANIFEST.md    generated: every block, its URL, and the paste order
 1. **Change** on a branch: a page block, an essay spec, `yoast.py` or `ytconf.py`.
 2. **Build:** `bash generators/build.sh`. It must end `BUILD OK`. It regenerates the sidebar widgets, the `/writing` hub, page schema and Yoast headers, so commit what it changes.
 3. **Open a pull request.** GitHub runs two checks:
-   - **Build and gates:** the full build, a check that the committed blocks match what the build produces, the essay content check, and the Life System tests.
+   - **Build and gates:** the full build, a check that the committed blocks match what the build produces, and the essay content check.
    - **Browser QA:** every page at 10 screen widths in light and dark, checking for sideways scroll, clipping, contrast, heading order, accessible names and focus rings.
    - **Deploy plan:** the WordPress pages and posts the merge would change. Nothing is written.
 4. **Merge** once the checks are green. The same checks run again on `main`, and if they pass, **the changed blocks are published to WordPress automatically**.
@@ -36,9 +35,10 @@ PASTE-MANIFEST.md    generated: every block, its URL, and the paste order
 - Each page gets the sidebar block followed by its own block, exactly as when pasted by hand. Each essay gets the sidebar too, which is how it reaches single posts.
 - A sidebar change redeploys every page and essay, since each one carries the sidebar.
 - **It touches only the URLs listed in `generators/ytconf.py` and the essay blocks.** A page it cannot find is an error; it never creates pages.
-- **It never changes a page's status.** `/system` stays private. A new essay is created as a **draft** in its category; you publish it in WordPress.
+- **It never changes a page's status.** A new essay is created as a **draft** in its category; you publish it in WordPress.
 - **Every write is read back.** If WordPress stored something different (a security plugin stripping scripts, say), the page is restored to its previous content and the run fails.
 - Unchanged pages are skipped, so a rerun is harmless.
+- **The only removal is `RETIRED` in `ytconf.py`:** old pages listed there by WordPress ID are moved to the Trash (restorable for 30 days), and only if that ID still has the listed address. Add a page there to retire it; the plan shows it as `TRASH` first.
 
 Manual runs: **Actions → checks → Run workflow** offers `plan` or `apply`, for every block or only the last commit's changes. Use `plan` with `all` to preview a full sync.
 

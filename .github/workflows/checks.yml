@@ -57,8 +57,6 @@ jobs:
           if ls generators/rewrite/[0-9][0-9]-*.py >/dev/null 2>&1; then
             python3 generators/rewrite/qa.py
           fi
-      - name: Life System engine tests
-        run: node system/test-engine.js
 
   browser:
     name: Browser QA (layout, contrast, accessibility)
@@ -115,16 +113,16 @@ jobs:
         id: what
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' ')
+            files=$(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' ')
             echo "mode=plan" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             if [ "${{ inputs.scope }}" = "all" ]; then files="--all"; else
-              files=$(git diff --name-only HEAD~1 HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' '); fi
+              files=$(git diff --name-only --diff-filter=d HEAD~1 HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' '); fi
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
           else
             before="${{ github.event.before }}"
             if [ -z "$before" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then before="HEAD~1"; fi
-            files=$(git diff --name-only "$before" HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' ')
+            files=$(git diff --name-only --diff-filter=d "$before" HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' ')
             echo "mode=apply" >> "$GITHUB_OUTPUT"
           fi
           echo "files=$files" >> "$GITHUB_OUTPUT"

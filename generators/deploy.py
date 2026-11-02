@@ -20,10 +20,13 @@ Optional:
                      Needs wordpress/yt-yoast-rest.php installed on the site.
 
 Safety, in order of importance:
-  - Only URLs mapped in ytconf (PAGES, PRIVATE) and essay blocks are touched.
+  - Only URLs mapped in ytconf (PAGES, PRIVATE), essay blocks and RETIRED are touched.
     A page that cannot be found is an error; pages are never created.
   - Status is never changed on an existing page or post. A new essay is
     created as a DRAFT; you publish it in WordPress.
+  - The only removal is ytconf.RETIRED: listed old pages are moved to the
+    Trash (never deleted outright), and only if the ID still has the listed
+    path.
   - Every write is read back and compared. If WordPress altered the content
     (a security plugin stripping scripts, say), the run fails loudly.
   - Unchanged content is skipped, so re-running is harmless.
@@ -40,7 +43,7 @@ class WP:
         token = base64.b64encode(("%s:%s" % (user, password)).encode()).decode()
         self.auth = "Basic " + token
 
-    def call(self, method, path, data=None, query=None):
+    def call(self, method, path, data=None, query=None, missing_ok=False):
         url = self.base + path
         if query:
             url += "?" + urllib.parse.urlencode(query)
@@ -52,6 +55,9 @@ class WP:
             with urllib.request.urlopen(req, timeout=60) as r:
                 return json.loads(r.read().decode() or "null")
         except urllib.error.HTTPError as e:
+            if missing_ok:
+                if e.code in (404, 410):
+                    return None
             detail = e.read().decode(errors="replace")[:300]
             raise SystemExit("WordPress %s %s returned %d: %s" % (method, path, e.code, detail))
         except urllib.error.URLError as e:
@@ -158,9 +164,11 @@ def main():
     if "01-sidebar.html" in files:
         files = all_files()
     plan = targets(files)
+    retired = getattr(C, "RETIRED", {})
     if not plan:
-        print("nothing to deploy")
-        return
+        if not retired:
+            print("nothing to deploy")
+            return
 
     sidebar = (C.BLOCKS / "01-sidebar.html").read_text(encoding="utf-8")
     url, user, pw = os.environ.get("WP_URL"), os.environ.get("WP_USER"), os.environ.get("WP_APP_PASSWORD")
@@ -174,6 +182,8 @@ def main():
         print("PLAN (no credentials, so nothing compared with the live site):")
         for kind, path, f in plan:
             print("  %-6s %-48s <- %s" % (kind[:-1], path, f))
+        for pid, rpath in sorted(retired.items()):
+            print("  trash  %-48s (page id %d)" % (rpath, pid))
         return
 
     wp = WP(url, user, pw)
@@ -182,6 +192,19 @@ def main():
     # Find every target before writing anything, so a missing page stops the
     # run before the first write rather than halfway through.
     found, missing = {}, []
+    retire = []
+    for pid, rpath in sorted(retired.items()):
+        r = wp.call("GET", "pages/%d" % pid, query={"context": "edit"}, missing_ok=True)
+        if r is None:
+            print("  gone       %s  (id %d no longer exists)" % (rpath, pid))
+            continue
+        if r.get("status") == "trash":
+            print("  gone       %s  (id %d already in the Trash)" % (rpath, pid))
+            continue
+        if path_of(r.get("link", "")) != rpath:
+            raise SystemExit("ytconf.RETIRED says page %d is %s, but WordPress has it at %s. Refusing to "
+                             "trash it; nothing was written." % (pid, rpath, path_of(r.get("link", ""))))
+        retire.append((pid, rpath, r))
     for kind, path, f in plan:
         found[f] = find(wp, kind, path, f)
         if found[f] is None:
@@ -264,8 +287,22 @@ def main():
             got = back.get("meta", {})
             if got.get("_yoast_wpseo_title") != data.get("meta", {}).get("_yoast_wpseo_title"):
                 print("  warn: Yoast fields did not stick on %s; is wordpress/yt-yoast-rest.php installed?" % path)
+    trashed = 0
+    for pid, rpath, r in retire:
+        title = r.get("title", {}).get("raw", "")
+        if not apply:
+            print("  TRASH      %s  (id %d, %s, title %r)" % (rpath, pid, r.get("status"), title))
+            trashed += 1
+            continue
+        res = wp.call("DELETE", "pages/%d" % pid)
+        if res.get("status") != "trash":
+            raise SystemExit("asked WordPress to trash %s (id %d) but it reports status %r"
+                             % (rpath, pid, res.get("status")))
+        trashed += 1
+        print("  trashed    %s  (id %d, %r). Restore it from Pages > Trash within 30 days if needed."
+              % (rpath, pid, title))
     verb = "applied" if apply else "planned"
-    print("%s: %d updated, %d created, %d unchanged" % (verb, changed, created, skipped))
+    print("%s: %d updated, %d created, %d unchanged, %d trashed" % (verb, changed, created, skipped, trashed))
 
 
 if __name__ == "__main__":
