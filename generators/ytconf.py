@@ -32,7 +32,7 @@ PERSON_ID = url("/about") + "#yash"
 # fullstackdigitalmarketer.com.
 CLUSTERS = {
     "Relationships": "why-reassurance-is-never-enough",
-    "Philosophy": None,
+    "Philosophy": "what-the-stoics-meant-by-what-is-up-to-us",
     "Psychology": "what-attachment-styles-actually-measure",
     "Physics and time": "what-the-observer-effect-actually-says",
     "Fourth dimension": None,
