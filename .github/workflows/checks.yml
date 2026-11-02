@@ -1,0 +1,70 @@
+name: checks
+
+# Runs on every pull request and every push to main. Nothing reaches the live
+# site from here: this only proves the blocks are valid before you paste them.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build and gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build (widgets, hub, schema, Yoast, link graph, gates, manifest)
+        run: bash generators/build.sh
+      - name: Generated files are committed
+        # build.sh regenerates the sidebar widgets, the /writing hub, page
+        # schema and Yoast headers. If it changed anything, the committed
+        # blocks are stale: run build.sh locally and commit the result.
+        run: |
+          if ! git diff --exit-code; then
+            echo "::error::build.sh changed committed files. Run it and commit the output."
+            exit 1
+          fi
+      - name: Essay content gate
+        run: |
+          if ls generators/rewrite/[0-9][0-9]-*.py >/dev/null 2>&1; then
+            python3 generators/rewrite/qa.py
+          fi
+      - name: Life System engine tests
+        run: node system/test-engine.js
+
+  browser:
+    name: Browser QA (layout, contrast, accessibility)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Playwright and Chromium
+        run: |
+          cd qa
+          npm init -y >/dev/null
+          npm install playwright@1.48.2 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: Layout and accessibility, every page, 10 widths, both themes
+        run: |
+          cd qa
+          bash mkall.sh
+          pages=$(ls [0-9][0-9]-*.html | sed 's/\.html$//')
+          node suite.js part_all.json $pages
+          python3 check.py
+      - name: Widget runtime
+        run: |
+          cd qa
+          python3 mkwtest.py
+          node wt.js

@@ -1,0 +1,25 @@
+QA run, 24 Oct 2026 13:35 UTC
+
+$ python3 report.py   (suite.js, 12 pages x 10 widths x 2 themes; a11y at 375 and 1440)
+12 pages
+LAYOUT issues: 0
+
+$ node states.js     (every details open, 5 widths x 2 themes)
+states issues: 0
+
+$ python3 mkwtest.py && node wt.js   (widget runtime in the new sidebar)
+calc default [ '468', '4.7', '$56,160', '4.7x' ]
+vol=1000 [ '1,200', '12.0', '$144,000', '12.0x' ]
+plan=12 [ '1,200', '12.0', '$144,000', '1.0x' ]
+empty [ 'n/a', 'n/a', 'n/a', '0.0x' ]
+check 2 of 3 done Nearly there.
+after reload 2 of 3 done
+tabs visible panels [ true, false, false ]
+after arrow [ false, true, false ] Agency
+sorted asc [ 'Row0', 'Row1', 'Row2', 'Row3' ]
+sorted desc [ 'Travel', 'Row9', 'Row8', 'Row7' ]
+filter 1 of 13 rows
+reset 0 of 3 done
+nojs calc [ '468', '4.7', '$56,160', '4.7x' ] tabs panels [ true, true, true ] tablist hidden true
+4 pages
+LAYOUT issues: 0

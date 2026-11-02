@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+# browser QA output: standalone pages and results are regenerated on every run
+qa/[0-9][0-9]-*.html
+qa/wtest.html
+qa/part_*.json
+qa/states.json
+qa/shots/
+node_modules/
+.DS_Store

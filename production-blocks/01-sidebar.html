@@ -1,0 +1,1559 @@
+<!-- ============================================================
+     YT SIDEBAR  ·  v3 (ported from the FSDM sidebar, 24 Oct 2026)
+     Global: paste FIRST, as its own Custom HTML block, on every page
+     and on every post. It is the site's stylesheet as well as its
+     navigation: design tokens, page globals, all post CSS, and the
+     post-widget runtime live here and nowhere else.
+
+     Ported by namespace transform (fs- to yt-) from
+     fullstackdigitalmarketer.com's sidebar, then given this site's
+     navigation: nine slots, shortcuts 1 to 9 plus 0 for home, and
+     a prefix match so /books/<slug> and /writing/<slug> keep their
+     parent lit.
+
+     Edit post and widget CSS HERE. postkit.CSS in generators/ is
+     not the source of it. Widget CSS and JS between the
+     POST-WIDGETS markers are rewritten by install-post-widgets.py.
+
+     Pages wrap their content in <div class="yt-shell">. Leave the
+     fallback padding at the end of the script synchronous: the
+     live layout depends on it running at parse time.
+============================================================ -->
+
+<style>
+  /* @import MUST be the first rule in a stylesheet. It was sitting after
+     the :root token blocks, which means the browser ignored it outright and
+     neither Inter nor JetBrains Mono ever loaded: the whole site was
+     rendering in the Helvetica/Arial fallback. */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ============ GLOBAL TOKENS (light + dark) ============ */
+  :root[data-yt-theme="light"]{
+    --yt-bg:#f5f5f3;
+    --yt-surface:#ffffff;
+    --yt-surface-2:#fafafa;
+    --yt-hover:#eeeeec;
+    --yt-text:#111827;
+    /* Audit fix, Oct 2026: #6b7280 measured 4.43:1 and #9ca3af 2.33:1
+       against the light surfaces; both are used for 10-13px text, which
+       needs 4.5:1. Now 6.9:1 and 5.3:1 on #f5f5f3. */
+    --yt-text-2:#4b5563;
+    --yt-text-3:#5f666d;
+    --yt-fill-2:#6b7280;
+    --yt-fill-3:#9ca3af;
+    --yt-border:#e5e7eb;
+    /* Form fields need their own tokens. --yt-border is a hairline for cards
+       and is far too faint for an input boundary: it measured 1.24:1 in light
+       and 1.20:1 in dark against the surrounding card, where a UI boundary
+       needs 3:1. Placeholders were failing the 4.5:1 text minimum in both
+       themes too. These values are measured, not eyeballed. */
+    --yt-field-bg:#ffffff;
+    --yt-field-border:#8a8f98;
+    --yt-field-ph:#5f6773;
+    --yt-line:#ececea;
+    --yt-accent:#111827;
+    --yt-kbd-bg:#f0f0ee;
+    --yt-active-bg:#ececea;
+    --yt-logo:#111827;
+  }
+  :root[data-yt-theme="dark"]{
+    --yt-bg:#0d0d0d;
+    --yt-surface:#141414;
+    --yt-surface-2:#161616;
+    --yt-hover:#1c1c1c;
+    --yt-text:#fafafa;
+    --yt-text-2:#9ca3af;
+    /* Audit fix: #6b7280 measured 3.74:1 on the dark surfaces. */
+    --yt-text-3:#8b9299;
+    --yt-fill-2:#9ca3af;
+    --yt-fill-3:#6b7280;
+    --yt-border:#252525;
+    /* Field sits LIGHTER than the card in dark mode, which is the convention
+       and the opposite of what this build did before. */
+    --yt-field-bg:#1e1e1e;
+    --yt-field-border:#6a6a6a;
+    --yt-field-ph:#a8aeb8;
+    --yt-line:#1f1f1f;
+    --yt-accent:#fafafa;
+    --yt-kbd-bg:#1c1c1c;
+    --yt-active-bg:#1f1f1f;
+    --yt-logo:#fafafa;
+  }
+  :root{
+    --yt-font-ui:"Inter","Helvetica Neue",Arial,sans-serif;
+    --yt-font-display:"Inter","Helvetica Neue",Arial,sans-serif;
+    --yt-font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    --yt-ease:.18s ease;
+    --yt-sidebar-w:240px;
+    --yt-sidebar-w-mobile:60px;
+  }
+
+  /* Theme-driven background + text colors */
+  html[data-yt-theme]{
+    background:var(--yt-bg);
+    color:var(--yt-text);
+  }
+  html[data-yt-theme] body{
+    background:var(--yt-bg);
+    color:var(--yt-text);
+    font-family:var(--yt-font-ui) !important;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  /* Lock font-family inside our scoped containers regardless of theme overrides */
+  .yt-sidebar, .yt-sidebar *,
+  .yt-page, .yt-page *{
+    font-family:var(--yt-font-ui) !important;
+  }
+  /* Monospace exception for kbd/dates/local time */
+  .yt-sidebar .yt-kbd{
+    font-family:var(--yt-font-mono) !important;
+  }
+  /* Neutralise theme uppercase / heavy letter-spacing on headings */
+  .yt-page h1, .yt-page h2, .yt-page h3, .yt-page h4,
+  .yt-sidebar h1, .yt-sidebar h2, .yt-sidebar h3, .yt-sidebar h4{
+    text-transform:none !important;
+    letter-spacing:-.015em;
+  }
+  /* Reset margins inside our scope */
+  .yt-page p, .yt-page h1, .yt-page h2, .yt-page h3, .yt-page h4{
+    margin:0;
+  }
+
+  /* Content shell, offsets page content beside fixed sidebar */
+  /* Post pages carry no .yt-shell wrapper, so scoping box-sizing to it alone
+     left every post block on content-box: 100% width PLUS padding. Cover the
+     post subtrees explicitly. */
+  /* Tool form fields at 16px on touch. They are 14px by design, and iOS
+     Safari zooms the page on focus for anything under 16 and does not zoom
+     back, which throws the layout sideways the moment someone taps an input.
+     Scoped to coarse pointers so the desktop sizing is untouched. This covers
+     all ten tool pages at once rather than each one separately. */
+  @media (pointer:coarse){
+    .yt-input, .yt-select, .yt-textarea{ font-size:16px !important; }
+  }
+
+  /* Visually hidden but announced. Used for live regions that confirm an
+     action, where showing the text would duplicate what is already on screen. */
+  .yt-sr-only{
+    position:absolute; width:1px; height:1px;
+    padding:0; margin:-1px; overflow:hidden;
+    clip:rect(0 0 0 0); white-space:nowrap; border:0;
+  }
+
+  /* DECORATIVE ICONS. 237 inline SVGs across the site had no aria-hidden, so
+     a screen reader announced each one as an unlabelled graphic between the
+     text it decorates. None of them carry meaning the adjacent text does not
+     already state. Anything that IS meaningful must set role="img" and a
+     title, which this rule leaves alone. */
+  .yt-page svg:not([role]):not([aria-label]),
+  .yt-post svg:not([role]):not([aria-label]){
+    pointer-events:none;
+  }
+
+  /* NARROW SCREENS, site-wide (Oct 2026 responsive audit). A long word in a
+     heading or a long token in a table cell set the minimum width of its
+     row, so at 320px the page scrolled sideways. Words now break only when
+     they cannot fit, and headings may shrink on the smallest phones. */
+  .yt-page, .yt-post{ overflow-wrap:break-word; }
+  /* Long words hyphenate at proper points rather than splitting anywhere;
+     flex children holding a heading may shrink so the hyphenation can act. */
+  .yt-page h1, .yt-page h2, .yt-page h3, .yt-post h1, .yt-post h2, .yt-post h3{ overflow-wrap:break-word; hyphens:auto; -webkit-hyphens:auto; }
+  .yt-page :is(header, div):has(> h1){ min-width:0; }
+  .yt-page :is(header, div) > :is(h1, div):has(> h1), .yt-page header > div{ min-width:0; }
+  @media (max-width:380px){
+    .yt-page h1{ font-size:min(1.75rem, 8.2vw) !important; }
+  }
+
+  /* FOCUS VISIBILITY, site-wide. Three pages had no focus styles at all, so a
+     keyboard user had no indication of position. :focus-visible so it shows
+     for keyboard use and not on mouse click. */
+  .yt-page a:focus-visible,
+  .yt-page button:focus-visible,
+  .yt-page summary:focus-visible,
+  .yt-page [tabindex]:focus-visible{
+    outline:2px solid var(--yt-text, #111827);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  .yt-page a:focus, .yt-page button:focus{
+    outline:2px solid var(--yt-text, #111827); outline-offset:3px;
+  }
+  .yt-page a:focus:not(:focus-visible),
+  .yt-page button:focus:not(:focus-visible){ outline:none; }
+
+  .yt-shell, .yt-shell *, .yt-shell *::before, .yt-shell *::after,
+  .yt-post, .yt-post *, .yt-post *::before, .yt-post *::after{
+    box-sizing:border-box;
+  }
+
+  /* Global form-field readability. Applies to every block, since inputs live
+     on the contact page, the blog hub newsletter and all ten tool pages.
+     --yt-border is a card hairline: it measured 1.2:1 against the surrounding
+     card, where a UI boundary needs 3:1, and placeholders failed the 4.5:1
+     text minimum in BOTH themes. These values are measured, not eyeballed. */
+  .yt-shell input[type="text"],
+  .yt-shell input[type="email"],
+  .yt-shell input[type="url"],
+  .yt-shell input[type="number"],
+  .yt-shell input[type="search"],
+  .yt-shell textarea,
+  .yt-shell select{
+    background:var(--yt-field-bg) !important;
+    border:1px solid var(--yt-field-border) !important;
+    /* The page-level rule pinned every property with !important EXCEPT color,
+       so Kadence's own input colour won and typed text rendered in the theme's
+       muted grey. -webkit-text-fill-color is pinned too because on Chrome and
+       Android it overrides color outright, so pinning color alone is not
+       enough. This is the same Kadence-override trap as button:hover. */
+    color:var(--yt-text) !important;
+    -webkit-text-fill-color:var(--yt-text) !important;
+    caret-color:var(--yt-text) !important;
+    opacity:1 !important;
+  }
+
+  /* Chrome autofill forces its own background and text fill, which on a dark
+     theme lands as dark text on a pale yellow box. The inset shadow repaints
+     the background because autofill ignores background-color. */
+  .yt-shell input:-webkit-autofill,
+  .yt-shell input:-webkit-autofill:hover,
+  .yt-shell input:-webkit-autofill:focus,
+  .yt-shell textarea:-webkit-autofill{
+    -webkit-text-fill-color:var(--yt-text) !important;
+    -webkit-box-shadow:0 0 0 1000px var(--yt-field-bg) inset !important;
+    box-shadow:0 0 0 1000px var(--yt-field-bg) inset !important;
+    caret-color:var(--yt-text) !important;
+  }
+  .yt-shell input::placeholder,
+  .yt-shell textarea::placeholder{
+    color:var(--yt-field-ph) !important;
+    -webkit-text-fill-color:var(--yt-field-ph) !important;
+    opacity:1 !important;
+  }
+  .yt-shell input:focus,
+  .yt-shell textarea:focus,
+  .yt-shell select:focus{
+    outline:2px solid var(--yt-text) !important;
+    outline-offset:1px !important;
+    border-color:var(--yt-text) !important;
+  }
+  .yt-shell{
+    padding-left:var(--yt-sidebar-w);
+    min-height:100vh;
+    margin:0 !important;
+    max-width:none !important;
+    width:auto !important;
+    background:var(--yt-bg);
+    transition:padding-left var(--yt-ease), background var(--yt-ease);
+  }
+  /* Base .yt-page styles, applied on EVERY page so theme switching
+     works consistently across Home, About, Services, etc. */
+  .yt-page{
+    background:var(--yt-bg) !important;
+    color:var(--yt-text);
+    line-height:1.55;
+    min-height:100vh;
+    transition:background var(--yt-ease), color var(--yt-ease);
+    margin:0;
+    max-width:none;
+    width:auto;
+  }
+  /* Kadence sometimes wraps Custom HTML inside .wp-block-html / .entry-content
+     with its own padding. Neutralise within our scope only. */
+  .entry-content > .yt-shell,
+  .wp-block-html > .yt-shell,
+  .yt-shell > .yt-page{
+    margin:0 !important;
+    max-width:none !important;
+    padding-left:0;
+    padding-right:0;
+  }
+  .yt-shell > .yt-page{
+    padding:48px 40px 96px !important;
+  }
+  @media (max-width:900px){
+    .yt-shell{ padding-left:var(--yt-sidebar-w-mobile); }
+    .yt-shell > .yt-page{ padding:32px 24px 64px !important; }
+  }
+
+  /* ============ SIDEBAR ============ */
+  .yt-sidebar{
+    position:fixed;
+    top:0; left:0; bottom:0;
+    width:var(--yt-sidebar-w);
+    background:var(--yt-bg);
+    border-right:1px solid var(--yt-line);
+    padding:24px 16px;
+    display:flex; flex-direction:column;
+    font-family:var(--yt-font-ui);
+    z-index:9000;
+    overflow-y:auto;
+    overflow-x:hidden;
+    transition:width var(--yt-ease), background var(--yt-ease), border-color var(--yt-ease);
+  }
+  .yt-sidebar *, .yt-sidebar *::before, .yt-sidebar *::after{ box-sizing:border-box; }
+  .yt-sidebar a{ color:inherit; text-decoration:none; }
+  .yt-sidebar ul{ list-style:none; padding:0; margin:0; }
+  .yt-sidebar button{ background:none; border:0; padding:0; font:inherit; color:inherit; cursor:pointer; }
+
+  /* Brand mark */
+  .yt-side-brand{
+    display:flex; align-items:center;
+    padding:8px 10px;
+    margin-bottom:24px;
+    border-radius:8px;
+    transition:background var(--yt-ease);
+  }
+  .yt-side-brand:hover{ background:var(--yt-hover); }
+  .yt-side-brand__mark{
+    width:30px; height:30px; flex:none;
+    border-radius:8px;
+    background:var(--yt-logo);
+    color:var(--yt-bg);
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:14px; letter-spacing:-.02em;
+  }
+  .yt-side-brand__name{
+    margin-left:12px;
+    font-size:13px; font-weight:500;
+    letter-spacing:-.01em;
+    line-height:1.25;
+    min-width:0;
+  }
+  .yt-side-brand__line{ display:block; white-space:nowrap; }
+
+  /* Group label */
+  .yt-side-group{
+    margin-top:18px;
+    padding:6px 12px;
+    font-size:11px; font-weight:500;
+    color:var(--yt-text-3);
+    letter-spacing:.02em;
+    text-transform:none;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+
+  /* Nav links */
+  .yt-side-nav{ display:flex; flex-direction:column; gap:1px; }
+  .yt-side-link{
+    display:flex; align-items:center;
+    gap:12px;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:450;
+    letter-spacing:-.005em;
+    color:var(--yt-text);
+    transition:background var(--yt-ease), color var(--yt-ease);
+    position:relative;
+    white-space:nowrap;
+  }
+  .yt-side-link:hover{ background:var(--yt-hover); }
+  .yt-side-link.is-active{ background:var(--yt-active-bg); }
+  .yt-side-link__icon{
+    width:18px; height:18px; flex:none;
+    display:inline-flex; align-items:center; justify-content:center;
+    color:var(--yt-text-2);
+  }
+  .yt-side-link__icon svg{ width:16px; height:16px; }
+  .yt-side-link.is-active .yt-side-link__icon{ color:var(--yt-text); }
+  .yt-side-link__label{
+    flex:1;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .yt-kbd{
+    margin-left:auto;
+    font-family:var(--yt-font-mono);
+    font-size:11px;
+    color:var(--yt-text-3);
+    background:var(--yt-kbd-bg);
+    padding:2px 6px;
+    border-radius:4px;
+    line-height:1.4;
+  }
+  .yt-side-link__arrow{
+    margin-left:auto;
+    color:var(--yt-text-3);
+    font-size:12px;
+    transition:transform var(--yt-ease);
+  }
+  .yt-side-link:hover .yt-side-link__arrow{ transform:translate(2px,-2px); }
+
+  /* Theme toggle */
+  .yt-side-spacer{ flex:1; min-height:24px; }
+  .yt-theme-toggle{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
+    gap:2px;
+    background:var(--yt-surface);
+    border:1px solid var(--yt-border);
+    border-radius:10px;
+    padding:3px;
+    margin-top:12px;
+  }
+  .yt-theme-toggle button{
+    appearance:none !important;
+    -webkit-appearance:none !important;
+    background:transparent !important;
+    border:0 !important;
+    margin:0 !important;
+    padding:8px 4px !important;
+    width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    font-size:12px !important;
+    font-weight:500 !important;
+    line-height:1 !important;
+    text-align:center !important;
+    text-transform:none !important;
+    letter-spacing:0 !important;
+    color:var(--yt-text-2);
+    border-radius:7px;
+    transition:background var(--yt-ease), color var(--yt-ease);
+    white-space:nowrap;
+    cursor:pointer;
+    box-shadow:none !important;
+  }
+  .yt-theme-toggle button:hover{ color:var(--yt-text); background:transparent !important; }
+  .yt-theme-toggle button.is-active{
+    background:var(--yt-active-bg) !important;
+    color:var(--yt-text);
+  }
+  .yt-theme-toggle button:focus{ outline:none; }
+  .yt-theme-toggle button:focus-visible{ outline:2px solid var(--yt-text-3); outline-offset:1px; }
+
+  /* ============ MOBILE (collapsed icon rail) ============ */
+  @media (max-width:900px){
+    .yt-sidebar{
+      width:var(--yt-sidebar-w-mobile);
+      padding:18px 8px;
+    }
+    .yt-side-brand{ justify-content:center; padding:6px; }
+    .yt-side-brand__name,
+    .yt-kbd,
+    .yt-side-link__arrow,
+    .yt-side-group{ display:none; }
+    /* The label used to be display:none here, which left all nine links
+       with an EMPTY accessible name on phones and tablets: a screen
+       reader heard "link" nine times. Hidden visually, still read. */
+    .yt-side-link__label{ position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0 0 0 0) !important; white-space:nowrap !important; border:0 !important; }
+    .yt-side-link{ justify-content:center; padding:10px; }
+    .yt-side-link__icon{ color:var(--yt-text); }
+    .yt-side-link__icon svg{ width:18px; height:18px; }
+    .yt-theme-toggle{
+      grid-template-columns:minmax(0,1fr);
+      gap:1px;
+      padding:2px;
+    }
+    /* WCAG 2.5.8: each option at least 24px tall */
+    .yt-theme-toggle button{
+      padding:7px 2px !important;
+      min-height:26px !important;
+      font-size:10.5px !important;
+    }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      transition-duration:.01ms !important;
+      animation-duration:.01ms !important;
+    }
+  }
+
+  /* Kadence-override: pin button colors across states */
+
+  .yt-theme-toggle button, .yt-theme-toggle button:hover, .yt-theme-toggle button:focus{ color:var(--yt-text-2) !important; }
+  .yt-theme-toggle button:hover{ color:var(--yt-text) !important; }
+  .yt-theme-toggle button.is-active, .yt-theme-toggle button.is-active:hover{ color:var(--yt-text) !important; }
+
+  /* ===== POST STYLES =====
+     Scoped to .yt-post and its components, so they affect nothing
+     outside a post. Edit them here directly, then re-paste this block.
+     (FSDM's comment said they were injected from postkit.POST_CSS;
+     that injector no longer exists and postkit.CSS is stale.) */
+  /* TOKEN NAMES. The sidebar defines --yt-text, --yt-text-2, --yt-text-3,
+     --yt-bg, --yt-surface, --yt-surface-2, --yt-hover, --yt-line, --yt-border,
+     --yt-active-bg, --yt-accent, --yt-logo. There is NO --yt-muted. Using it
+     silently fell back to a literal grey that never flipped with the theme,
+     which is why secondary text stayed dim in dark mode. Check any new token
+     name against 01-sidebar.html before using it. */
+  /* These blocks render INSIDE the WordPress single-post template, which
+     already supplies the sidebar offset and the content column. Wrapping in
+     .yt-shell here double-offset the content by the 240px sidebar width, and
+     margin:0 auto then centred it again inside that. Hence: no shell wrapper,
+     no auto-centring, no horizontal padding. Left edge lines up with the
+     theme's own post title. */
+  /* Proportions taken from the old essay template, which framed the article
+     correctly: max-width 1080, centred, 40px side padding, generous bottom.
+     The TOP padding lives in 06-post-meta.html, which sits directly above
+     this block, so the two do not double up. Reading measure stays ~720px. */
+  /* The sidebar is position:fixed at left:0, so .yt-shell's padding-left is
+     the ONLY thing keeping content clear of it. Removing that wrapper is why
+     post text sat under the sidebar: the 40px padding was applying, it was
+     just 40px against a 240px sidebar. Both post-page blocks carry .yt-shell,
+     one each. They are siblings, not nested, so the offset does not double.
+     Grid and spacing copied from the essay template's .yt-essay-art. */
+  /* LEFT-ALIGNED, not centred. Centring a 1080px container inside a wide
+     content area pushed the article ~350px clear of the sidebar and left the
+     TOC stranded at the far right. Anchored left, the gutter is just the
+     padding and the rail sits next to the text. */
+  /* ORIGINAL CONTAINER, restored. Single column, centred, generous padding.
+     The .yt-shell wrapper supplies the sidebar offset; this just sets the
+     reading measure. No full-bleed, no grid, no rail, nothing that depends on
+     what the theme does with its own container. */
+  /* When the essay template renders, it clones this block into its own
+     article, which already carries the sidebar offset. The cloned .yt-shell
+     would then add a SECOND 240px of padding and another min-height:100vh of
+     blank space. Neutralise it inside the template. Outside the template the
+     wrapper behaves normally and supplies the offset. */
+  [data-yt-essay-shell] .yt-shell,
+  .yt-essay-art__body .yt-shell{
+    padding-left:0 !important;
+    min-height:0 !important;
+  }
+  [data-yt-essay-shell] .yt-post,
+  .yt-essay-art__body .yt-post{
+    padding:0 !important;
+    max-width:none !important;
+  }
+  /* LEFT-ALIGNED, matching every other page. .yt-shell > .yt-page uses
+     `margin:0; max-width:none; padding:48px 40px 96px`, so services, the blog
+     hub and the rest all start their text 40px past the sidebar. Posts were
+     `margin:0 auto`, so their left gutter grew with the viewport and sat 37px
+     further right than everything else on an iPad in landscape.
+
+     max-width is 840 rather than 760 because box-sizing is border-box: 840
+     minus 40px padding each side leaves the 760px reading measure. */
+  .yt-post{ max-width:840px; margin:0; padding:56px 40px 96px; }
+
+
+  .yt-post-shell{ max-width:none; }
+
+
+  /* Category chip. Values copied from the original essay template's
+     .yt-essay-art__cat, which is the look this had before the header was
+     rebuilt: 5px 10px, radius 6, --yt-active-bg, 11.5px, --yt-text-2. */
+  .yt-post__chip{
+    display:inline-flex; align-items:center;
+    padding:5px 10px;
+    background:var(--yt-active-bg);
+    border-radius:6px;
+    font-size:11.5px;
+    letter-spacing:.02em;
+    color:var(--yt-text-2, #6b7280) !important;
+    text-decoration:none !important;
+    text-transform:uppercase;
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    transition:opacity .18s ease;
+  }
+  .yt-post__chip:hover{ opacity:.7; }
+  .yt-post__chip, .yt-post__chip:hover,
+  .yt-post__chip:focus, .yt-post__chip:active{
+    color:var(--yt-text-2, #6b7280) !important; text-decoration:none !important;
+  }
+
+  .yt-post__crumb{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280) !important; margin-bottom:24px;
+  }
+  .yt-post__crumb a{ color:var(--yt-text-2, #6b7280) !important; text-decoration:none; }
+  .yt-post__crumb a:hover{ color:var(--yt-text, #111827) !important; }
+  .yt-post__meta{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280) !important; margin-bottom:12px;
+  }
+  .yt-post__byline{
+    display:flex; align-items:center; gap:12px;
+    padding:14px 0; margin:0 0 36px;
+    border-top:1px solid var(--yt-line);
+    border-bottom:1px solid var(--yt-line);
+  }
+  .yt-post__byline-avatar{
+    width:38px; height:38px; flex-shrink:0; border-radius:9px;
+    background:var(--yt-text); color:var(--yt-bg) !important;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:16px; line-height:1;
+  }
+  .yt-post__byline-name{
+    font-size:14px; font-weight:600; line-height:1.2;
+    color:var(--yt-text, #111827) !important;
+  }
+  .yt-post__byline-role{
+    font-size:12px; line-height:1.3; margin-top:2px;
+    color:var(--yt-text-2, #6b7280) !important;
+  }
+  .yt-post__title{
+    font-size:clamp(28px,4.4vw,42px); line-height:1.18; letter-spacing:-.02em;
+    font-weight:650; color:var(--yt-text); margin:0 0 18px;
+  }
+  .yt-post__dek{
+    font-size:18px; line-height:1.6; color:var(--yt-text-2, #6b7280);
+    margin:0 0 36px; padding-bottom:28px; border-bottom:1px solid var(--yt-line);
+  }
+
+
+  .yt-post__toc{
+    border:1px solid var(--yt-line); border-radius:10px;
+    padding:20px 22px; margin:0 0 44px; background:var(--yt-surface);
+  }
+  .yt-post__toc-label{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280) !important; margin-bottom:12px;
+  }
+  .yt-post__toc ol{ margin:0; padding-left:20px; }
+  .yt-post__toc li{ margin:6px 0; font-size:15px; }
+  .yt-post__toc a{ color:var(--yt-text, #111827) !important; text-decoration:none; }
+  .yt-post__toc a:hover{ text-decoration:underline; }
+
+  .yt-post__body h2{
+    font-size:23px; line-height:1.3; letter-spacing:-.01em; font-weight:640;
+    color:var(--yt-text); margin:52px 0 18px; scroll-margin-top:24px;
+  }
+  .yt-post__body p{
+    font-size:17px; line-height:1.72; color:var(--yt-text); margin:0 0 20px;
+  }
+  .yt-post__body ul, .yt-post__body ol{ margin:0 0 24px; padding-left:22px; }
+  .yt-post__body h3{
+    font-size:18.5px; line-height:1.35; font-weight:620; letter-spacing:-.005em;
+    color:var(--yt-text); margin:34px 0 12px; scroll-margin-top:24px;
+  }
+  .yt-post__body code{
+    font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em;
+    padding:1px 5px; border-radius:4px; background:var(--yt-surface); border:1px solid var(--yt-line);
+    overflow-wrap:anywhere; word-break:break-word;
+  }
+  .yt-post__body li{
+    font-size:17px; line-height:1.68; color:var(--yt-text); margin:0 0 12px;
+  }
+  .yt-post__body strong{ font-weight:620; }
+
+  /* ============================= VISUAL COMPONENTS ============================= */
+
+  .yt-viz{
+    margin:36px 0; padding:24px; border:1px solid var(--yt-line);
+    border-radius:10px; background:var(--yt-surface);
+  }
+  .yt-viz__cap{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); margin-bottom:18px; display:block;
+  }
+  .yt-viz__src{
+    font-size:12px; color:var(--yt-text-2, #6b7280); margin-top:16px;
+    padding-top:12px; border-top:1px solid var(--yt-line);
+  }
+
+  /* ---- bar chart, widths set inline, no script ---- */
+  .yt-bars{ display:flex; flex-direction:column; gap:12px; }
+  .yt-bar{ display:grid; grid-template-columns:minmax(0,1fr); gap:5px; }
+  .yt-bar__top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .yt-bar__label{ font-size:14px; color:var(--yt-text); font-weight:520; }
+  .yt-bar__val{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:12px; color:var(--yt-text-2, #6b7280); white-space:nowrap;
+  }
+  .yt-bar__track{
+    height:8px; border-radius:4px; background:var(--yt-hover);
+    border:1px solid var(--yt-line); overflow:hidden;
+  }
+  .yt-bar__fill{ height:100%; background:var(--yt-text); border-radius:3px 0 0 3px; }
+  .yt-bar__fill--soft{ background:var(--yt-fill-2, #6b7280); opacity:.45; }
+
+  /* ---- data table ---- */
+  .yt-table{ width:100%; border-collapse:collapse; font-size:14px; }
+  .yt-table th{
+    text-align:left; padding:10px 12px;
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); border-bottom:1px solid var(--yt-text);
+    font-weight:500;
+  }
+  .yt-table td{
+    padding:11px 12px; border-bottom:1px solid var(--yt-line);
+    color:var(--yt-text); line-height:1.5; vertical-align:top;
+  }
+  .yt-table tr:last-child td{ border-bottom:0; }
+  .yt-table td.yt-num{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    text-align:right; white-space:nowrap;
+  }
+  .yt-table__wrap{ overflow-x:auto; }
+
+  /* ---- scatter plot ---- */
+  .yt-plot{ width:100%; height:auto; display:block; color:var(--yt-text); }
+  .yt-plot__axis{ stroke:var(--yt-line); stroke-width:1; }
+  .yt-plot__tick{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:13px; fill:var(--yt-text-2, #6b7280);
+  }
+  .yt-plot__dot{ fill:var(--yt-text); }
+  .yt-plot__dot--soft{ fill:none; stroke:var(--yt-fill-2, #6b7280); stroke-width:1.4; }
+  .yt-plot__lbl{ font-size:14px; fill:var(--yt-text); }
+  .yt-plot__zone{ fill:var(--yt-hover); }
+  .yt-plot__zonelbl{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:12px; fill:var(--yt-text-2, #6b7280); letter-spacing:.06em;
+  }
+  /* A 700-unit viewBox squeezed into a ~256px mobile column scales text to
+     roughly a third of its size, which is unreadable however well it is laid
+     out. Let the chart keep a legible minimum width and scroll instead. */
+  .yt-viz__scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .yt-viz__scroll .yt-plot{ min-width:520px; }
+  .yt-viz__hint{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); margin-top:8px; display:none;
+  }
+  @media (max-width:720px){ .yt-viz__hint{ display:block; } }
+
+  /* ---- structural diagram ---- */
+  .yt-dia{ width:100%; height:auto; display:block; color:var(--yt-text); }
+  .yt-dia__node{ fill:var(--yt-surface); stroke:currentColor; stroke-width:1.4; }
+  .yt-dia__node--hub{ fill:var(--yt-text); }
+  .yt-dia__edge{ stroke:var(--yt-fill-2, #6b7280); stroke-width:1.2; fill:none; }
+  .yt-dia__lbl{ font-size:10px; fill:var(--yt-text); text-anchor:middle; }
+  .yt-dia__lbl--inv{ fill:var(--yt-bg); }
+  .yt-dia__cap{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:13px; fill:var(--yt-text); text-anchor:middle;
+    letter-spacing:.08em; text-transform:uppercase;
+  }
+  .yt-dia__sub{
+    font-size:12px; fill:var(--yt-text-2, #6b7280); text-anchor:middle;
+  }
+  .yt-viz__scroll .yt-dia{ min-width:470px; }
+
+  /* ---- stage timeline ---- */
+  .yt-stages{ display:flex; flex-direction:column; }
+  .yt-stage{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; }
+  .yt-stage__rail{ display:flex; flex-direction:column; align-items:center; }
+  .yt-stage__num{
+    width:26px; height:26px; flex:none; border-radius:50%;
+    border:1px solid var(--yt-text); color:var(--yt-text);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;
+  }
+  .yt-stage__line{ width:1px; flex:1; background:var(--yt-line); min-height:14px; }
+  .yt-stage:last-child .yt-stage__line{ display:none; }
+  .yt-stage__body{ padding-bottom:22px; }
+  .yt-stage__ttl{ font-size:15px; font-weight:600; color:var(--yt-text); margin-bottom:4px; }
+  .yt-stage__txt{ font-size:14px; line-height:1.6; color:var(--yt-text-2, #6b7280); }
+
+  /* ---- expandable panel, native details, zero JS ---- */
+  .yt-drop{ border-top:1px solid var(--yt-line); }
+  .yt-drop:last-of-type{ border-bottom:1px solid var(--yt-line); }
+  .yt-drop summary{
+    list-style:none; cursor:pointer; padding:14px 0;
+    display:flex; justify-content:space-between; align-items:center; gap:14px;
+    font-size:15px; font-weight:560; color:var(--yt-text);
+  }
+  .yt-drop summary::-webkit-details-marker{ display:none; }
+  .yt-drop summary::after{
+    content:'+';
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:16px; color:var(--yt-text-2, #6b7280); flex:none;
+    transition:transform .18s ease;
+  }
+  .yt-drop[open] summary::after{ transform:rotate(45deg); }
+  .yt-drop__body{ padding:0 0 16px; font-size:15px; line-height:1.65; color:var(--yt-text-2, #6b7280); }
+  /* Kadence-override: summary is not a button, but pin anyway */
+  .yt-drop summary, .yt-drop summary:hover,
+  .yt-drop summary:focus, .yt-drop summary:active{
+    color:var(--yt-text, #111827) !important; background:none !important;
+  }
+
+  /* ---- stat row ---- */
+  .yt-stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(130px, 100%),1fr)); gap:20px; }
+  /* grid item: min-width:0 stops a long number forcing the column wider */
+  .yt-stat{ min-width:0; }
+  .yt-stat__num{
+    font-size:30px; font-weight:650; letter-spacing:-.02em;
+    color:var(--yt-text); line-height:1.1;
+  }
+  .yt-stat__lbl{
+    font-size:12px; line-height:1.45; color:var(--yt-text-2, #6b7280); margin-top:6px;
+  }
+
+
+  /* ---- operator note: a first-person aside, visually distinct from the
+     takeaway so the reader can tell opinion from summary ---- */
+  .yt-opnote{
+    margin:44px 0 0; padding:24px 26px;
+    border:1px solid var(--yt-line); border-radius:10px;
+    background:var(--yt-hover);
+  }
+  .yt-opnote__label{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .yt-opnote__label svg{ width:15px; height:15px; flex:none; }
+  .yt-opnote p{ margin:0 0 14px; font-size:16px; line-height:1.7; }
+  .yt-opnote p:last-child{ margin-bottom:0; }
+
+  /* ---- FAQ, native <details>, no script ---- */
+  .yt-faq{ margin:48px 0 0; }
+  .yt-faq__h{
+    font-size:20px; font-weight:640; color:var(--yt-text);
+    margin:0 0 18px; letter-spacing:-.01em;
+  }
+  .yt-faq__item{ border-top:1px solid var(--yt-line); }
+  .yt-faq__item:last-of-type{ border-bottom:1px solid var(--yt-line); }
+  .yt-faq__item summary{
+    list-style:none; cursor:pointer; padding:16px 0;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+    font-size:16px; font-weight:560; color:var(--yt-text); line-height:1.45;
+  }
+  .yt-faq__item summary::-webkit-details-marker{ display:none; }
+  .yt-faq__item summary::after{
+    content:'+';
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:17px; color:var(--yt-text-2, #6b7280); flex:none; line-height:1.3;
+    transition:transform .18s ease;
+  }
+  /* Rotate the plus into a cross rather than swapping in a minus glyph. The
+     minus was written as a CSS escape inside a normal Python string, where
+     a leading backslash-2-2-1 is an OCTAL escape, so it generated control
+     character U+0091 plus a stray digit and rendered as a tofu box. The
+     plus sign is ASCII and always
+     renders; rotation needs no glyph at all. */
+  .yt-faq__item[open] summary::after{ transform:rotate(45deg); }
+  .yt-faq__a{ padding:0 0 18px; font-size:16px; line-height:1.7; color:var(--yt-text-2, #6b7280); }
+  /* Kadence-override */
+  .yt-faq__item summary, .yt-faq__item summary:hover,
+  .yt-faq__item summary:focus, .yt-faq__item summary:active{
+    color:var(--yt-text, #111827) !important; background:none !important;
+  }
+
+
+
+
+  /* THEME PINNING. Kadence sets colours on .entry-content descendants that do
+     not flip with our light/dark tokens, so in dark mode body text rendered
+     dark-on-dark and was effectively invisible. Anything sitting on one of our
+     own backgrounds looked fine, which is what made it look partial. Same trap
+     as the form fields: pin the colour or the theme wins. */
+  .yt-post__title, .yt-post__body h2, .yt-post__body h3,
+  .yt-post__body p, .yt-post__body li, .yt-post__body strong,
+  .yt-faq__h, .yt-faq__item summary, .yt-post__rel-title{
+    color:var(--yt-text, #111827) !important;
+  }
+  .yt-post__dek, .yt-post__body .yt-viz__src, .yt-post__toc-label,
+  .yt-faq__a, .yt-post__foot-label, .yt-post__rel-cat{
+    color:var(--yt-text-2, #6b7280) !important;
+  }
+  .yt-post__toc a{ color:var(--yt-text-2, #6b7280) !important; }
+  .yt-post__toc a:hover{ color:var(--yt-text, #111827) !important; }
+  .yt-post__body a{ color:var(--yt-text, #111827) !important; text-decoration:underline; }
+  .yt-post__body a:hover{ color:var(--yt-text, #111827) !important; }
+
+  /* FOCUS VISIBILITY. There were no focus styles anywhere in the post block,
+     so a keyboard user tabbing through the contents, the in-body links, the
+     FAQ triggers or the author links had no indication of where they were.
+     :focus-visible so it appears for keyboard use and not on mouse click. */
+  .yt-post a:focus-visible,
+  .yt-post summary:focus-visible,
+  .yt-post__chip:focus-visible,
+  .yt-post__rel:focus-visible,
+  .yt-post__btn:focus-visible,
+  .yt-post__author-link:focus-visible{
+    outline:2px solid var(--yt-text, #111827);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  /* Older engines without :focus-visible still get a ring rather than none. */
+  .yt-post a:focus,
+  .yt-post summary:focus{ outline:2px solid var(--yt-text, #111827); outline-offset:3px; }
+  .yt-post a:focus:not(:focus-visible),
+  .yt-post summary:focus:not(:focus-visible){ outline:none; }
+
+  .yt-post__takeaway{
+    border:1px solid var(--yt-line); border-left:3px solid var(--yt-text);
+    border-radius:0 10px 10px 0; padding:22px 24px; margin:48px 0 0;
+    background:var(--yt-surface);
+  }
+  .yt-post__takeaway-label{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); margin-bottom:10px;
+  }
+  .yt-post__takeaway p{ margin:0; font-size:17px; line-height:1.68; }
+
+  /* Author card and CTA at the foot of the article. These were MISSING
+     entirely: an earlier conditional insert anchored on a selector that did
+     not exist and failed silently, so the footer rendered as unstyled plain
+     text. Assert the anchor when adding CSS. */
+  .yt-post__author{
+    margin:40px 0 0; padding:24px;
+    border:1px solid var(--yt-line); border-radius:10px;
+    display:flex; gap:20px; align-items:flex-start;
+  }
+  .yt-post__avatar{
+    width:52px; height:52px; flex-shrink:0; border-radius:10px;
+    background:var(--yt-text); color:var(--yt-bg) !important;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:18px; line-height:1;
+  }
+  .yt-post__author-name{
+    font-size:17px; font-weight:640; margin-bottom:2px;
+    color:var(--yt-text, #111827) !important;
+  }
+  .yt-post__author-role{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    margin-bottom:12px; color:var(--yt-text-2, #6b7280) !important;
+  }
+  .yt-post__author-bio{
+    font-size:15px; line-height:1.65; margin:0 0 14px;
+    color:var(--yt-text-2, #6b7280) !important;
+  }
+  .yt-post__author-links{ display:flex; flex-wrap:wrap; gap:8px; }
+  .yt-post__author-link{
+    font-size:13px; text-decoration:none;
+    border:1px solid var(--yt-line); border-radius:7px; padding:6px 12px;
+    color:var(--yt-text, #111827) !important;
+  }
+  .yt-post__author-link:hover{ border-color:var(--yt-text); }
+  .yt-post__author-link, .yt-post__author-link:hover,
+  .yt-post__author-link:focus, .yt-post__author-link:active{
+    color:var(--yt-text, #111827) !important; text-decoration:none !important;
+  }
+
+  .yt-post__cta{
+    margin:20px 0 0; padding:28px;
+    border:1px solid var(--yt-line); border-radius:10px;
+    background:var(--yt-surface);
+  }
+  .yt-post__cta-h{
+    font-size:19px; font-weight:640; margin:0 0 8px; letter-spacing:-.01em;
+    text-transform:none !important;
+    color:var(--yt-text, #111827) !important;
+  }
+  .yt-post__cta p{
+    font-size:15px; line-height:1.6; margin:0 0 18px;
+    color:var(--yt-text-2, #6b7280) !important;
+  }
+  .yt-post__btn{
+    display:inline-block; padding:11px 20px; border-radius:8px;
+    border:1px solid var(--yt-text); background:var(--yt-text);
+    font-size:14px; font-weight:560; text-decoration:none;
+  }
+  /* Kadence-override: pin across states or hover goes white on white */
+  .yt-post__btn, .yt-post__btn:hover, .yt-post__btn:focus, .yt-post__btn:active{
+    color:var(--yt-bg) !important; background:var(--yt-text) !important;
+    border-color:var(--yt-text) !important; text-decoration:none !important;
+  }
+  @media (max-width:600px){ .yt-post__author{ flex-direction:column; gap:14px; } }
+
+  .yt-post__foot{ margin-top:64px; padding-top:32px; border-top:1px solid var(--yt-line); }
+  .yt-post__foot-label{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); margin-bottom:16px;
+  }
+  .yt-post__related{ display:grid; gap:12px; margin-bottom:40px; }
+  .yt-post__rel{
+    display:block; border:1px solid var(--yt-line); border-radius:10px;
+    padding:16px 18px; text-decoration:none; transition:border-color .18s ease;
+  }
+  .yt-post__rel:hover{ border-color:var(--yt-text); }
+  .yt-post__rel-cat{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--yt-text-2, #6b7280); display:block; margin-bottom:6px;
+  }
+  .yt-post__rel-title{ font-size:16px; font-weight:600; color:var(--yt-text); line-height:1.4; }
+
+
+  @media (prefers-reduced-motion:reduce){
+    .yt-post__rel,
+    .yt-faq__item summary::after,
+    .yt-drop summary::after{ transition:none; }
+  }
+
+  /* Tablet and phone. There was NO rule between the base and 480px, so every
+     iPad size and most phones were rendering desktop padding: 56px top and
+     96px bottom on a 390px screen. The sidebar also collapses to a 60px rail
+     at 900px, so the content gains room exactly here. */
+  @media (max-width:900px){
+    .yt-post{ padding:40px 24px 72px; }
+    .yt-post__title{ font-size:clamp(26px,6vw,34px); }
+    .yt-post__toc{ padding:16px 18px; margin-bottom:32px; }
+    .yt-viz{ padding:18px; }
+    .yt-post__author{ padding:20px; }
+    .yt-post__cta{ padding:22px; }
+  }
+  @media (max-width:480px){
+    .yt-post{ padding:32px 24px 56px; }
+    .yt-viz{ padding:14px; }
+    .yt-post__body p, .yt-post__body li{ font-size:16px; }
+  }
+
+  /* RAIL PLACEMENT: this block MUST come after the base .yt-post__toc
+     rule. A media query adds no specificity, so with the base rule
+     later in the file it won and the rail kept its card border and
+     padding at desktop width. Source order is the only thing
+     separating them. */
+  /* RIGHT RAIL for the contents, above 1240px only.
+     The article alone is centred, so the spare width is split evenly either
+     side and the right gutter is never wide enough on its own: at 1440 it is
+     220px against the 260px a rail needs. So above the breakpoint the
+     container becomes article PLUS rail, centred as a pair. The article
+     shifts left by about 130px, which is the cost of having the rail beside
+     it rather than above it.
+
+     The aside sits in the DOM where the inline contents used to be, so on
+     narrow screens it simply flows there. Grid placement is what moves it to
+     the right on wide ones. One element, never duplicated. */
+  @media (min-width:1240px){
+    .yt-post{
+      /* Rail is fluid rather than a fixed 220px. At 220 every contents entry
+         wrapped to two lines, because the longest heading here needs about
+         448px and no sensible rail is that wide. minmax lets it grow to 340px
+         where there is room and fall back to 220px where there is not.
+         minmax rather than a vw clamp because grid then takes the space from
+         the rail before the article: a vw-based rail widened itself at 1280
+         and squeezed the reading measure to 638px, which is the wrong trade. */
+      max-width:1240px;
+      margin:0;
+      display:grid;
+      grid-template-columns:minmax(0, 760px) minmax(220px, 340px);
+      gap:0 40px;
+      align-items:start;
+      padding-left:40px; padding-right:40px;
+    }
+    .yt-post > *{ grid-column:1; }
+    /* Same specificity as the rule above, so this would win only on source
+       order. Qualified with the parent to make it deliberate. */
+    .yt-post > .yt-post__side{
+      grid-column:2;
+      grid-row:1 / span 99;
+      align-self:start;
+      position:sticky; top:24px;
+    }
+    .yt-post__toc{
+      border:0; background:none; border-radius:0;
+      border-left:1px solid var(--yt-line);
+      padding:0 0 0 20px; margin:0;
+    }
+    .yt-post__toc li{ font-size:13px; line-height:1.4; margin:0 0 10px; }
+  }
+
+  /* ===== end post styles ===== */
+/* POST-WIDGETS-CSS:BEGIN */
+  /* ===================== POST WIDGETS (postkit_interactive) ===================== */
+  .yt-kt{ margin:28px 0 36px; padding:20px 22px; border:1px solid var(--yt-line); border-left:3px solid var(--yt-text); border-radius:10px; background:var(--yt-surface); }
+  .yt-kt__h{ font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--yt-text-2); margin-bottom:10px; }
+  .yt-post__body .yt-kt ul{ margin:0; padding-left:20px; }
+  .yt-post__body .yt-kt li{ font-size:16px; margin:0 0 8px; }
+  .yt-post__body .yt-kt li:last-child{ margin-bottom:0; }
+
+  .yt-cl{ margin:28px 0; padding:16px 18px; border:1px solid var(--yt-line); border-radius:10px; background:var(--yt-surface); }
+  .yt-cl__k{ display:inline-block; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-bottom:8px; background:var(--yt-active-bg); color:var(--yt-text); }
+  .yt-cl--warn .yt-cl__k{ background:rgba(234,179,8,.18); }
+  .yt-cl--tip .yt-cl__k{ background:rgba(22,163,74,.14); }
+  .yt-cl--example .yt-cl__k{ background:rgba(59,130,246,.14); }
+  .yt-cl--definition .yt-cl__k{ background:rgba(139,92,246,.15); }
+  .yt-cl--template{ border-style:dashed; }
+  .yt-cl--template .yt-cl__k{ background:rgba(20,184,166,.15); }
+  .yt-cl--note .yt-cl__k{ background:var(--yt-active-bg); }
+  .yt-calc, .yt-check, .yt-dec, .yt-tabs{ position:relative; }
+  .yt-cl__t{ font-weight:620; font-size:16px; color:var(--yt-text); margin-bottom:6px; }
+  .yt-cl__b{ font-size:15.5px; line-height:1.65; color:var(--yt-text); }
+  .yt-cl__b p{ font-size:15.5px !important; margin:0 0 10px !important; }
+  .yt-cl__b p:last-child{ margin-bottom:0 !important; }
+  .yt-cl__b ul, .yt-cl__b ol{ margin:6px 0 0 !important; }
+  .yt-cl__b li{ font-size:15.5px !important; margin-bottom:6px !important; }
+
+  .yt-calc__intro{ font-size:15px !important; color:var(--yt-text-2) !important; margin:0 0 16px !important; }
+  .yt-calc__ins{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap:12px 16px; margin-bottom:18px; }
+  .yt-calc__in{ display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--yt-text-2); }
+  .yt-calc__lbl{ font-size:13px; line-height:1.35; color:var(--yt-text-2); }
+  .yt-calc__field{ display:flex; align-items:center; gap:8px; }
+  .yt-calc__ctl{ appearance:none; -webkit-appearance:none; width:100%; min-width:0; min-height:40px; padding:8px 10px; font-size:16px; font-family:'JetBrains Mono',ui-monospace,monospace; color:var(--yt-text); background:var(--yt-field-bg, var(--yt-bg)); border:1px solid var(--yt-field-border, var(--yt-line)); border-radius:8px; }
+  select.yt-calc__ctl{ font-family:inherit; }
+  .yt-calc__ctl:focus-visible{ outline:2px solid var(--yt-text); outline-offset:2px; }
+  .yt-calc__unit{ font-size:12px; color:var(--yt-text-2); white-space:nowrap; }
+  .yt-calc__outs{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap:10px; padding-top:16px; border-top:1px solid var(--yt-line); }
+  .yt-calc__out{ display:flex; flex-direction:column; gap:3px; padding:12px 14px; border-radius:8px; background:var(--yt-bg); border:1px solid var(--yt-line); }
+  .yt-calc__out--big{ border-color:var(--yt-text); }
+  .yt-calc__olbl{ font-size:12.5px; color:var(--yt-text-2); }
+  .yt-calc__out output{ font-family:'JetBrains Mono',ui-monospace,monospace; font-size:20px; font-weight:600; color:var(--yt-text); font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+  .yt-calc__out--big output{ font-size:24px; }
+  .yt-calc__hint{ font-size:12px; color:var(--yt-text-2); line-height:1.45; }
+  @media (max-width:640px){ .yt-calc__ctl{ font-size:16px; } }
+
+  .yt-check__grp{ border:0; margin:0 0 14px; padding:0; min-width:0; }
+  .yt-check__grp legend{ font-weight:620; font-size:15px; color:var(--yt-text); margin-bottom:8px; padding:0; }
+  .yt-check__item{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:10px; align-items:start; padding:9px 4px; border-top:1px solid var(--yt-line); font-size:15.5px; line-height:1.55; color:var(--yt-text); cursor:pointer; }
+  .yt-check__item input{ width:18px; height:18px; margin:3px 0 0; accent-color:var(--yt-text); }
+  .yt-check__item input:checked + span{ color:var(--yt-text-2); text-decoration:line-through; text-decoration-color:var(--yt-fill-3, #9ca3af); }
+  .yt-check__bar{ display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .yt-check__bar[hidden], .yt-check__verdict[hidden], .yt-check__actions[hidden]{ display:none; }
+  .yt-check__count{ font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12.5px; color:var(--yt-text); white-space:nowrap; }
+  .yt-check__track{ flex:1; height:6px; border-radius:3px; background:var(--yt-active-bg); overflow:hidden; }
+  .yt-check__fill{ display:block; height:100%; width:0; background:var(--yt-text); transition:width .2s ease; }
+  .yt-post__body .yt-check__verdict{ font-size:15px; margin:6px 0 12px; padding:10px 12px; border-radius:8px; background:var(--yt-bg); border:1px solid var(--yt-line); }
+  .yt-check__actions{ display:flex; flex-wrap:wrap; gap:8px; }
+  .yt-check__btn, .yt-tabs__tab, .yt-sortbtn{ appearance:none; font:inherit; cursor:pointer; }
+  .yt-check__btn{ font-family:'JetBrains Mono',ui-monospace,monospace !important; font-size:12px !important; padding:8px 12px !important; min-height:32px; border-radius:6px; border:1px solid var(--yt-line) !important; background:var(--yt-bg) !important; color:var(--yt-text) !important; text-transform:none !important; letter-spacing:0 !important; }
+
+  .yt-tabs__list{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+  .yt-tabs__list[hidden]{ display:none; }
+  .yt-tabs__tab{ font-size:13.5px !important; padding:8px 14px !important; min-height:34px; border-radius:8px; border:1px solid var(--yt-line) !important; background:var(--yt-bg) !important; color:var(--yt-text-2) !important; text-transform:none !important; letter-spacing:0 !important; }
+  .yt-tabs__tab[aria-selected="true"]{ background:var(--yt-text) !important; color:var(--yt-bg) !important; border-color:var(--yt-text) !important; }
+  .yt-tabs__panel{ margin:0 0 18px; }
+  .yt-tabs__panel:last-of-type{ margin-bottom:0; }
+  .yt-post__body h3.yt-tabs__h{ margin:0 0 10px; font-size:16px; color:var(--yt-text); }
+  .yt-js .yt-tabs__h{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .yt-tabs__panel p, .yt-tabs__panel li{ font-size:15.5px !important; }
+
+  .yt-dec__q{ font-weight:620; font-size:15.5px; color:var(--yt-text); margin:4px 0 10px; }
+  .yt-dec__opt{ border:1px solid var(--yt-line); border-radius:8px; margin:0 0 8px; background:var(--yt-bg); }
+  .yt-dec__opt > summary{ list-style:none; cursor:pointer; padding:10px 14px; font-size:15px; color:var(--yt-text); display:flex; gap:10px; align-items:center; min-height:24px; }
+  .yt-dec__opt > summary::-webkit-details-marker{ display:none; }
+  .yt-dec__opt > summary::before{ content:"\2192"; font-family:'JetBrains Mono',ui-monospace,monospace; color:var(--yt-text-2); transition:transform .15s ease; }
+  .yt-dec__opt[open] > summary::before{ transform:rotate(90deg); }
+  .yt-dec__opt[open] > summary{ border-bottom:1px solid var(--yt-line); font-weight:600; }
+  .yt-dec__opt > .yt-dec__q, .yt-dec__opt > .yt-dec__opt, .yt-dec__opt > .yt-dec__out{ margin-left:14px; margin-right:14px; }
+  .yt-dec__opt > .yt-dec__q{ margin-top:12px; }
+  .yt-dec__opt > .yt-dec__opt:last-child, .yt-dec__opt > .yt-dec__out{ margin-bottom:12px; }
+  .yt-dec__out{ font-size:15px; line-height:1.6; color:var(--yt-text); padding:12px 14px; border-left:3px solid var(--yt-text); background:var(--yt-surface); border-radius:0 8px 8px 0; margin-top:12px; }
+
+  .yt-cmp{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap:12px; }
+  .yt-cmp__col{ border:1px solid var(--yt-line); border-radius:10px; padding:14px 16px; background:var(--yt-bg); }
+  .yt-cmp__t{ font-weight:640; font-size:16px; color:var(--yt-text); margin-bottom:8px; }
+  .yt-cmp__k{ font-family:'JetBrains Mono',ui-monospace,monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--yt-text-2); margin:10px 0 4px; }
+  .yt-post__body .yt-cmp ul{ margin:0; padding-left:18px; }
+  .yt-post__body .yt-cmp li{ font-size:14.5px; margin:0 0 5px; }
+  .yt-post__body .yt-cmp__pro li::marker{ color:#16a34a; }
+  .yt-post__body .yt-cmp__con li::marker{ color:#d97706; }
+  .yt-cmp__v{ margin-top:10px; padding-top:10px; border-top:1px solid var(--yt-line); font-size:14px; color:var(--yt-text); font-weight:560; }
+
+  .yt-post__body .yt-flow{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap:10px; counter-reset:none; }
+  .yt-post__body .yt-flow__s{ position:relative; margin:0; padding:12px 14px; border:1px solid var(--yt-line); border-radius:10px; background:var(--yt-bg); display:flex; flex-direction:column; gap:4px; }
+  .yt-flow__n{ font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px; color:var(--yt-text-2); }
+  .yt-flow__t{ font-weight:620; font-size:15px; color:var(--yt-text); }
+  .yt-flow__x{ font-size:13.5px; line-height:1.5; color:var(--yt-text-2); }
+
+  .yt-tfilter{ display:flex; align-items:center; gap:10px; margin:0 0 12px; flex-wrap:wrap; }
+  .yt-tfilter input{ flex:1 1 200px; min-width:0; min-height:38px; padding:8px 10px; font-size:16px; color:var(--yt-text); background:var(--yt-field-bg, var(--yt-bg)); border:1px solid var(--yt-field-border, var(--yt-line)); border-radius:8px; }
+  .yt-tfilter span{ font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:var(--yt-text-2); }
+  .yt-sortbtn{ background:none !important; border:0 !important; padding:2px 0 !important; margin:0 !important; color:inherit !important; font:inherit !important; text-transform:inherit !important; letter-spacing:inherit !important; display:inline-flex; gap:6px; align-items:center; min-height:24px; text-align:left; }
+  .yt-sortbtn::after{ content:"\2195"; opacity:.55; }
+  th[aria-sort="ascending"] .yt-sortbtn::after{ content:"\2191"; opacity:1; }
+  th[aria-sort="descending"] .yt-sortbtn::after{ content:"\2193"; opacity:1; }
+  .yt-table tr[hidden]{ display:none; }
+  /* POST-WIDGETS-CSS:END */
+</style>
+
+<aside class="yt-sidebar" aria-label="Primary navigation">
+
+  <a href="/" class="yt-side-brand" aria-label="Yash Tulsyani, home">
+    <span class="yt-side-brand__mark" aria-hidden="true">Y</span>
+    <span class="yt-side-brand__name">Yash Tulsyani</span>
+  </a>
+
+  <nav class="yt-side-nav" aria-label="Sections">
+    <a href="/" class="yt-side-link" data-shortcut="1">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+      </span>
+      <span class="yt-side-link__label">Home</span>
+      <span class="yt-kbd" aria-hidden="true">1</span>
+    </a>
+    <a href="/about" class="yt-side-link" data-shortcut="2">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      </span>
+      <span class="yt-side-link__label">About</span>
+      <span class="yt-kbd" aria-hidden="true">2</span>
+    </a>
+    <a href="/work" class="yt-side-link" data-shortcut="3">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
+      </span>
+      <span class="yt-side-link__label">Work</span>
+      <span class="yt-kbd" aria-hidden="true">3</span>
+    </a>
+  </nav>
+
+  <div class="yt-side-group">Thinking</div>
+  <nav class="yt-side-nav" aria-label="Thinking">
+    <a href="/writing" class="yt-side-link" data-shortcut="4">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+      </span>
+      <span class="yt-side-link__label">Writing</span>
+      <span class="yt-kbd" aria-hidden="true">4</span>
+    </a>
+    <a href="/books" class="yt-side-link" data-shortcut="5">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
+      </span>
+      <span class="yt-side-link__label">Books</span>
+      <span class="yt-kbd" aria-hidden="true">5</span>
+    </a>
+    <a href="/reading" class="yt-side-link" data-shortcut="6">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </span>
+      <span class="yt-side-link__label">Reading</span>
+      <span class="yt-kbd" aria-hidden="true">6</span>
+    </a>
+    <a href="/notes" class="yt-side-link" data-shortcut="7">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/><path d="M8 9h7"/><path d="M8 13h7"/><path d="M8 17h4"/></svg>
+      </span>
+      <span class="yt-side-link__label">Notes</span>
+      <span class="yt-kbd" aria-hidden="true">7</span>
+    </a>
+    <a href="/now" class="yt-side-link" data-shortcut="8">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+      </span>
+      <span class="yt-side-link__label">Now</span>
+      <span class="yt-kbd" aria-hidden="true">8</span>
+    </a>
+  </nav>
+
+  <div class="yt-side-group">Connect</div>
+  <nav class="yt-side-nav" aria-label="Connect">
+    <a href="/contact" class="yt-side-link" data-shortcut="9">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4c-1.6 0-3.2-.4-4.6-1.2L3 20l1.3-4.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+      </span>
+      <span class="yt-side-link__label">Contact</span>
+      <span class="yt-kbd" aria-hidden="true">9</span>
+    </a>
+    <a href="https://linkedin.com/in/yashtulsyani" target="_blank" rel="noopener" class="yt-side-link" aria-label="LinkedIn (opens in a new tab)">
+      <span class="yt-side-link__icon" aria-hidden="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4z"/></svg>
+      </span>
+      <span class="yt-side-link__label">LinkedIn</span>
+      <span class="yt-side-link__arrow" aria-hidden="true">↗</span>
+    </a>
+  </nav>
+
+  <div class="yt-side-spacer"></div>
+
+  <div class="yt-theme-toggle" role="group" aria-label="Theme">
+    <button type="button" data-yt-theme-set="light" class="is-active" aria-pressed="true">Light</button>
+    <button type="button" data-yt-theme-set="dark" aria-pressed="false">Dark</button>
+    <button type="button" data-yt-theme-set="auto" aria-pressed="false">Auto</button>
+  </div>
+
+</aside>
+
+<script>
+(function(){
+  // ---------- THEME ----------
+  var KEY = 'yt-theme-pref';
+  var root = document.documentElement;
+  var mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function applyTheme(pref){
+    var resolved = pref === 'auto' ? (mql.matches ? 'dark' : 'light') : pref;
+    root.setAttribute('data-yt-theme', resolved);
+    // mark toggle
+    document.querySelectorAll('[data-yt-theme-set]').forEach(function(btn){
+      var is = btn.getAttribute('data-yt-theme-set') === pref;
+      btn.classList.toggle('is-active', is);
+      btn.setAttribute('aria-pressed', is ? 'true' : 'false');
+    });
+  }
+  var stored = null;
+  try { stored = localStorage.getItem(KEY); } catch(e){}
+  applyTheme(stored ? stored : 'light');
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-yt-theme-set]');
+    if(!t) return;
+    var pref = t.getAttribute('data-yt-theme-set');
+    try { localStorage.setItem(KEY, pref); } catch(e){}
+    applyTheme(pref);
+  });
+
+  if(mql.addEventListener){
+    mql.addEventListener('change', function(){
+      var p = null; try { p = localStorage.getItem(KEY); } catch(e){}
+      if(p === 'auto'){ applyTheme(p); return; }
+      if(!p){ applyTheme('light'); }
+    });
+  }
+
+  // ---------- ACTIVE LINK ----------
+  var rawPath = window.location.pathname.replace(/\/$/,'');
+  var path = rawPath ? rawPath : '/';
+  document.querySelectorAll('.yt-sidebar .yt-side-link').forEach(function(a){
+    var href = a.getAttribute('href');
+    if(!href){ return; }
+    if(href.indexOf('http') === 0){ return; }
+    var rawNorm = href.replace(/\/$/,'');
+    var norm = rawNorm ? rawNorm : '/';
+    if(norm === path){
+      a.classList.add('is-active');
+      return;
+    }
+    // Sub-routes keep their parent lit: /books/<slug> lights Books and
+    // /writing/<slug> lights Writing. '/' is excluded or Home would match
+    // every page. Nested ifs, so no logical operators.
+    if(norm === '/'){ return; }
+    if(path.indexOf(norm + '/') === 0){ a.classList.add('is-active'); }
+  });
+
+  // ---------- KEYBOARD SHORTCUTS ----------
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey){ return; }
+    if(e.ctrlKey){ return; }
+    if(e.altKey){ return; }
+    var tagSource = e.target ? e.target.tagName : '';
+    var tag = tagSource ? tagSource.toLowerCase() : '';
+    if(tag === 'input'){ return; }
+    if(tag === 'textarea'){ return; }
+    if(e.target){ if(e.target.isContentEditable){ return; } }
+    var k = e.key;
+    if(k === '0'){ window.location.href = '/'; return; }
+    var link = document.querySelector('.yt-sidebar .yt-side-link[data-shortcut="'+k+'"]');
+    if(link){
+      e.preventDefault();
+      window.location.href = link.getAttribute('href');
+    }
+  });
+
+  // ---------- AUTO-WRAP CONTENT (best-effort) ----------
+  // If page content isn't wrapped in .yt-shell, add a left padding to body content.
+  /* Fallback offset. FSDM's history: an earlier version missed the post
+     wrappers and put 240px of padding on every post. Posts here use
+     .yt-shell too, so one check covers everything. */
+  /* Runs the moment the sidebar is parsed, ON PURPOSE. The live layout
+     depends on it: inside .entry-content the shell's padding is zeroed,
+     so this body padding is the offset. Deferring it to DOMContentLoaded
+     (tried 20 Oct 2026) put every page under the sidebar. */
+  var wrapped = document.querySelector('.yt-shell');
+  if(!wrapped){
+    document.body.style.paddingLeft =
+      (window.matchMedia('(max-width:900px)').matches ? '60px' : '240px');
+  }
+})();
+</script>
+<!-- POST-WIDGETS-JS:BEGIN -->
+<script>
+/* POST WIDGETS runtime: calculators, checklists, tabs, sortable tables.
+   Enhances markup that is complete without it. House rules: no double
+   ampersand or double pipe, ASCII only, addEventListener only. */
+(function(){
+  function ready(fn){ if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', fn); } else { fn(); } }
+  ready(function(){
+    document.documentElement.classList.add('yt-js');
+
+    /* ---------- expression language, mirrors postkit_interactive.evaluate ---------- */
+    var FUN = {
+      min: Math.min, max: Math.max, floor: Math.floor, ceil: Math.ceil, abs: Math.abs, sqrt: Math.sqrt,
+      ln: Math.log, log10: function(x){ return Math.log(x) / Math.LN10; }, pow: Math.pow,
+      round: function(x, n){ var k = Math.pow(10, n ? n : 0); return Math.floor(x * k + 0.5) / k; }
+    };
+    function tokens(src){
+      var re = /\s*(?:(\d+\.?\d*(?:e[+-]?\d+)?|\.\d+)|([A-Za-z_][A-Za-z0-9_]*)|(<=|>=|==|!=|[-+*\/^(),<>]))/g, out = [], m, pos = 0;
+      src = String(src).replace(/\s+$/, '');
+      while(pos < src.length){
+        re.lastIndex = pos; m = re.exec(src);
+        if(m === null){ throw new Error('bad expression'); }
+        if(m.index !== pos){ throw new Error('bad expression'); }
+        out.push(m[1] !== undefined ? m[1] : (m[2] !== undefined ? m[2] : m[3]));
+        pos = re.lastIndex;
+      }
+      return out;
+    }
+    function evaluate(src, env){
+      var t = tokens(src), i = 0;
+      function peek(){ return i < t.length ? t[i] : null; }
+      function take(){ i = i + 1; return t[i - 1]; }
+      function comp(){
+        var a = add(), op, b;
+        while(['<', '<=', '>', '>=', '==', '!='].indexOf(peek()) !== -1){
+          op = take(); b = add();
+          if(op === '<'){ a = a < b ? 1 : 0; } else if(op === '<='){ a = a <= b ? 1 : 0; } else if(op === '>'){ a = a > b ? 1 : 0; }
+          else if(op === '>='){ a = a >= b ? 1 : 0; } else if(op === '=='){ a = a === b ? 1 : 0; } else { a = a !== b ? 1 : 0; }
+        }
+        return a;
+      }
+      function add(){ var a = mul(), op; while(peek() === '+' ? true : peek() === '-'){ op = take(); a = op === '+' ? a + mul() : a - mul(); } return a; }
+      function mul(){ var a = unary(), op, b; while(peek() === '*' ? true : peek() === '/'){ op = take(); b = unary(); a = op === '*' ? a * b : (b !== 0 ? a / b : NaN); } return a; }
+      function unary(){ if(peek() === '-'){ take(); return -unary(); } if(peek() === '+'){ take(); return unary(); } return power(); }
+      function power(){ var a = atom(); if(peek() === '^'){ take(); return Math.pow(a, unary()); } return a; }
+      function atom(){
+        var x = take(), args, v;
+        if(x === undefined){ throw new Error('end'); }
+        if(x === '('){ v = comp(); take(); return v; }
+        if(/^[\d.]/.test(x)){ return parseFloat(x); }
+        if(peek() === '('){
+          take(); args = [];
+          if(peek() !== ')'){ args.push(comp()); while(peek() === ','){ take(); args.push(comp()); } }
+          take();
+          if(x === 'if'){ return args[0] ? args[1] : args[2]; }
+          return FUN[x].apply(null, args);
+        }
+        if(!(x in env)){ throw new Error('unknown ' + x); }
+        return env[x];
+      }
+      return comp();
+    }
+    function num(v, d){ return v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+    function fmt(v, k){
+      if(!isFinite(v)){ return 'n/a'; }
+      if(k === 'int'){ return num(Math.floor(v + 0.5), 0); }
+      if(k === 'num1'){ return num(v, 1); }
+      if(k === 'num2'){ return num(v, 2); }
+      if(k === 'pct'){ return num(v, 1) + '%'; }
+      if(k === 'pct0'){ return num(v, 0) + '%'; }
+      if(k === 'money'){ return (v < 0 ? '-$' : '$') + num(Math.floor(Math.abs(v) + 0.5), 0); }
+      if(k === 'money2'){ return (v < 0 ? '-$' : '$') + num(Math.abs(v), 2); }
+      if(k === 'gbp'){ return (v < 0 ? '-\u00a3' : '\u00a3') + num(Math.floor(Math.abs(v) + 0.5), 0); }
+      if(k === 'gbp2'){ return (v < 0 ? '-\u00a3' : '\u00a3') + num(Math.abs(v), 2); }
+      if(k === 'x'){ return num(v, 1) + 'x'; }
+      if(k === 'months'){ return num(v, 1) + ' months'; }
+      if(k === 'years'){ return num(v, 1) + ' years'; }
+      if(k === 'days'){ return num(v, 0) + ' days'; }
+      return num(v, 2);
+    }
+
+    /* ---------- calculators ---------- */
+    document.querySelectorAll('[data-yt-calc]').forEach(function(box){
+      function run(){
+        var env = {};
+        box.querySelectorAll('[data-v]').forEach(function(c){ var x = parseFloat(String(c.value).replace(/,/g, '')); env[c.getAttribute('data-v')] = isNaN(x) ? NaN : x; });
+        box.querySelectorAll('output[data-expr]').forEach(function(o){
+          var v;
+          try { v = evaluate(o.getAttribute('data-expr'), env); } catch(e){ v = NaN; }
+          var n = o.getAttribute('data-name');
+          if(n){ env[n] = v; }
+          o.textContent = fmt(v, o.getAttribute('data-fmt'));
+        });
+      }
+      box.addEventListener('input', run);
+      box.addEventListener('change', run);
+      run();
+    });
+
+    /* ---------- checklists ---------- */
+    function copyText(text, btn){
+      var done = function(){ var o = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = o; }, 1400); };
+      try { navigator.clipboard.writeText(text).then(done, function(){}); } catch(e){
+        var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e2){}
+        ta.remove();
+      }
+    }
+    document.querySelectorAll('[data-yt-check]').forEach(function(box){
+      var id = 'yt-check:' + location.pathname + ':' + box.getAttribute('data-yt-check');
+      var boxes = box.querySelectorAll('input[type="checkbox"]');
+      var bands = null;
+      try { bands = JSON.parse(box.getAttribute('data-bands')); } catch(e){ bands = null; }
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem(id)); } catch(e){ saved = null; }
+      if(saved){ boxes.forEach(function(b){ if(saved.indexOf(b.getAttribute('data-k')) !== -1){ b.checked = true; } }); }
+      ['.yt-check__bar', '.yt-check__actions'].forEach(function(s){ var el = box.querySelector(s); if(el){ el.hidden = false; } });
+      var verdict = box.querySelector('.yt-check__verdict');
+      if(bands){ verdict.hidden = false; }
+      function update(){
+        var n = 0, on = [];
+        boxes.forEach(function(b){ if(b.checked){ n = n + 1; on.push(b.getAttribute('data-k')); } });
+        var pct = boxes.length ? Math.round(n / boxes.length * 100) : 0;
+        box.querySelector('.yt-check__count').textContent = n + ' of ' + boxes.length + ' done';
+        box.querySelector('.yt-check__fill').style.width = pct + '%';
+        if(bands){ var txt = ''; bands.forEach(function(b){ if(pct >= b[0]){ txt = b[1]; } }); verdict.textContent = txt; }
+        try { localStorage.setItem(id, JSON.stringify(on)); } catch(e){}
+      }
+      box.addEventListener('change', update);
+      box.addEventListener('click', function(e){
+        var b = e.target.closest('[data-act]');
+        if(b === null){ return; }
+        if(b.getAttribute('data-act') === 'reset'){ boxes.forEach(function(x){ x.checked = false; }); update(); return; }
+        var md = ['## ' + box.querySelector('figcaption').textContent.trim(), ''];
+        box.querySelectorAll('fieldset').forEach(function(f){
+          md.push('### ' + f.querySelector('legend').textContent.trim());
+          f.querySelectorAll('.yt-check__item').forEach(function(it){ md.push('- [' + (it.querySelector('input').checked ? 'x' : ' ') + '] ' + it.textContent.trim()); });
+          md.push('');
+        });
+        copyText(md.join('\n'), b);
+      });
+      update();
+    });
+
+    /* ---------- tabs ---------- */
+    var tcount = 0;
+    document.querySelectorAll('[data-yt-tabs]').forEach(function(box){
+      tcount = tcount + 1;
+      var list = box.querySelector('[role="tablist"]'), tabs = box.querySelectorAll('[role="tab"]'), panels = box.querySelectorAll('[role="tabpanel"]');
+      list.hidden = false;
+      function show(k, focus){
+        tabs.forEach(function(t, j){ t.setAttribute('aria-selected', j === k ? 'true' : 'false'); t.tabIndex = j === k ? 0 : -1; });
+        panels.forEach(function(p, j){ p.hidden = j !== k; });
+        if(focus){ tabs[k].focus(); }
+      }
+      tabs.forEach(function(t, j){
+        t.id = 'yt-tab-' + tcount + '-' + j; panels[j].id = 'yt-tabp-' + tcount + '-' + j;
+        t.setAttribute('aria-controls', panels[j].id); panels[j].setAttribute('aria-labelledby', t.id); panels[j].tabIndex = 0;
+        t.addEventListener('click', function(){ show(j, false); });
+        t.addEventListener('keydown', function(e){
+          var k = -1;
+          if(e.key === 'ArrowRight'){ k = (j + 1) % tabs.length; } else if(e.key === 'ArrowLeft'){ k = (j - 1 + tabs.length) % tabs.length; }
+          else if(e.key === 'Home'){ k = 0; } else if(e.key === 'End'){ k = tabs.length - 1; }
+          if(k !== -1){ e.preventDefault(); show(k, true); }
+        });
+      });
+      show(0, false);
+    });
+
+    /* ---------- sortable and filterable tables ---------- */
+    function cellVal(td){
+      var s = td.textContent.trim(), n = parseFloat(s.replace(/[$,%\u00a3\u20ac\s]|x$/g, '').replace(/^~/, ''));
+      return isNaN(n) ? s.toLowerCase() : n;
+    }
+    document.querySelectorAll('table[data-yt-sort]').forEach(function(tb){
+      var body = tb.tBodies[0];
+      tb.querySelectorAll('thead th').forEach(function(th, col){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'yt-sortbtn'; b.innerHTML = th.innerHTML;
+        th.innerHTML = ''; th.appendChild(b);
+        b.addEventListener('click', function(){
+          var asc = th.getAttribute('aria-sort') !== 'ascending';
+          tb.querySelectorAll('thead th').forEach(function(o){ o.removeAttribute('aria-sort'); });
+          th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+          var rows = Array.prototype.slice.call(body.rows);
+          rows.sort(function(r1, r2){
+            var a = cellVal(r1.cells[col]), z = cellVal(r2.cells[col]), c;
+            if(typeof a === typeof z){ c = a < z ? -1 : (a > z ? 1 : 0); } else { c = typeof a === 'number' ? -1 : 1; }
+            return asc ? c : -c;
+          });
+          rows.forEach(function(r){ body.appendChild(r); });
+        });
+      });
+      if(tb.hasAttribute('data-yt-filter')){
+        var wrap = document.createElement('div'), inp = document.createElement('input'), cnt = document.createElement('span');
+        wrap.className = 'yt-tfilter';
+        inp.type = 'search'; inp.placeholder = 'Filter rows'; inp.setAttribute('aria-label', 'Filter the rows of this table');
+        cnt.setAttribute('aria-live', 'polite');
+        wrap.appendChild(inp); wrap.appendChild(cnt);
+        var host = tb.closest('.yt-table__wrap'); host = host ? host : tb;
+        host.parentNode.insertBefore(wrap, host);
+        var all = body.rows.length;
+        inp.addEventListener('input', function(){
+          var q = inp.value.trim().toLowerCase(), shown = 0;
+          Array.prototype.forEach.call(body.rows, function(r){ var hit = r.textContent.toLowerCase().indexOf(q) !== -1; r.hidden = !hit; if(hit){ shown = shown + 1; } });
+          cnt.textContent = q === '' ? '' : shown + ' of ' + all + ' rows';
+        });
+      }
+    });
+  });
+})();
+</script>
+<!-- POST-WIDGETS-JS:END -->
