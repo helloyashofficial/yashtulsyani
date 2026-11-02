@@ -166,7 +166,7 @@ A separate agent with no part in the build checked every page's copy and JSON-LD
 
 ## 10. Still needs Yash
 
-1. **Contact email.** `/contact` uses `yashtulsyani.work@gmail.com` from the sister site. Confirm or replace it; it appears twice.
+1. **Contact email.** Done: Yash confirmed `yashtulsyani.work@gmail.com` on 2 Nov 2026.
 2. **Book status.** Every page now says only "Unpublished". The unconfirmed "manuscript complete" chip and "Seeking a home" were removed, along with every "finished/complete" claim (section 9). If either book is finished, or you are seeking a publisher, say so and it can go back in.
 3. **Audience size and channel name** for `/about`, if they can be sourced and confirmed.
 4. **The reading list** (title, author, one line on why). It fills `/reading`, the homepage strip and `/now` at once.
