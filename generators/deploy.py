@@ -4,12 +4,17 @@ deploy.py --- publish blocks to WordPress through its REST API.
 
     python3 deploy.py --plan  [files...]   show what would change; writes nothing
     python3 deploy.py --apply [files...]   write to WordPress
-    python3 deploy.py --apply --all        every block (first sync, or after a
-                                           sidebar change)
+    python3 deploy.py --apply --all        every block (a full sync)
 
 With no files and no --all, it deploys nothing. Files are block names in
-production-blocks/, e.g. 26-now.html. If 01-sidebar.html is in the list,
-every page and essay is redeployed, because each one carries the sidebar.
+production-blocks/, e.g. 26-now.html.
+
+How the live site is put together (read from it on 2 Nov 2026): the sidebar
+is one synced pattern (ytconf.SIDEBAR_PATTERN), and every page and essay is
+that pattern followed by one Custom HTML block. So 01-sidebar.html goes into
+the pattern, and a page deploy replaces only the inside of its one HTML
+block, keeping the pattern reference and the block's name. A page that has
+no HTML block yet gets one; a page with more than one is refused.
 
 Credentials come from the environment, never from this repository:
     WP_URL           https://yashtulsyani.com
@@ -68,6 +73,39 @@ def block(html):
     return "<!-- wp:html -->\n%s\n<!-- /wp:html -->" % html.strip()
 
 
+HTML_BLOCK = re.compile(r"<!-- wp:html(?: \{.*?\})? -->(.*?)<!-- /wp:html -->", re.S)
+
+
+def sidebar_ref():
+    return '<!-- wp:block {"ref":%d} /-->' % C.SIDEBAR_PATTERN
+
+
+def compose(live, src, with_ref):
+    """Return (new content, live inner html or None, notes) for a page whose
+    current content is `live`. Only the inside of the one HTML block changes."""
+    notes = []
+    blocks = list(HTML_BLOCK.finditer(live))
+    if len(blocks) > 1:
+        raise ValueError("has %d Custom HTML blocks; expected one. Merge them by hand first." % len(blocks))
+    if blocks:
+        m = blocks[0]
+        new = live[:m.start(1)] + "\n" + src.strip() + "\n" + live[m.end(1):]
+        inner = m.group(1)
+        other = (live[:m.start()] + live[m.end():]).replace(sidebar_ref(), "").strip()
+        if other:
+            notes.append("other content on the page is kept: %r" % other[:200])
+    else:
+        new = (live.strip() + "\n\n" if live.strip() else "") + block(src)
+        inner = None
+        if live.strip():
+            notes.append("no HTML block yet; one is added after the existing content")
+    if with_ref:
+        if sidebar_ref() not in new:
+            new = sidebar_ref() + "\n\n" + new
+            notes.append("adds the sidebar pattern, which the page did not have")
+    return new, inner, notes
+
+
 def path_of(link):
     p = urllib.parse.urlparse(link).path.rstrip("/")
     return p if p else "/"
@@ -78,8 +116,8 @@ def targets(files):
     out = []
     for f in files:
         if f == "01-sidebar.html":
-            continue
-        if f in C.PAGES:
+            out.append(("blocks", "sidebar pattern %d" % C.SIDEBAR_PATTERN, f))
+        elif f in C.PAGES:
             out.append(("pages", C.PAGES[f], f))
         elif f in C.PRIVATE:
             out.append(("pages", C.PRIVATE[f], f))
@@ -99,6 +137,8 @@ def all_files():
 
 
 def find(wp, kind, path, f):
+    if kind == "blocks":
+        return wp.call("GET", "blocks/%d" % C.SIDEBAR_PATTERN, query={"context": "edit"}, missing_ok=True)
     if f in C.WP_IDS:
         return wp.call("GET", "%s/%d" % (kind, C.WP_IDS[f]), query={"context": "edit"})
     if path == "/":
@@ -161,8 +201,6 @@ def main():
             raise SystemExit("no such block: %s" % f)
     if "--all" in args:
         files = all_files()
-    if "01-sidebar.html" in files:
-        files = all_files()
     plan = targets(files)
     retired = getattr(C, "RETIRED", {})
     if not plan:
@@ -170,7 +208,6 @@ def main():
             print("nothing to deploy")
             return
 
-    sidebar = (C.BLOCKS / "01-sidebar.html").read_text(encoding="utf-8")
     url, user, pw = os.environ.get("WP_URL"), os.environ.get("WP_USER"), os.environ.get("WP_APP_PASSWORD")
     have_creds = True
     for v in (url, user, pw):
@@ -208,8 +245,13 @@ def main():
     for kind, path, f in plan:
         found[f] = find(wp, kind, path, f)
         if found[f] is None:
-            if kind == "pages":
+            if kind != "posts":
                 missing.append(path)
+        else:
+            try:
+                compose(found[f].get("content", {}).get("raw", ""), "x", kind != "blocks")
+            except ValueError as e:
+                raise SystemExit("%s %s Nothing was written." % (path, e))
     if missing:
         for path in missing:
             slug = path.rstrip("/").split("/")[-1]
@@ -226,14 +268,23 @@ def main():
                          "nothing was written." % (len(missing), ", ".join(missing)))
     for kind, path, f in plan:
         src = (C.BLOCKS / f).read_text(encoding="utf-8")
-        if kind == "pages":
-            content = block(sidebar) + "\n\n" + block(src)
-        else:
-            content = (block(sidebar) + "\n\n" if C.SIDEBAR_IN_POSTS else "") + block(src)
         slug = path.rstrip("/").split("/")[-1]
         cur = found[f]
+        with_ref = kind != "blocks"
+        live = cur.get("content", {}).get("raw", "") if cur is not None else ""
+        try:
+            content, inner, notes = compose(live, src, with_ref)
+        except ValueError as e:
+            raise SystemExit("%s %s; nothing after this was deployed." % (path, e))
         data = {"content": content}
         if use_yoast:
+            if kind == "blocks":
+                use_meta = False
+            else:
+                use_meta = True
+        else:
+            use_meta = False
+        if use_meta:
             meta = yoast_meta(f, slug)
             if meta:
                 data["meta"] = meta
@@ -244,6 +295,7 @@ def main():
             title = field(src, r'<h1 class="yt-post__title">(.*?)</h1>')
             cat = field(src, r"<span data-yt-cat>(.*?)</span>")
             data.update({"title": title, "slug": slug, "status": "draft"})
+            data["content"] = content = sidebar_ref() + "\n\n" + block(src)
             if not apply:
                 print("  CREATE draft post %s  (%s)" % (path, cat))
                 created += 1
@@ -253,25 +305,23 @@ def main():
             created += 1
             print("  created draft post %s, id %d. Publish it in WordPress." % (path, res["id"]))
         else:
-            live = cur.get("content", {}).get("raw", "")
-            if live.strip() == content.strip():
+            same = False
+            if inner is not None:
+                if inner.strip() == src.strip():
+                    if not notes:
+                        same = True
+            if same:
                 skipped += 1
                 print("  unchanged  %s" % path)
-                if not use_yoast:
+                if not use_meta:
                     continue
             if not apply:
-                same_page = "yes" if src.strip() in live else "no"
-                same_bar = "yes" if sidebar.strip() in live else "no"
-                print("  UPDATE     %s  (id %d, %s; live %d chars, new %d; page block already live: %s, "
-                      "sidebar already live: %s)" % (path, cur["id"], cur.get("status"), len(live),
-                                                     len(content), same_page, same_bar))
-                if same_page == "yes":
-                    rest = live.replace(src.strip(), "[PAGE BLOCK]")
-                    if sidebar.strip() in rest:
-                        rest = rest.replace(sidebar.strip(), "[SIDEBAR]")
-                    if len(rest) < 600:
-                        print("             live page is: %r" % rest)
-                changed += 1
+                if not same:
+                    print("  UPDATE     %s  (id %d, %s; HTML block %d -> %d chars)" % (
+                        path, cur["id"], cur.get("status"), len((inner or "").strip()), len(src.strip())))
+                    for n in notes:
+                        print("             %s" % n)
+                    changed += 1
                 continue
             res = wp.call("POST", "%s/%d" % (kind, cur["id"]), data)
             changed += 1
@@ -289,7 +339,7 @@ def main():
             raise SystemExit("READ-BACK MISMATCH on %s: WordPress stored %d chars, sent %d, so %s. Something "
                              "on the site is altering block content (often a security plugin stripping "
                              "<script>). Nothing after this was deployed." % (path, len(stored), len(content), note))
-        if use_yoast:
+        if use_meta:
             got = back.get("meta", {})
             if got.get("_yoast_wpseo_title") != data.get("meta", {}).get("_yoast_wpseo_title"):
                 print("  warn: Yoast fields did not stick on %s; is wordpress/yt-yoast-rest.php installed?" % path)

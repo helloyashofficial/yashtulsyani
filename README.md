@@ -32,9 +32,9 @@ PASTE-MANIFEST.md    generated: every block, its URL, and the paste order
 
 `generators/deploy.py`, run by the `deploy` job, writes blocks to WordPress through its REST API:
 
-- Each page gets the sidebar block followed by its own block, exactly as when pasted by hand. Each essay gets the sidebar too, which is how it reaches single posts.
-- A sidebar change redeploys every page and essay, since each one carries the sidebar.
-- **It touches only the URLs listed in `generators/ytconf.py` and the essay blocks.** A page it cannot find is an error; it never creates pages.
+- **The sidebar is one synced pattern in WordPress** (pattern 612, `SIDEBAR_PATTERN` in `ytconf.py`), placed at the top of every page and essay. `01-sidebar.html` deploys into that pattern, so a sidebar change is one write.
+- **A page deploy replaces only the inside of the page's one Custom HTML block.** The pattern reference, the block's name and anything else on the page are kept. A page with more than one HTML block is refused until you merge them by hand.
+- **It touches only the URLs listed in `generators/ytconf.py`, the essay blocks and the sidebar pattern.** Everything is looked up before the first write, so a missing page stops the run with nothing written. It never creates pages.
 - **It never changes a page's status.** A new essay is created as a **draft** in its category; you publish it in WordPress.
 - **Every write is read back.** If WordPress stored something different (a security plugin stripping scripts, say), the page is restored to its previous content and the run fails.
 - Unchanged pages are skipped, so a rerun is harmless.

@@ -78,11 +78,10 @@ WP_IDS = {
     # "02-home.html": 123,
 }
 
-# Every page is pasted as two Custom HTML blocks, sidebar first, and the
-# deploy writes them the same way. Essays get the sidebar block too, which
-# is how the sidebar reaches single posts. Set this to False only if the
-# theme already injects the sidebar on posts, or it will appear twice.
-SIDEBAR_IN_POSTS = True
+# The sidebar lives in one synced pattern, placed at the top of every page
+# and essay (read from the live site, 2 Nov 2026). 01-sidebar.html deploys
+# into it; pages keep their reference to it.
+SIDEBAR_PATTERN = 612
 
 # Old WordPress pages to retire: WordPress page ID -> the path it must have.
 # Every deploy moves these to the Trash (restorable there for 30 days), but
