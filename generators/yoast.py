@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-it-means-to-call-time-the-fourth-dimension": dict(
+        focus="time as the fourth dimension",
+        title="Time as the fourth dimension: what relativity actually says",
+        desc="What it means to call time the fourth dimension: Minkowski's 1908 idea, why time is not just another direction, how it was measured, and what remains open."),
     "what-the-stoics-meant-by-what-is-up-to-us": dict(
         focus="what is up to us",
         title="What is up to us: Epictetus on control and other people",
