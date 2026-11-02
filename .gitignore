@@ -8,3 +8,4 @@ qa/states.json
 qa/shots/
 node_modules/
 .DS_Store
+qa/live-shots/
