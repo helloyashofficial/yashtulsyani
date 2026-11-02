@@ -1,0 +1,37 @@
+name: tidy-branches
+
+# After every merge to main, delete branches whose pull request has been
+# merged, plus the live-audit screenshots branch. Never touches main or any
+# branch with an open or unmerged pull request.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  tidy:
+    name: Delete merged branches
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete merged pull request branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          default=$(gh api "repos/$REPO" --jq .default_branch)
+          open=$(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq '.[].head.ref')
+          merged=$(gh api "repos/$REPO/pulls?state=closed&per_page=100" --paginate \
+            --jq ".[] | select(.merged_at != null) | select(.head.repo.full_name == \"$REPO\") | .head.ref" | sort -u)
+          for b in $merged live-audit-shots; do
+            if [ "$b" = "$default" ]; then continue; fi
+            if echo "$open" | grep -qx "$b"; then echo "keep $b (open pull request)"; continue; fi
+            if gh api "repos/$REPO/branches/$b" >/dev/null 2>&1; then
+              gh api -X DELETE "repos/$REPO/git/refs/heads/$b" && echo "deleted $b"
+            fi
+          done
+          echo "remaining branches:"
+          gh api "repos/$REPO/branches" --jq '.[].name'
