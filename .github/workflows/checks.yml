@@ -133,4 +133,4 @@ jobs:
       - name: Deploy
         if: steps.what.outputs.files != ''
         working-directory: generators
-        run: python3 deploy.py --${{ steps.what.outputs.mode }} ${{ steps.what.outputs.files }}
+        run: python3 -u deploy.py --${{ steps.what.outputs.mode }} ${{ steps.what.outputs.files }}
