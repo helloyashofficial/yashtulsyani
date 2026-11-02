@@ -41,6 +41,7 @@ ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">the attach
 
 POST = dict(
     slug="what-repair-after-an-argument-actually-involves", num=45, cat="Relationships", read="auto",
+    date="2026-11-02",
     gen="rewrite/45-what-repair-after-an-argument-actually-involves.py",
     title="What repair after an argument actually involves, and what the famous numbers miss",
     dek="Couples argue. The research suggests most recover, and that many of their disagreements never get settled at all. What matters is how they come back, and some of the best-known numbers about it are weaker than they sound.",

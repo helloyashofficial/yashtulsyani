@@ -20,6 +20,7 @@ BOOKS = '<a href="/books">both books</a>'
 
 POST = dict(
     slug="what-the-observer-effect-actually-says", num=41, cat="Physics and time", read="auto",
+    date="2026-10-24",
     gen="rewrite/41-what-the-observer-effect-actually-says.py",
     title="What the observer effect actually says, and what it does not",
     dek="The most quoted result in quantum physics is also the most misread. The observer in the famous experiments is a detector, not a mind, and the real puzzle it points to is stranger than the popular version.",

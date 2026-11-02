@@ -57,7 +57,7 @@ def cards(es):
             '<span class="yt-wr-card__meta" aria-hidden="true">%s &middot; %s</span></div>\n'
             '    <h3 class="yt-wr-card__title">%s</h3>\n'
             '    <p class="yt-wr-card__dek">%s</p>\n'
-            '  </a></li>' % (C.POST_ROUTE, e["slug"], esc(e["title"]), esc(e["cat"]),
+            '  </a></li>' % (C.POST_ROUTE, e["slug"], esc("%s. %s, %s, %s" % (e["title"], e["cat"], e["date"], e["read"])), esc(e["cat"]),
                              esc(e["date"]), esc(e["read"]), esc(e["title"]), esc(e["dek"])))
     rows.append("</ol>")
     return "\n".join(rows)

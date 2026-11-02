@@ -37,6 +37,7 @@ SHRINK = '<a href="/books/nobody-has-to-shrink">Nobody has to shrink</a>'
 
 POST = dict(
     slug="what-attachment-styles-actually-measure", num=42, cat="Psychology", read="auto",
+    date="2026-11-02",
     gen="rewrite/42-what-attachment-styles-actually-measure.py",
     title="What attachment styles actually measure, and what they cannot tell you",
     dek="Secure, anxious, avoidant: the labels are everywhere, and they began as a newspaper quiz. The research has since moved a long way from boxes, and what it found is more useful than any label.",

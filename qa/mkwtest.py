@@ -2,7 +2,7 @@ import sys, pathlib; HERE=pathlib.Path(__file__).resolve().parent; sys.path.inse
 import postkit as K, newpost as np, yoast
 # Widget demo: a throwaway essay that is never written to production-blocks.
 yoast.YOAST['widget-test']=dict(focus='widget test',title='Widget test',desc='x'*130)
-POST=dict(slug="widget-test",num=99,cat="Relationships",read="auto",title="Widget test",dek="Test",takeaway="T",
+POST=dict(slug="widget-test",num=99,cat="Relationships",read="auto",date="2026-01-01",title="Widget test",dek="Test",takeaway="T",
  sections=[("Widgets",[
   "HTML:"+K.takeaways(["One <strong>bold</strong> point","Second point linking <a href=\"/books\">the books</a>, <a href=\"/writing/why-reassurance-is-never-enough\">the pillar</a> and <a href=\"/writing/what-the-observer-effect-actually-says\">a sibling</a>"]),
   "HTML:"+K.calc("calc-kv","Keyword value calculator",

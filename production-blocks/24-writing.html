@@ -12,8 +12,11 @@
      showed crawlers 65 words and no links; this one shows every
      essay to anything that reads HTML.
 
-     Every new essay changes this block: re-paste it after
-     publishing one.
+     Every new essay changes this block; merging it to main
+     republishes /writing automatically (generators/deploy.py).
+     Card dates come from each spec's date="YYYY-MM-DD" (the day it
+     is published), reading times from the essay body at 225 words
+     a minute; both match what the essay page itself shows.
 
      No filter bar yet. With a handful of essays it would be a
      control with almost nothing to filter; add one when a subject
@@ -75,6 +78,10 @@
     font-family:var(--yt-font-mono) !important;
     margin:-6px 0 22px;
   }
+  /* Qualified with .yt-page: the theme's ".entry-content ol" rule (0,1,1)
+     otherwise wins and indents the whole list by its default padding, which
+     the live audit of 3 Nov 2026 caught (about 35px lost on phones). */
+  .yt-page .yt-wr-cards,
   .yt-wr-cards{
     list-style:none;
     margin:0;
@@ -84,6 +91,7 @@
     gap:14px;
     max-width:760px;
   }
+  .yt-page .yt-wr-cards > li{ margin:0; padding:0; }
   .yt-wr-card{
     display:block;
     border:1px solid var(--yt-border, #e5e7eb);
@@ -99,7 +107,7 @@
     margin-bottom:10px;
   }
   .yt-wr-card__cat{
-    font-size:10.5px;
+    font-size:11.5px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--yt-text-2, #4b5563);
@@ -290,33 +298,33 @@
 <!-- WRITING-CARDS:BEGIN -->
 <p class="yt-wr-count">6 ESSAYS</p>
 <ol class="yt-wr-cards">
-  <li><a class="yt-wr-card" href="/writing/what-repair-after-an-argument-actually-involves" aria-label="What repair after an argument actually involves, and what the famous numbers miss">
-    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Relationships</span><span class="yt-wr-card__meta" aria-hidden="true">Oct 2026 &middot; 9 min read</span></div>
+  <li><a class="yt-wr-card" href="/writing/what-repair-after-an-argument-actually-involves" aria-label="What repair after an argument actually involves, and what the famous numbers miss. Relationships, 02 Nov 2026, 9 min read">
+    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Relationships</span><span class="yt-wr-card__meta" aria-hidden="true">02 Nov 2026 &middot; 9 min read</span></div>
     <h3 class="yt-wr-card__title">What repair after an argument actually involves, and what the famous numbers miss</h3>
     <p class="yt-wr-card__dek">Couples argue. The research suggests most recover, and that many of their disagreements never get settled at all. What matters is how they come back, and some of the best-known numbers about it are weaker than they sound.</p>
   </a></li>
-  <li><a class="yt-wr-card" href="/writing/what-it-means-to-call-time-the-fourth-dimension" aria-label="What it means to call time the fourth dimension, and what it does not">
-    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Fourth dimension</span><span class="yt-wr-card__meta" aria-hidden="true">Oct 2026 &middot; 11 min read</span></div>
+  <li><a class="yt-wr-card" href="/writing/what-it-means-to-call-time-the-fourth-dimension" aria-label="What it means to call time the fourth dimension, and what it does not. Fourth dimension, 02 Nov 2026, 11 min read">
+    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Fourth dimension</span><span class="yt-wr-card__meta" aria-hidden="true">02 Nov 2026 &middot; 11 min read</span></div>
     <h3 class="yt-wr-card__title">What it means to call time the fourth dimension, and what it does not</h3>
     <p class="yt-wr-card__dek">In 1908 a mathematician told a room of scientists that space and time on their own would become mere shadows. What he meant is precise, it has been measured, and it is stranger and more modest than the version that travels.</p>
   </a></li>
-  <li><a class="yt-wr-card" href="/writing/what-the-stoics-meant-by-what-is-up-to-us" aria-label="What the Stoics meant by what is up to us, and what it means for love">
-    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Philosophy</span><span class="yt-wr-card__meta" aria-hidden="true">Oct 2026 &middot; 11 min read</span></div>
+  <li><a class="yt-wr-card" href="/writing/what-the-stoics-meant-by-what-is-up-to-us" aria-label="What the Stoics meant by what is up to us, and what it means for love. Philosophy, 02 Nov 2026, 11 min read">
+    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Philosophy</span><span class="yt-wr-card__meta" aria-hidden="true">02 Nov 2026 &middot; 11 min read</span></div>
     <h3 class="yt-wr-card__title">What the Stoics meant by what is up to us, and what it means for love</h3>
     <p class="yt-wr-card__dek">Epictetus opened his Handbook by dividing the world in two: what is up to us, and what is not. Other people, and how they feel about us, sit on the far side of that line. Read closely, that is less cold than it sounds.</p>
   </a></li>
-  <li><a class="yt-wr-card" href="/writing/what-attachment-styles-actually-measure" aria-label="What attachment styles actually measure, and what they cannot tell you">
-    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Psychology</span><span class="yt-wr-card__meta" aria-hidden="true">Oct 2026 &middot; 12 min read</span></div>
+  <li><a class="yt-wr-card" href="/writing/what-attachment-styles-actually-measure" aria-label="What attachment styles actually measure, and what they cannot tell you. Psychology, 02 Nov 2026, 12 min read">
+    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Psychology</span><span class="yt-wr-card__meta" aria-hidden="true">02 Nov 2026 &middot; 12 min read</span></div>
     <h3 class="yt-wr-card__title">What attachment styles actually measure, and what they cannot tell you</h3>
     <p class="yt-wr-card__dek">Secure, anxious, avoidant: the labels are everywhere, and they began as a newspaper quiz. The research has since moved a long way from boxes, and what it found is more useful than any label.</p>
   </a></li>
-  <li><a class="yt-wr-card" href="/writing/what-the-observer-effect-actually-says" aria-label="What the observer effect actually says, and what it does not">
-    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Physics and time</span><span class="yt-wr-card__meta" aria-hidden="true">Oct 2026 &middot; 10 min read</span></div>
+  <li><a class="yt-wr-card" href="/writing/what-the-observer-effect-actually-says" aria-label="What the observer effect actually says, and what it does not. Physics and time, 24 Oct 2026, 10 min read">
+    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Physics and time</span><span class="yt-wr-card__meta" aria-hidden="true">24 Oct 2026 &middot; 10 min read</span></div>
     <h3 class="yt-wr-card__title">What the observer effect actually says, and what it does not</h3>
     <p class="yt-wr-card__dek">The most quoted result in quantum physics is also the most misread. The observer in the famous experiments is a detector, not a mind, and the real puzzle it points to is stranger than the popular version.</p>
   </a></li>
-  <li><a class="yt-wr-card" href="/writing/why-reassurance-is-never-enough" aria-label="Why reassurance is never enough, and what to do instead">
-    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Relationships</span><span class="yt-wr-card__meta" aria-hidden="true">Oct 2026 &middot; 11 min read</span></div>
+  <li><a class="yt-wr-card" href="/writing/why-reassurance-is-never-enough" aria-label="Why reassurance is never enough, and what to do instead. Relationships, 24 Oct 2026, 11 min read">
+    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">Relationships</span><span class="yt-wr-card__meta" aria-hidden="true">24 Oct 2026 &middot; 11 min read</span></div>
     <h3 class="yt-wr-card__title">Why reassurance is never enough, and what to do instead</h3>
     <p class="yt-wr-card__dek">Asking someone to promise they still love you works for about an hour. The relief is real, which is exactly why the question comes back, and why it slowly changes the relationship it was meant to protect.</p>
   </a></li>

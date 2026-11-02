@@ -1,0 +1,48 @@
+name: live-audit
+
+# Read-only audit of the live /writing hub: layout at 12 widths in both
+# themes, card data against each live essay, metadata, JSON-LD and links.
+# GET requests only; uses no secrets.
+on:
+  pull_request:
+    paths:
+      - "qa/live-audit.js"
+      - ".github/workflows/live-audit.yml"
+  workflow_dispatch:
+    inputs:
+      path:
+        description: "Page path to audit"
+        default: "/writing/"
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    name: Live audit of the writing hub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+      - name: Install Playwright and Chromium
+        run: |
+          cd qa
+          npm init -y >/dev/null
+          npm install playwright@1.48.2 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: Audit the live page
+        run: |
+          cd qa
+          node live-audit.js https://yashtulsyani.com "${{ github.event.inputs.path || '/writing/' }}" live-shots
+      - name: Publish screenshots to the live-audit-shots branch
+        if: always()
+        run: |
+          cd qa/live-shots
+          git init -q -b live-audit-shots
+          git config user.name "live-audit"
+          git config user.email "live-audit@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Live audit screenshots ${{ github.run_id }}"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" live-audit-shots
