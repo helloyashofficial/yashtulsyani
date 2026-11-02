@@ -265,6 +265,12 @@ def main():
                 print("  UPDATE     %s  (id %d, %s; live %d chars, new %d; page block already live: %s, "
                       "sidebar already live: %s)" % (path, cur["id"], cur.get("status"), len(live),
                                                      len(content), same_page, same_bar))
+                if same_page == "yes":
+                    rest = live.replace(src.strip(), "[PAGE BLOCK]")
+                    if sidebar.strip() in rest:
+                        rest = rest.replace(sidebar.strip(), "[SIDEBAR]")
+                    if len(rest) < 600:
+                        print("             live page is: %r" % rest)
                 changed += 1
                 continue
             res = wp.call("POST", "%s/%d" % (kind, cur["id"]), data)
