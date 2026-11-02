@@ -9,7 +9,7 @@ On 24 October 2026 the whole site was rebuilt on the machinery behind fullstackd
 ## 1. What is in this bundle
 
 ```
-production-blocks/   the 13 blocks to paste (sidebar, 11 pages, /system)
+production-blocks/   the blocks to paste (sidebar, 11 pages, essays)
 generators/          the build: gates, schema, Yoast, essay pipeline
   ytconf.py          the ONE place site settings live (domain, clusters, routes, page map)
   templates/         post-template.html, the block every essay is built from
@@ -30,7 +30,6 @@ Run `bash generators/build.sh`. It must end `BUILD OK`.
 1. `01-sidebar.html` first, as its own Custom HTML block, on every page **and every essay**. It is the site's stylesheet: tokens, page globals, all essay CSS and the widget runtime live in it and nowhere else.
 2. The pages. Book detail pages before `/books`, since the index links to them.
 3. Essays, when there are any, then re-paste `/writing`.
-4. `/system` last. Set it to **Private or password protected**, not only noindex. noindex leaves it readable by anyone with the URL.
 
 Every page block needs the new sidebar. Pasting a page without re-pasting the sidebar will leave it on the old tokens.
 
@@ -62,7 +61,7 @@ Every page block needs the new sidebar. Pasting a page without re-pasting the si
 - `/now` is stamped **October 2026** and its prefix is now `yt-now` so the freshness gate can read it.
 - The homepage shortcut hint now mentions 0 for home.
 
-**`/system`** got only the token and specificity fixes. Its script is byte-identical to the previous delivery, and `engine.js` still passes 80 of 80.
+**`/system`** (the Life System page) was removed from the site on 2 Nov 2026; Yash dropped it as an experiment. Its block and engine remain in git history.
 
 ---
 
@@ -109,7 +108,7 @@ The pipeline is ported and was proven end to end on throwaway essays that were t
 
 | Gate | Injected fault | Result |
 |---|---|---|
-| logical operators | `&&` in /system's script | FAIL, named |
+| logical operators | `&&` in /system's script (page since removed) | FAIL, named |
 | em-dash | one in /work's copy | FAIL |
 | h1 count | a second h1 on /contact | FAIL |
 | non-ASCII JS | a middot in the sidebar script | FAIL |
@@ -167,7 +166,7 @@ A separate agent with no part in the build checked every page's copy and JSON-LD
 
 ## 10. Still needs Yash
 
-1. **Contact email.** `/contact` uses `yashtulsyani.work@gmail.com` from the sister site. Confirm or replace it; it appears twice.
+1. **Contact email.** Done: Yash confirmed `yashtulsyani.work@gmail.com` on 2 Nov 2026.
 2. **Book status.** Every page now says only "Unpublished". The unconfirmed "manuscript complete" chip and "Seeking a home" were removed, along with every "finished/complete" claim (section 9). If either book is finished, or you are seeking a publisher, say so and it can go back in.
 3. **Audience size and channel name** for `/about`, if they can be sourced and confirmed.
 4. **The reading list** (title, author, one line on why). It fills `/reading`, the homepage strip and `/now` at once.
@@ -197,3 +196,15 @@ A separate agent with no part in the build checked every page's copy and JSON-LD
 3. Copy the focus keyphrase, SEO title and meta description from the block's header comment into Yoast.
 4. Re-paste `/writing` (24-writing.html) and `/now` (26-now.html), which now list them.
 5. Before any of that, confirm the sidebar reaches single posts (section 10, item 7). Without it, essays render unstyled.
+
+---
+
+## 12. GitHub and automatic publishing (2 Nov 2026)
+
+The site lives in `helloyashofficial/yashtulsyani`. `README.md` is the operating manual; `CLAUDE.md` holds the rules every session must follow.
+
+- `.github/workflows/checks.yml` runs build and gates, the "generated files are committed" check, essay QA and browser QA on every pull request, and a **deploy plan**. On a merge to `main` the same checks run and, if green, `generators/deploy.py --apply` publishes the changed blocks.
+- `deploy.py` was tested against a mock WordPress REST server before shipping, in eight scenarios: first full sync; rerun as a no-op; script stripping (detected, page restored); wrong password; plan against live state; Yoast fields with and without the snippet; and a missing page. A decoy page with the same slug under another parent was correctly left alone.
+- Settings in `ytconf.py`: `WP_IDS` for any page the lookup cannot find, and `SIDEBAR_PATTERN`. The live site (read 2 Nov 2026) holds the sidebar in synced pattern 612, and every page and essay is `<!-- wp:block {"ref":612} /-->` followed by one named Custom HTML block. That answers how the sidebar reaches single posts. `01-sidebar.html` deploys into the pattern; a page deploy replaces only the inside of its HTML block. Tested on a mock shaped like the live site: full sync and rerun, page already current (not written), two HTML blocks (refused, nothing written), missing pattern reference (added), script stripping on the pattern (restored), Yoast fields (never sent to the pattern).
+- First runs against the real WordPress (2 Nov 2026): the login works and all 11 public pages are found. `/settings` returned 403 to this login, so the front page is now found from the page list (the one page whose link is the site root). Every target is looked up before the first write, so a missing page stops the run with nothing written.
+- `ytconf.RETIRED` lists old pages to remove: `/insights` (id 623, the old blog hub, replaced by `/writing`) and `/life-system-rpg` (id 923, the dropped Life System experiment, which was published publicly). Each deploy moves them to the Trash, never deletes outright, and only if the ID still has the listed path. Tested on the mock: plan, apply, rerun, wrong ID (refused, nothing written) and already deleted.

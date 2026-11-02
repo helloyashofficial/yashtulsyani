@@ -15,4 +15,5 @@ Read `HANDOVER-V4.md` before changing anything. It is the technical source of tr
 ## Git
 
 - Work on a branch and open a pull request; do not push to `main` directly.
-- Nothing here publishes to WordPress. Yash pastes changed blocks himself after merging.
+- **Merging to `main` publishes to the live site** (generators/deploy.py, the `deploy` job). Treat every merge as a release: the deploy plan on the pull request lists what will change.
+- Never run `deploy.py --apply` locally, and never put WordPress credentials in the repo, a commit or a chat. They live only in GitHub secrets.

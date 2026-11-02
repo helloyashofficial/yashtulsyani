@@ -63,6 +63,33 @@ PAGES = {
     "26-now.html": "/now",
     "27-contact.html": "/contact",
 }
+# Private, noindex pages built here. None at present.
 PRIVATE = {
-    "30-system.html": "/system",
 }
+
+# ---------------------------------------------------------------- deploy
+# Level 2: generators/deploy.py publishes blocks to WordPress over its REST
+# API. It only ever touches the URLs mapped in PAGES, PRIVATE and the essay
+# blocks; anything else on the site is left alone.
+
+# Pages are found by their URL path. The front page is the one page whose
+# link is the site root. Fill in an ID for any page the lookup cannot find.
+WP_IDS = {
+    # "02-home.html": 123,
+}
+
+# The sidebar lives in one synced pattern, placed at the top of every page
+# and essay (read from the live site, 2 Nov 2026). 01-sidebar.html deploys
+# into it; pages keep their reference to it.
+SIDEBAR_PATTERN = 612
+
+# Old WordPress pages to retire: WordPress page ID -> the path it must have.
+# Every deploy moves these to the Trash (restorable there for 30 days), but
+# only if the ID still has that path, so a wrong ID never trashes the wrong
+# page. Already trashed or deleted pages are skipped.
+RETIRED = {
+    623: "/insights",           # the old blog hub, replaced by /writing
+    923: "/life-system-rpg",    # Life System experiment, dropped 2 Nov 2026
+}
+
+# Category IDs are looked up by name and created if missing.

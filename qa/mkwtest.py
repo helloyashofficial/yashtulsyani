@@ -4,7 +4,7 @@ import postkit as K, newpost as np, yoast
 yoast.YOAST['widget-test']=dict(focus='widget test',title='Widget test',desc='x'*130)
 POST=dict(slug="widget-test",num=99,cat="Relationships",read="auto",title="Widget test",dek="Test",takeaway="T",
  sections=[("Widgets",[
-  "HTML:"+K.takeaways(["One <strong>bold</strong> point","Second point with a <a href=\"/books\">link</a>"]),
+  "HTML:"+K.takeaways(["One <strong>bold</strong> point","Second point linking <a href=\"/books\">the books</a>, <a href=\"/writing/why-reassurance-is-never-enough\">the pillar</a> and <a href=\"/writing/what-the-observer-effect-actually-says\">a sibling</a>"]),
   "HTML:"+K.calc("calc-kv","Keyword value calculator",
      [dict(name="vol",label="Monthly searches",value=390),dict(name="ctr",label="Click share",value=10,unit="%"),dict(name="demo",label="Visit to demo",value=5,unit="%"),
       dict(name="win",label="Demo to customer",value=20,unit="%"),dict(name="acv",label="Annual contract value",value=12000,unit="$"),
