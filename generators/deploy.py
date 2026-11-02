@@ -254,6 +254,16 @@ def main():
                 compose(found[f].get("content", {}).get("raw", ""), "x", kind != "blocks")
             except ValueError as e:
                 raise SystemExit("%s %s Nothing was written." % (path, e))
+    if use_yoast:
+        # The Yoast fields are only exposed once wordpress/yt-yoast-rest.php
+        # is active. Check before writing anything.
+        probe = [c for (k, p_, f_), c in [((k, p_, f_), found[f_]) for k, p_, f_ in plan]
+                 if c is not None and k != "blocks"]
+        if probe:
+            m = probe[0].get("meta")
+            if not isinstance(m, dict) or "_yoast_wpseo_title" not in m:
+                raise SystemExit("YOAST_REST is on, but WordPress does not expose the Yoast fields. Is the "
+                                 "YT Yoast fields over REST plugin installed and active? Nothing was written.")
     if missing:
         for path in missing:
             slug = path.rstrip("/").split("/")[-1]
@@ -286,10 +296,17 @@ def main():
                 use_meta = True
         else:
             use_meta = False
+        meta = None
         if use_meta:
             meta = yoast_meta(f, slug)
             if meta:
                 data["meta"] = meta
+        meta_same = True
+        if meta:
+            have = (cur or {}).get("meta") or {}
+            for k_, v_ in meta.items():
+                if have.get(k_) != v_:
+                    meta_same = False
         if cur is None:
             if kind == "pages":
                 raise SystemExit("no WordPress page at %s; create it once by hand (or add its ID to "
@@ -313,11 +330,19 @@ def main():
                     if not notes:
                         same = True
             if same:
-                skipped += 1
-                print("  unchanged  %s" % path)
-                if not use_meta:
+                if meta_same:
+                    skipped += 1
+                    print("  unchanged  %s" % path)
                     continue
+                # Only the Yoast fields differ: send those alone, and expect
+                # the content to come back exactly as it is now.
+                data = {"meta": meta}
+                content = live
             if not apply:
+                if same:
+                    print("  YOAST      %s  (id %d: SEO title, description and keyphrase will be set)"
+                          % (path, cur["id"]))
+                    changed += 1
                 if not same:
                     print("  UPDATE     %s  (id %d, %s; HTML block %d -> %d chars)" % (
                         path, cur["id"], cur.get("status"), len((inner or "").strip()), len(src.strip())))
@@ -343,10 +368,12 @@ def main():
             raise SystemExit("READ-BACK MISMATCH on %s: WordPress stored %d chars, sent %d, so %s. Something "
                              "on the site is altering block content (often a security plugin stripping "
                              "<script>). Nothing after this was deployed." % (path, len(stored), len(content), note))
-        if use_meta:
-            got = back.get("meta", {})
-            if got.get("_yoast_wpseo_title") != data.get("meta", {}).get("_yoast_wpseo_title"):
-                print("  warn: Yoast fields did not stick on %s; is wordpress/yt-yoast-rest.php installed?" % path)
+        if meta:
+            got = back.get("meta") or {}
+            for k_, v_ in meta.items():
+                if got.get(k_) != v_:
+                    raise SystemExit("Yoast field %s did not save on %s (WordPress has %r). The page content "
+                                     "is fine; check the YT Yoast fields over REST plugin." % (k_, path, got.get(k_)))
     trashed = 0
     for pid, rpath, r in retire:
         title = r.get("title", {}).get("raw", "")
