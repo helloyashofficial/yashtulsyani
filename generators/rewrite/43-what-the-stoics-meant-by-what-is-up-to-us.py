@@ -24,6 +24,7 @@ BALTZLY = "https://plato.stanford.edu/archives/win2021/entries/stoicism/"
 ROBERTSON = "https://donaldrobertson.name/2010/09/10/excerpt-the-philosophy-of-cognitive-behavioural-therapy-cbt/"
 EBSCO = "https://www.ebsco.com/research-starters/health-and-medicine/rational-emotive-therapy"
 BMCR = "https://bmcr.brynmawr.edu/?p=26558"
+CARTER = "https://classics.mit.edu/Epictetus/epicench.html"
 
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">the essay on reassurance seeking</a>'
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">attachment anxiety</a>'
@@ -50,15 +51,15 @@ POST = dict(
         ]),
         ("Who Epictetus was", [
             "The details of his life are brief and mostly secure. According to " + a(GRAVER, "Margaret Graver’s entry on Epictetus in the Stanford Encyclopedia of Philosophy") + ", he was born sometime in the 50s of the common era in Hierapolis, a Greek city in Asia Minor, and spent part of his life as the slave of Epaphroditus. He studied for a time under the Stoic philosopher Musonius Rufus, then set up his own school at Nicopolis, where he taught until his death around 135.",
-            "He did not write the books that carry his name. His lectures were written down by his student, the historian Arrian of Nicomedia, as the Discourses, and the Handbook is a short abridgment of them. Graver is frank about its limits: she calls it a much attenuated account of his thought that at some points gives a misleading impression of his philosophical motivations.",
+            "He probably did not write the books that carry his name. According to the preface of the Discourses, his lectures were written down by the historian Arrian of Nicomedia, though a few scholars argue Epictetus composed them himself; the Handbook is a short abridgment of the Discourses. Graver is frank about its limits: she calls it a much attenuated account of his thought that at some points gives a misleading impression of his philosophical motivations.",
             "HTML:" + K.table("Epictetus at a glance",
-                ["", "What the sources say"],
+                ["Detail", "What the sources say"],
                 [["Born", "Sometime in the 50s CE, in Hierapolis, Asia Minor"],
                  ["Status", "Enslaved for part of his life, to Epaphroditus"],
                  ["Teacher", "The Stoic Musonius Rufus"],
                  ["School", "His own, at Nicopolis"],
                  ["Died", "Around 135 CE"],
-                 ["The texts", "Written down by his student Arrian: the Discourses, and the Handbook as an abridgment"]],
+                 ["The texts", "The Discourses, written down by Arrian of Nicomedia by their own account, and the Handbook as an abridgment"]],
                 source='Source: <a href="' + GRAVER + '" target="_blank" rel="noopener">Graver, Stanford Encyclopedia of Philosophy, “Epictetus”</a>.'),
             "That caution matters for what follows. The Handbook is the version of Epictetus most people meet, and its compression is part of why the idea can sound colder than it is. Where the Handbook is stark, this essay checks it against the fuller account.",
         ]),
@@ -103,13 +104,13 @@ POST = dict(
             "The fuller Epictetus pushes the other way too. Graver points out that he did not want people to be unfeeling like a statue, and that it is a misconception to think proper affection for friends and family must leave us open to debilitating emotions. For Epictetus, she writes, love of humanity is a willingness to exert oneself on others’ behalf, and the parent who stays at the bedside of a desperately sick child behaves more naturally, not less, than the one who runs away to weep.",
             "HTML:" + K.compare("Two readings of chapter 3", [
                 ("Love less, lose less", [], ["Treats attachment itself as the mistake", "Matches the men of stone caricature", "Not supported by the fuller account of Epictetus"], "The reading critics attacked."),
-                ("Love without owning", ["Keeps the affection", "Remembers the person is not yours to keep", "Puts effort into care rather than control"], [], "Closer to the Discourses, as Graver reads them."),
+                ("Love without owning", ["Keeps the affection", "Remembers the person is not yours to keep", "Puts effort into care rather than control"], [], "This essay’s reading, consistent with Graver’s account of the Discourses."),
             ], source='Sources: <a href="' + BALTZLY + '" target="_blank" rel="noopener">Baltzly, “Stoicism”</a>; <a href="' + GRAVER + '" target="_blank" rel="noopener">Graver, “Epictetus”</a>.'),
             "The second reading does not make the passage gentle. It is still asking something difficult: to love someone fully while knowing, at the same time, that they are mortal and not yours. But that is a different request from asking you to care less.",
         ]),
         ("Views, not things", [
             "Chapter 5 is the line from the Handbook most often quoted on its own. In Higginson’s version: “Men are disturbed not by things, but by the views which they take of things.” Death, the chapter goes on, is nothing terrible, or it would have seemed so to Socrates; the terror lies in our notion of death.",
-            "The popular paraphrase, that people are disturbed by their opinions about things, is close but not exact; Higginson writes views, and older translations have principles and notions. The idea is the same in each: the distress arrives through a judgement, and the judgement is the part that is up to us.",
+            "Translations differ on the key word: Higginson writes views, and " + a(CARTER, "the translation by Elizabeth Carter in MIT’s Internet Classics Archive") + " has principles and notions. The idea is the same in each: the distress arrives through a judgement, and the judgement is the part that is up to us.",
             "That idea has a modern descendant. Baltzly notes strong affinities between the central role Stoicism gives to judgement and the techniques of cognitive behavioural therapy. The founders of two of those therapies said so themselves. " + a(ROBERTSON, "Donald Robertson quotes Aaron Beck and his co-authors") + ", writing in 1979, that the philosophical origins of cognitive therapy can be traced back to the Stoic philosophers, and " + a(EBSCO, "a reference summary of Albert Ellis’s rational emotive behaviour therapy") + " lists Epictetus and Marcus Aurelius among its philosophical origins.",
             "HTML:" + K.callout("warn", "A limit worth keeping",
                 "<p>A family resemblance to a therapy is not evidence that reading Epictetus treats anything. The claim here is historical: the people who built these therapies named the Stoics as a source. Whether a particular idea helps a particular person is a separate question.</p>"),
@@ -129,7 +130,7 @@ POST = dict(
         ]),
         ("Where the line is too sharp", [
             "The distinction is clean, and real relationships are not. You cannot decide whether someone loves you, but what you do affects how they feel, and pretending otherwise would be its own mistake.",
-            "Modern writers have tried to account for this. " + a(BMCR, "A review of William Irvine’s 2009 book A Guide to the Good Life") + " describes his proposal of a three-way division: things we control completely, things we do not control at all, and things over which we have some control, such as whether we win a game of tennis. For the middle group, Irvine’s advice is to set internal goals: not to win, but to compete as hard as we can. The reviewer is not wholly convinced, noting that Irvine’s shift from virtue towards tranquillity may seem to some a sleight of hand.",
+            "Modern writers have tried to account for this. " + a(BMCR, "A review of William Irvine’s 2009 book A Guide to the Good Life") + " describes his proposal of a three-way division: things we control completely, things we do not control at all, and things over which we have some control, such as whether we win a game of tennis. For the middle group, Irvine’s advice is to set internal goals: not to win, but to compete as hard as we can. The review is largely favourable, though the reviewer notes that Irvine’s shift from virtue towards tranquillity may seem to some a sleight of hand.",
             "Whatever its standing as an account of Stoicism, the middle category describes relationships well. You have influence without control. The useful version of the Stoic idea, for love, is to put your effort into the part that is yours (how honestly you speak, how well you listen, how you treat the other person) and to hold the result, their feelings and their choices, as theirs.",
             "Said that way, the distinction is not a rule for feeling less. It is a way of seeing where effort belongs, so that care goes into what care can actually change.",
         ]),
@@ -141,7 +142,7 @@ POST = dict(
         ("What did Epictetus mean by what is up to us?",
          "The things that are fully our own: our judgements, aims, desires and aversions. Everything else, including the body, property, reputation and our relationships with other people, is not up to us, because it can be taken away, interrupted or decided by someone else."),
         ("Is the dichotomy of control Epictetus' own phrase?",
-         "The idea is his; it opens his Handbook. The phrase dichotomy of control is a modern label, used for example in William Irvine's 2009 book, which also proposes a third category for things we partly control."),
+         "The idea is his; it opens his Handbook. The phrase dichotomy of control is not in the Handbook. William Irvine uses it in his 2009 book A Guide to the Good Life, which also proposes a third category for things we partly control."),
         ("Does Stoicism mean not caring about people?",
          "No. Critics in antiquity called the Stoics men of stone, but the Stanford Encyclopedia notes that Epictetus did not want people to be unfeeling like a statue, and treated care for others as active effort on their behalf. The aim is not to love less but to stop staking one's peace on what one cannot control."),
         ("Is another person's love up to us?",
