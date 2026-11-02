@@ -5,9 +5,11 @@
  *              and focus keyphrase through the WordPress REST API. Without it,
  *              those three fields are pasted into Yoast by hand.
  *
- * Install: upload this file to wp-content/mu-plugins/ (create the folder if it
- * does not exist). Must-use plugins load automatically; there is nothing to
- * activate. Remove the file to undo it.
+ * Install, either way:
+ *   - WordPress dashboard: Plugins > Add New > Upload Plugin, choose
+ *     yt-yoast-rest.zip, Install Now, then Activate. Deactivate to undo.
+ *   - Or upload this file to wp-content/mu-plugins/ (create the folder if it
+ *     does not exist). Must-use plugins load automatically. Remove to undo.
  *
  * Safe by design: the fields are only writable by a user who can edit that
  * particular post or page, which is exactly who could edit them in Yoast's

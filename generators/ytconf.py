@@ -87,6 +87,11 @@ SIDEBAR_PATTERN = 612
 # 2 Nov 2026); "draft" would wait for someone to publish it in WordPress.
 NEW_POST_STATUS = "publish"
 
+# Set Yoast's SEO title, meta description and focus keyphrase from
+# generators/yoast.py on every deploy. Needs wordpress/yt-yoast-rest.php
+# installed and active on the site; until then, leave this False.
+YOAST_REST = False
+
 # Old WordPress pages to retire: WordPress page ID -> the path it must have.
 # Every deploy moves these to the Trash (restorable there for 30 days), but
 # only if the ID still has that path, so a wrong ID never trashes the wrong
