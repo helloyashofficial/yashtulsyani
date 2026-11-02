@@ -179,6 +179,28 @@ def main():
     wp = WP(url, user, pw)
     use_yoast = os.environ.get("YOAST_REST") == "1"
     changed = skipped = created = 0
+    # Find every target before writing anything, so a missing page stops the
+    # run before the first write rather than halfway through.
+    found, missing = {}, []
+    for kind, path, f in plan:
+        found[f] = find(wp, kind, path, f)
+        if found[f] is None:
+            if kind == "pages":
+                missing.append(path)
+    if missing:
+        for path in missing:
+            slug = path.rstrip("/").split("/")[-1]
+            print("  MISSING    %s: no page at this address." % path)
+            near = wp.call("GET", "pages", query={"search": slug, "status": STATUSES,
+                                                   "context": "edit", "per_page": 20})
+            for h in near:
+                print("             similar: %s  (id %d, %s, title %r)" % (
+                    h.get("link"), h["id"], h.get("status"), h.get("title", {}).get("raw", "")))
+            if not near:
+                print("             no page with %r in its title or content either." % slug)
+        raise SystemExit("%d page(s) missing: %s. Create each once by hand in WordPress (or add its "
+                         "ID to ytconf.WP_IDS) and rerun. Pages are never created automatically, and "
+                         "nothing was written." % (len(missing), ", ".join(missing)))
     for kind, path, f in plan:
         src = (C.BLOCKS / f).read_text(encoding="utf-8")
         if kind == "pages":
@@ -186,7 +208,7 @@ def main():
         else:
             content = (block(sidebar) + "\n\n" if C.SIDEBAR_IN_POSTS else "") + block(src)
         slug = path.rstrip("/").split("/")[-1]
-        cur = find(wp, kind, path, f)
+        cur = found[f]
         data = {"content": content}
         if use_yoast:
             meta = yoast_meta(f, slug)
@@ -215,7 +237,11 @@ def main():
                 if not use_yoast:
                     continue
             if not apply:
-                print("  UPDATE     %s  (id %d, %s)" % (path, cur["id"], cur.get("status")))
+                same_page = "yes" if src.strip() in live else "no"
+                same_bar = "yes" if sidebar.strip() in live else "no"
+                print("  UPDATE     %s  (id %d, %s; live %d chars, new %d; page block already live: %s, "
+                      "sidebar already live: %s)" % (path, cur["id"], cur.get("status"), len(live),
+                                                     len(content), same_page, same_bar))
                 changed += 1
                 continue
             res = wp.call("POST", "%s/%d" % (kind, cur["id"]), data)
