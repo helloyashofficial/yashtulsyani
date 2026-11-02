@@ -33,7 +33,7 @@ PERSON_ID = url("/about") + "#yash"
 CLUSTERS = {
     "Relationships": "why-reassurance-is-never-enough",
     "Philosophy": None,
-    "Psychology": None,
+    "Psychology": "what-attachment-styles-actually-measure",
     "Physics and time": "what-the-observer-effect-actually-says",
     "Fourth dimension": None,
 }
