@@ -117,7 +117,7 @@ POST = dict(
         ]),
         ("What this means in a relationship", [
             "Put the pieces together and the distinction becomes practical. In any relationship there are things that are not up to you: whether the other person loves you, what they feel on a given day, whether they stay, what they think of you. And there are things that are: what you believe about the situation, what you ask for, how you ask, and what you do next.",
-            "Most painful patterns in relationships involve putting effort on the wrong side of that line. " + ESSAY40 + " describes one of them in detail: asking again and again for proof of something that is, in the end, another person’s to give. The asking is up to you. The feeling it is trying to secure is not, which is why no answer settles it.",
+            "Most painful patterns in relationships involve putting effort on the wrong side of that line. (Coming back from an argument is a case in point, set out in <a href=\"/writing/what-repair-after-an-argument-actually-involves\">what repair after an argument actually involves</a>.) " + ESSAY40 + " describes one of them in detail: asking again and again for proof of something that is, in the end, another person’s to give. The asking is up to you. The feeling it is trying to secure is not, which is why no answer settles it.",
             "HTML:" + K.decision("Where does my effort belong here?",
                 ("Is the thing I want settled something only the other person can decide?", [
                     ("Yes", ("Am I trying to secure it by pressure, testing or repeated asking?", [
