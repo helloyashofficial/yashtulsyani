@@ -197,3 +197,14 @@ A separate agent with no part in the build checked every page's copy and JSON-LD
 3. Copy the focus keyphrase, SEO title and meta description from the block's header comment into Yoast.
 4. Re-paste `/writing` (24-writing.html) and `/now` (26-now.html), which now list them.
 5. Before any of that, confirm the sidebar reaches single posts (section 10, item 7). Without it, essays render unstyled.
+
+---
+
+## 12. GitHub and automatic publishing (2 Nov 2026)
+
+The site lives in `helloyashofficial/yashtulsyani`. `README.md` is the operating manual; `CLAUDE.md` holds the rules every session must follow.
+
+- `.github/workflows/checks.yml` runs build and gates, the "generated files are committed" check, essay QA, engine tests and browser QA on every pull request, and a **deploy plan**. On a merge to `main` the same checks run and, if green, `generators/deploy.py --apply` publishes the changed blocks.
+- `deploy.py` was tested against a mock WordPress REST server before shipping, in eight scenarios: first full sync; rerun as a no-op; script stripping (detected, page restored); wrong password; plan against live state; Yoast fields with and without the snippet; and a missing page. A decoy page with the same slug under another parent was correctly left alone.
+- Settings in `ytconf.py`: `WP_IDS` for any page the lookup cannot find, and `SIDEBAR_IN_POSTS`, which resolves the long-open question of how the sidebar reaches single posts: the deploy includes it in the post body.
+- Not yet tested against the real WordPress. The first manual `plan` run, after the secrets are added, is that test.

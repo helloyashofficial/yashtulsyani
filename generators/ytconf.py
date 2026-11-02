@@ -66,3 +66,23 @@ PAGES = {
 PRIVATE = {
     "30-system.html": "/system",
 }
+
+# ---------------------------------------------------------------- deploy
+# Level 2: generators/deploy.py publishes blocks to WordPress over its REST
+# API. It only ever touches the URLs mapped in PAGES, PRIVATE and the essay
+# blocks; anything else on the site is left alone.
+
+# Pages are found by their URL path. The front page has no path of its own,
+# so its WordPress page ID is looked up from the site's settings, or given
+# here. Fill in an ID for any page the lookup cannot find.
+WP_IDS = {
+    # "02-home.html": 123,
+}
+
+# Every page is pasted as two Custom HTML blocks, sidebar first, and the
+# deploy writes them the same way. Essays get the sidebar block too, which
+# is how the sidebar reaches single posts. Set this to False only if the
+# theme already injects the sidebar on posts, or it will appear twice.
+SIDEBAR_IN_POSTS = True
+
+# Category IDs are looked up by name and created if missing.

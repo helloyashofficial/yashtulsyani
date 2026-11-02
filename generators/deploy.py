@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""
+deploy.py --- publish blocks to WordPress through its REST API.
+
+    python3 deploy.py --plan  [files...]   show what would change; writes nothing
+    python3 deploy.py --apply [files...]   write to WordPress
+    python3 deploy.py --apply --all        every block (first sync, or after a
+                                           sidebar change)
+
+With no files and no --all, it deploys nothing. Files are block names in
+production-blocks/, e.g. 26-now.html. If 01-sidebar.html is in the list,
+every page and essay is redeployed, because each one carries the sidebar.
+
+Credentials come from the environment, never from this repository:
+    WP_URL           https://yashtulsyani.com
+    WP_USER          the WordPress username the application password belongs to
+    WP_APP_PASSWORD  an application password (Users > Profile > Application Passwords)
+Optional:
+    YOAST_REST=1     also set Yoast title, description and focus keyphrase.
+                     Needs wordpress/yt-yoast-rest.php installed on the site.
+
+Safety, in order of importance:
+  - Only URLs mapped in ytconf (PAGES, PRIVATE) and essay blocks are touched.
+    A page that cannot be found is an error; pages are never created.
+  - Status is never changed on an existing page or post. A new essay is
+    created as a DRAFT; you publish it in WordPress.
+  - Every write is read back and compared. If WordPress altered the content
+    (a security plugin stripping scripts, say), the run fails loudly.
+  - Unchanged content is skipped, so re-running is harmless.
+"""
+import base64, json, os, re, sys, urllib.error, urllib.parse, urllib.request
+import ytconf as C
+
+STATUSES = "publish,private,draft,pending,future"
+
+
+class WP:
+    def __init__(self, url, user, password):
+        self.base = url.rstrip("/") + "/wp-json/wp/v2/"
+        token = base64.b64encode(("%s:%s" % (user, password)).encode()).decode()
+        self.auth = "Basic " + token
+
+    def call(self, method, path, data=None, query=None):
+        url = self.base + path
+        if query:
+            url += "?" + urllib.parse.urlencode(query)
+        body = json.dumps(data).encode() if data is not None else None
+        req = urllib.request.Request(url, data=body, method=method, headers={
+            "Authorization": self.auth, "Content-Type": "application/json",
+            "Accept": "application/json", "User-Agent": "yt-deploy/1"})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.loads(r.read().decode() or "null")
+        except urllib.error.HTTPError as e:
+            detail = e.read().decode(errors="replace")[:300]
+            raise SystemExit("WordPress %s %s returned %d: %s" % (method, path, e.code, detail))
+        except urllib.error.URLError as e:
+            raise SystemExit("could not reach WordPress at %s: %s" % (self.base, e.reason))
+
+
+def block(html):
+    return "<!-- wp:html -->\n%s\n<!-- /wp:html -->" % html.strip()
+
+
+def path_of(link):
+    p = urllib.parse.urlparse(link).path.rstrip("/")
+    return p if p else "/"
+
+
+def targets(files):
+    """Map block files to (kind, path, file). Unknown files are an error."""
+    out = []
+    for f in files:
+        if f == "01-sidebar.html":
+            continue
+        if f in C.PAGES:
+            out.append(("pages", C.PAGES[f], f))
+        elif f in C.PRIVATE:
+            out.append(("pages", C.PRIVATE[f], f))
+        elif re.match(r"\d\d-post-", f):
+            src = (C.BLOCKS / f).read_text(encoding="utf-8")
+            m = re.search(r"SLUG\s*:\s*(\S+)", src)
+            if not m:
+                raise SystemExit("%s has no SLUG line" % f)
+            out.append(("posts", m.group(1).rstrip("/"), f))
+        else:
+            raise SystemExit("%s has no destination in ytconf; refusing to guess" % f)
+    return out
+
+
+def all_files():
+    return sorted(p.name for p in C.BLOCKS.glob("*.html"))
+
+
+def find(wp, kind, path, f):
+    if f in C.WP_IDS:
+        return wp.call("GET", "%s/%d" % (kind, C.WP_IDS[f]), query={"context": "edit"})
+    if path == "/":
+        s = wp.call("GET", "settings")
+        pid = s.get("page_on_front") if isinstance(s, dict) else None
+        if not pid:
+            raise SystemExit("cannot find the front page; add its ID to ytconf.WP_IDS['%s']" % f)
+        return wp.call("GET", "pages/%d" % pid, query={"context": "edit"})
+    slug = path.rstrip("/").split("/")[-1]
+    hits = wp.call("GET", kind, query={"slug": slug, "status": STATUSES, "context": "edit", "per_page": 20})
+    hits = [h for h in hits if path_of(h.get("link", "")) == path]
+    if len(hits) > 1:
+        raise SystemExit("%d %s match %s; add the right ID to ytconf.WP_IDS" % (len(hits), kind, path))
+    return hits[0] if hits else None
+
+
+def category_id(wp, name, cache={}):
+    if name in cache:
+        return cache[name]
+    hits = [c for c in wp.call("GET", "categories", query={"search": name, "per_page": 50})
+            if c.get("name") == name]
+    cid = hits[0]["id"] if hits else wp.call("POST", "categories", {"name": name})["id"]
+    cache[name] = cid
+    return cid
+
+
+def yoast_meta(f, slug):
+    import yoast as Y
+    d = Y.PAGES.get(f) or Y.YOAST.get(slug)
+    if not d:
+        return None
+    return {"_yoast_wpseo_title": d["title"], "_yoast_wpseo_metadesc": d["desc"],
+            "_yoast_wpseo_focuskw": d["focus"]}
+
+
+def field(src, pattern):
+    m = re.search(pattern, re.sub(r"<!--.*?-->", "", src, flags=re.S), re.S)
+    return re.sub(r"<[^>]+>", "", m.group(1)).strip() if m else None
+
+
+def main():
+    args = sys.argv[1:]
+    apply = "--apply" in args
+    if not apply:
+        if "--plan" not in args:
+            raise SystemExit(__doc__)
+    files = [a for a in args if not a.startswith("--")]
+    for f in files:
+        if not (C.BLOCKS / f).exists():
+            raise SystemExit("no such block: %s" % f)
+    if "--all" in args:
+        files = all_files()
+    if "01-sidebar.html" in files:
+        files = all_files()
+    plan = targets(files)
+    if not plan:
+        print("nothing to deploy")
+        return
+
+    sidebar = (C.BLOCKS / "01-sidebar.html").read_text(encoding="utf-8")
+    url, user, pw = os.environ.get("WP_URL"), os.environ.get("WP_USER"), os.environ.get("WP_APP_PASSWORD")
+    have_creds = True
+    for v in (url, user, pw):
+        if not v:
+            have_creds = False
+    if not have_creds:
+        if apply:
+            raise SystemExit("WP_URL, WP_USER and WP_APP_PASSWORD must be set to deploy")
+        print("PLAN (no credentials, so nothing compared with the live site):")
+        for kind, path, f in plan:
+            print("  %-6s %-48s <- %s" % (kind[:-1], path, f))
+        return
+
+    wp = WP(url, user, pw)
+    use_yoast = os.environ.get("YOAST_REST") == "1"
+    changed = skipped = created = 0
+    for kind, path, f in plan:
+        src = (C.BLOCKS / f).read_text(encoding="utf-8")
+        if kind == "pages":
+            content = block(sidebar) + "\n\n" + block(src)
+        else:
+            content = (block(sidebar) + "\n\n" if C.SIDEBAR_IN_POSTS else "") + block(src)
+        slug = path.rstrip("/").split("/")[-1]
+        cur = find(wp, kind, path, f)
+        data = {"content": content}
+        if use_yoast:
+            meta = yoast_meta(f, slug)
+            if meta:
+                data["meta"] = meta
+        if cur is None:
+            if kind == "pages":
+                raise SystemExit("no WordPress page at %s; create it once by hand (or add its ID to "
+                                 "ytconf.WP_IDS) and rerun. Pages are never created automatically." % path)
+            title = field(src, r'<h1 class="yt-post__title">(.*?)</h1>')
+            cat = field(src, r"<span data-yt-cat>(.*?)</span>")
+            data.update({"title": title, "slug": slug, "status": "draft"})
+            if not apply:
+                print("  CREATE draft post %s  (%s)" % (path, cat))
+                created += 1
+                continue
+            data["categories"] = [category_id(wp, cat)]
+            res = wp.call("POST", "posts", data)
+            created += 1
+            print("  created draft post %s, id %d. Publish it in WordPress." % (path, res["id"]))
+        else:
+            live = cur.get("content", {}).get("raw", "")
+            if live.strip() == content.strip():
+                skipped += 1
+                print("  unchanged  %s" % path)
+                if not use_yoast:
+                    continue
+            if not apply:
+                print("  UPDATE     %s  (id %d, %s)" % (path, cur["id"], cur.get("status")))
+                changed += 1
+                continue
+            res = wp.call("POST", "%s/%d" % (kind, cur["id"]), data)
+            changed += 1
+            print("  updated    %s  (id %d, status left as %s)" % (path, res["id"], res.get("status")))
+        # read back: WordPress must have stored exactly what was sent
+        back = wp.call("GET", "%s/%d" % (kind, res["id"]), query={"context": "edit"})
+        stored = back.get("content", {}).get("raw", "")
+        if stored.strip() != content.strip():
+            # Put the page back the way it was before failing, so a stripped
+            # write never stays live. A new draft is left as a draft.
+            note = "the new draft was left unpublished"
+            if cur is not None:
+                wp.call("POST", "%s/%d" % (kind, cur["id"]), {"content": cur.get("content", {}).get("raw", "")})
+                note = "its previous content was restored"
+            raise SystemExit("READ-BACK MISMATCH on %s: WordPress stored %d chars, sent %d, so %s. Something "
+                             "on the site is altering block content (often a security plugin stripping "
+                             "<script>). Nothing after this was deployed." % (path, len(stored), len(content), note))
+        if use_yoast:
+            got = back.get("meta", {})
+            if got.get("_yoast_wpseo_title") != data.get("meta", {}).get("_yoast_wpseo_title"):
+                print("  warn: Yoast fields did not stick on %s; is wordpress/yt-yoast-rest.php installed?" % path)
+    verb = "applied" if apply else "planned"
+    print("%s: %d updated, %d created, %d unchanged" % (verb, changed, created, skipped))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,22 +1,44 @@
 name: checks
 
-# Runs on every pull request and every push to main. Nothing reaches the live
-# site from here: this only proves the blocks are valid before you paste them.
+# Every pull request: build, gates, browser QA, and a deploy PLAN showing which
+# WordPress pages the merge would change. Nothing is written to the site.
+#
+# Every merge to main: the same checks, then the changed blocks are published
+# to WordPress (Level 2). Deploy only runs if every check passed.
+#
+# Manual run (Actions > checks > Run workflow): plan or apply, for the changed
+# blocks or for every block. Use "plan" + "all" first on a new setup.
 on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan shows what would change; apply writes to WordPress"
+        type: choice
+        options: [plan, apply]
+        default: plan
+      scope:
+        description: "changed = blocks changed in the last commit; all = every block"
+        type: choice
+        options: [all, changed]
+        default: all
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     name: Build and gates
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: "20"
       - name: Build (widgets, hub, schema, Yoast, link graph, gates, manifest)
@@ -43,11 +65,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: "20"
       - name: Install Playwright and Chromium
@@ -68,3 +90,47 @@ jobs:
           cd qa
           python3 mkwtest.py
           node wt.js
+
+  deploy:
+    name: Deploy to WordPress
+    runs-on: ubuntu-latest
+    needs: [build, browser]
+    # Pull requests only plan, so they use a separate "preview" environment.
+    # Real deploys use "production": add required reviewers there if you want
+    # to approve each deploy by hand before it runs.
+    environment: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
+    env:
+      WP_URL: ${{ secrets.WP_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      YOAST_REST: ${{ vars.YOAST_REST }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Work out which blocks changed
+        id: what
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' ')
+            echo "mode=plan" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ inputs.scope }}" = "all" ]; then files="--all"; else
+              files=$(git diff --name-only HEAD~1 HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' '); fi
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          else
+            before="${{ github.event.before }}"
+            if [ -z "$before" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then before="HEAD~1"; fi
+            files=$(git diff --name-only "$before" HEAD -- 'production-blocks/*.html' | xargs -r -n1 basename | tr '\n' ' ')
+            echo "mode=apply" >> "$GITHUB_OUTPUT"
+          fi
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+          echo "Mode: $(grep '^mode=' "$GITHUB_OUTPUT" | tail -1 | cut -d= -f2)"
+          echo "Blocks: ${files:-none}"
+      - name: Deploy
+        if: steps.what.outputs.files != ''
+        working-directory: generators
+        run: python3 deploy.py --${{ steps.what.outputs.mode }} ${{ steps.what.outputs.files }}
