@@ -14,6 +14,7 @@ build-time date and read time), so the hub cannot disagree with the essay.
 """
 import html, json, re, sys
 import ytconf as C
+import covers
 
 HUB = C.BLOCKS / "24-writing.html"
 
@@ -54,11 +55,15 @@ def cards(es):
     for e in es:
         rows.append(
             '  <li><a class="yt-wr-card" href="%s%s" aria-label="%s">\n'
+            '    <div class="yt-wr-card__cover">%s</div>\n'
+            '    <div class="yt-wr-card__body">\n'
             '    <div class="yt-wr-card__top"><span class="yt-wr-card__cat" aria-hidden="true">%s</span>'
             '<span class="yt-wr-card__meta" aria-hidden="true">%s &middot; %s</span></div>\n'
             '    <h3 class="yt-wr-card__title">%s</h3>\n'
             '    <p class="yt-wr-card__dek">%s</p>\n'
-            '  </a></li>' % (C.POST_ROUTE, e["slug"], esc("%s. %s, %s, %s" % (e["title"], e["cat"], e["date"], e["read"])), esc(e["cat"]),
+            '    </div>\n'
+            '  </a></li>' % (C.POST_ROUTE, e["slug"], esc("%s. %s, %s, %s" % (e["title"], e["cat"], e["date"], e["read"])),
+                             covers.cover(e["slug"], e["cat"]), esc(e["cat"]),
                              esc(e["date"]), esc(e["read"]), esc(e["title"]), esc(e["dek"])))
     rows.append("</ol>")
     return "\n".join(rows)

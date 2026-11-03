@@ -79,7 +79,9 @@ const SHOTS = [320, 390, 768, 1024, 1440];
       return { h1: t('h1.yt-post__title') || t('h1'), cat: t('[data-yt-cat]'), date: t('[data-yt-date]'), read: t('[data-yt-read]'),
                published: m('meta[property="article:published_time"]'), modified: m('meta[property="article:modified_time"]'),
                yoastRead: m('meta[name="twitter:data2"]'), canonical: (document.querySelector('link[rel="canonical"]') || {}).href || null,
-               dek: t('.yt-post__dek') };
+               dek: t('.yt-post__dek'), ogImage: m('meta[property="og:image"]'),
+               cover: !!document.querySelector('.yt-post__cover svg'),
+               themeImage: [...document.querySelectorAll('img.wp-post-image, .post-thumbnail img')].filter(i => { const r = i.getBoundingClientRect(); const cs = getComputedStyle(i); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden'; }).length };
     });
     e.href = c.href; e.status = r ? r.status() : 0;
     R.essays.push(e);
@@ -91,6 +93,10 @@ const SHOTS = [320, 390, 768, 1024, 1440];
     if (norm(cdate) !== norm(e.date)) R.problems.push(`${c.href}: card date "${norm(cdate)}" vs essay shows "${norm(e.date)}" (published ${e.published})`);
     if (norm(cread) !== norm(e.read)) R.problems.push(`${c.href}: card "${norm(cread)}" vs essay shows "${norm(e.read)}" (Yoast: ${e.yoastRead})`);
     if (e.dek) if (norm(c.dek) !== norm(e.dek)) R.problems.push(`${c.href}: card summary differs from the essay dek`);
+    if (!e.cover) R.problems.push(`${c.href}: essay has no cover drawing`);
+    if (e.themeImage) R.problems.push(`${c.href}: the theme shows the featured image on the page (${e.themeImage})`);
+    if (!e.ogImage) R.problems.push(`${c.href}: no og:image`);
+    else if (!/yt-social-/.test(e.ogImage)) R.problems.push(`${c.href}: og:image is not the share image: ${e.ogImage}`);
     await ec.close();
   }
   // order: newest first by published time
