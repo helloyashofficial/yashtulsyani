@@ -182,6 +182,8 @@ def build(spec, write=True):
     pubd = datetime.date.fromisoformat(spec["date"])
     shown = "%02d %s %d" % (pubd.day, ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][pubd.month - 1], pubd.year)
     out = must(r"(<span data-yt-date>)[^<]*(</span>)", lambda m: m.group(1) + shown + m.group(2), out, "date")
+    import covers
+    out = must(r'(<div class="yt-post__cover">).*?(</div>)', lambda m: m.group(1) + covers.cover(spec["slug"], spec["cat"]) + m.group(2), out, "cover")
     tail = ("     Regenerate with generators/%s\n"
             "     FOCUS KEYPHRASE : %s\n"
             "     SEO TITLE       : %s  [%d chars]\n"

@@ -64,6 +64,8 @@ To switch publishing off, delete the `WP_APP_PASSWORD` secret, or revoke the app
 3. Run it, then `bash generators/build.sh`. The `/writing` hub regenerates from the essays automatically.
 4. Open a pull request and merge it. The deploy publishes the essay in its category and updates `/writing`. Merging is publishing, so read the essay before you merge.
 
+**Covers and share images.** Every essay gets a line-drawn cover from `generators/covers.py`, on its page and on its `/writing` card (a new essay uses its subject's default unless it is given its own motif in `BY_SLUG`). When a pull request changes an essay, `social-images.yml` renders its 1200x630 share image into `social/` on that branch, and the deploy uploads it and sets it as the post's featured image, which Yoast uses for social previews.
+
 Every outside claim in an essay links to a primary source that was actually read. Section 5 of `HANDOVER-V4.md` has the details and the linking rules.
 
 ## Things that will fail the build on purpose

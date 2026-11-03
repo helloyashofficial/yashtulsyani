@@ -36,7 +36,7 @@ Safety, in order of importance:
     (a security plugin stripping scripts, say), the run fails loudly.
   - Unchanged content is skipped, so re-running is harmless.
 """
-import base64, json, os, re, sys, urllib.error, urllib.parse, urllib.request
+import base64, hashlib, json, os, re, sys, urllib.error, urllib.parse, urllib.request
 import ytconf as C
 
 STATUSES = "publish,private,draft,pending,future"
@@ -67,6 +67,31 @@ class WP:
             raise SystemExit("WordPress %s %s returned %d: %s" % (method, path, e.code, detail))
         except urllib.error.URLError as e:
             raise SystemExit("could not reach WordPress at %s: %s" % (self.base, e.reason))
+
+
+    def upload(self, filename, data, mime):
+        req = urllib.request.Request(self.base + "media", data=data, method="POST", headers={
+            "Authorization": self.auth, "Content-Type": mime, "Accept": "application/json",
+            "Content-Disposition": 'attachment; filename="%s"' % filename, "User-Agent": "yt-deploy/1"})
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                return json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            raise SystemExit("WordPress media upload of %s returned %d: %s" % (filename, e.code, e.read().decode(errors="replace")[:300]))
+
+
+SOCIAL = C.ROOT / "social" if hasattr(C, "ROOT") else C.BLOCKS.parent / "social"
+
+
+def social_image(slug):
+    """(path, media slug) for an essay's share image, or None. The media slug
+    carries a hash of the file, so a changed image is uploaded once, and an
+    unchanged one is never uploaded again."""
+    p = SOCIAL / (slug + ".png")
+    if not p.exists():
+        return None
+    h = hashlib.sha1(p.read_bytes()).hexdigest()[:10]
+    return p, "yt-social-%s-%s" % (slug, h)
 
 
 def block(html):
@@ -374,6 +399,45 @@ def main():
                 if got.get(k_) != v_:
                     raise SystemExit("Yoast field %s did not save on %s (WordPress has %r). The page content "
                                      "is fine; check the YT Yoast fields over REST plugin." % (k_, path, got.get(k_)))
+    # Share images: each essay's social/<slug>.png, uploaded once to the media
+    # library and set as the post's featured image (Yoast uses it as og:image).
+    shared = 0
+    for kind, path, f in plan:
+        if kind != "posts":
+            continue
+        slug = path.rstrip("/").split("/")[-1]
+        si = social_image(slug)
+        if si is None:
+            print("  warn: no share image social/%s.png" % slug)
+            continue
+        png, mslug = si
+        post = find(wp, kind, path, f)
+        if post is None:
+            print("  SOCIAL     %s  (set after the post is created)" % path)
+            continue
+        hits = [m for m in wp.call("GET", "media", query={"slug": mslug, "per_page": 5}) if m.get("slug") == mslug]
+        mid = hits[0]["id"] if hits else None
+        if mid is not None:
+            if post.get("featured_media") == mid:
+                continue
+        if not apply:
+            print("  SOCIAL     %s  (%s share image %s)" % (path, "set existing" if mid else "upload and set", png.name))
+            shared += 1
+            continue
+        if mid is None:
+            title = field((C.BLOCKS / f).read_text(encoding="utf-8"), r'<h1 class="yt-post__title">(.*?)</h1>')
+            m = wp.upload(mslug + ".png", png.read_bytes(), "image/png")
+            mid = m["id"]
+            wp.call("POST", "media/%d" % mid, {"alt_text": "Share image for the essay: %s" % title, "title": title})
+            if m.get("slug") != mslug:
+                print("  note: WordPress named the upload %r" % m.get("slug"))
+        wp.call("POST", "posts/%d" % post["id"], {"featured_media": mid})
+        back = wp.call("GET", "posts/%d" % post["id"], query={"context": "edit"})
+        if back.get("featured_media") != mid:
+            raise SystemExit("share image did not attach to %s" % path)
+        shared += 1
+        print("  social     %s  (featured image %d)" % (path, mid))
+
     trashed = 0
     for pid, rpath, r in retire:
         title = r.get("title", {}).get("raw", "")
@@ -389,7 +453,7 @@ def main():
         print("  trashed    %s  (id %d, %r). Restore it from Pages > Trash within 30 days if needed."
               % (rpath, pid, title))
     verb = "applied" if apply else "planned"
-    print("%s: %d updated, %d created, %d unchanged, %d trashed" % (verb, changed, created, skipped, trashed))
+    print("%s: %d updated, %d created, %d unchanged, %d trashed, %d share images" % (verb, changed, created, skipped, trashed, shared))
 
 
 if __name__ == "__main__":
