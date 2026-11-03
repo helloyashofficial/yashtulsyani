@@ -26,6 +26,7 @@ BY_SLUG = {
     "what-the-stoics-meant-by-what-is-up-to-us": "dichotomy",
     "what-it-means-to-call-time-the-fourth-dimension": "cone",
     "what-repair-after-an-argument-actually-involves": "repair",
+    "what-self-silencing-is": "muted",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -167,13 +168,33 @@ def repair(uid):
     return out
 
 
+def muted(uid):
+    """A voice as a waveform that falls to a flat line part way through, with
+    the outline of what it would have said still faintly there."""
+    out = [line(36, 120, 444, 120, "c")]
+    n = 34
+    for i in range(n):
+        x = 44 + i * 12
+        amp = 74 * (0.35 + 0.65 * abs(math.sin(i * 0.9) * math.cos(i * 0.37)))
+        if i < 14:
+            out.append(line(x, 120 - amp, x, 120 + amp))
+        else:
+            fade = max(0.0, 1 - (i - 14) / 3.0)
+            out.append(line(x, 120 - amp, x, 120 + amp, "c", ' stroke-dasharray="2 4"'))
+            if fade > 0:
+                out.append(line(x, 120 - amp * fade * 0.5, x, 120 + amp * fade * 0.5))
+    out.append(line(44 + 17 * 12, 120, 444, 120))
+    out.append(dot(44 + 17 * 12, 120, 3.2))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted)
 
 
 def cover(slug, subject):
