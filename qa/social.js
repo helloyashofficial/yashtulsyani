@@ -50,6 +50,10 @@ h1{ font:600 50px/1.12 Inter, sans-serif; letter-spacing:-.025em; color:#111827;
   for (const e of essays) {
     await p.setContent(page(e), { waitUntil: 'load' });
     await p.evaluate(() => document.fonts.ready);
+    const ok = await p.evaluate(() => [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family.replace(/"/g, '') + ' ' + f.weight));
+    for (const need of ['Inter 600', 'JetBrains Mono 500']) {
+      if (!ok.includes(need)) throw new Error('font did not load: ' + need + ' (loaded: ' + ok.join(', ') + ')');
+    }
     const fit = await p.evaluate(() => { const h = document.querySelector('h1'); return h.getBoundingClientRect().height; });
     if (fit > 300) await p.evaluate(() => { document.querySelector('h1').style.fontSize = '42px'; });
     await p.screenshot({ path: path.join(outDir, e.slug + '.png'), type: 'png' });
