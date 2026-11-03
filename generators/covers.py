@@ -29,6 +29,7 @@ BY_SLUG = {
     "what-self-silencing-is": "muted",
     "why-we-blame-the-people-we-love": "regard",
     "why-time-has-a-direction": "spread",
+    "what-flatland-teaches-about-the-fourth-dimension": "slice",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -239,13 +240,35 @@ def spread(uid):
     return out
 
 
+def slice(uid):
+    """A sphere passing down through a flat plane, and below it the circles a
+    Flatlander would see: a point, growing circles, the largest, then
+    shrinking again to a point."""
+    out = []
+    out.append(path("M40 150 L130 104 L440 104 L350 150 Z", "b"))
+    cx, r = 240, 46
+    out.append(circle(cx, 104 - r + 16, r))
+    out.append(path("M%s %s A%s %s 0 0 0 %s %s" % (cx - 43, 120, 43, 9, cx + 43, 120), "a", ' stroke-dasharray="3 4"'))
+    seq = [0, 9, 17, 22, 17, 9, 0]
+    xs = [74, 122, 176, 240, 304, 358, 406]
+    for x, rr in zip(xs, seq):
+        if rr == 0:
+            out.append(dot(x, 198, 2.6))
+        else:
+            out.append(path("M%s %s A%s %s 0 1 1 %s %s A%s %s 0 1 1 %s %s" % (x - rr, 198, rr, rr * 0.32, x + rr, 198, rr, rr * 0.32, x - rr, 198), "a"))
+    out.append(line(60, 222, 420, 222, "c"))
+    out.append(line(420, 222, 412, 217, "c"))
+    out.append(line(420, 222, 412, 227, "c"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice)
 
 
 def cover(slug, subject):

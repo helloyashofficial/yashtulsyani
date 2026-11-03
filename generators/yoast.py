@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-flatland-teaches-about-the-fourth-dimension": dict(
+        focus="Flatland fourth dimension",
+        title="Flatland and the fourth dimension: what Abbott's novel shows",
+        desc="What Abbott's Flatland (1884) teaches about the fourth dimension: the satire, the argument from analogy, the tesseract, and why it is not about time."),
     "why-time-has-a-direction": dict(
         focus="arrow of time",
         title="The arrow of time: why time has a direction",
