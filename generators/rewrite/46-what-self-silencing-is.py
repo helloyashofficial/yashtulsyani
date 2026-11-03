@@ -50,7 +50,7 @@ POST = dict(
         ("What self-silencing is", [
             "Self-silencing is holding back your own thoughts, feelings and needs in a close relationship to avoid conflict or the risk of losing the other person. The research treats it as a pattern of beliefs about how to keep a relationship, measured by a questionnaire, and it has been linked repeatedly to depression.",
             "HTML:" + K.takeaways([
-                "The idea comes from the psychologist Dana Crowley Jack, who built it from interviews with depressed women.",
+                "The idea comes from the psychologist Dana Crowley Jack, who built it from depressed women’s own accounts.",
                 "It is measured by a 31-item questionnaire with four parts, from judging yourself by others’ standards to keeping a public self apart from a private one.",
                 "The research links it to depressive symptoms; most of that evidence is correlational, and some of it follows people over time.",
                 "Men often score as high as women or higher. What the silence means to them can differ.",
@@ -61,8 +61,8 @@ POST = dict(
                 "<p>Not saying, doing or showing things you think would contradict a partner’s wishes, so as to protect the relationship. In Dana Crowley Jack’s account, it rests on beliefs about how intimacy has to be kept, not on a single decision to stay quiet.</p>"),
         ]),
         ("Where the idea came from", [
-            "The concept comes from Dana Crowley Jack, who developed it from listening to depressed women talk about their relationships, set out in her 1991 book Silencing the Self: Women and Depression. In an extract written with her co-author Ali, " + a(JACK, "Jack describes") + " women who would silence or suppress certain thoughts, feelings and actions that they thought would contradict their partner’s wishes, and argues that these beliefs create vulnerability to depression by directing women to defer to the needs of others.",
-            "To study the idea, Jack and Dill published the Silencing the Self Scale in 1992. As " + a(STSS, "the scale’s record") + " sets out, it has 31 statements, each rated on a five-point scale from disagree to agree, giving a total between 31 and 155. Jack and Ali note that the statements were taken from depressed women’s own accounts and worded so that they apply equally to men.",
+            "The concept comes from the psychologist Dana Crowley Jack, who developed it from depressed women’s own accounts of their relationships. In " + a(JACK, "a blog extract by Jack and Alisha Ali") + ", co-editors of Silencing the Self Across Cultures (2010), Jack describes women who would silence or suppress certain thoughts, feelings and actions that they thought would contradict their partner’s wishes, and argues that these beliefs create vulnerability to depression by directing women to defer to the needs of others.",
+            "To study the idea, Jack and Dill published the Silencing the Self Scale in 1992. As " + a(STSS, "the scale’s record") + " sets out, it has 31 statements, each rated on a five-point scale from disagree to agree, giving a total between 31 and 155. Jack and Ali note that the statements came directly from depressed women’s accounts and were worded to be gender neutral.",
             "HTML:" + K.table("The four parts of the Silencing the Self Scale",
                 ["Subscale", "Items", "What it is about"],
                 [["Externalized self-perception", "1 to 6", "Judging yourself by outside standards"],
@@ -91,9 +91,10 @@ POST = dict(
             "What may differ is the meaning. In interviews in the Ussher and Perz study, women tended to describe silencing themselves as something they had to do to cope, while men tended to describe it as an ordinary part of being a man, and saw voicing their own needs as weakness. The same score can sit on different reasons.",
         ]),
         ("What silence does inside a relationship", [
-            "The closest evidence on couples comes from research on hiding emotions. In " + a(IMPETT12, "a study by Impett and colleagues") + ", couples took part in a laboratory session, kept a diary for fourteen days and were followed up three months later. People who suppressed their emotions when they made a sacrifice for their partner reported decreases in relationship satisfaction, and more thoughts about breaking up three months later. Feeling less authentic explained much of that cost.",
+            "The closest evidence on couples comes from research on hiding emotions. In " + a(IMPETT12, "a study by Impett and colleagues") + ", couples took part in a laboratory session, kept a diary for fourteen days and were followed up three months later. People who suppressed their emotions when they made a sacrifice for their partner reported decreases in relationship satisfaction, and more thoughts about breaking up three months later. In the laboratory and diary parts of the study, feeling less authentic helped explain those costs.",
             "A " + a(IMPETT14, "later study of 80 couples") + " looked at the other side. When people believed their partner was hiding feelings while making a sacrifice, they saw that partner as less authentic, and that went with poorer relationship quality three months on.",
-            "Self-silencing as Jack defined it has also been followed over years. In " + a(SHULMAN, "a study") + " that followed 144 adolescents from 16 to 23, self-silencing at 16 predicted more concealment in relationships seven years later, and changes in self-silencing were related to later concealment, partner support and relationship certainty. And in " + a(MACD, "a 2001 doctoral study of 85 couples") + ", silencing was associated with an increase in women’s depressive symptoms, though not men’s.",
+            "Self-silencing as Jack defined it has also been followed over years. In " + a(SHULMAN, "a study") + " that followed 144 adolescents from 16 to 23, self-silencing at 16 predicted more concealment in relationships seven years later, and changes in self-silencing were related to later concealment, partner support and relationship certainty.",
+            "Couples have been studied too. In " + a(MACD, "a 2001 doctoral study of 85 couples") + ", silencing one’s needs and feelings within the relationship was associated with an increase in women’s depressive symptoms.",
             "HTML:" + K.table("Hiding what you feel: what the studies measured",
                 ["Study", "Design", "Finding"],
                 [["Impett and colleagues (2012)", "Couples; lab session, 14-day diary, 3-month follow-up", "Suppression during sacrifice predicted lower satisfaction and more thoughts of breaking up"],
@@ -101,11 +102,11 @@ POST = dict(
                  ["Shulman and colleagues (2018)", "144 adolescents followed from 16 to 23", "Self-silencing at 16 predicted more concealment at 23"],
                  ["Butler and colleagues (2003)", "Pairs of women who had not met, discussing an upsetting topic", "Suppression disrupted the conversation and raised the other person’s blood pressure"]],
                 source='Sources as linked in the text. <a href="' + BUTLER + '" target="_blank" rel="noopener">Butler et al., Emotion 3 (2003)</a>.'),
-            "The last row is often quoted as if it were about couples. It is not. In " + a(BUTLER, "the 2003 study by Butler and colleagues") + ", the pairs were strangers. Suppression disrupted communication, reduced rapport and magnified blood pressure responses in the suppressor’s partner in the conversation. It is a striking finding about what hiding emotion does to an exchange, but it was measured between people who had just met. A broader " + a(GROSS, "2003 study by Gross and John") + " found that habitually suppressing emotion was associated with worse interpersonal functioning and lower well-being.",
+            "It is easy to read the last row as being about couples. It is not. In " + a(BUTLER, "the 2003 study by Butler and colleagues") + ", the pairs were strangers. Suppression disrupted communication, reduced rapport and magnified blood pressure responses in the suppressor’s partner in the conversation. It is a striking finding about what hiding emotion does to an exchange, but it was measured between people who had just met. A " + a(GROSS, "2003 set of studies by Gross and John") + " found that habitually suppressing emotion was associated with worse interpersonal functioning and lower well-being.",
         ]),
         ("When holding back is not a mistake", [
             "None of this means every unsaid thought is a wound. Ordinary tact, choosing a better moment and letting small things go are part of living with anyone. The research is about a pattern, not a single silence.",
-            "There is also a real exception. In " + a(LE13, "a study by Le and Impett") + ", people who were highly focused on their partner and the relationship, which the authors call high interdependence, experienced boosts in well-being and relationship quality when they suppressed negative emotions during a sacrifice. The authors describe this as a condition under which suppression may be beneficial.",
+            "There is also a real exception. In " + a(LE13, "a study by Le and Impett") + ", people with a more interdependent sense of self, who define themselves more through their relationships, experienced boosts in well-being and relationship quality when they suppressed negative emotions during a sacrifice. The authors describe this as a condition under which suppression may be beneficial.",
             "HTML:" + K.decision("Is this a silence I am choosing, or one I am keeping?",
                 ("Would saying it put you or someone else at risk?", [
                     ("Yes", "<p>Then silence may be protecting you, and this essay is not the right frame. Talk to someone you trust outside the relationship.</p>"),
@@ -125,14 +126,14 @@ POST = dict(
             "The research on attachment points the same way. Fear of rejection is one of the two dimensions described in " + ESSAY42 + ", and self-silencing is one of the things that fear can lead people to do. A score does not decide the behaviour; the behaviour is the part that can change.",
         ]),
         ("What to try instead", [
-            "No trial has tested a cure for self-silencing, so what follows is drawn from the findings above rather than proven by them. The most consistent thread is authenticity: in the Impett studies, feeling less authentic explained much of the cost of hiding emotion.",
+            "This essay found no tested intervention for self-silencing, so what follows is drawn from the findings above rather than proven by them. The most consistent thread is authenticity: in the Impett studies, hiding emotion made people feel less authentic (2012) and made partners seem less authentic (2014).",
             "HTML:" + K.stages("Speaking without making it a crisis", [
                 ("01", "Notice the pattern", "Not every silence, just the ones that repeat: the same need, unsaid, again."),
                 ("02", "Say one true thing", "Small and specific: what you feel and what you would like, not a case for the prosecution."),
                 ("03", "Say it once", "Repeating it for reassurance is the opposite trap. Let the answer be the other person’s."),
                 ("04", "Notice how it lands", "See how a stated need is received. If every one is met with punishment, that is information too."),
             ], source="The essay’s suggestions, drawn from the studies cited; not a tested intervention."),
-            SHRINK + ", one of the books on this site, is about the person being made small in a relationship, as its own page puts it, and turns the same mirror on the person doing it. This essay is the research underneath one half of that: what it costs, over time, to keep making yourself smaller so that nothing has to be said.",
+            SHRINK + ", one of the books on this site, turns the mirror both ways, as its own page puts it: a chapter for the person being made small, and a harder one for the person doing it. This essay is the research underneath one half of that: what it costs, over time, to keep making yourself smaller so that nothing has to be said.",
         ]),
     ],
     note=[
@@ -144,9 +145,9 @@ POST = dict(
         ("Is self-silencing linked to depression?",
          "Yes, consistently, though mostly through correlations measured at one time. One study of 209 adolescent dating couples found that self-silencing predicted later increases in depressive symptoms, which suggests a direction for that group but does not rule out the reverse."),
         ("Do men self-silence too?",
-         "Yes. In several studies men scored as high as women or higher, including a study of 155 men and 329 women caring for someone with cancer. Interviews in that study suggested the silence can mean something different to men than to women."),
+         "Yes. Men scored higher on self-silencing in two studies, including one of 155 men and 329 women caring for someone with cancer, and higher on one part of the scale in a third. Interviews in that study suggested the silence can mean something different to men than to women."),
         ("Is it always bad to hide your feelings from a partner?",
-         "No. Ordinary tact and choosing your moment are part of any relationship, and one study found that people highly focused on their partner benefited from suppressing negative emotions during a sacrifice. The costs show up when hiding becomes a habit, especially around giving things up for a partner."),
+         "No. Ordinary tact and choosing your moment are part of any relationship, and one study found that people with a more interdependent sense of self benefited from suppressing negative emotions during a sacrifice. The costs show up when hiding becomes a habit, especially around giving things up for a partner."),
         ("What is the Silencing the Self Scale?",
          "A 31-item questionnaire published by Jack and Dill in 1992. It has four parts: judging yourself by outside standards, care as self-sacrifice, silencing the self, and a divided self."),
     ],
