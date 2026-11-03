@@ -48,8 +48,9 @@ def esc(s):
 def cards(es):
     if not es:
         return ('<p class="yt-wr-count">NOTHING PUBLISHED YET</p>')
-    rows = ['<p class="yt-wr-count">%d ESSAY%s</p>' % (len(es), "" if len(es) == 1 else "S"),
-            '<ol class="yt-wr-cards">']
+    # No essay count above the list (Yash, 3 Nov 2026). The count line class
+    # is kept only for the empty state above.
+    rows = ['<ol class="yt-wr-cards">']
     for e in es:
         rows.append(
             '  <li><a class="yt-wr-card" href="%s%s" aria-label="%s">\n'
