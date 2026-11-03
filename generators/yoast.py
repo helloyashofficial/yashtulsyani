@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "why-we-blame-the-people-we-love": dict(
+        focus="Strawson resentment",
+        title="Why we blame the people we love: Strawson on resentment",
+        desc="Strawson's Freedom and Resentment, read closely: reactive attitudes, two kinds of excuse, the objective attitude, and what determinism would change."),
     "what-self-silencing-is": dict(
         focus="self-silencing",
         title="Self-silencing: what keeping the peace can cost",

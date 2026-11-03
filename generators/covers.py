@@ -27,6 +27,7 @@ BY_SLUG = {
     "what-it-means-to-call-time-the-fourth-dimension": "cone",
     "what-repair-after-an-argument-actually-involves": "repair",
     "what-self-silencing-is": "muted",
+    "why-we-blame-the-people-we-love": "regard",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -188,13 +189,32 @@ def muted(uid):
     return out
 
 
+def regard(uid):
+    """Strawson's two stances: two people facing each other, joined by the
+    exchange of attitudes between them (the participant stance), and a third
+    point looking on from outside along a straight dashed line (the objective
+    stance)."""
+    ax, bx, y = 172, 308, 132
+    out = [circle(ax, y, 30), circle(bx, y, 30)]
+    out.append(path("M%s %s Q %s %s %s %s" % (ax + 30, y - 10, (ax + bx) / 2.0, y - 62, bx - 30, y - 10)))
+    out.append(path("M%s %s Q %s %s %s %s" % (bx - 30, y + 10, (ax + bx) / 2.0, y + 62, ax + 30, y + 10), "b"))
+    for (x, yy, d) in ((bx - 30, y - 10, 1), (ax + 30, y + 10, -1)):
+        out.append(line(x, yy, x - 9 * d, yy - 4 * d))
+        out.append(line(x, yy, x - 7 * d, yy + 6 * d))
+    ox, oy = 404, 40
+    out.append(circle(ox, oy, 12, "b"))
+    out.append(line(ox - 10, oy + 8, (ax + bx) / 2.0, y - 20, "c", ' stroke-dasharray="3 5"'))
+    out.append(circle((ax + bx) / 2.0, y, 92, "c"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard)
 
 
 def cover(slug, subject):
