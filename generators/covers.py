@@ -28,6 +28,7 @@ BY_SLUG = {
     "what-repair-after-an-argument-actually-involves": "repair",
     "what-self-silencing-is": "muted",
     "why-we-blame-the-people-we-love": "regard",
+    "why-time-has-a-direction": "spread",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -217,13 +218,34 @@ def regard(uid):
     return out
 
 
+def spread(uid):
+    """Three moments of the same box: particles gathered in one corner, then
+    spreading, then spread through it; an arrow underneath points the way
+    the sequence is always seen to run."""
+    rnd = random.Random(uid)
+    out = []
+    boxes = [(48, 116), (186, 254), (324, 392)]
+    for k, (x0, x1) in enumerate(boxes):
+        out.append(path("M%s 40 H%s V176 H%s Z" % (x0, x1 + 40, x0), "b"))
+        w = (x1 + 40 - x0)
+        frac = (0.28, 0.62, 1.0)[k]
+        for _ in range(26):
+            px = x0 + 8 + rnd.random() * (w - 16) * frac
+            py = 48 + rnd.random() * (120 * frac + 0.0) + (0 if k == 2 else 0)
+            out.append(dot(px, min(py, 168), 2))
+    out.append(line(48, 206, 432, 206))
+    out.append(line(432, 206, 422, 200))
+    out.append(line(432, 206, 422, 212))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread)
 
 
 def cover(slug, subject):

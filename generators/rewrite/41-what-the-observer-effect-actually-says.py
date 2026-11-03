@@ -35,7 +35,7 @@ POST = dict(
                 "The measurement problem is real and unsolved. Decoherence does not solve it on its own.",
                 "No mainstream interpretation gives conscious minds a special physical role.",
             ]),
-            "That opening paragraph is the whole correction, and the rest of this essay is the evidence for it. (Relativity’s claims about time are a separate subject, set out in <a href=\"/writing/what-it-means-to-call-time-the-fourth-dimension\">what it means to call time the fourth dimension</a>.) It matters on this site because the books borrow quantum vocabulary for human life, and a borrowing is only honest if you know what you are borrowing from.",
+            "That opening paragraph is the whole correction, and the rest of this essay is the evidence for it. (Relativity’s claims about time are a separate subject, set out in <a href=\"/writing/what-it-means-to-call-time-the-fourth-dimension\">what it means to call time the fourth dimension</a>; why time has a direction at all is taken up in <a href=\"/writing/why-time-has-a-direction\">why time has a direction</a>.) It matters on this site because the books borrow quantum vocabulary for human life, and a borrowing is only honest if you know what you are borrowing from.",
             "HTML:" + K.callout("definition", "Observation, in physics",
                 "<p>An interaction between a quantum system and something else that leaves the other thing carrying information about the system: which path it took, where it is, how it is spinning. The other thing can be a photon, an electron, a molecule of air or a laboratory detector.</p>"),
         ]),

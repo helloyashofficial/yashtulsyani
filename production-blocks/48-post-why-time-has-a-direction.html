@@ -1,0 +1,455 @@
+<!-- ============================================================
+     ESSAY  ·  why-time-has-a-direction
+     yashtulsyani.com  ·  Custom HTML block
+
+     THIS FILE IS THE TEMPLATE newpost.py BUILDS ESSAYS FROM. It is not
+     pasted anywhere and lives outside production-blocks on purpose.
+     Ported from FSDM's 48-post-content-audit.html (24 Oct 2026): the
+     same anatomy, with FSDM's content removed and this site's crumb,
+     byline, author card and closing link put in.
+
+     ONE BLOCK PER ESSAY. Paste it and nothing else into the Post body,
+     with the sidebar block reaching the page as on every other page.
+
+     The wrapper is a DIV with class yt-shell, not a <main>, so the
+     sidebar's fallback finds it and never adds padding to <body>.
+
+     The contents sit in a sticky right rail above 1240px and collapse
+     inline, above the article, below it. One element either way.
+
+     One small script at the bottom upgrades the category, date and read
+     time to the values WordPress and Yoast set. The build-time values are
+     already in the markup, so a failure leaves a correct page.
+
+     Regenerate with generators/rewrite/48-why-time-has-a-direction.py
+     FOCUS KEYPHRASE : arrow of time
+     SEO TITLE       : The arrow of time: why time has a direction  [43 chars]
+     META DESCRIPTION: Why time has a direction: time-symmetric laws, Eddington's arrow, Boltzmann's entropy, two classic objections, and the Past Hypothesis still debated.  [149 chars]
+     SLUG            : /writing/why-time-has-a-direction
+     ============================================================ -->
+<!-- Essay styling lives in 01-sidebar.html, emitted once for the whole
+     site. Re-paste the sidebar after any design change. -->
+<div class="yt-shell yt-post-shell">
+  <article class="yt-post">
+
+    <div class="yt-post__crumb">
+      <a class="yt-post__chip" href="/writing">Writing</a> · <span data-yt-cat>Physics and time</span>
+    </div>
+
+    <div class="yt-post__meta"><span data-yt-date>03 Nov 2026</span><span data-yt-updated></span> · <span data-yt-read>9 min read</span></div>
+
+    <h1 class="yt-post__title">Why time has a direction, and what entropy does and does not explain</h1>
+    <p class="yt-post__dek">The basic laws of physics barely care which way time runs. Eggs still break and never unbreak. The standard explanation runs through entropy, and it ends with an assumption about the beginning of the universe that physicists are still arguing about.</p>
+    <div class="yt-post__cover"><svg class="yt-cv" viewBox="0 0 480 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" fill="none" stroke-width="1" stroke-linecap="round"><path class="yt-cv-b" d="M48 40 H156 V176 H48 Z"/><circle class="yt-cv-a yt-cv-dot" cx="56.6" cy="74.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="65.5" cy="64.5" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="64.3" cy="48.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="76.6" cy="72.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="59.6" cy="59.2" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="66.4" cy="52.2" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="78.8" cy="65.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="67.7" cy="50.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="78.9" cy="53.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="58.2" cy="60.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="81.3" cy="78.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="56.7" cy="57.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="61.3" cy="70.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="71" cy="64.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="61.4" cy="70.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="73.3" cy="58.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="76.3" cy="63.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="78" cy="66.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="72.7" cy="71.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="63.6" cy="49.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="78.2" cy="71.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="66.4" cy="60.5" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="66.7" cy="62.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="78.3" cy="75.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="78.6" cy="65.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="77.7" cy="58.3" r="2"/><path class="yt-cv-b" d="M186 40 H294 V176 H186 Z"/><circle class="yt-cv-a yt-cv-dot" cx="223.7" cy="71.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="243.3" cy="119.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="209.8" cy="116.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="248.1" cy="116.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="196.1" cy="97.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="230.2" cy="99.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="245.7" cy="112.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="215" cy="85.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="239.4" cy="86.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="226.5" cy="72.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="204.6" cy="101.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="221" cy="52.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="203.6" cy="82.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="243.5" cy="58.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="215.9" cy="65.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="245" cy="84.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="234.5" cy="91.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="235.7" cy="109.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="214.2" cy="60.2" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="212.8" cy="116.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="221.4" cy="120.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="233.6" cy="54.2" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="246.7" cy="94.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="241.9" cy="88.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="196.8" cy="118.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="230.3" cy="79.3" r="2"/><path class="yt-cv-b" d="M324 40 H432 V176 H324 Z"/><circle class="yt-cv-a yt-cv-dot" cx="410.2" cy="67.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="423.2" cy="106.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="385.5" cy="123.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="392.9" cy="94.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="399.3" cy="64.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="379.9" cy="131.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="416.2" cy="74.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="332.5" cy="143.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="405.9" cy="84.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="348.2" cy="142.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="388.3" cy="158.9" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="389.9" cy="140.6" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="354.1" cy="68.8" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="398.7" cy="146.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="402.4" cy="116.5" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="404.1" cy="104.3" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="369.3" cy="152.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="401.8" cy="104.2" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="417.2" cy="103.5" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="343.6" cy="100.1" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="364.6" cy="142.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="367.9" cy="161.4" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="414.2" cy="124.7" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="419.1" cy="158.2" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="343.1" cy="119" r="2"/><circle class="yt-cv-a yt-cv-dot" cx="406.6" cy="70.9" r="2"/><line class="yt-cv-a" x1="48" y1="206" x2="432" y2="206"/><line class="yt-cv-a" x1="432" y1="206" x2="422" y2="200"/><line class="yt-cv-a" x1="432" y1="206" x2="422" y2="212"/></svg></div>
+
+    <div class="yt-post__byline">
+      <span class="yt-post__byline-avatar" aria-hidden="true">YT</span>
+      <div>
+        <div class="yt-post__byline-name">Yash Tulsyani</div>
+        <div class="yt-post__byline-role">Writer</div>
+      </div>
+    </div>
+
+    <aside class="yt-post__side">
+      <nav class="yt-post__toc" aria-label="On this page">
+        <div class="yt-post__toc-label">On this page</div>
+        <ol>
+            <li><a href="#why-time-has-a-direction">Why time has a direction</a></li>
+            <li><a href="#laws-that-do-not-care-which-way">Laws that do not care which way</a></li>
+            <li><a href="#eddington-names-the-arrow">Eddington names the arrow</a></li>
+            <li><a href="#entropy-as-counting">Entropy as counting</a></li>
+            <li><a href="#two-objections-and-the-answer">Two objections, and the answer</a></li>
+            <li><a href="#the-past-hypothesis">The Past Hypothesis</a></li>
+            <li><a href="#the-other-arrows">The other arrows</a></li>
+            <li><a href="#what-this-does-and-does-not-say">What this does and does not say</a></li>
+          </ol>
+      </nav>
+    </aside>
+
+    <div class="yt-post__body">
+        <h2 id="why-time-has-a-direction">Why time has a direction</h2>
+        <p>Time seems to have a direction because of entropy: large collections of particles tend to move from rare arrangements to common ones, and almost never the reverse. That explains the arrow only if the universe began in a very rare, low-entropy state, an assumption physicists call the Past Hypothesis, and why it did is still an open question.</p>
+        <aside class="yt-kt" aria-label="Key takeaways"><div class="yt-kt__h">Key takeaways</div><ul><li>The basic laws of motion are, with one small exception, indifferent to the direction of time.</li><li>Arthur Eddington named the one-way property time’s arrow, in a book published in 1928.</li><li>Boltzmann tied entropy to counting: how many microscopic arrangements fit what we see at large scale.</li><li>Entropy increase is overwhelmingly likely, not strictly certain, which answers two famous objections.</li><li>The account needs a low-entropy beginning, the Past Hypothesis. Its status is still debated.</li><li>Whether memory, causation and the other arrows all reduce to entropy is doubtful.</li></ul></aside>
+        <p>This essay is in the literal register, like <a href="/writing/what-the-observer-effect-actually-says">what the observer effect actually says</a>. It states the physics and the open questions as the sources state them, and borrows nothing for human life except in one labelled paragraph at the end.</p>
+        <aside class="yt-cl yt-cl--definition"><div class="yt-cl__k">Definition</div><div class="yt-cl__t">Entropy, in this essay</div><div class="yt-cl__b"><p>A measure of how many microscopic arrangements of a system are compatible with its large-scale state. A state that can be realised in vastly more ways has higher entropy. The word disorder is a common gloss, but, as later sections show, it can mislead.</p></div></aside>
+        <h2 id="laws-that-do-not-care-which-way">Laws that do not care which way</h2>
+        <p>The puzzle starts with the laws themselves. As <a href="https://plato.stanford.edu/archives/spr2025/entries/time-thermo/" target="_blank" rel="noopener">Craig Callender’s entry in the Stanford Encyclopedia of Philosophy</a> puts it, the problem is usually said to arise because fundamental physics is time symmetric, or more precisely, time reversal invariant. Loosely, a theory has that property if its laws don’t care about the direction of time.</p>
+        <p>A film of two billiard balls colliding looks equally possible run backwards. The same is true, as far as the basic equations go, for planets in orbit and for most of what happens inside atoms. In its <a href="https://www.nobelprize.org/prizes/physics/1980/press-release/" target="_blank" rel="noopener">1980 prize announcement</a>, the Royal Swedish Academy of Sciences explains the principle as the fundamental laws not changing when all motions are reversed, and notes that this symmetry is valid for processes governed by electromagnetic, gravitational and strong forces.</p>
+        <p>There is one known exception. The same announcement records the discovery, by James Cronin and Val Fitch, of violations of fundamental symmetry principles in the decay of neutral K-mesons, and concludes that perfect symmetry by time reversal is not always true. Callender notes that weak interactions between quarks and leptons can violate time symmetry, but that these violations don’t appear to be responsible for thermodynamic behaviour. The everyday arrow has to come from somewhere else.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Time symmetry in the basic forces</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Force</th>
+      <th>Same run backwards?</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Electromagnetic</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Gravitational</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Strong</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Weak</td>
+        <td>Not always: violations seen in neutral K-meson decays, not thought responsible for the everyday arrow</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://www.nobelprize.org/prizes/physics/1980/press-release/" target="_blank" rel="noopener">Nobel Prize in Physics 1980, press release</a>; <a href="https://plato.stanford.edu/archives/spr2025/entries/time-thermo/" target="_blank" rel="noopener">Callender, Stanford Encyclopedia of Philosophy</a>.</div>
+</figure>
+        <h2 id="eddington-names-the-arrow">Eddington names the arrow</h2>
+        <p>The phrase comes from the astronomer Arthur Eddington. His book The Nature of the Physical World, based on his Gifford Lectures of 1927, was <a href="https://gutenberg.org/cache/epub/72963/pg72963-images.html" target="_blank" rel="noopener">published in November 1928</a>. In it, as quoted by <a href="https://arxiv.org/pdf/1705.01467" target="_blank" rel="noopener">Arieh Ben-Naim</a>, he proposed: “Let us draw an arrow arbitrarily.” “If as we follow the arrow we find more and more of the random element in the state of the world, then the arrow is pointing towards the future.” He then wrote: “I shall use the phrase ‘time’s arrow’ to express this one-way property of time which has no analogue in space.”</p>
+        <p>Eddington was emphatic about the law behind it. The law that entropy always increases, the second law of thermodynamics, holds, he wrote, “I think, the supreme position among the laws of Nature”.</p>
+        <aside class="yt-cl yt-cl--note"><div class="yt-cl__k">Note</div><div class="yt-cl__t">Why space has no arrow</div><div class="yt-cl__b"><p>Eddington’s phrase was that this one-way property “has no analogue in space”: no law about space corresponds to the second law’s steady preference for one direction of time.</p></div></aside>
+        <h2 id="entropy-as-counting">Entropy as counting</h2>
+        <p>The second law in its classical form says, in Callender’s words, that in the spontaneous evolution of a thermally closed system the entropy can never decrease, and that it attains its maximum value at equilibrium. Heat flows from hot to cold, never the reverse.</p>
+        <p>Ludwig Boltzmann’s insight was to explain this by counting. As <a href="https://plato.stanford.edu/archives/sum2026/entries/statphys-statmech/" target="_blank" rel="noopener">Charlotte Werndl’s entry on the philosophy of statistical mechanics</a> sets out, Boltzmann entropy is a property of a large-scale state, defined by the size of the region of possible microscopic states that produce it. The bigger that region, the higher the entropy, and the equilibrium state is the one with the largest region.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Why entropy goes up, in four steps</figcaption>
+  <div class="yt-stages">
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">01</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">Large-scale states</div>
+        <div class="yt-stage__txt">We see temperature, pressure, where the gas is: a handful of numbers.</div>
+      </div>
+    </div>
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">02</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">Many microscopic states each</div>
+        <div class="yt-stage__txt">Each of those large-scale states can be produced by a huge number of exact arrangements of particles.</div>
+      </div>
+    </div>
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">03</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">Very unequal counts</div>
+        <div class="yt-stage__txt">For a gas in a box, spread-out states can be produced in overwhelmingly more ways than gathered-up ones.</div>
+      </div>
+    </div>
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">04</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">Drift towards the common</div>
+        <div class="yt-stage__txt">A system wandering among its arrangements almost always ends up in the large-scale state with the most of them.</div>
+      </div>
+    </div>
+  </div>
+  <div class="yt-viz__src">A simplified account of Boltzmann’s approach, following <a href="https://plato.stanford.edu/archives/sum2026/entries/statphys-statmech/" target="_blank" rel="noopener">Werndl</a> and <a href="https://arxiv.org/pdf/cond-mat/0105242" target="_blank" rel="noopener">Goldstein (2001)</a>.</div>
+</figure>
+        <p>Shuffle a new deck of cards and it is almost never back in order. Nothing forbids the ordered deck; there are simply vastly more shuffled orders. Boltzmann’s second law is that idea applied to the particles of a gas, where the numbers are so large that almost never becomes never in practice.</p>
+        <h2 id="two-objections-and-the-answer">Two objections, and the answer</h2>
+        <p>Boltzmann’s account met two famous objections. The first, as Werndl records, is Loschmidt’s reversibility objection, first put forward by Loschmidt in 1876: since the laws of motion are reversible, for every motion that raises entropy there is a reversed motion that lowers it.</p>
+        <p>The second is Zermelo’s recurrence objection, first put forward by Zermelo in 1896. It rests on Poincaré’s result that systems of this kind must, at some point, return arbitrarily close to their initial state. In Callender’s words, recurrence means that every solution will at some point have its entropy decrease if we wait long enough.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">The two classic objections</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Objection</th>
+      <th>First raised</th>
+      <th>The point</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Reversibility</td>
+        <td>Loschmidt, 1876</td>
+        <td>Reversed motions are just as lawful, so entropy-lowering motions exist</td>
+      </tr>
+      <tr>
+        <td>Recurrence</td>
+        <td>Zermelo, 1896, using Poincaré’s result</td>
+        <td>Given long enough, a system returns close to its starting state</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://plato.stanford.edu/archives/sum2026/entries/statphys-statmech/" target="_blank" rel="noopener">Werndl</a>; <a href="https://plato.stanford.edu/archives/spr2025/entries/time-thermo/" target="_blank" rel="noopener">Callender</a>.</div>
+</figure>
+        <p>The answer is that the second law, understood Boltzmann’s way, is about likelihood. A decrease in entropy is not impossible; it is overwhelmingly unlikely. The reversed motions exist, but they are an unimaginably small fraction of all motions. The recurrences come, but on timescales far beyond anything that matters. Sheldon Goldstein, in <a href="https://arxiv.org/pdf/cond-mat/0105242" target="_blank" rel="noopener">a 2001 account of Boltzmann’s approach</a>, argues that neither objection is a genuine conflict with Boltzmann’s analysis.</p>
+        <h2 id="the-past-hypothesis">The Past Hypothesis</h2>
+        <p>There is a catch, and it is the deepest part of the story. If entropy-raising and entropy-lowering motions are equally lawful, the same counting argument that says entropy will rise in the future also says it should have been higher in the past. Run backwards, the most likely history of a half-melted ice cube is one in which it was more melted earlier.</p>
+        <p>We know that is false: the past had lower entropy. To get the right answer, the account needs an extra assumption about the beginning. Callender describes it as the cosmological posit that the universe began in an extremely tiny section of its available phase space, and notes that David Albert, in 2000, called this the Past Hypothesis.</p>
+        <p>Richard Feynman had made the same point decades earlier. In The Character of Physical Law (1965), as <a href="https://arxiv.org/pdf/math-ph/0010018" target="_blank" rel="noopener">Joel Lebowitz quotes him</a>, he wrote that “it is necessary to add to the physical laws the hypothesis that in the past the universe was more ordered, in the technical sense, than it is today...to make an understanding of the irreversibility.”</p>
+        <p>The low-entropy beginning has a surprising feature. Lebowitz notes that in a universe dominated, like ours, by gravity, a uniform density corresponds to a state of very low entropy. Gravity makes matter clump, and clumped states have more entropy. So a smooth, evenly spread early universe, which might look like maximum disorder, was in fact extraordinarily special. Roger Penrose estimated just how special, and his estimate is quoted by Goldstein and by Lebowitz; the two give the exponent differently, so no figure is repeated here.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">What the Past Hypothesis is, according to whom</figcaption>
+  <div class="yt-cmp">
+    <div class="yt-cmp__col"><div class="yt-cmp__t">A law of nature</div><div class="yt-cmp__k">Strengths</div><ul class="yt-cmp__pro"><li>Treats the low-entropy start as part of physics itself</li></ul><div class="yt-cmp__k">Limits</div><ul class="yt-cmp__con"><li>Unusual: a law about one moment rather than about change</li></ul><div class="yt-cmp__v">Chen, Goldstein and Loewer.</div></div>
+    <div class="yt-cmp__col"><div class="yt-cmp__t">A fact needing no explanation</div><div class="yt-cmp__k">Strengths</div><ul class="yt-cmp__pro"><li>Keeps laws as rules for change</li><li>Initial conditions are not the kind of thing to be explained</li></ul><div class="yt-cmp__k">Limits</div><ul class="yt-cmp__con"><li>Leaves the most important fact about the universe as given</li></ul><div class="yt-cmp__v">Callender.</div></div>
+    <div class="yt-cmp__col"><div class="yt-cmp__t">A fact that needs explaining</div><div class="yt-cmp__k">Strengths</div><ul class="yt-cmp__pro"><li>Takes the specialness of the start seriously</li></ul><div class="yt-cmp__k">Limits</div><ul class="yt-cmp__con"><li>Asks for an explanation no one yet has</li></ul><div class="yt-cmp__v">Price.</div></div>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://plato.stanford.edu/archives/sum2026/entries/statphys-statmech/" target="_blank" rel="noopener">Werndl</a> and <a href="https://plato.stanford.edu/archives/spr2025/entries/time-thermo/" target="_blank" rel="noopener">Callender</a>, Stanford Encyclopedia of Philosophy.</div>
+</figure>
+        <p>Not everyone accepts the hypothesis in any of these forms. Callender reports that Earman is very critical of it, concluding that it isn’t even coherent enough to be false.</p>
+        <h2 id="the-other-arrows">The other arrows</h2>
+        <p>Entropy is not the only way time seems to point. Callender’s entry lists several. There is a knowledge arrow: roughly put, we know more about the past than the future. A causal arrow: causes typically occur before their effects. A radiative arrow, in which waves spread out from their sources rather than converging on them. A cosmological arrow, the most obvious being the expansion of the universe. And a psychological arrow, which the entry calls controversial and actually many different asymmetries.</p>
+        <p>Boltzmann suggested long ago that these are all explained by the direction of increasing entropy. Callender is cautious: a straightforward reduction of these arrows to entropy, he writes, is probably not in the cards. In one newer view, the low-entropy past, together with the laws and the statistics, is what is basic, and the thermodynamic arrow is just one of its consequences, alongside the others.</p>
+        <p>Some of the arrows are closer to entropy than others. On the radiative arrow, the entry reports that most agree the asymmetry of waves is ultimately thermodynamic, but after that matters are contested. The cosmological arrow invites a stranger thought. Gold proposed that if the universe ever stopped expanding and began to contract, then at the maximum radius the thermodynamic arrow would flip, so that entropy would decrease in the contracting phase. The idea is a speculation rather than a result, and it shows how tightly the account ties the direction of time to the state of the universe as a whole.</p>
+        <p>The knowledge arrow shows how that works. Callender notes that the highly constrained early state is what causes there to be macroscopic traces of the past in the present, but not traces of the future. Footprints, photographs and memories are records, and records point backwards because the past was special and the future is not.</p>
+        <h2 id="what-this-does-and-does-not-say">What this does and does not say</h2>
+        <p>Read literally, the account is modest. The laws mostly do not care which way time runs; the arrow comes from statistics plus a special beginning; and why the beginning was special is unsettled. It says nothing about consciousness, meaning or fate.</p>
+        <p>Here is the one borrowing in this essay, labelled as such. As a metaphor only, the asymmetry of records is apt for people: the past leaves traces and the future leaves none, which is part of why the past feels fixed and the future open. In physics that is a fact about entropy and a low-entropy start; in a life it is only a resemblance, and nothing in this essay suggests the physics governs it.</p>
+        <p>Two other essays here carry the thread on. <a href="/writing/what-it-means-to-call-time-the-fourth-dimension">The essay on time as the fourth dimension</a> explains why relativity leaves open whether past and future are as real as the present. And <a href="/writing/why-we-blame-the-people-we-love">why we blame the people we love</a> asks what a fixed future would mean for blame, and finds that the answer has less to do with physics than with how people treat each other.</p>
+
+      <div class="yt-post__takeaway">
+        <div class="yt-post__takeaway-label">The short version</div>
+        <p>The fundamental laws of motion are, with a small exception in the weak interaction, the same run forwards or backwards, yet everyday processes only go one way. The usual explanation is the second law of thermodynamics: entropy, which Boltzmann tied to how many microscopic arrangements fit a given large-scale state, tends to increase. That only explains the arrow if entropy was low in the past, so the account needs an extra assumption, the Past Hypothesis, that the universe began in an extremely low-entropy state. Whether that assumption is a law, a brute fact or something needing explanation is still debated, and philosophers doubt that every arrow of time reduces neatly to entropy.</p>
+      </div>
+    </div>
+
+    <div class="yt-opnote">
+      <div class="yt-opnote__label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Author's note</div>
+      <p>Eddington and Feynman are quoted through scholarly papers that cite them, because their books could not be read in full for this essay; the papers are linked where the quotations appear.</p>
+    </div>
+    <section class="yt-faq">
+      <h2 class="yt-faq__h" id="faq">Frequently asked</h2>
+      <details class="yt-faq__item">
+        <summary>Why does time only go forward?</summary>
+        <div class="yt-faq__a">The basic laws of motion mostly work the same in both directions. The one-way character comes from entropy: systems move from states that can be realised in few ways to states that can be realised in vastly more ways. That explains the arrow only if the universe began in a very low-entropy state, which physicists call the Past Hypothesis.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Who coined the phrase arrow of time?</summary>
+        <div class="yt-faq__a">The astronomer Arthur Eddington, in The Nature of the Physical World, published in 1928 and based on his 1927 Gifford Lectures. He used time's arrow for the one-way property of time which, he wrote, has no analogue in space.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Is entropy the same as disorder?</summary>
+        <div class="yt-faq__a">Not exactly. In Boltzmann's account, entropy measures how many microscopic arrangements fit a given large-scale state. Disorder is a loose gloss that can mislead: because of gravity, a smooth, evenly spread universe is a state of very low entropy, not high.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Can entropy ever decrease?</summary>
+        <div class="yt-faq__a">Not impossibly, but almost never. On Boltzmann's account a decrease in an isolated (thermally closed) system is overwhelmingly unlikely rather than forbidden, which is how his view answers the objections raised by Loschmidt in 1876 and Zermelo in 1896.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>What is the Past Hypothesis?</summary>
+        <div class="yt-faq__a">The assumption that the universe began in an extremely low-entropy state. David Albert called it that in 2000; Richard Feynman had made the point earlier. Philosophers still disagree about whether it is a law, a brute fact or something that needs explaining.</div>
+      </details>
+    </section>
+
+    <div class="yt-post__foot">
+      <div class="yt-post__foot-label">Related reading</div>
+      <div class="yt-post__related">
+          <a class="yt-post__rel" href="/writing/what-it-means-to-call-time-the-fourth-dimension" aria-label="What it means to call time the fourth dimension, and what it does not">
+            <span class="yt-post__rel-cat" aria-hidden="true">Fourth dimension</span>
+            <span class="yt-post__rel-title">What it means to call time the fourth dimension, and what it does not</span>
+          </a>
+          <a class="yt-post__rel" href="/writing/what-the-observer-effect-actually-says" aria-label="What the observer effect actually says, and what it does not">
+            <span class="yt-post__rel-cat" aria-hidden="true">Physics and time</span>
+            <span class="yt-post__rel-title">What the observer effect actually says, and what it does not</span>
+          </a>
+      </div>
+
+      <div class="yt-post__author">
+        <span class="yt-post__avatar" aria-hidden="true">YT</span>
+        <div>
+          <div class="yt-post__author-name">Yash Tulsyani</div>
+          <div class="yt-post__author-role">Writer</div>
+          <p class="yt-post__author-bio">I write about relationships, insecurity and attention, and about where the physics we borrow to describe them stops being literal. Two books so far, both unpublished.</p>
+          <div class="yt-post__author-links">
+            <a class="yt-post__author-link" href="/about">More about Yash Tulsyani</a>
+            <a class="yt-post__author-link" href="/books">The books</a>
+            <a class="yt-post__author-link" href="/contact">Write to me</a>
+            <a class="yt-post__author-link" href="https://linkedin.com/in/yashtulsyani" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-post__cta">
+        <div class="yt-post__cta-h">The longer version</div>
+        <p>Both books take this argument further than an essay can, and both hold the same line about where the physics stops.</p>
+        <a class="yt-post__btn" href="/books">Read about the books</a>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+/* Upgrades the category and date to what is set in WordPress. Progressive
+   enhancement only: the build-time values are already rendered above, so a
+   failure here leaves a correct page rather than a blank one.
+
+   Reads markup WordPress has already emitted. No network request.
+   Hardened per HANDOVER section 3: zero and-and, zero pipe-pipe, ASCII only,
+   addEventListener only. */
+(function(){
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun',
+                'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function metaOf(prop){
+    var m = document.querySelector('meta[property="' + prop + '"]');
+    if(!m){ return ''; }
+    var v = m.getAttribute('content');
+    return v ? v : '';
+  }
+
+  function fmt(v){
+    if(!v){ return ''; }
+    var d = new Date(v);
+    if(isNaN(d.getTime())){ return ''; }
+    var day = d.getDate();
+    var dd = day < 10 ? '0' + day : '' + day;
+    return dd + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function ldNodes(){
+    var out = [];
+    var tags = document.querySelectorAll('script[type="application/ld+json"]');
+    for(var i = 0; i < tags.length; i++){
+      var data;
+      try { data = JSON.parse(tags[i].textContent); }
+      catch(e){ continue; }
+      var graph = data['@graph'] ? data['@graph'] : [data];
+      for(var j = 0; j < graph.length; j++){ out.push(graph[j]); }
+    }
+    return out;
+  }
+
+  function category(){
+    /* Yoast puts the primary category on the Article node. Some setups do not,
+       so fall back to the middle item of its BreadcrumbList, which is the
+       category step between Home and the post. */
+    var nodes = ldNodes();
+    var i;
+    for(i = 0; i < nodes.length; i++){
+      var sec = nodes[i].articleSection;
+      if(!sec){ continue; }
+      if(Object.prototype.toString.call(sec) === '[object Array]'){
+        if(sec.length){ return String(sec[0]); }
+      } else {
+        return String(sec);
+      }
+    }
+    for(i = 0; i < nodes.length; i++){
+      if(nodes[i]['@type'] !== 'BreadcrumbList'){ continue; }
+      var list = nodes[i].itemListElement;
+      if(!list){ continue; }
+      if(list.length < 3){ continue; }
+      var mid = list[list.length - 2];
+      if(!mid){ continue; }
+      if(mid.name){ return String(mid.name); }
+    }
+    return '';
+  }
+
+  function setAll(sel, text){
+    if(!text){ return; }
+    var els = document.querySelectorAll(sel);
+    for(var i = 0; i < els.length; i++){ els[i].textContent = text; }
+  }
+
+  /* Reading time is NOT taken from Yoast. On this site every post begins
+     with the sidebar synced pattern, and Yoast counts that pattern's code as
+     words, so its estimate (twitter:data2) came out two to three times too
+     long (a live audit on 3 Nov 2026 found 24 to 29 minutes for essays of
+     2,000 to 2,700 words). The baked value is the body at 225 words a minute,
+     and the /writing card shows the same figure. */
+
+  function start(){
+    setAll('[data-yt-cat]', category());
+
+    var pub = metaOf('article:published_time');
+    setAll('[data-yt-date]', fmt(pub));
+
+    /* "Updated" only when the post was genuinely revised. WordPress stamps
+       modified_time on every save, so a same-day one says nothing. */
+    var modRaw = metaOf('article:modified_time');
+    if(!modRaw){ return; }
+    var mod = new Date(modRaw);
+    if(isNaN(mod.getTime())){ return; }
+    var p = new Date(pub);
+    if(!isNaN(p.getTime())){
+      if((mod.getTime() - p.getTime()) / 86400000 < 1){ return; }
+    }
+    var slot = document.querySelector('[data-yt-updated]');
+    if(!slot){ return; }
+    var DOT = String.fromCharCode(183);   /* middot, kept out of the source
+       because WordPress mangles non-ASCII in a Custom HTML block's JS */
+    slot.textContent = ' ' + DOT + ' Updated: ' + fmt(modRaw);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://yashtulsyani.com/writing/why-time-has-a-direction/#faq",
+      "mainEntityOfPage": "https://yashtulsyani.com/writing/why-time-has-a-direction/",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does time only go forward?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The basic laws of motion mostly work the same in both directions. The one-way character comes from entropy: systems move from states that can be realised in few ways to states that can be realised in vastly more ways. That explains the arrow only if the universe began in a very low-entropy state, which physicists call the Past Hypothesis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who coined the phrase arrow of time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The astronomer Arthur Eddington, in The Nature of the Physical World, published in 1928 and based on his 1927 Gifford Lectures. He used time's arrow for the one-way property of time which, he wrote, has no analogue in space."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is entropy the same as disorder?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not exactly. In Boltzmann's account, entropy measures how many microscopic arrangements fit a given large-scale state. Disorder is a loose gloss that can mislead: because of gravity, a smooth, evenly spread universe is a state of very low entropy, not high."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can entropy ever decrease?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not impossibly, but almost never. On Boltzmann's account a decrease in an isolated (thermally closed) system is overwhelmingly unlikely rather than forbidden, which is how his view answers the objections raised by Loschmidt in 1876 and Zermelo in 1896."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Past Hypothesis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The assumption that the universe began in an extremely low-entropy state. David Albert called it that in 2000; Richard Feynman had made the point earlier. Philosophers still disagree about whether it is a law, a brute fact or something that needs explaining."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
