@@ -419,9 +419,14 @@ def main():
         mid = hits[0]["id"] if hits else None
         if mid is not None:
             if post.get("featured_media") == mid:
-                yh = post.get("yoast_head_json") or {}
-                og = [i.get("url") for i in (yh.get("og_image") or []) if isinstance(i, dict)]
-                print("  share ok   %s  (featured image %d; Yoast og:image %s)" % (path, mid, og[0] if og else "NOT SET"))
+                pub = wp.call("GET", "posts/%d" % post["id"])
+                yh = pub.get("yoast_head_json")
+                if not isinstance(yh, dict):
+                    state = "Yoast data not exposed"
+                else:
+                    og = [i.get("url") for i in (yh.get("og_image") or []) if isinstance(i, dict)]
+                    state = "Yoast og:image %s; og:title %s; twitter:card %s" % (og[0] if og else "NOT SET", "set" if yh.get("og_title") else "missing", yh.get("twitter_card"))
+                print("  share ok   %s  (featured image %d, post says %s; %s)" % (path, mid, pub.get("featured_media"), state))
                 continue
         if not apply:
             print("  SOCIAL     %s  (%s share image %s)" % (path, "set existing" if mid else "upload and set", png.name))
