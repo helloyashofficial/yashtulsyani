@@ -12,7 +12,9 @@ fs.mkdirSync(outDir, { recursive: true });
 const font = (fam, file, w) => {
   const p = path.join(fontDir, file);
   if (!fs.existsSync(p)) throw new Error('missing font ' + p);
-  return `@font-face{font-family:"${fam}";font-weight:${w};src:url("file://${p}") format("woff2");}`;
+  // Embedded as data: URLs. A page built with setContent cannot load file:// fonts.
+  const b64 = fs.readFileSync(p).toString('base64');
+  return `@font-face{font-family:"${fam}";font-weight:${w};src:url(data:font/woff2;base64,${b64}) format("woff2");}`;
 };
 const FONTS = [
   font('Inter', '@fontsource/inter/files/inter-latin-500-normal.woff2', 500),
