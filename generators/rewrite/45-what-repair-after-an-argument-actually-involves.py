@@ -35,6 +35,7 @@ LIVESCI = "https://www.livescience.com/9223-hold-grudge-spouse.html"
 UTK = "https://our.tennessee.edu/2011/marriage-psychology"
 PERPETUAL = "https://www.gottman.com/?p=446426884"
 
+GOODNEWS = '<a href="/writing/what-your-partner-does-with-your-good-news">what your partner does with your good news</a>'
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">why reassurance is never enough</a>'
 ESSAY43 = '<a href="/writing/what-the-stoics-meant-by-what-is-up-to-us">what is up to us</a>'
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">the attachment research</a>'
@@ -143,7 +144,7 @@ POST = dict(
                         ("No", "<p>Return to ordinary warmth. The research suggests that coming back is part of what counts, and that the disagreement itself may simply recur.</p>"),
                     ])),
                 ])),
-            "Two other essays on this site meet repair at different points. The apology is yours to give and the forgiveness is not, which is the distinction at the centre of " + ESSAY43 + ". And a repair conversation can quietly turn into the loop described in " + ESSAY40 + ", when what is being asked for after the argument is not repair but proof.",
+            "Two other essays on this site meet repair at different points. The apology is yours to give and the forgiveness is not, which is the distinction at the centre of " + ESSAY43 + ". And a repair conversation can quietly turn into the loop described in " + ESSAY40 + ", when what is being asked for after the argument is not repair but proof.", "The other half of the picture is what happens when things go well, which is the subject of " + GOODNEWS + ".",
             "Repair also looks different from person to person, and " + ESSAY42 + " is one way of thinking about why. But no score settles how two people should come back from a particular argument. That is decided in the next conversation, and in whether there is one.",
         ]),
     ],

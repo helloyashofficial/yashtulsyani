@@ -30,6 +30,7 @@ BY_SLUG = {
     "why-we-blame-the-people-we-love": "regard",
     "why-time-has-a-direction": "spread",
     "what-flatland-teaches-about-the-fourth-dimension": "slice",
+    "what-your-partner-does-with-your-good-news": "respond",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -262,13 +263,33 @@ def slice(uid):
     return out
 
 
+def respond(uid):
+    """Four ways to answer good news, as a two-by-two field: active to
+    passive across, constructive above destructive. Only one quadrant
+    answers the news with something that radiates back."""
+    cx, cy = 240, 120
+    out = [line(cx - 150, cy, cx + 150, cy, "c"), line(cx, 14, cx, 226, "c")]
+    for qx, qy in ((cx + 75, cy + 53), (cx - 75, cy + 53)):
+        out.append(dot(qx, qy, 2.2, "c"))
+    out.append(dot(cx + 75, cy - 53, 2.4, "b"))
+    out.append(line(cx + 63, cy - 53, cx + 87, cy - 53, "b"))
+    qx, qy = cx - 75, cy - 53
+    out.append(dot(qx, qy, 3.2))
+    for i in range(12):
+        t = i * math.pi / 6
+        r0, r1 = 12, 30 if i % 2 == 0 else 22
+        out.append(line(qx + r0 * math.cos(t), qy + r0 * math.sin(t), qx + r1 * math.cos(t), qy + r1 * math.sin(t)))
+    out.append(circle(qx, qy, 40, "b", ' stroke-dasharray="2 5"'))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, respond=respond)
 
 
 def cover(slug, subject):

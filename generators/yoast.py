@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-your-partner-does-with-your-good-news": dict(
+        focus="active constructive responding",
+        title="Active constructive responding: what to do with good news",
+        desc="Active constructive responding to a partner's good news: Gable's four response styles, what the studies found, and how tentative the evidence still is."),
     "what-flatland-teaches-about-the-fourth-dimension": dict(
         focus="Flatland fourth dimension",
         title="Flatland and the fourth dimension: what Abbott's novel shows",
