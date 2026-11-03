@@ -36,6 +36,7 @@ MIP = "https://www.minkowskiinstitute.org/mip/books/minkowski.html"
 EININDEX = "https://www.marxists.org/reference/archive/einstein/works/1910s/relative/index.htm"
 PT1905 = "https://physicstoday.aip.org/news/einsteins-special-relativity-paper-arrives-at-annalen-der-physik"
 
+FLAT = '<a href="/writing/what-flatland-teaches-about-the-fourth-dimension">what Flatland teaches about the fourth dimension</a>'
 ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">the essay on the observer effect</a>'
 
 POST = dict(
@@ -139,7 +140,7 @@ POST = dict(
                  ["Basic measure", "Distance", "Interval"],
                  ["Status", "A mathematical and imaginative idea", "The structure of physical spacetime, tested by experiment"]],
                 source='Sources: <a href="' + RUCKER + '" target="_blank" rel="noopener">Rucker</a>; <a href="' + PDR + '" target="_blank" rel="noopener">Crabb, Public Domain Review (2015)</a>.'),
-            "Both ideas are interesting. They are not the same idea, and much of the mystique around the phrase fourth dimension comes from blending them.",
+            "Both ideas are interesting. They are not the same idea, and much of the mystique around the phrase fourth dimension comes from blending them. The spatial idea also reached a wide public through a novel of 1884, and " + FLAT + " follows it from a square on a plane to the tesseract.",
         ]),
         ("What the idea is good for, and what it is not", [
             "As physics, the idea is precise and modest. Events need four numbers; observers split them differently; the interval is shared; the effects show up in clocks. It says nothing about consciousness, nothing about destiny, and nothing about people.",
@@ -163,6 +164,7 @@ POST = dict(
          "In a 1955 letter to the family of his friend Michele Besso, he wrote that for believing physicists the separation between past, present and future is an illusion, albeit a stubborn one. It was a personal letter, not a scientific claim, and the popular English wording is a later translation."),
     ],
     related=[
+        ("what-flatland-teaches-about-the-fourth-dimension", "What Flatland teaches about the fourth dimension, and what it does not", "Fourth dimension"),
         ("what-the-observer-effect-actually-says", "What the observer effect actually says, and what it does not", "Physics and time"),
     ],
 )
