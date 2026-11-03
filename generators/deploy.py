@@ -117,6 +117,35 @@ def social_image(slug):
     return p, "yt-social-%s-%s" % (slug, h)
 
 
+def settle_author(wp, apply):
+    """Make the deploy account's public name the author's name. WordPress
+    shows it as the byline, and Yoast as "Written by" in share previews.
+    When it changes, each published post is saved once so that the page
+    cache and Yoast pick up the new name. Only the account's own profile
+    is touched, never its login or password."""
+    want = getattr(C, "AUTHOR_NAME", "")
+    if not want:
+        return
+    me = wp.call("GET", "users/me", query={"context": "edit"})
+    if me.get("name") == want:
+        print("  author     %s (unchanged)" % want)
+        return
+    first, _, last = want.partition(" ")
+    if not apply:
+        print("  author     would rename %r to %r" % (me.get("name"), want))
+        return
+    wp.call("POST", "users/me", {"name": want, "nickname": want, "first_name": first, "last_name": last})
+    got = wp.call("GET", "users/me", query={"context": "edit"}).get("name")
+    if got != want:
+        raise SystemExit("author name read back as %r, not %r" % (got, want))
+    print("  author     renamed %r to %r" % (me.get("name"), want))
+    posts = wp.call("GET", "posts", query={"author": me["id"], "status": "publish", "per_page": 100,
+                                           "context": "edit", "_fields": "id,link"})
+    for p in posts:
+        wp.call("POST", "posts/%d" % p["id"], {})
+        print("  refreshed  %s" % path_of(p.get("link", "")))
+
+
 def block(html):
     return "<!-- wp:html -->\n%s\n<!-- /wp:html -->" % html.strip()
 
@@ -253,8 +282,9 @@ def main():
     retired = getattr(C, "RETIRED", {})
     if not plan:
         if not retired:
-            print("nothing to deploy")
-            return
+            if not getattr(C, "AUTHOR_NAME", ""):
+                print("nothing to deploy")
+                return
 
     url, user, pw = os.environ.get("WP_URL"), os.environ.get("WP_USER"), os.environ.get("WP_APP_PASSWORD")
     have_creds = True
@@ -272,6 +302,7 @@ def main():
         return
 
     wp = WP(url, user, pw)
+    settle_author(wp, apply)
     use_yoast = os.environ.get("YOAST_REST") == "1"
     if getattr(C, "YOAST_REST", False):
         use_yoast = True
