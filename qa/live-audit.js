@@ -81,6 +81,8 @@ const SHOTS = [320, 390, 768, 1024, 1440];
                yoastRead: m('meta[name="twitter:data2"]'), canonical: (document.querySelector('link[rel="canonical"]') || {}).href || null,
                dek: t('.yt-post__dek'), ogImage: m('meta[property="og:image"]'),
                cover: !!document.querySelector('.yt-post__cover svg'),
+               ogTags: [...document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]')].map(n => (n.getAttribute('property') || n.getAttribute('name')) + '=' + (n.getAttribute('content') || '').slice(0, 80)),
+               cacheHints: [...document.childNodes].filter(n => n.nodeType === 8).map(n => n.textContent.trim().slice(0, 120)).slice(-3),
                themeImage: [...document.querySelectorAll('img.wp-post-image, .post-thumbnail img')].filter(i => { const r = i.getBoundingClientRect(); const cs = getComputedStyle(i); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden'; }).length };
     });
     e.href = c.href; e.status = r ? r.status() : 0;

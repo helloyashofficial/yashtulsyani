@@ -419,6 +419,9 @@ def main():
         mid = hits[0]["id"] if hits else None
         if mid is not None:
             if post.get("featured_media") == mid:
+                yh = post.get("yoast_head_json") or {}
+                og = [i.get("url") for i in (yh.get("og_image") or []) if isinstance(i, dict)]
+                print("  share ok   %s  (featured image %d; Yoast og:image %s)" % (path, mid, og[0] if og else "NOT SET"))
                 continue
         if not apply:
             print("  SOCIAL     %s  (%s share image %s)" % (path, "set existing" if mid else "upload and set", png.name))
