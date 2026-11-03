@@ -102,3 +102,8 @@ RETIRED = {
 }
 
 # Category IDs are looked up by name and created if missing.
+
+# Public name of the WordPress account the deploy job uses. It is the byline
+# WordPress and Yoast show ("Written by" in share previews). deploy.py sets
+# it on the account if it differs. Leave empty to leave the account alone.
+AUTHOR_NAME = "Yash Tulsyani"

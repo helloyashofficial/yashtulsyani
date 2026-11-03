@@ -129,6 +129,5 @@ jobs:
           echo "Mode: $(grep '^mode=' "$GITHUB_OUTPUT" | tail -1 | cut -d= -f2)"
           echo "Blocks: ${files:-none}"
       - name: Deploy
-        if: steps.what.outputs.files != ''
         working-directory: generators
         run: python3 -u deploy.py --${{ steps.what.outputs.mode }} ${{ steps.what.outputs.files }}
