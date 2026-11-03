@@ -140,7 +140,7 @@ POST = dict(
                  ["Basic measure", "Distance", "Interval"],
                  ["Status", "A mathematical and imaginative idea", "The structure of physical spacetime, tested by experiment"]],
                 source='Sources: <a href="' + RUCKER + '" target="_blank" rel="noopener">Rucker</a>; <a href="' + PDR + '" target="_blank" rel="noopener">Crabb, Public Domain Review (2015)</a>.'),
-            "Both ideas are interesting. They are not the same idea, and much of the mystique around the phrase fourth dimension comes from blending them. The spatial idea had its most famous introduction in a novel of 1884, and " + FLAT + " follows it from a square on a plane to the tesseract.",
+            "Both ideas are interesting. They are not the same idea, and much of the mystique around the phrase fourth dimension comes from blending them. The spatial idea also reached a wide public through a novel of 1884, and " + FLAT + " follows it from a square on a plane to the tesseract.",
         ]),
         ("What the idea is good for, and what it is not", [
             "As physics, the idea is precise and modest. Events need four numbers; observers split them differently; the interval is shared; the effects show up in clocks. It says nothing about consciousness, nothing about destiny, and nothing about people.",
