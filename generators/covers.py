@@ -194,17 +194,26 @@ def regard(uid):
     exchange of attitudes between them (the participant stance), and a third
     point looking on from outside along a straight dashed line (the objective
     stance)."""
-    ax, bx, y = 172, 308, 132
-    out = [circle(ax, y, 30), circle(bx, y, 30)]
-    out.append(path("M%s %s Q %s %s %s %s" % (ax + 30, y - 10, (ax + bx) / 2.0, y - 62, bx - 30, y - 10)))
-    out.append(path("M%s %s Q %s %s %s %s" % (bx - 30, y + 10, (ax + bx) / 2.0, y + 62, ax + 30, y + 10), "b"))
-    for (x, yy, d) in ((bx - 30, y - 10, 1), (ax + 30, y + 10, -1)):
-        out.append(line(x, yy, x - 9 * d, yy - 4 * d))
-        out.append(line(x, yy, x - 7 * d, yy + 6 * d))
-    ox, oy = 404, 40
-    out.append(circle(ox, oy, 12, "b"))
-    out.append(line(ox - 10, oy + 8, (ax + bx) / 2.0, y - 20, "c", ' stroke-dasharray="3 5"'))
-    out.append(circle((ax + bx) / 2.0, y, 92, "c"))
+    y = 132
+    ax, bx, r = 140, 340, 26
+    out = [circle(ax, y, r), circle(bx, y, r)]
+
+    def arrow_arc(x0, y0, cx, cy, x1, y1, c):
+        out.append(path("M%s %s Q %s %s %s %s" % (f(x0), f(y0), f(cx), f(cy), f(x1), f(y1)), c))
+        dx, dy = x1 - cx, y1 - cy
+        n = math.hypot(dx, dy)
+        ux, uy = dx / n, dy / n
+        for sgn in (-1, 1):
+            ang = math.radians(28) * sgn
+            vx = ux * math.cos(ang) - uy * math.sin(ang)
+            vy = ux * math.sin(ang) + uy * math.cos(ang)
+            out.append(line(x1, y1, x1 - 11 * vx, y1 - 11 * vy, c))
+
+    arrow_arc(ax + 22, y - 14, 240, y - 78, bx - 22, y - 14, "a")
+    arrow_arc(bx - 22, y + 14, 240, y + 78, ax + 22, y + 14, "b")
+    ox, oy = 424, 34
+    out.append(circle(ox, oy, 11, "b"))
+    out.append(line(ox - 12, oy + 4, 262, y - 44, "c", ' stroke-dasharray="3 5"'))
     return out
 
 
