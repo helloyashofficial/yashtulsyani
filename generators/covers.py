@@ -27,6 +27,7 @@ BY_SLUG = {
     "what-it-means-to-call-time-the-fourth-dimension": "cone",
     "what-repair-after-an-argument-actually-involves": "repair",
     "what-self-silencing-is": "muted",
+    "why-we-blame-the-people-we-love": "regard",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -188,13 +189,41 @@ def muted(uid):
     return out
 
 
+def regard(uid):
+    """Strawson's two stances: two people facing each other, joined by the
+    exchange of attitudes between them (the participant stance), and a third
+    point looking on from outside along a straight dashed line (the objective
+    stance)."""
+    y = 132
+    ax, bx, r = 140, 340, 26
+    out = [circle(ax, y, r), circle(bx, y, r)]
+
+    def arrow_arc(x0, y0, cx, cy, x1, y1, c):
+        out.append(path("M%s %s Q %s %s %s %s" % (f(x0), f(y0), f(cx), f(cy), f(x1), f(y1)), c))
+        dx, dy = x1 - cx, y1 - cy
+        n = math.hypot(dx, dy)
+        ux, uy = dx / n, dy / n
+        for sgn in (-1, 1):
+            ang = math.radians(28) * sgn
+            vx = ux * math.cos(ang) - uy * math.sin(ang)
+            vy = ux * math.sin(ang) + uy * math.cos(ang)
+            out.append(line(x1, y1, x1 - 11 * vx, y1 - 11 * vy, c))
+
+    arrow_arc(ax + 22, y - 14, 240, y - 78, bx - 22, y - 14, "a")
+    arrow_arc(bx - 22, y + 14, 240, y + 78, ax + 22, y + 14, "b")
+    ox, oy = 424, 34
+    out.append(circle(ox, oy, 11, "b"))
+    out.append(line(ox - 12, oy + 4, 262, y - 44, "c", ' stroke-dasharray="3 5"'))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard)
 
 
 def cover(slug, subject):
