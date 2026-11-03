@@ -83,6 +83,29 @@ class WP:
 SOCIAL = C.ROOT / "social" if hasattr(C, "ROOT") else C.BLOCKS.parent / "social"
 
 
+def yoast_og(wp, pid):
+    """The og:image Yoast publishes for a post (public view), or None."""
+    yh = wp.call("GET", "posts/%d" % pid).get("yoast_head_json")
+    if not isinstance(yh, dict):
+        return None
+    og = [i.get("url") for i in (yh.get("og_image") or []) if isinstance(i, dict)]
+    return og[0] if og else None
+
+
+def settle_yoast(wp, pid, mid, path):
+    """WordPress saves a post before attaching its featured image, so Yoast's
+    stored copy can miss the image. Saving once more makes Yoast re-read it.
+    Returns the og:image Yoast then publishes."""
+    og = yoast_og(wp, pid)
+    if og:
+        return og
+    wp.call("POST", "posts/%d" % pid, {"featured_media": mid})
+    og = yoast_og(wp, pid)
+    if not og:
+        print("  warn: Yoast still publishes no og:image for %s" % path)
+    return og
+
+
 def social_image(slug):
     """(path, media slug) for an essay's share image, or None. The media slug
     carries a hash of the file, so a changed image is uploaded once, and an
@@ -419,6 +442,16 @@ def main():
         mid = hits[0]["id"] if hits else None
         if mid is not None:
             if post.get("featured_media") == mid:
+                og = yoast_og(wp, post["id"])
+                if og:
+                    continue
+                if not apply:
+                    print("  SOCIAL     %s  (image attached; Yoast has not picked it up, will re-save)" % path)
+                    shared += 1
+                    continue
+                og = settle_yoast(wp, post["id"], mid, path)
+                shared += 1
+                print("  social     %s  (Yoast og:image now %s)" % (path, og))
                 continue
         if not apply:
             print("  SOCIAL     %s  (%s share image %s)" % (path, "set existing" if mid else "upload and set", png.name))
@@ -435,8 +468,9 @@ def main():
         back = wp.call("GET", "posts/%d" % post["id"], query={"context": "edit"})
         if back.get("featured_media") != mid:
             raise SystemExit("share image did not attach to %s" % path)
+        og = settle_yoast(wp, post["id"], mid, path)
         shared += 1
-        print("  social     %s  (featured image %d)" % (path, mid))
+        print("  social     %s  (featured image %d; Yoast og:image %s)" % (path, mid, og))
 
     trashed = 0
     for pid, rpath, r in retire:
