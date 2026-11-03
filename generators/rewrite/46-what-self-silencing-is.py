@@ -130,7 +130,7 @@ POST = dict(
                 ("01", "Notice the pattern", "Not every silence, just the ones that repeat: the same need, unsaid, again."),
                 ("02", "Say one true thing", "Small and specific: what you feel and what you would like, not a case for the prosecution."),
                 ("03", "Say it once", "Repeating it for reassurance is the opposite trap. Let the answer be the other person’s."),
-                ("04", "Watch what happens next", "Most relationships absorb a stated need. If yours punishes every one, that is information too."),
+                ("04", "Notice how it lands", "See how a stated need is received. If every one is met with punishment, that is information too."),
             ], source="The essay’s suggestions, drawn from the studies cited; not a tested intervention."),
             SHRINK + ", one of the books on this site, is about the person being made small in a relationship, as its own page puts it, and turns the same mirror on the person doing it. This essay is the research underneath one half of that: what it costs, over time, to keep making yourself smaller so that nothing has to be said.",
         ]),
