@@ -61,7 +61,7 @@ class WP:
                 return json.loads(r.read().decode() or "null")
         except urllib.error.HTTPError as e:
             if missing_ok:
-                if e.code in (404, 410):
+                if e.code in ((401, 403, 404, 410) if missing_ok == "or-forbidden" else (404, 410)):
                     return None
             detail = e.read().decode(errors="replace")[:300]
             raise SystemExit("WordPress %s %s returned %d: %s" % (method, path, e.code, detail))
@@ -126,6 +126,7 @@ def settle_author(wp, apply):
     want = getattr(C, "AUTHOR_NAME", "")
     if not want:
         return
+    rename_accounts(wp, apply)
     me = wp.call("GET", "users/me", query={"context": "edit"})
     if me.get("name") == want:
         print("  author     %s (unchanged)" % want)
@@ -145,6 +146,30 @@ def settle_author(wp, apply):
     for p in posts:
         wp.call("POST", "posts/%d" % p["id"], {})
         print("  refreshed  %s" % path_of(p.get("link", "")))
+
+
+def rename_accounts(wp, apply):
+    """Set the public name of other accounts listed in ytconf.RENAME_USERS
+    ({user id: name}). Only the display name and nickname change, never a
+    login, email or password. Needs the deploy account to be allowed to
+    edit users; if it is not, say so and carry on."""
+    for uid, want in sorted(getattr(C, "RENAME_USERS", {}).items()):
+        u = wp.call("GET", "users/%d" % uid, query={"context": "edit"}, missing_ok="or-forbidden")
+        if u is None:
+            print("  account    %d not found or not editable by the deploy account; rename it by hand" % uid)
+            continue
+        if u.get("name") == want:
+            print("  account    %d is %s (unchanged)" % (uid, want))
+            continue
+        if not apply:
+            print("  account    would rename account %d to %s" % (uid, want))
+            continue
+        first, _, last = want.partition(" ")
+        wp.call("POST", "users/%d" % uid, {"name": want, "nickname": want, "first_name": first, "last_name": last})
+        got = wp.call("GET", "users/%d" % uid, query={"context": "edit"}).get("name")
+        if got != want:
+            raise SystemExit("account %d name read back as %r, not %r" % (uid, got, want))
+        print("  account    renamed account %d to %s" % (uid, want))
 
 
 def adopt_posts(wp, my_id, want, apply):

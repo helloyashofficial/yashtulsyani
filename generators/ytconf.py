@@ -107,3 +107,7 @@ RETIRED = {
 # WordPress and Yoast show ("Written by" in share previews). deploy.py sets
 # it on the account if it differs. Leave empty to leave the account alone.
 AUTHOR_NAME = "Yash Tulsyani"
+
+# Other WordPress accounts whose public name should be the author's name,
+# as {user id: name}. Account 1 is Yash's own login.
+RENAME_USERS = {1: "Yash Tulsyani"}
