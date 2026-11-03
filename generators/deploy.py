@@ -129,6 +129,7 @@ def settle_author(wp, apply):
     me = wp.call("GET", "users/me", query={"context": "edit"})
     if me.get("name") == want:
         print("  author     %s (unchanged)" % want)
+        adopt_posts(wp, me["id"], want, apply)
         return
     first, _, last = want.partition(" ")
     if not apply:
@@ -144,6 +145,33 @@ def settle_author(wp, apply):
     for p in posts:
         wp.call("POST", "posts/%d" % p["id"], {})
         print("  refreshed  %s" % path_of(p.get("link", "")))
+
+
+def adopt_posts(wp, my_id, want, apply):
+    """Published posts whose author's public name is not the author's name
+    (for example an account whose display name is an email address) are
+    moved to the deploy account, which carries the right name."""
+    posts = wp.call("GET", "posts", query={"status": "publish", "per_page": 100,
+                                           "context": "edit", "_fields": "id,link,author"})
+    names = {}
+    for p in posts:
+        aid = p.get("author")
+        if aid == my_id:
+            continue
+        if aid not in names:
+            u = wp.call("GET", "users/%d" % aid, missing_ok=True)
+            names[aid] = (u or {}).get("name", "")
+        if names[aid] == want:
+            continue
+        path = path_of(p.get("link", ""))
+        if not apply:
+            print("  author     would move %s to %s (author id %d)" % (path, want, aid))
+            continue
+        wp.call("POST", "posts/%d" % p["id"], {"author": my_id})
+        got = wp.call("GET", "posts/%d" % p["id"], query={"context": "edit", "_fields": "author"}).get("author")
+        if got != my_id:
+            raise SystemExit("could not move %s to the deploy account" % path)
+        print("  author     moved %s to %s" % (path, want))
 
 
 def block(html):
