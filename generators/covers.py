@@ -30,6 +30,7 @@ BY_SLUG = {
     "why-we-blame-the-people-we-love": "regard",
     "why-time-has-a-direction": "spread",
     "what-flatland-teaches-about-the-fourth-dimension": "slice",
+    "what-your-partner-does-with-your-good-news": "echo",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -262,13 +263,25 @@ def slice(uid):
     return out
 
 
+def echo(uid):
+    """Good news and its answer: a small message leaves one person as short
+    waves, and comes back from the other as wider, stronger ones."""
+    y, ax, bx = 120, 80, 400
+    out = [circle(ax, y, 28), circle(bx, y, 28)]
+    for i, r in enumerate((14, 24, 34)):
+        out.append(path(arc(ax + 30, y, r, -0.45, 0.45), "a" if i == 0 else "b"))
+    for i, r in enumerate((30, 56, 82, 108, 134)):
+        out.append(path(arc(bx - 34, y, r, math.pi - 0.62, math.pi + 0.62), "a" if i < 3 else "b"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo)
 
 
 def cover(slug, subject):
