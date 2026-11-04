@@ -32,6 +32,7 @@ BY_SLUG = {
     "what-flatland-teaches-about-the-fourth-dimension": "slice",
     "what-your-partner-does-with-your-good-news": "echo",
     "what-rumination-is": "coil",
+    "what-epicurus-meant-by-pleasure": "settle",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -296,13 +297,30 @@ def coil(uid):
     return out
 
 
+def settle(uid):
+    """Epicurean pleasure as rest: a disturbed line that grows calmer and
+    calmer until it lies flat, with a still point where it comes to rest."""
+    cy = 120
+    k = 2 * math.pi / 56.0
+    pts = []
+    for x in range(40, 441, 2):
+        u = (x - 40) / 400.0
+        amp = 46 * math.exp(-4.2 * u) * (1 - u)
+        pts.append((x, cy - amp * math.sin((x - 40) * k)))
+    out = [path("M" + " L".join("%s %s" % (f(x), f(y)) for x, y in pts))]
+    for i, r in enumerate((10, 20, 30)):
+        out.append(path("M%s %s A%s %s 0 0 0 %s %s" % (f(400 - r), cy + 22, r, f(r * 0.28), f(400 + r), cy + 22), "c" if i else "b"))
+    out.append(dot(400, cy, 2.6))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle)
 
 
 def cover(slug, subject):
