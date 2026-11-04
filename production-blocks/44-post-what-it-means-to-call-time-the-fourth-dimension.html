@@ -408,13 +408,19 @@
     return v ? v : '';
   }
 
+  /* Dates are shown in the site's own time (Settings > General is
+     Asia/Kolkata, UTC+5:30; ytconf.SITE_TIMEZONE), not the reader's, so
+     every reader sees the same date and it matches the /writing card.
+     India has no daylight saving, so a fixed offset is exact. */
+  var SITE_OFFSET_MIN = 330;
   function fmt(v){
     if(!v){ return ''; }
     var d = new Date(v);
     if(isNaN(d.getTime())){ return ''; }
-    var day = d.getDate();
+    var s = new Date(d.getTime() + SITE_OFFSET_MIN * 60000);
+    var day = s.getUTCDate();
     var dd = day < 10 ? '0' + day : '' + day;
-    return dd + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+    return dd + ' ' + MONTHS[s.getUTCMonth()] + ' ' + s.getUTCFullYear();
   }
 
   function ldNodes(){
