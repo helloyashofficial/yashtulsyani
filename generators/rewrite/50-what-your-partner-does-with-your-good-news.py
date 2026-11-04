@@ -44,7 +44,7 @@ ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">what attac
 
 POST = dict(
     slug="what-your-partner-does-with-your-good-news", num=50, cat="Relationships", read="auto",
-    date="2026-11-03",
+    date="2026-11-04",
     gen="rewrite/50-what-your-partner-does-with-your-good-news.py",
     title="What your partner does with your good news, and why it may matter more than you think",
     dek="Most advice about relationships is about the hard moments. A line of research that began in the 1990s looks at the easy ones: what happens when one person shares good news and the other responds. The findings are striking, and more tentative than they are usually made to sound.",
