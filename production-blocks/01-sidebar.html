@@ -156,9 +156,14 @@
      row, so at 320px the page scrolled sideways. Words now break only when
      they cannot fit, and headings may shrink on the smallest phones. */
   .yt-page, .yt-post{ overflow-wrap:break-word; }
-  /* Long words hyphenate at proper points rather than splitting anywhere;
+  /* On the narrowest phones long words hyphenate at proper points rather
+     than splitting anywhere (wider screens never need it, and hyphenating
+     ordinary words there looks broken);
      flex children holding a heading may shrink so the hyphenation can act. */
-  .yt-page h1, .yt-page h2, .yt-page h3, .yt-post h1, .yt-post h2, .yt-post h3{ overflow-wrap:break-word; hyphens:auto; -webkit-hyphens:auto; }
+  .yt-page h1, .yt-page h2, .yt-page h3, .yt-post h1, .yt-post h2, .yt-post h3{ overflow-wrap:break-word; }
+  @media (max-width:380px){
+    .yt-page h1, .yt-page h2, .yt-page h3, .yt-post h1, .yt-post h2, .yt-post h3{ hyphens:auto; -webkit-hyphens:auto; }
+  }
   .yt-page :is(header, div):has(> h1){ min-width:0; }
   .yt-page :is(header, div) > :is(h1, div):has(> h1), .yt-page header > div{ min-width:0; }
   @media (max-width:380px){
