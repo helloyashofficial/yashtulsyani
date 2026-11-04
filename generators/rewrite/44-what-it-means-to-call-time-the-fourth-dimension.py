@@ -36,6 +36,7 @@ MIP = "https://www.minkowskiinstitute.org/mip/books/minkowski.html"
 EININDEX = "https://www.marxists.org/reference/archive/einstein/works/1910s/relative/index.htm"
 PT1905 = "https://physicstoday.aip.org/news/einsteins-special-relativity-paper-arrives-at-annalen-der-physik"
 
+MCT = '<a href="/writing/what-mctaggart-meant-by-the-unreality-of-time">what McTaggart meant by the unreality of time</a>'
 FLAT = '<a href="/writing/what-flatland-teaches-about-the-fourth-dimension">what Flatland teaches about the fourth dimension</a>'
 ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">the essay on the observer effect</a>'
 
@@ -119,7 +120,7 @@ POST = dict(
         ("Does the past still exist?", [
             "If there is no universal now, a philosophical question follows quickly. Is the present special? Or are past and future events as real as present ones, laid out in spacetime like places on a map? The second view is often called the block universe.",
             "Savitt’s entry sets out the positions. Presentism is the view that only the present exists. Eternalism holds that future and past events at a place are no more or less real than distant events at a time. Some philosophers have argued that relativity forces eternalism, because there is no frame-independent present to privilege.",
-            "The entry’s conclusion is more careful. It says eternalism is not a straightforward consequence of adopting the spacetime viewpoint, and that whether the block universe is refuted is controversial. On the other side, rebutting McTaggart’s famous argument that the passage of time is contradictory does not show that eternalism is false, the entry says, only that it is optional. It also notes that, for many, the deepest problems in the metaphysics of time concern passage, the sense that time flows. Whether a fixed future would leave room for blame is a separate question, taken up in <a href=\"/writing/why-we-blame-the-people-we-love\">why we blame the people we love</a>.",
+            "The entry’s conclusion is more careful. It says eternalism is not a straightforward consequence of adopting the spacetime viewpoint, and that whether the block universe is refuted is controversial. On the other side, rebutting McTaggart’s famous argument that the passage of time is contradictory does not show that eternalism is false, the entry says, only that it is optional. It also notes that, for many, the deepest problems in the metaphysics of time concern passage, the sense that time flows. Whether a fixed future would leave room for blame is a separate question, taken up in <a href=\"/writing/why-we-blame-the-people-we-love\">why we blame the people we love</a>. The older argument behind this debate, McTaggart’s claim that time itself is unreal, is the subject of " + MCT + ".",
             "HTML:" + K.compare("Two views of time, and what relativity says", [
                 ("Presentism", ["Matches how time feels", "The present is privileged"], ["Has to explain why physics finds no universal present"], "Under pressure from relativity, not refuted by it."),
                 ("Eternalism, the block universe", ["Fits the spacetime picture naturally", "No privileged now is needed"], ["Has to explain the experience of passage"], "Compatible with relativity, not required by it."),

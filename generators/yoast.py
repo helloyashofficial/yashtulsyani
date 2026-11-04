@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-mctaggart-meant-by-the-unreality-of-time": dict(
+        focus="McTaggart unreality of time",
+        title="McTaggart on the unreality of time: the A and B series",
+        desc="McTaggart's 1908 argument for the unreality of time: the A and B series, the contradiction, the replies, the growing block, and relativity."),
     "what-entanglement-is": dict(
         focus="quantum entanglement",
         title="Quantum entanglement: what it is, and what it is not",
