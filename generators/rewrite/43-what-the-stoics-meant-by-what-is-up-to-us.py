@@ -26,6 +26,7 @@ EBSCO = "https://www.ebsco.com/research-starters/health-and-medicine/rational-em
 BMCR = "https://bmcr.brynmawr.edu/?p=26558"
 CARTER = "https://classics.mit.edu/Epictetus/epicench.html"
 
+EPICURUS = '<a href="/writing/what-epicurus-meant-by-pleasure">what Epicurus meant by pleasure</a>'
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">the essay on reassurance seeking</a>'
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">attachment anxiety</a>'
 
@@ -134,6 +135,7 @@ POST = dict(
             "Modern writers have tried to account for this. " + a(BMCR, "A review of William Irvine’s 2009 book A Guide to the Good Life") + " describes his proposal of a three-way division: things we control completely, things we do not control at all, and things over which we have some control, such as whether we win a game of tennis. For the middle group, Irvine’s advice is to set internal goals: not to win, but to compete as hard as we can. The review is largely favourable, though the reviewer notes that Irvine’s shift from virtue towards tranquillity may seem to some a sleight of hand.",
             "Whatever its standing as an account of Stoicism, the middle category describes relationships well. You have influence without control. The useful version of the Stoic idea, for love, is to put your effort into the part that is yours (how honestly you speak, how well you listen, how you treat the other person) and to hold the result, their feelings and their choices, as theirs.",
             "Said that way, the distinction is not a rule for feeling less. It is a way of seeing where effort belongs, so that care goes into what care can actually change.",
+            "The Stoics’ great rivals, the Epicureans, aimed at a similar calm by a different road, through a careful account of pleasure. That road is set out in " + EPICURUS + ".",
         ]),
     ],
     note=[

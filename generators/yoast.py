@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-epicurus-meant-by-pleasure": dict(
+        focus="Epicurus pleasure",
+        title="What Epicurus meant by pleasure: calm, not indulgence",
+        desc="What Epicurus meant by pleasure, in his own words: the absence of pain and trouble, three kinds of desire, death as nothing to fear, and friendship."),
     "what-rumination-is": dict(
         focus="rumination",
         title="Rumination: why thinking it through can make things worse",
