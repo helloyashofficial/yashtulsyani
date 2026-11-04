@@ -31,6 +31,7 @@ BY_SLUG = {
     "why-time-has-a-direction": "spread",
     "what-flatland-teaches-about-the-fourth-dimension": "slice",
     "what-your-partner-does-with-your-good-news": "echo",
+    "what-rumination-is": "coil",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -275,13 +276,33 @@ def echo(uid):
     return out
 
 
+def coil(uid):
+    """Rumination: a line arrives, then loops back over itself again and
+    again, barely moving forward, before it finally leaves."""
+    cy = 120
+    out = [line(40, cy + 34, 150, cy + 34)]
+    pts = []
+    n = 1400
+    loops = 11
+    for i in range(n + 1):
+        t = i / float(n) * loops * 2 * math.pi
+        r = 34 - 10 * math.sin(math.pi * i / n)
+        x = 150 + t * 2.6 - r * math.sin(t)
+        y = cy + r * math.cos(t)
+        pts.append((x, y))
+    out.append(path("M" + " L".join("%s %s" % (f(x), f(y)) for x, y in pts[::4])))
+    ex = pts[-1][0]
+    out.append(line(ex, cy + 34, 440, cy + 34, "b", ' stroke-dasharray="2 5"'))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil)
 
 
 def cover(slug, subject):

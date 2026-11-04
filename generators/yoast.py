@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-rumination-is": dict(
+        focus="rumination",
+        title="Rumination: why thinking it through can make things worse",
+        desc="What rumination is and what the research found: the earthquake study, brooding versus reflection, abstract versus concrete thought, and what helps."),
     "what-your-partner-does-with-your-good-news": dict(
         focus="active constructive responding",
         title="Active constructive responding: what to do with good news",

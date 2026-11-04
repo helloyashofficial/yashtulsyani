@@ -34,6 +34,7 @@ IMPETT14 = "https://labsites.rochester.edu/lelab/wp-content/uploads/2020/06/Impe
 LE13 = "https://www.psychologicalscience.org/journals/psychological-science/0956797613475365/"
 SAHDEV = "https://www.researchsquare.com/article/rs-10798157"
 
+RUMINATION = '<a href="/writing/what-rumination-is">what rumination is</a>'
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">what attachment styles actually measure</a>'
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">the essay on reassurance seeking</a>'
 ESSAY43 = '<a href="/writing/what-the-stoics-meant-by-what-is-up-to-us">what is up to us</a>'
@@ -124,6 +125,7 @@ POST = dict(
             "Self-silencing has an opposite that this site has already written about. " + ESSAY40.replace(">the essay on reassurance seeking<", ">The essay on reassurance seeking<") + " describes asking again and again for proof that a relationship is safe. Self-silencing tries to keep it safe by asking for nothing at all. One says too much and the other too little, and both are trying to manage the other person’s reaction before it happens.",
             "That is where an older idea is useful. In the language of " + ESSAY43 + ", what you say and how you say it are yours; how the other person responds is not. Silencing yourself to control that response puts effort on the side of the line where it cannot work, and gives up the part that was yours.",
             "The research on attachment points the same way. Fear of rejection is one of the two dimensions described in " + ESSAY42 + ", and self-silencing is one of the things that fear can lead people to do. A score does not decide the behaviour; the behaviour is the part that can change.",
+            "Silencing is about what goes unsaid. Its inward counterpart, going over the same feelings and problems without getting anywhere, is the subject of " + RUMINATION + ".",
         ]),
         ("What to try instead", [
             "This essay found no tested intervention for self-silencing, so what follows is drawn from the findings above rather than proven by them. The most consistent thread is authenticity: in the Impett studies, hiding emotion made people feel less authentic (2012) and made partners seem less authentic (2014).",
