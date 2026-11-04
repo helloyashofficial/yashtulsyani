@@ -25,7 +25,6 @@ SEPM = "https://plato.stanford.edu/ENTRIES/mctaggart/"
 IEPM = "https://iep.utm.edu/mctaggar/"
 TRIN = "https://explore.trin.cam.ac.uk/assets/mctaggart/"
 SEPT = "https://plato.stanford.edu/entries/time/"
-IEPT = "https://iep.utm.edu/time/"
 SAVITT = "https://plato.stanford.edu/entries/spacetime-bebecome/"
 BROAD = "https://plato.stanford.edu/entries/broad/"
 GARRETT = "https://openresearch-repository.anu.edu.au/bitstream/1885/250514/1/01_Garrett_Time%20Space%20Dummett%20and%20McTaggart.pdf"
@@ -53,7 +52,7 @@ POST = dict(
                 "McTaggart argued that time needs change, and change needs the A series.",
                 "He then argued that the A series is contradictory, and that every attempt to fix it recreates the contradiction.",
                 "Almost no one accepts his conclusion, but the A-theory and B-theory of time are named after his series.",
-                "The modern debate about whether the past and future exist runs along the lines he drew.",
+                "The modern debate about whether the past and future exist still runs along the lines he drew.",
             ]),
             "This essay is about philosophy, not physics. It sets out the argument as McTaggart wrote it, quoting his paper, and then the main replies. It follows " + ESSAY44 + ", which covers the physics of spacetime and where the philosophical question begins.",
             "HTML:" + K.callout("definition", "The two series",
@@ -76,7 +75,7 @@ POST = dict(
         ]),
         ("Step one: time needs the A series", [
             "McTaggart’s first claim is that time requires change, and that the B series alone has no change in it. Every earlier-later relation holds forever; nothing about it ever alters. What changes is only that events stop being future and become present, then past. In the " + a(TEXT, "paper") + ": “Without the A series then, there would be no change, and consequently the B series by itself is not sufficient for time, since time involves change.”",
-            "He considers the opposite view, that the real nature of time only contains the distinction of the B series, and rejects it: “I believe it to be untenable.” So, on his account, the A series is essential to the nature of time. If it is not real, time is not real.",
+            "He considers the opposite view, that the real nature of time only contains the distinction of the B series, and rejects it: “I believe it to be untenable,” he writes. So, on his account, the A series is essential to the nature of time. If it is not real, time is not real.",
             "The " + a(SEPM, "Stanford Encyclopedia") + " sets out the structure in three steps: time is real only if real change occurs; real change occurs only if the A series exists; the A series does not exist; therefore time is not real. The first two steps are this section. The third is where the argument becomes famous.",
         ]),
         ("Step two: the A series contradicts itself", [
@@ -92,24 +91,24 @@ POST = dict(
         ]),
         ("What is left: the C series", [
             "McTaggart concludes that neither time as a whole, nor the A series and B series, really exist. In the " + a(TEXT, "paper’s words") + ": “Our conclusion, then, is that neither time as a whole, nor the A series and B series, really exist.” The B series falls with the A series, because on his account it only counts as temporal because of it.",
-            "That does not leave nothing. He describes a further ordering, which he calls the C series, that is not temporal, for it involves no change, but only an order. It is, he writes, a series of the permanent relations to one another of those realities which in time are events, and it is possible that the C series does really exist.",
+            "That does not leave nothing. He describes a further ordering, which he calls the C series. In his words it is “not temporal, for it involves no change, but only an order”: “a series of the permanent relations to one another of those realities which in time are events”. And, he adds, it is possible “that the C series does really exist.”",
             "The " + a(SEPM, "Stanford Encyclopedia") + " explains how the pieces fit: were there to be an A series, the conjunction of it with the C series would yield a B series. And it notes that, on his view, although time is unreal, our perception of temporal order is not wholly delusory. Something real is ordered; it is only the passing of time that is not.",
         ]),
         ("The replies", [
-            "Almost no one accepts the conclusion. The philosopher Dyke, in an abstract on " + a(CUP, "Cambridge Core") + ", writes: “Today, almost no one agrees with his conclusion.” She adds that the argument remains the locus classicus for both the A-theory and the B-theory of time. The " + a(SEPT, "Stanford Encyclopedia’s entry on time") + " notes that the A/B distinction has stuck around as a way of classifying theories of change.",
-            "B-theorists reject step one. They hold, in the entry’s words, that all change can be described in before-after terms: a thing being one way at an earlier time and another way at a later time is all that change is. On this view the B series is enough for time, and the A series is a feature of how things look from inside time, not of time itself. The philosopher D. H. Mellor developed this response at length in " + a(REALTIME, "Real Time, published in 1981") + ". " + a(MELLOR, "Routledge") + ", publisher of the sequel Real Time II, says that his Real Time dominated the philosophy of time for fifteen years, and the sequel includes a chapter titled McTaggart’s proof.",
-            "A-theorists reject step two or three. They hold, as the " + a(SEPT, "same entry") + " puts it, that at least some important forms of change require classifying events as past, present or future, and look for ways the A series can be coherent.",
-            "Not every reply has been critical. The philosopher Dummett published a defence of McTaggart’s proof in 1960. As " + a(GARRETT, "Garrett quotes him") + ", Dummett held that reality must be something of which there exists in principle a complete description, and that the description of what is really there, as it really is, must be independent of any particular point of view.",
+            "Almost no one accepts the conclusion. The philosopher Heather Dyke, in an abstract on " + a(CUP, "Cambridge Core") + ", writes: “Today, almost no one agrees with his conclusion.” The abstract adds that the argument remains the locus classicus for both the A-theory and the B-theory of time. The " + a(SEPT, "Stanford Encyclopedia’s entry on time") + " notes that the A/B distinction has stuck around as a way of classifying theories of change, and that the argument has lasted because it organises the central debates about the metaphysics of temporal passage.",
+            "B-theorists deny that change needs the A series. In the entry’s words, B-theorists think all change can be described in before-after terms. On this view the B series is enough for time. The philosopher D. H. Mellor’s " + a(REALTIME, "Real Time, published in 1981") + ", is one of the best-known books in this debate: " + a(MELLOR, "Routledge") + ", publisher of its sequel Real Time II, says that his Real Time dominated the philosophy of time for fifteen years, and the sequel includes a chapter titled McTaggart’s proof.",
+            "A-theorists accept McTaggart’s point that change needs the A series, and deny that the A series is contradictory. They hold, as the " + a(SEPT, "same entry") + " puts it, that at least some important forms of change require classifying events as past, present or future.",
+            "The most interesting reply took the argument seriously in order to locate its weak point. The philosopher Dummett published A Defence of McTaggart’s Proof of the Unreality of Time in 1960. As " + a(GARRETT, "Garrett explains") + ", Dummett argued that the proof rests on an assumption, which he ascribed to McTaggart, that reality must be something of which there exists in principle a complete description, independent of any particular point of view. Dummett himself rejected that assumption, calling it our prejudice that there must be a complete description of reality, and regarded McTaggart’s conclusion as false.",
             "HTML:" + K.compare("Three views of what exists", [
                 ("Presentism", ["Matches the sense that only now is real"], ["Struggles with relativity’s lack of a universal now"], "Only present objects exist."),
-                ("Growing block", ["Keeps the past fixed and the future open"], ["Must say what is special about the edge"], "The past and present exist; the future does not."),
+                ("Growing block", ["Keeps the past fixed and the future open"], ["Must explain what makes the present the edge"], "The past and present exist; the future does not."),
                 ("Eternalism", ["Fits the spacetime picture"], ["Must explain why time seems to pass"], "Past, present and future all exist."),
             ], source='Definitions from the <a href="' + SEPT + '" target="_blank" rel="noopener">Stanford Encyclopedia, Time</a>; the strengths and weaknesses are a summary of the debate in that entry and in <a href="' + SAVITT + '" target="_blank" rel="noopener">Savitt</a>.'),
         ]),
         ("The growing block, and relativity", [
-            "One of McTaggart’s own students offered a middle view. C. D. Broad, in his 1923 book Scientific Thought, described a picture that, as the " + a(BROAD, "Stanford Encyclopedia’s entry on Broad") + " quotes it, accepts the reality of the present and the past, but holds that the future is simply nothing at all. In Broad’s words: “Nothing has happened to the present by becoming past except that fresh slices of existence have been added.” And: “The sum total of existence is always increasing, and it is this which gives the time-series a sense.” This is now called the growing block.",
+            "One of McTaggart’s own students offered a middle view. C. D. Broad, in his 1923 book Scientific Thought, described a picture that, as the " + a(BROAD, "Stanford Encyclopedia’s entry on Broad") + " quotes it, accepts the reality of the present and the past, but holds that the future is simply nothing at all. In Broad’s words: “Nothing has happened to the present by becoming past except that fresh slices of existence have been added to the total history of the world.” And: “The sum total of existence is always increasing, and it is this which gives the time-series a sense …” This is now called the growing block.",
             "Physics complicates every A-theory. The " + a(SEPT, "Stanford Encyclopedia’s entry on time") + " notes that, according to special relativity, it follows from the relativity of simultaneity that there is no fact of the matter as to what is present, and that this creates serious difficulty for the A-theory in general and for presentism in particular. It also notes that presentists and other A-theorists have a way of avoiding the worry.",
-            "Steven Savitt, in the " + a(SAVITT, "Stanford Encyclopedia’s entry on being and becoming in modern physics") + ", surveys the arguments on both sides, including attempts to locate becoming in the structure of light cones, and concludes that it seems unlikely that a simple argument will decide between the views. Relativity changes the shape of the debate McTaggart began; it does not end it.",
+            "Steven Savitt, in the " + a(SAVITT, "Stanford Encyclopedia’s entry on being and becoming in modern physics") + ", surveys the arguments on both sides, including attempts to locate becoming in the structure of light cones. Of presentism and what he calls possibilism, he remarks that it seems unlikely that a simple argument will decide between these two metaphysical pictures. In this essay’s reading, relativity changes the shape of the debate McTaggart began; it does not end it.",
         ]),
         ("What this does and does not say", [
             "Read carefully, McTaggart’s paper does not show that time is unreal, and almost no one thinks it does. What it shows is that the two ways we speak about time come apart: one in terms of past, present and future, which changes, and one in terms of earlier and later, which does not. Any account of time has to say which is fundamental, and how the other relates to it.",
@@ -127,7 +126,7 @@ POST = dict(
         ("Did McTaggart think nothing exists?",
          "No. He was an idealist who held that ultimate reality consists of loving spirits, and he thought a non-temporal ordering, the C series, might really exist. What he denied was that time itself is real."),
         ("Does anyone accept McTaggart's conclusion?",
-         "Very few. The philosopher Dyke writes that almost no one agrees with it today, but the argument remains the classic starting point for both the A-theory and the B-theory of time."),
+         "Very few. The philosopher Heather Dyke writes that almost no one agrees with it today, but the argument remains the classic starting point for both the A-theory and the B-theory of time."),
         ("What is the growing block theory of time?",
          "The view that the past and present exist but the future does not, so that existence grows as time passes. C. D. Broad, one of McTaggart's students, set out a version of it in 1923."),
     ],
