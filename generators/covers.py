@@ -36,6 +36,7 @@ BY_SLUG = {
     "what-entanglement-is": "pair",
     "what-mctaggart-meant-by-the-unreality-of-time": "series",
     "what-the-michelangelo-phenomenon-says": "ideal",
+    "what-the-spotlight-effect-is": "spotlight",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -376,13 +377,33 @@ def ideal(uid):
     return out
 
 
+def spotlight(uid):
+    """The spotlight effect: a cone of light falling on one person in a
+    crowd, as it feels from inside, while only a few of the people around
+    are actually turned towards them."""
+    cx, cy = 240, 168
+    out = [path("M%s 20 L%s %s M%s 20 L%s %s" % (cx - 8, cx - 46, cy + 14, cx + 8, cx + 46, cy + 14), "c")]
+    out.append(path("M%s %s A46 9 0 1 0 %s %s A46 9 0 1 0 %s %s" % (cx - 46, cy + 14, cx + 46, cy + 14, cx - 46, cy + 14), "b", ' stroke-dasharray="2 4"'))
+    out.append(circle(cx, cy - 14, 9))
+    out.append(line(cx, cy - 5, cx, cy + 12))
+    crowd = [(96, 120), (128, 186), (150, 92), (330, 96), (352, 182), (388, 132), (70, 170), (410, 196), (300, 210), (180, 214)]
+    looking = {(150, 92), (352, 182)}
+    for x, y in crowd:
+        out.append(dot(x, y, 3, "b"))
+        if (x, y) in looking:
+            dx, dy = cx - x, (cy - 14) - y
+            n = math.hypot(dx, dy)
+            out.append(line(x + dx / n * 8, y + dy / n * 8, x + dx / n * 22, y + dy / n * 22, "b"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight)
 
 
 def cover(slug, subject):

@@ -40,6 +40,7 @@ ROSE = "https://scilit.com/publications/1a8bd19677792a60015231e97ca11c8f"
 RFCBT = "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/8A7837A95E24712C034EB101FD53F41A/S0007125000258352a.pdf/ruminationfocused_cognitivebehavioural_therapy_for_residual_depression_phase_ii_randomised_controlled_trial.pdf"
 YALE = "https://news.yale.edu/2013/01/07/memoriam-susan-nolen-hoeksema"
 
+SPOTLIGHT = '<a href="/writing/what-the-spotlight-effect-is">what the spotlight effect is</a>'
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">what attachment styles actually measure</a>'
 ESSAY46 = '<a href="/writing/what-self-silencing-is">what self-silencing is</a>'
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">why reassurance is never enough</a>'
@@ -129,6 +130,7 @@ POST = dict(
         ("What this does and does not say", [
             "Read carefully, the research supports a clear but bounded claim. Repetitive, abstract, self-judging thought about feelings and problems predicts worse and longer low mood, worsens mood and problem solving in people already low in experiments, and is linked to anxiety as well as depression. Not all thinking about problems is harmful: reflection aimed at understanding, and concrete attention to what actually happened, look different. The evidence for rumination as a cause is strongest in the short term in the laboratory; over longer periods it is mostly prediction.",
             "The practical lesson is not to stop thinking about problems. It is to notice when thinking has stopped going anywhere, when it has become the same abstract questions about why and what it means, and to treat that as a signal to do something else for a while, or to switch to the concrete.",
+            "A related habit of mind, overestimating how much others noticed the moment you keep replaying, is described in " + SPOTLIGHT + ".",
             "This connects to other essays here. " + ESSAY46.replace(">what self-silencing", ">What self-silencing") + " looks at another inward pattern that often goes with low mood: holding back what you think and feel to keep the peace. " + ESSAY40.replace(">why reassurance", ">Why reassurance") + " describes a loop between partners that has a similar shape: going back again and again for an answer that does not settle anything. And " + ESSAY42 + " looks at another way psychologists measure inner habits through questionnaires, with similar limits.",
         ]),
     ],

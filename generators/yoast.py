@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-spotlight-effect-is": dict(
+        focus="spotlight effect",
+        title="Spotlight effect: why others notice us less than we think",
+        desc="The spotlight effect explained: the T-shirt study, the illusion of transparency, why we overestimate attention, what helps, and the limits."),
     "what-the-michelangelo-phenomenon-says": dict(
         focus="Michelangelo phenomenon",
         title="The Michelangelo phenomenon: how partners shape each other",
