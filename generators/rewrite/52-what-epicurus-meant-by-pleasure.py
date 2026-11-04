@@ -33,6 +33,7 @@ BMCR = "https://bmcr.brynmawr.edu/?p=49101"
 OINO = "https://archaeology.org/issues/180-1507/features/3344-turkey-oinoanda-epicurean-inscription"
 LACT = "https://www.ewtn.com/catholicism/library/treatise-on-the-anger-of-god-de-ira-dei-11482"
 
+ARIST = '<a href="/writing/what-aristotle-meant-by-the-three-kinds-of-friendship">what Aristotle meant by the three kinds of friendship</a>'
 ESSAY43 = '<a href="/writing/what-the-stoics-meant-by-what-is-up-to-us">what the Stoics meant by what is up to us</a>'
 ESSAY47 = '<a href="/writing/why-we-blame-the-people-we-love">why we blame the people we love</a>'
 ESSAY51 = '<a href="/writing/what-rumination-is">what rumination is</a>'
@@ -104,6 +105,7 @@ POST = dict(
         ("Friends", [
             "For a philosophy often caricatured as selfish, Epicureanism made remarkable room for other people. Konstan, in the " + a(SEP, "Stanford Encyclopedia") + ", writes that Epicurus placed an extremely high value on friendship, or love: the Greek is philia.",
             "Two of the " + a(VS, "Vatican Sayings") + ", in Saint-Andre’s translation, show the range of what he said. One is cautious: “Every friendship is an excellence in itself, even though it begins in mutual advantage.” The Greek of that saying is disputed, and other readings give a different sense. The other is unguarded: “Friendship dances around the world, announcing to each of us that we must awaken to happiness.”",
+            "Before Epicurus, Aristotle had built a whole theory of friendship around a similar question: what, in a friendship, is actually loved? That account is set out in " + ARIST + ".",
             "The Garden itself was meant to be welcoming. Seneca, in " + a(SENECA, "the same letter") + ", records the motto carved in the Garden: “Stranger, here you will do well to tarry; here our highest good is pleasure.” The keeper of the house, he goes on, will welcome you with barley-meal and serve you water in abundance.",
         ]),
         ("What is not quite Epicurus", [

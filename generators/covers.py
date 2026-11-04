@@ -37,6 +37,7 @@ BY_SLUG = {
     "what-mctaggart-meant-by-the-unreality-of-time": "series",
     "what-the-michelangelo-phenomenon-says": "ideal",
     "what-the-spotlight-effect-is": "spotlight",
+    "what-aristotle-meant-by-the-three-kinds-of-friendship": "three",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -397,13 +398,26 @@ def spotlight(uid):
     return out
 
 
+def three(uid):
+    """Aristotle's three friendships, as three pairs: one held together only
+    by a thin dashed line (utility), one barely touching (pleasure), and one
+    in which the two circles share a large part of each other (the good)."""
+    cy = 120
+    out = []
+    out += [circle(64, cy, 20, "b"), circle(136, cy, 20, "b"), line(84, cy, 116, cy, "c", ' stroke-dasharray="2 4"')]
+    out += [circle(222, cy, 24, "b"), circle(266, cy, 24, "b")]
+    out += [circle(366, cy, 30), circle(398, cy, 30)]
+    out.append(dot(382, cy, 2.6))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three)
 
 
 def cover(slug, subject):
