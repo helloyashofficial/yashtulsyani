@@ -107,3 +107,7 @@ RETIRED = {
 # WordPress and Yoast show ("Written by" in share previews). deploy.py sets
 # it on the account if it differs. Leave empty to leave the account alone.
 AUTHOR_NAME = "Yash Tulsyani"
+
+# WordPress timezone the essay dates assume (Settings > General). deploy.py
+# warns if the live site is set to anything else.
+SITE_TIMEZONE = "Asia/Kolkata"
