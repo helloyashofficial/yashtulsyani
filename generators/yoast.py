@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-michelangelo-phenomenon-says": dict(
+        focus="Michelangelo phenomenon",
+        title="The Michelangelo phenomenon: how partners shape each other",
+        desc="The Michelangelo phenomenon explained: how partners affirm each other's ideal selves, what the studies found, the Pygmalion problem, and the limits."),
     "what-mctaggart-meant-by-the-unreality-of-time": dict(
         focus="McTaggart unreality of time",
         title="McTaggart on the unreality of time: the A and B series",

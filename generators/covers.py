@@ -35,6 +35,7 @@ BY_SLUG = {
     "what-epicurus-meant-by-pleasure": "settle",
     "what-entanglement-is": "pair",
     "what-mctaggart-meant-by-the-unreality-of-time": "series",
+    "what-the-michelangelo-phenomenon-says": "chisel",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -359,13 +360,29 @@ def series(uid):
     return out
 
 
+def chisel(uid):
+    """The Michelangelo image: a rough block of stone, and inside it a smooth
+    form half released, with a few chips falling away. Two small marks at the
+    side stand for the partner doing the shaping."""
+    out = [path("M150 200 L138 92 L176 46 L262 38 L322 70 L334 150 L300 204 Z", "b")]
+    out.append(path("M196 196 C 192 150 200 112 236 98 C 270 86 290 118 284 150 C 280 176 266 190 262 196", "a"))
+    out.append(circle(242, 76, 17))
+    for x, y, r in ((352, 120, 3.2), (366, 146, 2.4), (346, 170, 2.8), (372, 186, 2)):
+        out.append(path("M%s %s l%s %s l%s %s z" % (x, y, r * 2, -r, -r * 0.6, r * 2.2), "c"))
+    out.append(line(394, 64, 356, 98, "b"))
+    out.append(line(356, 98, 362, 92, "b"))
+    out.append(line(356, 98, 364, 100, "b"))
+    out.append(line(120, 204, 360, 204, "c"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, chisel=chisel)
 
 
 def cover(slug, subject):
