@@ -1,0 +1,431 @@
+<!-- ============================================================
+     ESSAY  ·  what-rumination-is
+     yashtulsyani.com  ·  Custom HTML block
+
+     THIS FILE IS THE TEMPLATE newpost.py BUILDS ESSAYS FROM. It is not
+     pasted anywhere and lives outside production-blocks on purpose.
+     Ported from FSDM's 48-post-content-audit.html (24 Oct 2026): the
+     same anatomy, with FSDM's content removed and this site's crumb,
+     byline, author card and closing link put in.
+
+     ONE BLOCK PER ESSAY. Paste it and nothing else into the Post body,
+     with the sidebar block reaching the page as on every other page.
+
+     The wrapper is a DIV with class yt-shell, not a <main>, so the
+     sidebar's fallback finds it and never adds padding to <body>.
+
+     The contents sit in a sticky right rail above 1240px and collapse
+     inline, above the article, below it. One element either way.
+
+     One small script at the bottom upgrades the category, date and read
+     time to the values WordPress and Yoast set. The build-time values are
+     already in the markup, so a failure leaves a correct page.
+
+     Regenerate with generators/rewrite/51-what-rumination-is.py
+     FOCUS KEYPHRASE : rumination
+     SEO TITLE       : Rumination: why thinking it through can make things worse  [57 chars]
+     META DESCRIPTION: What rumination is and what the research found: the earthquake study, brooding versus reflection, abstract versus concrete thought, and what helps.  [147 chars]
+     SLUG            : /writing/what-rumination-is
+     ============================================================ -->
+<!-- Essay styling lives in 01-sidebar.html, emitted once for the whole
+     site. Re-paste the sidebar after any design change. -->
+<div class="yt-shell yt-post-shell">
+  <article class="yt-post">
+
+    <div class="yt-post__crumb">
+      <a class="yt-post__chip" href="/writing">Writing</a> · <span data-yt-cat>Psychology</span>
+    </div>
+
+    <div class="yt-post__meta"><span data-yt-date>04 Nov 2026</span><span data-yt-updated></span> · <span data-yt-read>10 min read</span></div>
+
+    <h1 class="yt-post__title">What rumination is, and why thinking it through can make things worse</h1>
+    <p class="yt-post__dek">Going over a problem again and again feels like working on it. A long line of research suggests that, for people who are already low, it often keeps the low mood going instead. It also suggests that not all repetitive thinking is the same, and the difference is useful.</p>
+    <div class="yt-post__cover"><svg class="yt-cv" viewBox="0 0 480 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" fill="none" stroke-width="1" stroke-linecap="round"><path class="yt-cv-a" d="M150 98 L142.6 99.3 L135.9 103 L130.6 108.9 L127.3 116.4 L126.3 124.9 L127.9 133.6 L132 141.9 L138.4 149 L146.6 154.3 L156.1 157.3 L166.1 157.9 L175.8 155.9 L184.6 151.5 L191.9 145.1 L197 137.3 L199.7 128.6 L199.8 119.9 L197.5 111.9 L193 105.3 L186.8 100.6 L179.6 98.2 L172.1 98.4 L165 101.1 L159 106.1 L154.8 113 L152.8 121.1 L153.3 129.9 L156.4 138.5 L161.8 146.1 L169.3 152.3 L178.3 156.3 L188.2 158 L198.1 157.1 L207.4 153.7 L215.4 148.1 L221.5 140.8 L225.2 132.4 L226.5 123.6 L225.2 115.2 L221.6 107.9 L216 102.3 L209.2 98.9 L201.7 98 L194.3 99.7 L187.8 103.7 L182.8 109.9 L179.8 117.5 L179.2 126.1 L181.1 134.9 L185.6 143 L192.3 149.9 L200.7 154.9 L210.3 157.6 L220.3 157.8 L229.9 155.4 L238.6 150.7 L245.5 144.1 L250.3 136.1 L252.7 127.4 L252.4 118.7 L249.8 110.9 L245 104.5 L238.6 100.1 L231.3 98.1 L223.8 98.7 L216.8 101.7 L211.1 107 L207.2 114.1 L205.5 122.4 L206.4 131.1 L209.8 139.6 L215.6 147.1 L223.3 153 L232.5 156.7 L242.4 158 L252.3 156.7 L261.4 153 L269.2 147.1 L274.9 139.6 L278.4 131.1 L279.2 122.4 L277.6 114.1 L273.6 107 L267.9 101.7 L260.9 98.7 L253.4 98.1 L246.1 100.1 L239.7 104.5 L235 110.9 L232.3 118.7 L232.1 127.4 L234.4 136.1 L239.2 144.1 L246.2 150.7 L254.8 155.4 L264.5 157.8 L274.5 157.6 L284 154.9 L292.5 149.9 L299.1 143 L303.6 134.9 L305.6 126.1 L305 117.5 L302 109.9 L296.9 103.7 L290.4 99.7 L283 98 L275.5 98.9 L268.7 102.3 L263.2 107.9 L259.6 115.2 L258.3 123.6 L259.5 132.4 L263.2 140.8 L269.3 148.1 L277.3 153.7 L286.6 157.1 L296.6 158 L306.4 156.3 L315.4 152.3 L322.9 146.1 L328.4 138.5 L331.4 129.9 L331.9 121.1 L329.9 113 L325.7 106.1 L319.7 101.1 L312.6 98.4 L305.1 98.2 L297.9 100.6 L291.7 105.3 L287.2 111.9 L284.9 119.9 L285 128.6 L287.7 137.3 L292.9 145.1 L300.1 151.5 L308.9 155.9 L318.7 157.9 L328.6 157.3 L338.1 154.3 L346.3 149 L352.7 141.9 L356.8 133.6 L358.4 124.9 L357.5 116.4 L354.1 108.9 L348.9 103 L342.2 99.3 L334.7 98"/><line class="yt-cv-c" x1="40" y1="190" x2="440" y2="190" stroke-dasharray="2 5"/><circle class="yt-cv-a yt-cv-dot" cx="150" cy="98" r="3"/></svg></div>
+
+    <div class="yt-post__byline">
+      <span class="yt-post__byline-avatar" aria-hidden="true">YT</span>
+      <div>
+        <div class="yt-post__byline-name">Yash Tulsyani</div>
+        <div class="yt-post__byline-role">Writer</div>
+      </div>
+    </div>
+
+    <aside class="yt-post__side">
+      <nav class="yt-post__toc" aria-label="On this page">
+        <div class="yt-post__toc-label">On this page</div>
+        <ol>
+            <li><a href="#what-rumination-is">What rumination is</a></li>
+            <li><a href="#the-response-styles-theory">The response styles theory</a></li>
+            <li><a href="#an-earthquake-by-chance">An earthquake, by chance</a></li>
+            <li><a href="#what-the-experiments-show">What the experiments show</a></li>
+            <li><a href="#brooding-and-reflection">Brooding and reflection</a></li>
+            <li><a href="#abstract-and-concrete-thinking">Abstract and concrete thinking</a></li>
+            <li><a href="#who-ruminates-and-what-else-it-is-linked-to">Who ruminates, and what else it is linked to</a></li>
+            <li><a href="#what-helps">What helps</a></li>
+            <li><a href="#what-this-does-and-does-not-say">What this does and does not say</a></li>
+          </ol>
+      </nav>
+    </aside>
+
+    <div class="yt-post__body">
+        <h2 id="what-rumination-is">What rumination is</h2>
+        <p>Rumination is repetitive thinking about your own feelings and problems: why you feel this way, what it says about you, what will happen next. Research suggests that, in people who are already low, it tends to deepen and prolong the low mood and to make problems look harder to solve. Not all repetitive thought does this; the brooding, abstract kind is the problem.</p>
+        <aside class="yt-kt" aria-label="Key takeaways"><div class="yt-kt__h">Key takeaways</div><ul><li>Rumination is thinking perseveratively about your feelings and problems, in the words of Nolen-Hoeksema and colleagues.</li><li>People who ruminated more before the Loma Prieta earthquake were more depressed afterwards.</li><li>In experiments, rumination worsened mood and problem solving in people who were already low, but not in people who were not.</li><li>Brooding goes with more depression. Reflection went with more at the time but predicted less over time.</li><li>Abstract thinking about causes and meanings is the unhelpful kind; concrete, moment-by-moment attention is not.</li><li>Most of the evidence is prediction, not proof of cause. A therapy aimed at rumination has had promising early results.</li></ul></aside>
+        <p>This essay sets out what the research means by rumination, what the main studies found, and what they leave open. It is about how the research describes a habit of thought, not a guide to treating depression; anyone struggling with low mood should talk to a doctor or another qualified professional.</p>
+        <aside class="yt-cl yt-cl--definition"><div class="yt-cl__k">Definition</div><div class="yt-cl__t">Rumination, in this essay</div><div class="yt-cl__b"><p>Defined by <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">Nolen-Hoeksema, Wisco and Lyubomirsky</a> as the process of thinking perseveratively about one’s feelings and problems.</p></div></aside>
+        <h2 id="the-response-styles-theory">The response styles theory</h2>
+        <p>The modern study of rumination begins with Susan Nolen-Hoeksema, a psychologist who later chaired the psychology department at Yale. According to <a href="https://news.yale.edu/2013/01/07/memoriam-susan-nolen-hoeksema" target="_blank" rel="noopener">Yale’s obituary</a>, she received her doctorate from the University of Pennsylvania in 1986, wrote books including Women Who Think Too Much, and died in January 2013 at the age of 53.</p>
+        <p>Her idea, first set out in 1991, was that the way people respond to feeling low affects how long the low lasts. Her original definition, as <a href="https://ore.exeter.ac.uk/repository/bitstream/10871/11162/2/watkinsconstructiveunconstructiveRT.pdf" target="_blank" rel="noopener">Watkins quotes it</a>, described rumination as behaviors and thoughts that focus one’s attention on one’s depressive symptoms and on the implications of these symptoms. Someone who responds to sadness by asking why they feel this way, what is wrong with them and where it will lead is ruminating. Someone who responds by doing something absorbing is distracting themselves.</p>
+        <p>The prediction was that the first response would make depression worse and longer. In the <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">2008 review</a> she wrote with Wisco and Sonja Lyubomirsky, the theory is summarised as holding that rumination exacerbates and prolongs distress, particularly depression. One of the routes it describes is practical: rumination in the context of a low mood seems to interfere with good problem solving.</p>
+        <aside class="yt-cl yt-cl--note"><div class="yt-cl__k">Note</div><div class="yt-cl__t">Why it feels useful</div><div class="yt-cl__b"><p>Rumination usually feels like an attempt to understand, not like a habit. That may be part of why it is hard to notice from the inside.</p></div></aside>
+        <h2 id="an-earthquake-by-chance">An earthquake, by chance</h2>
+        <p>Some of the strongest early evidence came from an accident of timing. Nolen-Hoeksema and Morrow had measured mood and response styles in a group of students <a href="https://scilit.net/publications/b67677b1341ab4100bbb41277fcfafd1" target="_blank" rel="noopener">14 days before the Loma Prieta earthquake</a>. According to the abstract, 137 students were followed up 10 days and 7 weeks after it.</p>
+        <p>The abstract reports that students who already had elevated symptoms and a ruminative style before the earthquake had more depression and stress symptoms at both follow-ups, and that students who ruminated more about the earthquake in the first 10 days were still more likely to have high symptoms 7 weeks later. Writing in <a href="https://www.researchgate.net/profile/Louise-Parker-2/publication/15151833_Ruminative_Coping_With_Depressed_Mood_Following_Loss/links/53f4f4b00cf22be01c3efc96/Ruminative-Coping-With-Depressed-Mood-Following-Loss.pdf" target="_blank" rel="noopener">1994</a>, Nolen-Hoeksema and her colleagues summarised it: people with a more ruminative style before the earthquake were more depressed afterwards, even after taking into account pre-earthquake levels of distress.</p>
+        <p>A larger study pointed the same way. The <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">2008 review</a> reports that in a sample of approximately 1,300 adults randomly drawn from the community, rumination scores predicted new onsets of major depressive episodes over the following year, among people who were not already depressed. The 1994 study, of 253 bereaved adults, found that people with a more ruminative style were more depressed six months later, even after controlling for initial depression and other factors.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Three studies that followed people over time</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Study</th>
+      <th>Who</th>
+      <th>What rumination predicted</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Loma Prieta earthquake (1991)</td>
+        <td>137 students, measured before the earthquake</td>
+        <td>More depression and stress symptoms 10 days and 7 weeks after</td>
+      </tr>
+      <tr>
+        <td>Bereavement (1994)</td>
+        <td>253 bereaved adults</td>
+        <td>More depression at 6 months, after controlling for initial levels</td>
+      </tr>
+      <tr>
+        <td>Community sample (2000)</td>
+        <td>About 1,300 adults</td>
+        <td>New episodes of major depression over the next year</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://scilit.net/publications/b67677b1341ab4100bbb41277fcfafd1" target="_blank" rel="noopener">Loma Prieta abstract</a>; <a href="https://www.researchgate.net/profile/Louise-Parker-2/publication/15151833_Ruminative_Coping_With_Depressed_Mood_Following_Loss/links/53f4f4b00cf22be01c3efc96/Ruminative-Coping-With-Depressed-Mood-Following-Loss.pdf" target="_blank" rel="noopener">Nolen-Hoeksema, Parker and Larson (1994)</a>; <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">Nolen-Hoeksema, Wisco and Lyubomirsky (2008)</a>.</div>
+</figure>
+        <p>Studies like these show that rumination comes before worse outcomes, which is stronger than showing that the two go together. They do not on their own prove that rumination causes them. For that, the research turned to experiments.</p>
+        <h2 id="what-the-experiments-show">What the experiments show</h2>
+        <p>In the laboratory, researchers ask some participants to spend a few minutes thinking about themselves and their feelings, and others to think about neutral things. A chapter by <a href="https://sonjalyubomirsky.com/wp-content/uploads/2024/07/Lyubomirsky-Tkach-2004.pdf" target="_blank" rel="noopener">Lyubomirsky and Tkach</a> gives examples of each: a rumination prompt such as “Think about the kind of person you are”, and a distraction prompt such as “Think about the size of the Statue of Liberty”.</p>
+        <p>The result depends on who is ruminating. The <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">2008 review</a> reports that the rumination induction significantly increases dysphoric mood in dysphoric participants, but not in nondysphoric participants. Dysphoric here means already in a low mood. For someone feeling fine, thinking about themselves for a few minutes does little harm; for someone already low, it makes things worse.</p>
+        <p>Rumination also seems to make problems look harder. The review notes that inducing dysphoric participants to ruminate prompts them to appraise their problems as overwhelming and unsolvable. In one study described by <a href="https://sonjalyubomirsky.com/wp-content/uploads/2024/07/Lyubomirsky-Tkach-2004.pdf" target="_blank" rel="noopener">Lyubomirsky and Tkach</a>, dysphoric students who ruminated generated less effective solutions to hypothetical problems.</p>
+        <p>One finding captures why the habit persists. The same chapter reports that dysphoric ruminators recognised that pleasant, distracting activities would lift their mood, but were unwilling to do them. Knowing what would help is not the same as doing it.</p>
+        <p>Distraction has limits too. Lyubomirsky and Tkach note that effective distractions do not include inherently dangerous or self-destructive activities. The aim of distraction in this research is a short break that lets mood lift enough to think more clearly, not a permanent escape from the problem.</p>
+        <h2 id="brooding-and-reflection">Brooding and reflection</h2>
+        <p>Not all repetitive self-focused thinking turned out to be the same. In <a href="https://link.springer.com/content/pdf/10.1023/a:1023910315561.pdf" target="_blank" rel="noopener">a 2003 analysis</a>, Treynor, Gonzalez and Nolen-Hoeksema split the standard rumination questionnaire into two components, reflective pondering and brooding, which the abstract says differentially relate to depression.</p>
+        <p>Later researchers describe the two clearly. In <a href="https://web.stanford.edu/group/mood/cgi-bin/wordpress/wp-content/uploads/2012/02/whitmer_gotlib_CTR_2011.pdf" target="_blank" rel="noopener">a 2011 paper</a>, Whitmer and Gotlib define brooding as passive and judgmental pondering of one’s mood, and reflection as contemplative, intentional pondering of one’s mood with a focus on problem solving.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Brooding and reflection, in the questionnaire’s words</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Component</th>
+      <th>Example items</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Brooding</td>
+        <td>“Think ‘What am I doing to deserve this?’” · “Think ‘Why do I always react this way?’”</td>
+      </tr>
+      <tr>
+        <td>Reflection</td>
+        <td>“Analyze recent events to try to understand why you are depressed” · “Go away by yourself and think about why you feel this way”</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Items from the Ruminative Responses Scale, as reproduced by <a href="https://novopsych.com/wp-content/uploads/2026/08/ruminative-responses-scale-rrs-blank-form-pdf-survey-questions-items.pdf" target="_blank" rel="noopener">NovoPsych</a>; components from <a href="https://link.springer.com/content/pdf/10.1023/a:1023910315561.pdf" target="_blank" rel="noopener">Treynor, Gonzalez and Nolen-Hoeksema (2003)</a>.</div>
+</figure>
+        <p>The findings were different for each. The <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">2008 review</a> reports that brooding was positively correlated with depression both at the time and over one year, and that, although reflective pondering was associated with more depression at the time, it was associated with less depression over time. <a href="https://web.stanford.edu/group/mood/cgi-bin/wordpress/wp-content/uploads/2012/02/whitmer_gotlib_CTR_2011.pdf" target="_blank" rel="noopener">Whitmer and Gotlib</a> summarise it the same way: reflection was associated with concurrent symptoms but predicted lower levels of depression over time.</p>
+        <p>That pattern makes sense. Reflection may start when someone is already low, which is why it shows up alongside symptoms, but it is aimed at understanding and doing something, which may be why it helps later. Brooding is judgement without a way forward.</p>
+        <h2 id="abstract-and-concrete-thinking">Abstract and concrete thinking</h2>
+        <p>The psychologist Watkins took the distinction further. In a <a href="https://ore.exeter.ac.uk/repository/bitstream/10871/11162/2/watkinsconstructiveunconstructiveRT.pdf" target="_blank" rel="noopener">2008 review in Psychological Bulletin</a>, he argues that repetitive thought can have constructive or unconstructive consequences, and that which it has depends on three things: the valence of what is being thought about, the context in which it happens, and the level of construal, meaning whether the thinking is abstract or concrete.</p>
+        <p>Abstract thinking, in Watkins’s description, is an evaluative mindset focused on the causes, meanings and implications of events: why did this happen, what does it say about me. Concrete thinking attends to the specifics of what happened and how it felt, moment by moment. Watkins reports an experiment by Ehring and colleagues in which abstract rumination resulted in slower recovery of negative affect than concrete rumination or distraction.</p>
+        <p>The difference also affects problem solving. In a study of <a href="https://scilit.com/publications/91a16854b667eb9d4f7f74036049ee2e" target="_blank" rel="noopener">40 depressed patients and 40 never-depressed people</a>, Watkins and Moulds found that concrete self-focus improved problem solving in the depressed patients compared with abstract self-focus. Their conclusion was that the particular mode of thinking, rather than thinking about symptoms as such, determines the effects of rumination on problem solving.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Two ways of thinking about the same bad day</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Abstract (unhelpful when low)</th>
+      <th>Concrete (less harmful)</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Why does this always happen to me?</td>
+        <td>What exactly happened, in what order?</td>
+      </tr>
+      <tr>
+        <td>What does this say about who I am?</td>
+        <td>What did I notice and feel at each point?</td>
+      </tr>
+      <tr>
+        <td>Where is this going to lead?</td>
+        <td>What is the next specific thing I could do?</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Illustrations of the distinction described by <a href="https://ore.exeter.ac.uk/repository/bitstream/10871/11162/2/watkinsconstructiveunconstructiveRT.pdf" target="_blank" rel="noopener">Watkins (2008)</a>; the questions are examples, not items from a study.</div>
+</figure>
+        <h2 id="who-ruminates-and-what-else-it-is-linked-to">Who ruminates, and what else it is linked to</h2>
+        <p>Nolen-Hoeksema was interested from the start in why women are more often depressed than men. The <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">2008 review</a> notes that several studies have found women more likely to ruminate, and that the difference in rumination has been found to account for part of the gender difference in depression in some studies. The size of the difference is modest. A <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3786159" target="_blank" rel="noopener">2013 meta-analysis by Johnson and Whisman</a> of 59 samples and more than 14,000 people found women scored higher, and the authors note that the effect sizes were small in magnitude.</p>
+        <p>Rumination is not only linked to depression. A <a href="https://pubmed.ncbi.nlm.nih.gov/20015584/" target="_blank" rel="noopener">2010 meta-analysis</a> by Aldao, Nolen-Hoeksema and Schweizer combined 241 effect sizes from 114 studies of how people regulate emotions and found a large effect size for rumination, larger than for avoidance, suppression or the other strategies they examined. A <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3042543" target="_blank" rel="noopener">2011 study</a> by McLaughlin and Nolen-Hoeksema, of 1,065 adolescents and 1,317 adults, found rumination helped explain why depression and anxiety so often occur together.</p>
+        <p>It can also be shared. The psychologist A. J. Rose described <a href="https://scilit.com/publications/1a8bd19677792a60015231e97ca11c8f" target="_blank" rel="noopener">co-rumination</a> in 2002 as extensively discussing and revisiting problems, speculating about problems, and focusing on negative feelings with a friend. In her study of 608 schoolchildren, co-rumination was linked both to close, high-quality friendships and to symptoms of depression and anxiety. Talking a problem over with a friend can be support or a shared loop, depending on how it is done.</p>
+        <h2 id="what-helps">What helps</h2>
+        <p>If rumination keeps low mood going, interrupting it should help. The research points to a few approaches. Brief distraction with neutral or pleasant activities, which the <a href="https://www.academia.edu/1028279/Rethinking_rumination" target="_blank" rel="noopener">2008 review</a> mentions as one way of helping people prone to rumination. Shifting from abstract to concrete thinking, as in Watkins’s experiments. And therapies designed to target the habit directly.</p>
+        <p>The most direct test so far is a small trial of rumination-focused cognitive behavioural therapy. In <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/8A7837A95E24712C034EB101FD53F41A/S0007125000258352a.pdf/ruminationfocused_cognitivebehavioural_therapy_for_residual_depression_phase_ii_randomised_controlled_trial.pdf" target="_blank" rel="noopener">a 2011 trial led by Watkins</a>, 42 people with residual depression were randomly allocated to usual treatment, or usual treatment plus up to 12 sessions of the therapy. The authors report that adding it significantly improved residual symptoms and remission rates, and that the effect was mediated by change in rumination.</p>
+        <p>The trial is an early one. Its authors note that it lacked an attentional control group, so it cannot show whether the effects came from the specific content of the therapy or from therapy in general. It is a reason for optimism, not a settled result.</p>
+        <aside class="yt-cl yt-cl--warn"><div class="yt-cl__k">Watch out</div><div class="yt-cl__t">Not medical advice</div><div class="yt-cl__b"><p>This essay describes research. It is not a treatment plan. If low mood is lasting, getting worse or making daily life hard, a doctor or a qualified therapist is the right place to start.</p></div></aside>
+        <h2 id="what-this-does-and-does-not-say">What this does and does not say</h2>
+        <p>Read carefully, the research supports a clear but bounded claim. Repetitive, abstract, self-judging thought about feelings and problems predicts worse and longer low mood, worsens mood and problem solving in people already low in experiments, and is linked to anxiety as well as depression. Not all thinking about problems is harmful: reflection aimed at understanding, and concrete attention to what actually happened, look different. The evidence for rumination as a cause is strongest in the short term in the laboratory; over longer periods it is mostly prediction.</p>
+        <p>The practical lesson is not to stop thinking about problems. It is to notice when thinking has stopped going anywhere, when it has become the same abstract questions about why and what it means, and to treat that as a signal to do something else for a while, or to switch to the concrete.</p>
+        <p>This connects to other essays here. <a href="/writing/what-self-silencing-is">What self-silencing is</a> looks at another inward pattern that often goes with low mood: holding back what you think and feel to keep the peace. <a href="/writing/why-reassurance-is-never-enough">Why reassurance is never enough</a> describes a loop between partners that has a similar shape: going back again and again for an answer that does not settle anything. And <a href="/writing/what-attachment-styles-actually-measure">what attachment styles actually measure</a> looks at another way psychologists measure inner habits through questionnaires, with similar limits.</p>
+
+      <div class="yt-post__takeaway">
+        <div class="yt-post__takeaway-label">The short version</div>
+        <p>Rumination is thinking repetitively about your feelings and problems: why you feel this way, what it means, what will follow. Susan Nolen-Hoeksema proposed that this response to low mood makes it worse and longer. Studies support that in several ways: people who ruminated before an earthquake were more depressed after it, rumination predicted new episodes of depression in a community sample, and in experiments rumination worsened mood and problem solving in people who were already low, though not in people who were not. Later work split rumination into brooding, which goes with more depression, and reflection, which predicted less over time, and found that abstract, evaluative thinking is the harmful kind while concrete, experiential thinking is not. Most of the evidence shows prediction rather than proof of cause, and a therapy aimed at rumination has had encouraging early results.</p>
+      </div>
+    </div>
+
+    <div class="yt-opnote">
+      <div class="yt-opnote__label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Author's note</div>
+      <p>The original 1993 and 1995 experiments by Lyubomirsky and Nolen-Hoeksema are described through a review chapter by Lyubomirsky and Tkach. The questionnaire items are quoted from a reproduction of the scale, not the original paper.</p>
+    </div>
+    <section class="yt-faq">
+      <h2 class="yt-faq__h" id="faq">Frequently asked</h2>
+      <details class="yt-faq__item">
+        <summary>What is rumination in psychology?</summary>
+        <div class="yt-faq__a">Repetitive thinking about your own feelings and problems: why you feel this way, what it means, and what will follow. Nolen-Hoeksema, Wisco and Lyubomirsky (2008) define it as thinking perseveratively about one's feelings and problems.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Does rumination cause depression?</summary>
+        <div class="yt-faq__a">The evidence shows it predicts depression. In studies that followed people over time, rumination predicted more depression after an earthquake, after bereavement, and new episodes over a year. In experiments it worsened mood in people already low, but not in others. Prediction is not the same as proof of cause.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>What is the difference between brooding and reflection?</summary>
+        <div class="yt-faq__a">Brooding is passive, judgemental pondering of your mood, such as asking why you always react this way. Reflection is intentional pondering aimed at understanding and problem solving. Brooding goes with more depression; reflection went with more depression at the time but predicted less over time.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Is thinking about your problems always bad?</summary>
+        <div class="yt-faq__a">No. Research by Watkins suggests the abstract kind, focused on causes, meanings and implications, is the unhelpful one, while concrete attention to what actually happened and how it felt is not, and can help problem solving.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Do women ruminate more than men?</summary>
+        <div class="yt-faq__a">On average, slightly. A 2013 meta-analysis of more than 14,000 people found women scored higher on rumination, with small effect sizes. Some studies find the difference helps explain why women are more often depressed.</div>
+      </details>
+    </section>
+
+    <div class="yt-post__foot">
+      <div class="yt-post__foot-label">Related reading</div>
+      <div class="yt-post__related">
+          <a class="yt-post__rel" href="/writing/what-self-silencing-is" aria-label="What self-silencing is">
+            <span class="yt-post__rel-cat" aria-hidden="true">Psychology</span>
+            <span class="yt-post__rel-title">What self-silencing is</span>
+          </a>
+          <a class="yt-post__rel" href="/writing/what-attachment-styles-actually-measure" aria-label="What attachment styles actually measure, and what they cannot tell you">
+            <span class="yt-post__rel-cat" aria-hidden="true">Psychology</span>
+            <span class="yt-post__rel-title">What attachment styles actually measure, and what they cannot tell you</span>
+          </a>
+      </div>
+
+      <div class="yt-post__author">
+        <span class="yt-post__avatar" aria-hidden="true">YT</span>
+        <div>
+          <div class="yt-post__author-name">Yash Tulsyani</div>
+          <div class="yt-post__author-role">Writer</div>
+          <p class="yt-post__author-bio">I write about relationships, insecurity and attention, and about where the physics we borrow to describe them stops being literal. Two books so far, both unpublished.</p>
+          <div class="yt-post__author-links">
+            <a class="yt-post__author-link" href="/about">More about Yash Tulsyani</a>
+            <a class="yt-post__author-link" href="/books">The books</a>
+            <a class="yt-post__author-link" href="/contact">Write to me</a>
+            <a class="yt-post__author-link" href="https://linkedin.com/in/yashtulsyani" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-post__cta">
+        <div class="yt-post__cta-h">The longer version</div>
+        <p>Both books take this argument further than an essay can, and both hold the same line about where the physics stops.</p>
+        <a class="yt-post__btn" href="/books">Read about the books</a>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+/* Upgrades the category and date to what is set in WordPress. Progressive
+   enhancement only: the build-time values are already rendered above, so a
+   failure here leaves a correct page rather than a blank one.
+
+   Reads markup WordPress has already emitted. No network request.
+   Hardened per HANDOVER section 3: zero and-and, zero pipe-pipe, ASCII only,
+   addEventListener only. */
+(function(){
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun',
+                'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function metaOf(prop){
+    var m = document.querySelector('meta[property="' + prop + '"]');
+    if(!m){ return ''; }
+    var v = m.getAttribute('content');
+    return v ? v : '';
+  }
+
+  function fmt(v){
+    if(!v){ return ''; }
+    var d = new Date(v);
+    if(isNaN(d.getTime())){ return ''; }
+    var day = d.getDate();
+    var dd = day < 10 ? '0' + day : '' + day;
+    return dd + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function ldNodes(){
+    var out = [];
+    var tags = document.querySelectorAll('script[type="application/ld+json"]');
+    for(var i = 0; i < tags.length; i++){
+      var data;
+      try { data = JSON.parse(tags[i].textContent); }
+      catch(e){ continue; }
+      var graph = data['@graph'] ? data['@graph'] : [data];
+      for(var j = 0; j < graph.length; j++){ out.push(graph[j]); }
+    }
+    return out;
+  }
+
+  function category(){
+    /* Yoast puts the primary category on the Article node. Some setups do not,
+       so fall back to the middle item of its BreadcrumbList, which is the
+       category step between Home and the post. */
+    var nodes = ldNodes();
+    var i;
+    for(i = 0; i < nodes.length; i++){
+      var sec = nodes[i].articleSection;
+      if(!sec){ continue; }
+      if(Object.prototype.toString.call(sec) === '[object Array]'){
+        if(sec.length){ return String(sec[0]); }
+      } else {
+        return String(sec);
+      }
+    }
+    for(i = 0; i < nodes.length; i++){
+      if(nodes[i]['@type'] !== 'BreadcrumbList'){ continue; }
+      var list = nodes[i].itemListElement;
+      if(!list){ continue; }
+      if(list.length < 3){ continue; }
+      var mid = list[list.length - 2];
+      if(!mid){ continue; }
+      if(mid.name){ return String(mid.name); }
+    }
+    return '';
+  }
+
+  function setAll(sel, text){
+    if(!text){ return; }
+    var els = document.querySelectorAll(sel);
+    for(var i = 0; i < els.length; i++){ els[i].textContent = text; }
+  }
+
+  /* Reading time is NOT taken from Yoast. On this site every post begins
+     with the sidebar synced pattern, and Yoast counts that pattern's code as
+     words, so its estimate (twitter:data2) came out two to three times too
+     long (a live audit on 3 Nov 2026 found 24 to 29 minutes for essays of
+     2,000 to 2,700 words). The baked value is the body at 225 words a minute,
+     and the /writing card shows the same figure. */
+
+  function start(){
+    setAll('[data-yt-cat]', category());
+
+    var pub = metaOf('article:published_time');
+    setAll('[data-yt-date]', fmt(pub));
+
+    /* "Updated" only when the post was genuinely revised. WordPress stamps
+       modified_time on every save, so a same-day one says nothing. */
+    var modRaw = metaOf('article:modified_time');
+    if(!modRaw){ return; }
+    var mod = new Date(modRaw);
+    if(isNaN(mod.getTime())){ return; }
+    var p = new Date(pub);
+    if(!isNaN(p.getTime())){
+      if((mod.getTime() - p.getTime()) / 86400000 < 1){ return; }
+    }
+    var slot = document.querySelector('[data-yt-updated]');
+    if(!slot){ return; }
+    var DOT = String.fromCharCode(183);   /* middot, kept out of the source
+       because WordPress mangles non-ASCII in a Custom HTML block's JS */
+    slot.textContent = ' ' + DOT + ' Updated: ' + fmt(modRaw);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://yashtulsyani.com/writing/what-rumination-is/#faq",
+      "mainEntityOfPage": "https://yashtulsyani.com/writing/what-rumination-is/",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is rumination in psychology?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Repetitive thinking about your own feelings and problems: why you feel this way, what it means, and what will follow. Nolen-Hoeksema, Wisco and Lyubomirsky (2008) define it as thinking perseveratively about one's feelings and problems."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does rumination cause depression?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The evidence shows it predicts depression. In studies that followed people over time, rumination predicted more depression after an earthquake, after bereavement, and new episodes over a year. In experiments it worsened mood in people already low, but not in others. Prediction is not the same as proof of cause."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between brooding and reflection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brooding is passive, judgemental pondering of your mood, such as asking why you always react this way. Reflection is intentional pondering aimed at understanding and problem solving. Brooding goes with more depression; reflection went with more depression at the time but predicted less over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is thinking about your problems always bad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Research by Watkins suggests the abstract kind, focused on causes, meanings and implications, is the unhelpful one, while concrete attention to what actually happened and how it felt is not, and can help problem solving."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do women ruminate more than men?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On average, slightly. A 2013 meta-analysis of more than 14,000 people found women scored higher on rumination, with small effect sizes. Some studies find the difference helps explain why women are more often depressed."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
