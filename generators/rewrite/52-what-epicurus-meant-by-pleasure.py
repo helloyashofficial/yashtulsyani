@@ -105,7 +105,7 @@ POST = dict(
         ("Friends", [
             "For a philosophy often caricatured as selfish, Epicureanism made remarkable room for other people. Konstan, in the " + a(SEP, "Stanford Encyclopedia") + ", writes that Epicurus placed an extremely high value on friendship, or love: the Greek is philia.",
             "Two of the " + a(VS, "Vatican Sayings") + ", in Saint-Andre’s translation, show the range of what he said. One is cautious: “Every friendship is an excellence in itself, even though it begins in mutual advantage.” The Greek of that saying is disputed, and other readings give a different sense. The other is unguarded: “Friendship dances around the world, announcing to each of us that we must awaken to happiness.”",
-            "Before Epicurus, Aristotle had built a whole theory of friendship around a similar question: what, in a friendship, is actually loved? That account is set out in " + ARIST + ".",
+            "A generation before Epicurus, Aristotle had built a whole theory of friendship around the question: what, in a friendship, is actually loved? That account is set out in " + ARIST + ".",
             "The Garden itself was meant to be welcoming. Seneca, in " + a(SENECA, "the same letter") + ", records the motto carved in the Garden: “Stranger, here you will do well to tarry; here our highest good is pleasure.” The keeper of the house, he goes on, will welcome you with barley-meal and serve you water in abundance.",
         ]),
         ("What is not quite Epicurus", [
