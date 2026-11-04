@@ -35,7 +35,7 @@ BY_SLUG = {
     "what-epicurus-meant-by-pleasure": "settle",
     "what-entanglement-is": "pair",
     "what-mctaggart-meant-by-the-unreality-of-time": "series",
-    "what-the-michelangelo-phenomenon-says": "chisel",
+    "what-the-michelangelo-phenomenon-says": "ideal",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -360,17 +360,19 @@ def series(uid):
     return out
 
 
-def chisel(uid):
-    """The Michelangelo image: a rough block of stone, and inside it a smooth
-    form half released, with a few chips falling away."""
-    out = [path("M150 200 L138 92 L176 46 L262 38 L322 70 L334 150 L300 204 Z", "b")]
-    out.append(path("M196 196 C 192 150 200 112 236 98 C 270 86 290 118 284 150 C 280 176 266 190 262 196", "a"))
-    out.append(circle(242, 76, 17))
-    for x, y, r in ((352, 120, 3.2), (366, 146, 2.4), (346, 170, 2.8), (372, 186, 2)):
-        out.append(path("M%s %s l%s %s l%s %s z" % (x, y, r * 2, -r, -r * 0.6, r * 2.2), "c"))
-    for d in ("M150 160 L178 150", "M164 70 L186 84", "M300 62 L312 92", "M318 176 L298 168"):
-        out.append(path(d, "c"))
-    out.append(line(120, 204, 360, 204, "c"))
+def ideal(uid):
+    """The Michelangelo phenomenon: you as a small circle inside a dashed
+    outline of the person you want to be, and a partner beside you whose
+    attention reaches that outline, not the circle as it is now."""
+    cy = 120
+    cx = 290
+    out = [circle(cx, cy, 34), circle(cx, cy, 70, "b", ' stroke-dasharray="3 5"')]
+    px = 130
+    out.append(circle(px, cy, 22))
+    for dy in (-40, 0, 40):
+        ty = cy + dy
+        tx = cx - math.sqrt(max(0, 70 ** 2 - dy ** 2))
+        out.append(line(px + 26, cy + dy * 0.35, tx - 4, ty, "c"))
     return out
 
 
@@ -380,7 +382,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, chisel=chisel)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal)
 
 
 def cover(slug, subject):
