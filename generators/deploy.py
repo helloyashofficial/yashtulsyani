@@ -36,7 +36,8 @@ Safety, in order of importance:
     (a security plugin stripping scripts, say), the run fails loudly.
   - Unchanged content is skipped, so re-running is harmless.
 """
-import base64, hashlib, json, os, re, sys, urllib.error, urllib.parse, urllib.request
+import base64
+import time, hashlib, json, os, re, sys, urllib.error, urllib.parse, urllib.request
 import ytconf as C
 
 STATUSES = "publish,private,draft,pending,future"
@@ -125,7 +126,8 @@ def check_timezone(wp):
     if not want:
         return
     root = wp.base.rsplit("wp/v2/", 1)[0]
-    req = urllib.request.Request(root, headers={"Accept": "application/json", "User-Agent": "yt-deploy/1"})
+    # A fresh query string keeps a page cache from answering with a stale copy.
+    req = urllib.request.Request(root + "?yt=" + str(int(time.time())), headers={"Accept": "application/json", "User-Agent": "yt-deploy/1"})
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
             info = json.loads(r.read().decode())
