@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-aristotle-meant-by-the-three-kinds-of-friendship": dict(
+        focus="Aristotle friendship",
+        title="Aristotle on friendship: the three kinds, and why one lasts",
+        desc="Aristotle on friendship, in his own words: utility, pleasure and the good, another self, how many friends, and the debate over the lesser kinds."),
     "what-the-spotlight-effect-is": dict(
         focus="spotlight effect",
         title="Spotlight effect: why others notice us less than we think",
