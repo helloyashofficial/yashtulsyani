@@ -277,19 +277,22 @@ def echo(uid):
 
 
 def coil(uid):
-    """Rumination: a line that keeps looping back over itself and barely
-    moves forward, beside the straight path it could have taken."""
-    cy = 128
+    """Rumination: a line arrives, then loops back over itself again and
+    again, barely moving forward, before it finally leaves."""
+    cy = 120
+    out = [line(40, cy + 34, 150, cy + 34)]
     pts = []
-    n = 900
+    n = 1400
+    loops = 11
     for i in range(n + 1):
-        t = i / float(n) * 7 * 2 * math.pi
-        x = 150 + t * 4.2 - 30 * math.sin(t)
-        y = cy - 30 * math.cos(t)
+        t = i / float(n) * loops * 2 * math.pi
+        r = 34 - 10 * math.sin(math.pi * i / n)
+        x = 150 + t * 2.6 - r * math.sin(t)
+        y = cy + r * math.cos(t)
         pts.append((x, y))
-    out = [path("M" + " L".join("%s %s" % (f(x), f(y)) for x, y in pts[::6]))]
-    out.append(line(40, cy + 62, 440, cy + 62, "c", ' stroke-dasharray="2 5"'))
-    out.append(dot(150, cy - 30, 3))
+    out.append(path("M" + " L".join("%s %s" % (f(x), f(y)) for x, y in pts[::4])))
+    ex = pts[-1][0]
+    out.append(line(ex, cy + 34, 440, cy + 34, "b", ' stroke-dasharray="2 5"'))
     return out
 
 
