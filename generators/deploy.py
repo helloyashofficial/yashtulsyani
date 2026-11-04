@@ -36,7 +36,8 @@ Safety, in order of importance:
     (a security plugin stripping scripts, say), the run fails loudly.
   - Unchanged content is skipped, so re-running is harmless.
 """
-import base64, hashlib, json, os, re, sys, urllib.error, urllib.parse, urllib.request
+import base64
+import time, hashlib, json, os, re, sys, urllib.error, urllib.parse, urllib.request
 import ytconf as C
 
 STATUSES = "publish,private,draft,pending,future"
@@ -115,6 +116,30 @@ def social_image(slug):
         return None
     h = hashlib.sha1(p.read_bytes()).hexdigest()[:10]
     return p, "yt-social-%s-%s" % (slug, h)
+
+
+def check_timezone(wp):
+    """Hub cards carry the date from each essay's spec, written in India time.
+    WordPress dates posts in its own timezone, so the two only agree when the
+    site is set to ytconf.SITE_TIMEZONE. Reads the public REST index."""
+    want = getattr(C, "SITE_TIMEZONE", "")
+    if not want:
+        return
+    root = wp.base.rsplit("wp/v2/", 1)[0]
+    # A fresh query string keeps a page cache from answering with a stale copy.
+    req = urllib.request.Request(root + "?yt=" + str(int(time.time())), headers={"Accept": "application/json", "User-Agent": "yt-deploy/1"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            info = json.loads(r.read().decode())
+    except Exception as e:
+        print("  timezone   could not read the site's timezone: %s" % e)
+        return
+    tz, off = info.get("timezone_string"), info.get("gmt_offset")
+    if tz == want:
+        print("  timezone   %s (UTC%+g), as expected" % (tz, float(off or 0)))
+    else:
+        print("  WARN timezone is %r (offset %s), not %s: post dates may differ from the hub cards. "
+              "Set it in Settings > General." % (tz, off, want))
 
 
 def settle_author(wp, apply):
@@ -330,6 +355,7 @@ def main():
         return
 
     wp = WP(url, user, pw)
+    check_timezone(wp)
     settle_author(wp, apply)
     use_yoast = os.environ.get("YOAST_REST") == "1"
     if getattr(C, "YOAST_REST", False):
