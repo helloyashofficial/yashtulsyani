@@ -362,16 +362,14 @@ def series(uid):
 
 def chisel(uid):
     """The Michelangelo image: a rough block of stone, and inside it a smooth
-    form half released, with a few chips falling away. Two small marks at the
-    side stand for the partner doing the shaping."""
+    form half released, with a few chips falling away."""
     out = [path("M150 200 L138 92 L176 46 L262 38 L322 70 L334 150 L300 204 Z", "b")]
     out.append(path("M196 196 C 192 150 200 112 236 98 C 270 86 290 118 284 150 C 280 176 266 190 262 196", "a"))
     out.append(circle(242, 76, 17))
     for x, y, r in ((352, 120, 3.2), (366, 146, 2.4), (346, 170, 2.8), (372, 186, 2)):
         out.append(path("M%s %s l%s %s l%s %s z" % (x, y, r * 2, -r, -r * 0.6, r * 2.2), "c"))
-    out.append(line(394, 64, 356, 98, "b"))
-    out.append(line(356, 98, 362, 92, "b"))
-    out.append(line(356, 98, 364, 100, "b"))
+    for d in ("M150 160 L178 150", "M164 70 L186 84", "M300 62 L312 92", "M318 176 L298 168"):
+        out.append(path(d, "c"))
     out.append(line(120, 204, 360, 204, "c"))
     return out
 
