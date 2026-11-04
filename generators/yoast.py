@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-entanglement-is": dict(
+        focus="quantum entanglement",
+        title="Quantum entanglement: what it is, and what it is not",
+        desc="What quantum entanglement is: Einstein's objection, Bell's test, the 2022 Nobel experiments, why it cannot send messages, and why people are not entangled."),
     "what-epicurus-meant-by-pleasure": dict(
         focus="Epicurus pleasure",
         title="What Epicurus meant by pleasure: calm, not indulgence",

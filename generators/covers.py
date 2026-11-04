@@ -33,6 +33,7 @@ BY_SLUG = {
     "what-your-partner-does-with-your-good-news": "echo",
     "what-rumination-is": "coil",
     "what-epicurus-meant-by-pleasure": "settle",
+    "what-entanglement-is": "pair",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -314,13 +315,36 @@ def settle(uid):
     return out
 
 
+def pair(uid):
+    """Entanglement: two particles far apart, each measured along a setting,
+    with outcomes that always come out opposite. The link between them is
+    drawn faint and dashed: a correlation, not a signal."""
+    cy = 120
+    ax, bx = 92, 388
+    out = [circle(ax, cy, 16), circle(bx, cy, 16)]
+    out.append(line(ax, cy + 10, ax, cy - 10))
+    out.append(line(ax, cy - 10, ax - 4, cy - 4))
+    out.append(line(ax, cy - 10, ax + 4, cy - 4))
+    out.append(line(bx, cy - 10, bx, cy + 10))
+    out.append(line(bx, cy + 10, bx - 4, cy + 4))
+    out.append(line(bx, cy + 10, bx + 4, cy + 4))
+    out.append(path("M%s %s Q %s %s %s %s" % (ax + 22, cy, 240, cy - 70, bx - 22, cy), "c", ' stroke-dasharray="2 6"'))
+    for x in (ax, bx):
+        out.append(line(x - 34, cy + 46, x + 34, cy + 46, "b"))
+        out.append(line(x, cy + 26, x, cy + 46, "c"))
+    out.append(dot(240, cy, 3))
+    out.append(line(232, cy, ax + 24, cy, "b", ' stroke-dasharray="1 5"'))
+    out.append(line(248, cy, bx - 24, cy, "b", ' stroke-dasharray="1 5"'))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair)
 
 
 def cover(slug, subject):
