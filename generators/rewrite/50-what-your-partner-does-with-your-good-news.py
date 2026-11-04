@@ -37,6 +37,7 @@ MRT = "https://cns.org/Assets/61659458-0c72-4295-9832-018698f5a662/6370026003733
 MONITOR = "https://www.apa.org/monitor/2009/12/army-program"
 STEEN = "https://sites.bu.edu/litzlab/files/2023/05/Posttraumatic-stress-disorder-prevention-in-troops-Review-of-the-comprehensive-soldier-fitness-program.pdf"
 
+MICHEL = '<a href="/writing/what-the-michelangelo-phenomenon-says">what the Michelangelo phenomenon says</a>'
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">why reassurance is never enough</a>'
 ESSAY45 = '<a href="/writing/what-repair-after-an-argument-actually-involves">what repair after an argument involves</a>'
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">what attachment styles actually measure</a>'
@@ -119,6 +120,7 @@ POST = dict(
             "Taken together, the research supports a modest and useful claim. How people respond to a partner’s good news is linked to how the relationship is doing, enthusiastic engagement is the response most consistently linked to good outcomes, and quiet approval may land as less than it is meant to be, at least in some cultures. It does not show that learning a technique will fix a relationship, and it does not supply a script.",
             "Read practically, the questionnaire items describe what engagement looks like: asking questions, showing interest in the details, letting the other person tell it fully. The items describe genuine concern, not a performance of excitement.",
             "This connects to three other essays here. The pattern in " + ESSAY40 + " is the hard-times version of the same question, about what a partner’s response can and cannot give. " + ESSAY45.replace(">what repair", ">What repair") + " covers the moments after things go wrong, which this research suggests are only half the picture. And " + ESSAY42 + " looks at another set of questionnaires that measure how people perceive their partners, with similar limits.",
+            "A related line of research, on how partners help each other grow towards their own ideals, is set out in " + MICHEL + ".",
         ]),
     ],
     note=[

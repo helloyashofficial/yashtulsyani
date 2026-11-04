@@ -35,6 +35,7 @@ BY_SLUG = {
     "what-epicurus-meant-by-pleasure": "settle",
     "what-entanglement-is": "pair",
     "what-mctaggart-meant-by-the-unreality-of-time": "series",
+    "what-the-michelangelo-phenomenon-says": "ideal",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -359,13 +360,29 @@ def series(uid):
     return out
 
 
+def ideal(uid):
+    """The Michelangelo phenomenon: you as a small circle inside a dashed
+    outline of the person you want to be, and a partner beside you whose
+    attention reaches that outline, not the circle as it is now."""
+    cy = 120
+    cx = 290
+    out = [circle(cx, cy, 34), circle(cx, cy, 70, "b", ' stroke-dasharray="3 5"')]
+    px = 130
+    out.append(circle(px, cy, 22))
+    for dy in (-40, 0, 40):
+        ty = cy + dy
+        tx = cx - math.sqrt(max(0, 70 ** 2 - dy ** 2))
+        out.append(line(px + 26, cy + dy * 0.35, tx - 4, ty, "c"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal)
 
 
 def cover(slug, subject):
