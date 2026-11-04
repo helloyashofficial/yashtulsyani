@@ -1,0 +1,411 @@
+<!-- ============================================================
+     ESSAY  ·  what-entanglement-is
+     yashtulsyani.com  ·  Custom HTML block
+
+     THIS FILE IS THE TEMPLATE newpost.py BUILDS ESSAYS FROM. It is not
+     pasted anywhere and lives outside production-blocks on purpose.
+     Ported from FSDM's 48-post-content-audit.html (24 Oct 2026): the
+     same anatomy, with FSDM's content removed and this site's crumb,
+     byline, author card and closing link put in.
+
+     ONE BLOCK PER ESSAY. Paste it and nothing else into the Post body,
+     with the sidebar block reaching the page as on every other page.
+
+     The wrapper is a DIV with class yt-shell, not a <main>, so the
+     sidebar's fallback finds it and never adds padding to <body>.
+
+     The contents sit in a sticky right rail above 1240px and collapse
+     inline, above the article, below it. One element either way.
+
+     One small script at the bottom upgrades the category, date and read
+     time to the values WordPress and Yoast set. The build-time values are
+     already in the markup, so a failure leaves a correct page.
+
+     Regenerate with generators/rewrite/53-what-entanglement-is.py
+     FOCUS KEYPHRASE : quantum entanglement
+     SEO TITLE       : Quantum entanglement: what it is, and what it is not  [52 chars]
+     META DESCRIPTION: What quantum entanglement is: Einstein's objection, Bell's test, the 2022 Nobel experiments, why it cannot send messages, and why people are not entangled.  [155 chars]
+     SLUG            : /writing/what-entanglement-is
+     ============================================================ -->
+<!-- Essay styling lives in 01-sidebar.html, emitted once for the whole
+     site. Re-paste the sidebar after any design change. -->
+<div class="yt-shell yt-post-shell">
+  <article class="yt-post">
+
+    <div class="yt-post__crumb">
+      <a class="yt-post__chip" href="/writing">Writing</a> · <span data-yt-cat>Physics and time</span>
+    </div>
+
+    <div class="yt-post__meta"><span data-yt-date>04 Nov 2026</span><span data-yt-updated></span> · <span data-yt-read>10 min read</span></div>
+
+    <h1 class="yt-post__title">What quantum entanglement actually is, and what it is not</h1>
+    <p class="yt-post__dek">Entanglement is the quantum idea most often borrowed for talk about souls and lovers. In physics it is something precise: a correlation between measurements that no ordinary explanation can match. It cannot send a message, and it does not survive in anything as large and warm as a person.</p>
+    <div class="yt-post__cover"><svg class="yt-cv" viewBox="0 0 480 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" fill="none" stroke-width="1" stroke-linecap="round"><circle class="yt-cv-a" cx="92" cy="120" r="16"/><circle class="yt-cv-a" cx="388" cy="120" r="16"/><line class="yt-cv-a" x1="92" y1="130" x2="92" y2="110"/><line class="yt-cv-a" x1="92" y1="110" x2="88" y2="116"/><line class="yt-cv-a" x1="92" y1="110" x2="96" y2="116"/><line class="yt-cv-a" x1="388" y1="110" x2="388" y2="130"/><line class="yt-cv-a" x1="388" y1="130" x2="384" y2="124"/><line class="yt-cv-a" x1="388" y1="130" x2="392" y2="124"/><path class="yt-cv-c" d="M114 120 Q 240 50 366 120" stroke-dasharray="2 6"/><line class="yt-cv-b" x1="58" y1="166" x2="126" y2="166"/><line class="yt-cv-c" x1="92" y1="146" x2="92" y2="166"/><line class="yt-cv-b" x1="354" y1="166" x2="422" y2="166"/><line class="yt-cv-c" x1="388" y1="146" x2="388" y2="166"/><circle class="yt-cv-a yt-cv-dot" cx="240" cy="120" r="3"/><line class="yt-cv-b" x1="232" y1="120" x2="116" y2="120" stroke-dasharray="1 5"/><line class="yt-cv-b" x1="248" y1="120" x2="364" y2="120" stroke-dasharray="1 5"/></svg></div>
+
+    <div class="yt-post__byline">
+      <span class="yt-post__byline-avatar" aria-hidden="true">YT</span>
+      <div>
+        <div class="yt-post__byline-name">Yash Tulsyani</div>
+        <div class="yt-post__byline-role">Writer</div>
+      </div>
+    </div>
+
+    <aside class="yt-post__side">
+      <nav class="yt-post__toc" aria-label="On this page">
+        <div class="yt-post__toc-label">On this page</div>
+        <ol>
+            <li><a href="#what-entanglement-is">What entanglement is</a></li>
+            <li><a href="#einstein-s-objection">Einstein’s objection</a></li>
+            <li><a href="#schr-dinger-s-word">Schrödinger’s word</a></li>
+            <li><a href="#spooky-action-at-a-distance">Spooky action at a distance</a></li>
+            <li><a href="#bell-s-test">Bell’s test</a></li>
+            <li><a href="#what-entanglement-cannot-do">What entanglement cannot do</a></li>
+            <li><a href="#what-entanglement-is-used-for">What entanglement is used for</a></li>
+            <li><a href="#why-people-are-not-entangled">Why people are not entangled</a></li>
+            <li><a href="#what-this-does-and-does-not-say">What this does and does not say</a></li>
+          </ol>
+      </nav>
+    </aside>
+
+    <div class="yt-post__body">
+        <h2 id="what-entanglement-is">What entanglement is</h2>
+        <p>Entanglement is a state in which two or more particles behave like a single system even when they are far apart. Measure them and the results are correlated more strongly than any explanation based on properties fixed in advance could allow. It cannot be used to send a message, and it is quickly destroyed in large, warm objects.</p>
+        <aside class="yt-kt" aria-label="Key takeaways"><div class="yt-kt__h">Key takeaways</div><ul><li>In the words of the Nobel committee, entangled particles behave like a single unit even when they are separated.</li><li>Einstein, Podolsky and Rosen argued in 1935 that this showed quantum mechanics was incomplete.</li><li>Schrödinger named it the same year and called it the characteristic trait of quantum mechanics.</li><li>Bell showed in 1964 how to test the question; experiments since then side with quantum mechanics.</li><li>Entanglement cannot carry a message faster than light.</li><li>In anything as large and warm as a person, it is destroyed almost instantly.</li></ul></aside>
+        <p>This essay is in the literal register, like <a href="/writing/what-the-observer-effect-actually-says">what the observer effect actually says</a>, which touched on entanglement briefly. It sets out what the physics says, how it was tested and what it rules out, and keeps any borrowing for human life to one labelled paragraph at the end.</p>
+        <aside class="yt-cl yt-cl--definition"><div class="yt-cl__k">Definition</div><div class="yt-cl__t">Entanglement, in this essay</div><div class="yt-cl__b"><p>The <a href="https://nobelprize.org/prizes/physics/2022/press-release/" target="_blank" rel="noopener">Nobel Prize press release of 2022</a> describes entangled quantum states as ones where two particles behave like a single unit even when they are separated. Everything in this essay is about particles and the outcomes of measurements on them, not about people.</p></div></aside>
+        <h2 id="einstein-s-objection">Einstein’s objection</h2>
+        <p>The story starts with an argument against quantum mechanics. In 1935 Einstein, Podolsky and Rosen published a paper in Physical Review titled Can quantum-mechanical description of physical reality be considered complete? The <a href="https://plato.stanford.edu/ENTRIES/qt-epr/" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a> sets out its reasoning.</p>
+        <p>The argument rests on a criterion of what is real: “If, without in any way disturbing a system, we can predict with certainty … the value of a physical quantity, then there exists an element of reality corresponding to that quantity.” Take two particles that have interacted and then separated. Measuring one lets you predict a property of the other with certainty, without touching it. So, the authors argued, that property must have been real all along.</p>
+        <p>But quantum mechanics does not assign the property a definite value before measurement. If the property was real and the theory leaves it out, the theory is missing something. The conclusion, in the encyclopedia’s summary, is that the quantum mechanical description of systems by state vectors is incomplete.</p>
+        <h2 id="schr-dinger-s-word">Schrödinger’s word</h2>
+        <p>Erwin Schrödinger replied the same year. In a paper published in October 1935 in the Proceedings of the Cambridge Philosophical Society, recorded by <a href="https://www.cambridge.org/core/journals/mathematical-proceedings-of-the-cambridge-philosophical-society/article/abs/discussion-of-probability-relations-between-separated-systems/C1C71E1AA5BA56EBE6588AAACB9A222D" target="_blank" rel="noopener">Cambridge University Press</a> as Discussion of Probability Relations between Separated Systems, he gave the phenomenon its name.</p>
+        <p>According to the <a href="https://plato.stanford.edu/ENTRIES/qt-entangle/" target="_blank" rel="noopener">Stanford Encyclopedia’s entry on entanglement</a>, Schrödinger coined the term to describe this peculiar connection between quantum systems, and wrote of it: “I would not call that one but rather the characteristic trait of quantum mechanics, the one that enforces its entire departure from classical lines of thought.”</p>
+        <p>Einstein and Schrödinger saw the same feature from opposite sides. For Einstein it was a sign the theory was unfinished. For Schrödinger it was the heart of what made the theory new.</p>
+        <h2 id="spooky-action-at-a-distance">Spooky action at a distance</h2>
+        <p>Einstein’s most quoted phrase about entanglement is not in the 1935 paper. It comes from a letter to Born in March 1947, which the physicist N. David Mermin quotes in <a href="https://aip.brightspotcdn.com/PTO.v78.i1.28_1.online.pdf" target="_blank" rel="noopener">a well-known Physics Today essay of 1985</a>: Einstein could not seriously believe in the quantum theory, he wrote, because it cannot be reconciled with the idea that physics should represent a reality in time and space, free from spooky actions at a distance.</p>
+        <p>Mermin explains what Einstein meant: the spooky actions, spukhafte Fernwirkungen in German, are the acquisition of a definite value by a property of one system as a result of a measurement made on another, distant one. Einstein found that unacceptable. The question was whether nature agreed.</p>
+        <aside class="yt-cl yt-cl--warn"><div class="yt-cl__k">Watch out</div><div class="yt-cl__t">A date often got wrong</div><div class="yt-cl__b"><p>The phrase spooky action at a distance is often attributed to the 1935 paper. It is from Einstein’s 1947 letter to Born, as <a href="https://aip.brightspotcdn.com/PTO.v78.i1.28_1.online.pdf" target="_blank" rel="noopener">Mermin</a> records.</p></div></aside>
+        <h2 id="bell-s-test">Bell’s test</h2>
+        <p>In 1964 the physicist J. S. Bell, in a paper titled On the Einstein-Podolsky-Rosen paradox, showed the disagreement could be tested. The <a href="https://plato.stanford.edu/archives/sum2006/entries/bell-theorem/index.html" target="_blank" rel="noopener">Stanford Encyclopedia’s entry on Bell’s theorem</a> states the result: no physical theory which is realistic and also local in a specified sense can agree with all of the statistical implications of quantum mechanics.</p>
+        <p>Put simply, if particles carried hidden instructions set when they were created, and if nothing done to one could affect the other faster than light, then the correlations between measurements on them would have to stay below a certain limit, a Bell inequality. Quantum mechanics predicts correlations above that limit; as the <a href="https://arxiv.org/abs/1511.03190v2" target="_blank" rel="noopener">abstract of one of the 2015 experiments</a> puts it, local realism is incompatible with the predictions of quantum mechanics. An experiment could decide between them.</p>
+        <p>The experiments came over the following decades, and the <a href="https://nobelprize.org/prizes/physics/2022/press-release/" target="_blank" rel="noopener">2022 Nobel Prize in Physics</a> went to three of the people who did them: John Clauser, Alain Aspect and Anton Zeilinger, “for experiments with entangled photons, establishing the violation of Bell inequalities and pioneering quantum information science.” Of Clauser’s measurements, the press release says they supported quantum mechanics by clearly violating a Bell inequality, which means that quantum mechanics cannot be replaced by a theory that uses hidden variables.</p>
+        <p>Each experiment left some room for doubt, known as loopholes. The press release notes that some loopholes remained after Clauser’s work, and that Aspect closed an important one by switching the measurement settings after an entangled pair had left its source, so the setting that existed when they were emitted could not affect the result.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Closing the loopholes: three experiments in 2015</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Team</th>
+      <th>What was entangled</th>
+      <th>Reported result</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Hensen and colleagues</td>
+        <td>Electron spins 1.3 km apart</td>
+        <td>245 trials; S = 2.42 against a local limit of 2</td>
+      </tr>
+      <tr>
+        <td>Giustina and colleagues</td>
+        <td>Photons</td>
+        <td>Probability under local realism no more than 3.74 × 10⁻³¹</td>
+      </tr>
+      <tr>
+        <td>Shalm and colleagues</td>
+        <td>Photons</td>
+        <td>Adjusted p value as small as 2.3 × 10⁻⁷</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Sources: abstracts of <a href="https://arxiv.org/abs/1508.05949" target="_blank" rel="noopener">Hensen et al.</a>, <a href="https://arxiv.org/abs/1511.03190v2" target="_blank" rel="noopener">Giustina et al.</a> and <a href="https://ui.adsabs.harvard.edu/abs/2015PhRvL.115y0402S" target="_blank" rel="noopener">Shalm et al.</a> (2015).</div>
+</figure>
+        <p>Two loopholes mattered most. The locality loophole is the possibility that something about one measurement reached the other in time to influence it; the answer is to separate the stations far enough, and choose the settings late enough, that no signal at light speed could connect them. The detection loophole is the possibility that the particles actually detected are not a fair sample of all those produced. Hensen and colleagues, in their <a href="https://arxiv.org/abs/1508.05949" target="_blank" rel="noopener">abstract</a>, write that fast random choice of settings and a spatial separation of 1.3 km ensured the required locality conditions and that efficient spin readout avoids the fair sampling assumption, the detection loophole. Their test used the standard CHSH form of Bell’s inequality, S ≤ 2, and found S = 2.42 ± 0.20.</p>
+        <p>In 2015 three groups closed the main loopholes at once. The experiment reported by <a href="https://arxiv.org/abs/1508.05949" target="_blank" rel="noopener">Hensen and colleagues</a> entangled electron spins at stations separated by 1.3 km and found a violation in 245 trials. Two photon experiments, by <a href="https://arxiv.org/abs/1511.03190v2" target="_blank" rel="noopener">Giustina and colleagues</a> and by <a href="https://ui.adsabs.harvard.edu/abs/2015PhRvL.115y0402S" target="_blank" rel="noopener">Shalm and colleagues</a>, reported very small probabilities that local realism could explain their results. The US National Institute of Standards and Technology, where Shalm works, said in a <a href="https://www.nist.gov/node/768181" target="_blank" rel="noopener">2015 release</a> that its test closed all three major loopholes.</p>
+        <p>The distances have grown since. In 2017, <a href="https://arxiv.org/abs/1707.01339" target="_blank" rel="noopener">Yin and colleagues</a> used the Micius satellite to distribute entangled photons to two ground stations 1203 km apart and found a Bell violation under strict locality conditions. According to <a href="https://physicstoday.aip.org/news/satellite-distributed-entanglement" target="_blank" rel="noopener">Physics Today</a>, the satellite orbits at about 500 km.</p>
+        <h2 id="what-entanglement-cannot-do">What entanglement cannot do</h2>
+        <p>The most common misunderstanding is that entanglement lets one particle send an instant message to the other. It does not. The <a href="https://plato.stanford.edu/archives/sum2006/entries/bell-theorem/index.html" target="_blank" rel="noopener">Stanford Encyclopedia</a> notes that several researchers have shown that this kind of connection cannot be used to send messages superluminally, faster than light, between the two measuring stations.</p>
+        <p>The reason is that each person’s results, taken alone, look random. Mermin, describing an idealised version of the experiment in <a href="https://aip.brightspotcdn.com/PTO.v78.i1.28_1.online.pdf" target="_blank" rel="noopener">his essay</a>, writes that the statistical pattern at one detector is entirely random. The correlation only appears when the two records are brought together and compared, which, as <a href="https://www.hw.ac.uk/uk/research/long-read/common-misconceptions-about-quantum.htm" target="_blank" rel="noopener">Fedrizzi and Malik explain</a>, means sending the results over an ordinary, classical channel.</p>
+        <p>Physicists Alessandro Fedrizzi and Mehul Malik make the point bluntly in an article in <a href="https://theconversation.edu.au/four-common-misconceptions-about-quantum-physics-192062" target="_blank" rel="noopener">The Conversation</a>: “The idea that measuring one entangled card changes the state of the other is not true.” Einstein rejected such an instant influence, the article explains, because it would mean communication faster than the speed of light, something forbidden by his theories. In a <a href="https://www.hw.ac.uk/uk/research/long-read/common-misconceptions-about-quantum.htm" target="_blank" rel="noopener">Heriot-Watt University article</a> they note that a common misconception is that entanglement might be used for faster-than-light communication.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">What entanglement does and does not do</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Claim</th>
+      <th>Status</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Measurements on entangled particles are correlated beyond any local hidden-variable limit</td>
+        <td>Confirmed by experiment</td>
+      </tr>
+      <tr>
+        <td>Measuring one particle sends a signal to the other</td>
+        <td>False: each side’s results alone are random</td>
+      </tr>
+      <tr>
+        <td>Entanglement allows faster-than-light communication</td>
+        <td>False</td>
+      </tr>
+      <tr>
+        <td>Quantum teleportation moves objects</td>
+        <td>False: it moves a quantum state, and needs ordinary communication</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://plato.stanford.edu/archives/sum2006/entries/bell-theorem/index.html" target="_blank" rel="noopener">Stanford Encyclopedia, Bell’s theorem</a>; <a href="https://theconversation.edu.au/four-common-misconceptions-about-quantum-physics-192062" target="_blank" rel="noopener">The Conversation</a>; <a href="https://aip.brightspotcdn.com/PTO.v78.i1.28_1.online.pdf" target="_blank" rel="noopener">Mermin</a>; <a href="https://www.hw.ac.uk/uk/research/long-read/common-misconceptions-about-quantum.htm" target="_blank" rel="noopener">Heriot-Watt University</a>; <a href="https://plato.stanford.edu/ENTRIES/qt-entangle/" target="_blank" rel="noopener">Stanford Encyclopedia, entanglement and information</a>.</div>
+</figure>
+        <h2 id="what-entanglement-is-used-for">What entanglement is used for</h2>
+        <p>Entanglement is no longer only a puzzle. The <a href="https://nobelprize.org/prizes/physics/2022/press-release/" target="_blank" rel="noopener">2022 press release</a> quotes the committee chair, Anders Irbäck: “It has become increasingly clear that a new kind of quantum technology is emerging.” It notes that Zeilinger’s group demonstrated quantum teleportation, which makes it possible to move a quantum state from one particle to one at a distance. The <a href="https://www.nobelprize.org/prizes/physics/2022/popular-information/" target="_blank" rel="noopener">Nobel popular information</a> dates the first such experiment to 1997.</p>
+        <p>Teleportation is less dramatic than its name. The <a href="https://plato.stanford.edu/ENTRIES/qt-entangle/" target="_blank" rel="noopener">Stanford Encyclopedia</a> explains that the receiver reconstructs the state on the basis of just two bits of classical information sent by the sender. No object is moved, and the <a href="https://plato.stanford.edu/archives/sum2006/entries/bell-theorem/index.html" target="_blank" rel="noopener">no-signalling result</a> still applies.</p>
+        <p>Entanglement is also used for secure communication. The same entry explains that it can make quantum cryptography secure through what is called the monogamy of entangled state correlations: no third party can share entanglement correlations between the two people communicating, so an eavesdropper leaves a trace.</p>
+        <h2 id="why-people-are-not-entangled">Why people are not entangled</h2>
+        <p>Entanglement is not rare. As the <a href="https://plato.stanford.edu/ENTRiES/qm-decoherence/" target="_blank" rel="noopener">Stanford Encyclopedia’s entry on decoherence</a> explains, objects become entangled with their surroundings all the time, and that is exactly what destroys the clean quantum behaviour seen in isolated particles. The entry notes that middle-sized objects on the Earth’s surface are very effectively decohered by the air in the atmosphere, and interference is typically very well suppressed between localised states of macroscopic objects.</p>
+        <p>For people, the physics points the same way. The <a href="https://theconversation.edu.au/four-common-misconceptions-about-quantum-physics-192062" target="_blank" rel="noopener">article in The Conversation</a> notes that quantum coherence is extremely short-lived in something the size of a cat, and generally won’t apply to big creatures such as cats or a human. The experiments above isolated single photons or single electron spins with great care; larger, warmer systems lose coherence quickly.</p>
+        <p>That has not stopped the word from travelling. The physicist Julien Bobroff, in <a href="https://phys.org/news/2019-04-common-myths-quantum-physics.pdf" target="_blank" rel="noopener">an article on common myths</a>, describes a kind of quantum mysticism in which a pseudo-New Age spirituality finds its credentials in scientific jargon. Claims that two people are entangled, or that entanglement explains a bond between them, borrow the word without the physics. None of the experiments above tested anything about people, and nothing in them suggests it.</p>
+        <h2 id="what-this-does-and-does-not-say">What this does and does not say</h2>
+        <p>Read literally, entanglement is a well-tested and strange result. Measurements on separated particles are correlated in ways no local explanation based on pre-set properties can match, the effect has been confirmed over more than a thousand kilometres, and it cannot be used to send a message. How to interpret it is still debated, as the <a href="https://plato.stanford.edu/ENTRIES/qt-entangle/" target="_blank" rel="noopener">Stanford Encyclopedia</a> entries linked here show; the experiments settle what happens, not what it means.</p>
+        <p>Here is the one borrowing in this essay, labelled as a metaphor. Two people who have shared a great deal can find that they respond to the same events in matching ways, even when apart, without anything passing between them at the time: the match was built by their history together. That is a resemblance to the physics, not an instance of it, and the resemblance is closer to Einstein’s hidden instructions than to entanglement, which is exactly what Bell’s test ruled out for particles. Nothing in the physics says anything about people.</p>
+        <p>Three other essays here carry the physics further. The observer-effect essay, linked above, explains measurement and decoherence. <a href="/writing/what-it-means-to-call-time-the-fourth-dimension">What it means to call time the fourth dimension</a> covers the relativity behind the speed-of-light limit that entanglement does not break. And <a href="/writing/why-time-has-a-direction">why time has a direction</a> asks why, if the basic laws barely distinguish past and future, time still seems to run one way.</p>
+
+      <div class="yt-post__takeaway">
+        <div class="yt-post__takeaway-label">The short version</div>
+        <p>Entanglement is a state in which two particles behave like a single unit even when separated, so that measurements on them are correlated in ways no theory based on local hidden properties can reproduce. Einstein, Podolsky and Rosen argued in 1935 that this showed quantum mechanics was incomplete; Schrödinger, the same year, named the phenomenon and called it the characteristic trait of the theory. J. S. Bell showed in 1964 that the question could be tested, experiments led by John Clauser, Alain Aspect and Anton Zeilinger, recognised by the 2022 Nobel Prize, found the correlations quantum mechanics predicts, and three experiments in 2015 closed the main loopholes together. Entanglement cannot be used to send signals faster than light, it underpins quantum cryptography and teleportation of quantum states, and in large warm objects like people it is destroyed almost instantly by decoherence.</p>
+      </div>
+    </div>
+
+    <div class="yt-opnote">
+      <div class="yt-opnote__label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Author's note</div>
+      <p>Quoted figures for the 2015 and 2017 experiments are from the papers’ abstracts. Einstein’s 1947 letter is quoted through Mermin’s essay, and Schrödinger’s 1935 sentence through the Stanford Encyclopedia of Philosophy.</p>
+    </div>
+    <section class="yt-faq">
+      <h2 class="yt-faq__h" id="faq">Frequently asked</h2>
+      <details class="yt-faq__item">
+        <summary>What is quantum entanglement in simple terms?</summary>
+        <div class="yt-faq__a">A state in which two particles behave like a single unit even when they are separated, so that measurements on them are correlated more strongly than any explanation based on properties fixed in advance can allow.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Can entanglement be used to send messages faster than light?</summary>
+        <div class="yt-faq__a">No. Each side’s results, taken alone, are random. The correlation only shows up when the two sets of results are compared, which needs ordinary communication. Several researchers have shown entanglement cannot be used to signal faster than light.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Did Einstein call entanglement spooky action at a distance?</summary>
+        <div class="yt-faq__a">Yes, but not in the famous 1935 paper. The phrase comes from a letter he wrote to Born in March 1947, quoted by N. David Mermin.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>What did the 2022 Nobel Prize in Physics recognise?</summary>
+        <div class="yt-faq__a">Experiments by John Clauser, Alain Aspect and Anton Zeilinger with entangled photons, establishing the violation of Bell inequalities and pioneering quantum information science.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Can people be entangled?</summary>
+        <div class="yt-faq__a">Not in the physics sense. Large, warm objects interact constantly with their surroundings, which destroys quantum coherence almost at once. The experiments that show entanglement isolate single photons or electrons with great care.</div>
+      </details>
+    </section>
+
+    <div class="yt-post__foot">
+      <div class="yt-post__foot-label">Related reading</div>
+      <div class="yt-post__related">
+          <a class="yt-post__rel" href="/writing/what-the-observer-effect-actually-says" aria-label="What the observer effect actually says, and what it does not">
+            <span class="yt-post__rel-cat" aria-hidden="true">Physics and time</span>
+            <span class="yt-post__rel-title">What the observer effect actually says, and what it does not</span>
+          </a>
+          <a class="yt-post__rel" href="/writing/why-time-has-a-direction" aria-label="Why time has a direction, and what entropy does and does not explain">
+            <span class="yt-post__rel-cat" aria-hidden="true">Physics and time</span>
+            <span class="yt-post__rel-title">Why time has a direction, and what entropy does and does not explain</span>
+          </a>
+      </div>
+
+      <div class="yt-post__author">
+        <span class="yt-post__avatar" aria-hidden="true">YT</span>
+        <div>
+          <div class="yt-post__author-name">Yash Tulsyani</div>
+          <div class="yt-post__author-role">Writer</div>
+          <p class="yt-post__author-bio">I write about relationships, insecurity and attention, and about where the physics we borrow to describe them stops being literal. Two books so far, both unpublished.</p>
+          <div class="yt-post__author-links">
+            <a class="yt-post__author-link" href="/about">More about Yash Tulsyani</a>
+            <a class="yt-post__author-link" href="/books">The books</a>
+            <a class="yt-post__author-link" href="/contact">Write to me</a>
+            <a class="yt-post__author-link" href="https://linkedin.com/in/yashtulsyani" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-post__cta">
+        <div class="yt-post__cta-h">The longer version</div>
+        <p>Both books take this argument further than an essay can, and both hold the same line about where the physics stops.</p>
+        <a class="yt-post__btn" href="/books">Read about the books</a>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+/* Upgrades the category and date to what is set in WordPress. Progressive
+   enhancement only: the build-time values are already rendered above, so a
+   failure here leaves a correct page rather than a blank one.
+
+   Reads markup WordPress has already emitted. No network request.
+   Hardened per HANDOVER section 3: zero and-and, zero pipe-pipe, ASCII only,
+   addEventListener only. */
+(function(){
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun',
+                'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function metaOf(prop){
+    var m = document.querySelector('meta[property="' + prop + '"]');
+    if(!m){ return ''; }
+    var v = m.getAttribute('content');
+    return v ? v : '';
+  }
+
+  function fmt(v){
+    if(!v){ return ''; }
+    var d = new Date(v);
+    if(isNaN(d.getTime())){ return ''; }
+    var day = d.getDate();
+    var dd = day < 10 ? '0' + day : '' + day;
+    return dd + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function ldNodes(){
+    var out = [];
+    var tags = document.querySelectorAll('script[type="application/ld+json"]');
+    for(var i = 0; i < tags.length; i++){
+      var data;
+      try { data = JSON.parse(tags[i].textContent); }
+      catch(e){ continue; }
+      var graph = data['@graph'] ? data['@graph'] : [data];
+      for(var j = 0; j < graph.length; j++){ out.push(graph[j]); }
+    }
+    return out;
+  }
+
+  function category(){
+    /* Yoast puts the primary category on the Article node. Some setups do not,
+       so fall back to the middle item of its BreadcrumbList, which is the
+       category step between Home and the post. */
+    var nodes = ldNodes();
+    var i;
+    for(i = 0; i < nodes.length; i++){
+      var sec = nodes[i].articleSection;
+      if(!sec){ continue; }
+      if(Object.prototype.toString.call(sec) === '[object Array]'){
+        if(sec.length){ return String(sec[0]); }
+      } else {
+        return String(sec);
+      }
+    }
+    for(i = 0; i < nodes.length; i++){
+      if(nodes[i]['@type'] !== 'BreadcrumbList'){ continue; }
+      var list = nodes[i].itemListElement;
+      if(!list){ continue; }
+      if(list.length < 3){ continue; }
+      var mid = list[list.length - 2];
+      if(!mid){ continue; }
+      if(mid.name){ return String(mid.name); }
+    }
+    return '';
+  }
+
+  function setAll(sel, text){
+    if(!text){ return; }
+    var els = document.querySelectorAll(sel);
+    for(var i = 0; i < els.length; i++){ els[i].textContent = text; }
+  }
+
+  /* Reading time is NOT taken from Yoast. On this site every post begins
+     with the sidebar synced pattern, and Yoast counts that pattern's code as
+     words, so its estimate (twitter:data2) came out two to three times too
+     long (a live audit on 3 Nov 2026 found 24 to 29 minutes for essays of
+     2,000 to 2,700 words). The baked value is the body at 225 words a minute,
+     and the /writing card shows the same figure. */
+
+  function start(){
+    setAll('[data-yt-cat]', category());
+
+    var pub = metaOf('article:published_time');
+    setAll('[data-yt-date]', fmt(pub));
+
+    /* "Updated" only when the post was genuinely revised. WordPress stamps
+       modified_time on every save, so a same-day one says nothing. */
+    var modRaw = metaOf('article:modified_time');
+    if(!modRaw){ return; }
+    var mod = new Date(modRaw);
+    if(isNaN(mod.getTime())){ return; }
+    var p = new Date(pub);
+    if(!isNaN(p.getTime())){
+      if((mod.getTime() - p.getTime()) / 86400000 < 1){ return; }
+    }
+    var slot = document.querySelector('[data-yt-updated]');
+    if(!slot){ return; }
+    var DOT = String.fromCharCode(183);   /* middot, kept out of the source
+       because WordPress mangles non-ASCII in a Custom HTML block's JS */
+    slot.textContent = ' ' + DOT + ' Updated: ' + fmt(modRaw);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://yashtulsyani.com/writing/what-entanglement-is/#faq",
+      "mainEntityOfPage": "https://yashtulsyani.com/writing/what-entanglement-is/",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is quantum entanglement in simple terms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A state in which two particles behave like a single unit even when they are separated, so that measurements on them are correlated more strongly than any explanation based on properties fixed in advance can allow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can entanglement be used to send messages faster than light?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Each side’s results, taken alone, are random. The correlation only shows up when the two sets of results are compared, which needs ordinary communication. Several researchers have shown entanglement cannot be used to signal faster than light."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Did Einstein call entanglement spooky action at a distance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but not in the famous 1935 paper. The phrase comes from a letter he wrote to Born in March 1947, quoted by N. David Mermin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What did the 2022 Nobel Prize in Physics recognise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Experiments by John Clauser, Alain Aspect and Anton Zeilinger with entangled photons, establishing the violation of Bell inequalities and pioneering quantum information science."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can people be entangled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not in the physics sense. Large, warm objects interact constantly with their surroundings, which destroys quantum coherence almost at once. The experiments that show entanglement isolate single photons or electrons with great care."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
