@@ -34,6 +34,7 @@ BY_SLUG = {
     "what-rumination-is": "coil",
     "what-epicurus-meant-by-pleasure": "settle",
     "what-entanglement-is": "pair",
+    "what-mctaggart-meant-by-the-unreality-of-time": "series",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -338,13 +339,33 @@ def pair(uid):
     return out
 
 
+def series(uid):
+    """McTaggart's two series: a fixed row of events in earlier-later order
+    (the B series), and above it a marker for the present that seems to
+    move along them (the A series), with its earlier positions fading."""
+    cy = 150
+    out = [line(40, cy, 440, cy, "b")]
+    xs = [70, 130, 190, 250, 310, 370, 420]
+    for x in xs:
+        out.append(dot(x, cy, 3))
+    now = 250
+    out.append(line(now, cy - 14, now, 70))
+    out.append(path("M%s 70 L%s 58 L%s 58 Z" % (now, now - 8, now + 8)))
+    for i, x in enumerate((190, 130)):
+        out.append(line(x, cy - 14, x, 82 + i * 12, "c", ' stroke-dasharray="2 4"'))
+    out.append(path("M%s 46 Q %s 30 %s 46" % (now - 40, now + 10, now + 60), "b"))
+    out.append(line(now + 60, 46, now + 52, 42, "b"))
+    out.append(line(now + 60, 46, now + 53, 52, "b"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series)
 
 
 def cover(slug, subject):
