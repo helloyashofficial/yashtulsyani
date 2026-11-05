@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "why-looking-at-the-sky-means-looking-into-the-past": dict(
+        focus="looking back in time",
+        title="Looking back in time: why the night sky shows the past",
+        desc="Why looking at the sky means looking back in time: the speed of light, the light-year, the oldest light, lookback versus distance, and dead stars."),
     "what-aristotle-meant-by-the-three-kinds-of-friendship": dict(
         focus="Aristotle friendship",
         title="Aristotle on friendship: the three kinds, and why one lasts",

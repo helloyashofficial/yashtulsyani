@@ -38,6 +38,7 @@ BY_SLUG = {
     "what-the-michelangelo-phenomenon-says": "ideal",
     "what-the-spotlight-effect-is": "spotlight",
     "what-aristotle-meant-by-the-three-kinds-of-friendship": "three",
+    "why-looking-at-the-sky-means-looking-into-the-past": "lookback",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -411,13 +412,30 @@ def three(uid):
     return out
 
 
+def lookback(uid):
+    """Light that left a star long ago: wavefronts spreading from a point on
+    the left, fading as they go, with the newest close to the star and the
+    oldest only now reaching an observer on the right."""
+    cy = 120
+    sx = 70
+    out = [dot(sx, cy, 3.4)]
+    for i, r in enumerate((40, 90, 145, 205, 270, 340)):
+        a0 = -math.asin(min(1.0, 96.0 / r))
+        cls = "a" if i == 5 else ("b" if i >= 3 else "c")
+        out.append(path(arc(sx, cy, r, a0, -a0), cls))
+    ox = sx + 340
+    out.append(circle(ox + 16, cy, 9))
+    out.append(line(ox + 16, cy + 9, ox + 16, cy + 30, "b"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback)
 
 
 def cover(slug, subject):
