@@ -41,6 +41,7 @@ BY_SLUG = {
     "why-looking-at-the-sky-means-looking-into-the-past": "lookback",
     "what-physicists-mean-by-extra-dimensions": "curled",
     "what-the-demand-withdraw-pattern-is": "pursue",
+    "what-learned-helplessness-actually-showed": "barrier",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -486,13 +487,28 @@ def pursue(uid):
     return out
 
 
+def barrier(uid):
+    """The shuttle box, reduced to lines: a floor with a low barrier in the
+    middle, a figure still on the first side, and the arc of the jump it
+    could make, drawn faint because it is not made."""
+    cy = 172
+    out = [line(60, cy, 420, cy, "b")]
+    out.append(line(240, cy, 240, cy - 34))
+    out.append(circle(160, cy - 16, 14))
+    out.append(path("M174 %s Q 240 %s 306 %s" % (cy - 26, cy - 110, cy - 26), "c", ' stroke-dasharray="3 5"'))
+    out.append(line(306, cy - 26, 298, cy - 34, "c"))
+    out.append(line(306, cy - 26, 296, cy - 24, "c"))
+    out.append(circle(320, cy - 16, 14, "c", ' stroke-dasharray="2 4"'))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier)
 
 
 def cover(slug, subject):
