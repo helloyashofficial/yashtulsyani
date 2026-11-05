@@ -74,7 +74,7 @@ POST = dict(
         ]),
         ("A light-year is a distance", [
             "The unit used for these distances is easy to misread. As " + a(GLENN, "NASA’s Glenn Research Center") + " puts it: “The light-year is a measure of distance, not time.” It is the total distance that a beam of light, moving in a straight line, travels in one year: almost 6 trillion miles, or, by the figure below, about 9.46 trillion kilometres.",
-            "The International Astronomical Union defines it precisely. According to its " + a(IAU, "archived public page on units") + ", the light-year is the distance travelled by light in one Julian year of 365.25 days in a vacuum, which comes to 9,460,730,472,580.8 km. The same page notes that the light-year is only sometimes used in scientific papers as a distance unit.",
+            "The International Astronomical Union defines it precisely. According to its " + a(IAU, "archived public page on units") + ", the light-year is the distance travelled by light in one Julian year of 365.25 days in a vacuum, which comes to 9,460,730,472,580.8 km. The same page notes that the light-year is only sometimes used in scientific papers as a distance unit, its use being mostly confined to popular publications.",
             "The useful property of the unit is that it converts directly into lookback. Something 100 light-years away is seen as it was 100 years ago, as long as the distances involved are small enough for the expansion of the universe not to matter.",
         ]),
         ("Seconds, minutes, years", [
