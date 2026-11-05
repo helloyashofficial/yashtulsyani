@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-demand-withdraw-pattern-is": dict(
+        focus="demand-withdraw pattern",
+        title="The demand-withdraw pattern: why it feeds itself",
+        desc="The demand-withdraw pattern in couples: what it is, who ends up demanding, what a 74-study meta-analysis found, why it feeds itself, and what helps."),
     "what-physicists-mean-by-extra-dimensions": dict(
         focus="extra dimensions",
         title="Extra dimensions: what physicists mean, and how they search",

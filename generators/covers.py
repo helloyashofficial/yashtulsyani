@@ -40,6 +40,7 @@ BY_SLUG = {
     "what-aristotle-meant-by-the-three-kinds-of-friendship": "three",
     "why-looking-at-the-sky-means-looking-into-the-past": "lookback",
     "what-physicists-mean-by-extra-dimensions": "curled",
+    "what-the-demand-withdraw-pattern-is": "pursue",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -446,13 +447,52 @@ def curled(uid):
     return out
 
 
+def pursue(uid):
+    """Demand and withdraw as a loop: two figures on the same closed track,
+    one following the other round, neither ever catching up."""
+    cx, cy, rx, ry = 240, 120, 150, 62
+    def at(t):
+        return cx + rx * math.cos(t), cy + ry * math.sin(t)
+    out = []
+    stops = (math.radians(200), math.radians(330))
+    seg = []
+    for i in range(361):
+        t = math.radians(i)
+        x, y = at(t)
+        near = False
+        for st in stops:
+            sx, sy = at(st)
+            if math.hypot(x - sx, y - sy) < 19:
+                near = True
+        if near:
+            if len(seg) > 1:
+                out.append(path("M" + " L".join("%s %s" % (f(px), f(py)) for px, py in seg), "b", ' stroke-dasharray="3 6"'))
+            seg = []
+        else:
+            seg.append((x, y))
+    if len(seg) > 1:
+        out.append(path("M" + " L".join("%s %s" % (f(px), f(py)) for px, py in seg), "b", ' stroke-dasharray="3 6"'))
+    for t, cls in ((math.radians(200), "a"), (math.radians(330), "a")):
+        x, y = at(t)
+        out.append(circle(x, y, 15, cls))
+    for t in (math.radians(255), math.radians(30), math.radians(120)):
+        x, y = at(t)
+        dx, dy = -rx * math.sin(t), ry * math.cos(t)
+        n = math.hypot(dx, dy); ux, uy = dx / n, dy / n
+        for sg in (-1, 1):
+            ang = math.radians(28) * sg
+            vx = ux * math.cos(ang) - uy * math.sin(ang); vy = ux * math.sin(ang) + uy * math.cos(ang)
+            out.append(line(x, y, x - 10 * vx, y - 10 * vy))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue)
 
 
 def cover(slug, subject):
