@@ -28,6 +28,7 @@ EDD = "https://gutenberg.org/cache/epub/72963/pg72963-images.html"
 GOLD = "https://arxiv.org/pdf/cond-mat/0105242"
 LEB = "https://arxiv.org/pdf/math-ph/0010018"
 
+LOOKBACK = '<a href="/writing/why-looking-at-the-sky-means-looking-into-the-past">why looking at the sky means looking into the past</a>'
 ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">what the observer effect actually says</a>'
 ESSAY44 = '<a href="/writing/what-it-means-to-call-time-the-fourth-dimension">the essay on time as the fourth dimension</a>'
 ESSAY47 = '<a href="/writing/why-we-blame-the-people-we-love">why we blame the people we love</a>'
@@ -110,6 +111,7 @@ POST = dict(
             "Boltzmann suggested long ago that these are all explained by the direction of increasing entropy. Callender is cautious: a straightforward reduction of these arrows to entropy, he writes, is probably not in the cards. In one newer view, the low-entropy past, together with the laws and the statistics, is what is basic, and the thermodynamic arrow is just one of its consequences, alongside the others.",
             "Some of the arrows are closer to entropy than others. On the radiative arrow, the entry reports that most agree the asymmetry of waves is ultimately thermodynamic, but after that matters are contested. The cosmological arrow invites a stranger thought. Gold proposed that if the universe ever stopped expanding and began to contract, then at the maximum radius the thermodynamic arrow would flip, so that entropy would decrease in the contracting phase. The idea is a speculation rather than a result, and it shows how tightly the account ties the direction of time to the state of the universe as a whole.",
             "The knowledge arrow shows how that works. Callender notes that the highly constrained early state is what causes there to be macroscopic traces of the past in the present, but not traces of the future. Footprints, photographs and memories are records, and records point backwards because the past was special and the future is not.",
+            "The light from the night sky is the largest record of all: every star and galaxy is seen as it was when its light set out, as " + LOOKBACK + " explains.",
         ]),
         ("What this does and does not say", [
             "Read literally, the account is modest. The laws mostly do not care which way time runs; the arrow comes from statistics plus a special beginning; and why the beginning was special is unsettled. It says nothing about consciousness, meaning or fate.",
