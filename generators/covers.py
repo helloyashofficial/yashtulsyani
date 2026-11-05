@@ -40,6 +40,7 @@ BY_SLUG = {
     "what-aristotle-meant-by-the-three-kinds-of-friendship": "three",
     "why-looking-at-the-sky-means-looking-into-the-past": "lookback",
     "what-physicists-mean-by-extra-dimensions": "curled",
+    "what-the-demand-withdraw-pattern-is": "pursue",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -446,13 +447,33 @@ def curled(uid):
     return out
 
 
+def pursue(uid):
+    """Demand and withdraw: one circle leans towards another, which moves
+    away; earlier rounds of the same chase repeat faintly behind them."""
+    cy = 120
+    out = []
+    for i, dx in enumerate((0, 70, 140)):
+        cls = "c" if i == 0 else ("b" if i == 1 else "a")
+        ax, bx = 70 + dx, 190 + dx
+        out.append(circle(ax, cy, 18, cls))
+        out.append(circle(bx, cy, 18, cls))
+        if i == 2:
+            out.append(line(ax + 24, cy, bx - 30, cy))
+            out.append(line(bx - 30, cy, bx - 37, cy - 5))
+            out.append(line(bx - 30, cy, bx - 37, cy + 5))
+            out.append(line(bx + 24, cy, bx + 66, cy))
+            out.append(line(bx + 66, cy, bx + 59, cy - 5))
+            out.append(line(bx + 66, cy, bx + 59, cy + 5))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue)
 
 
 def cover(slug, subject):
