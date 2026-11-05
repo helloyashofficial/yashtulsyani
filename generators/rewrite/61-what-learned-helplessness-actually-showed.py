@@ -25,7 +25,7 @@ def a(url, text):
 MS76 = "https://ppc.sas.upenn.edu/sites/default/files/lhtheoryevidence.pdf"
 OS67 = "https://about.illinoisstate.edu/vfdouga/files/2019/10/overmeier_seligman-_-LH.pdf"
 HIROTO = "https://www.appstate.edu/~steelekm/classes/psy5300/Documents/Hiroto1974-learned-helplessness.pdf"
-HS75 = "https://www.appstate.edu/~steelekm/classes/psy5300/Documents/Hiroto&Seligman1975-learned-helplessness.pdf"
+HS75 = "https://www.appstate.edu/~steelekm/classes/psy5300/Documents/Hiroto&amp;Seligman1975-learned-helplessness.pdf"
 AST78 = "https://core.ac.uk/download/357200055.pdf"
 MS16 = "https://ppc.sas.upenn.edu/sites/default/files/learnedhelplessnessat50.pdf"
 MSB23 = "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2023.1170417/full"
