@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-learned-helplessness-actually-showed": dict(
+        focus="learned helplessness",
+        title="Learned helplessness: what it showed and what changed",
+        desc="Learned helplessness: what the 1960s experiments found, how it was applied to people, and why its discoverers later said the theory got it backward."),
     "what-the-demand-withdraw-pattern-is": dict(
         focus="demand-withdraw pattern",
         title="The demand-withdraw pattern: why it feeds itself",
