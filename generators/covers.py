@@ -39,6 +39,7 @@ BY_SLUG = {
     "what-the-spotlight-effect-is": "spotlight",
     "what-aristotle-meant-by-the-three-kinds-of-friendship": "three",
     "why-looking-at-the-sky-means-looking-into-the-past": "lookback",
+    "what-physicists-mean-by-extra-dimensions": "curled",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -429,13 +430,29 @@ def lookback(uid):
     return out
 
 
+def curled(uid):
+    """A hidden dimension: from far away a thin line, and close up a tube,
+    each point of the line really a small circle that was too tight to see."""
+    cy = 120
+    out = [line(40, cy, 196, cy, "b")]
+    out.append(circle(196, cy, 16, "c", ' stroke-dasharray="2 4"'))
+    out.append(line(212, cy - 4, 236, cy - 26, "c", ' stroke-dasharray="2 4"'))
+    out.append(line(212, cy + 4, 236, cy + 26, "c", ' stroke-dasharray="2 4"'))
+    r = 26
+    out.append(line(246, cy - r, 430, cy - r))
+    out.append(line(246, cy + r, 430, cy + r))
+    for i, x in enumerate(range(246, 431, 30)):
+        out.append(path("M%s %s A9 %s 0 1 1 %s %s A9 %s 0 1 1 %s %s" % (x, cy - r, r, x, cy + r, r, x, cy - r), "a" if i in (0, 6) else "b"))
+    return out
+
+
 def overlap(uid):
     """Default for Relationships: two circles, overlapping, neither inside
     the other."""
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled)
 
 
 def cover(slug, subject):

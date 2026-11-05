@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-physicists-mean-by-extra-dimensions": dict(
+        focus="extra dimensions",
+        title="Extra dimensions: what physicists mean, and how they search",
+        desc="What physicists mean by extra dimensions: Kaluza-Klein, string theory, large extra dimensions, LHC searches, tabletop gravity tests, and the evidence."),
     "why-looking-at-the-sky-means-looking-into-the-past": dict(
         focus="looking back in time",
         title="Looking back in time: why the night sky shows the past",
