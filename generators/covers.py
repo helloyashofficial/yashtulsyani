@@ -448,22 +448,41 @@ def curled(uid):
 
 
 def pursue(uid):
-    """Demand and withdraw: one circle leans towards another, which moves
-    away; earlier rounds of the same chase repeat faintly behind them."""
-    cy = 120
+    """Demand and withdraw as a loop: two figures on the same closed track,
+    one following the other round, neither ever catching up."""
+    cx, cy, rx, ry = 240, 120, 150, 62
+    def at(t):
+        return cx + rx * math.cos(t), cy + ry * math.sin(t)
     out = []
-    for i, dx in enumerate((0, 70, 140)):
-        cls = "c" if i == 0 else ("b" if i == 1 else "a")
-        ax, bx = 70 + dx, 190 + dx
-        out.append(circle(ax, cy, 18, cls))
-        out.append(circle(bx, cy, 18, cls))
-        if i == 2:
-            out.append(line(ax + 24, cy, bx - 30, cy))
-            out.append(line(bx - 30, cy, bx - 37, cy - 5))
-            out.append(line(bx - 30, cy, bx - 37, cy + 5))
-            out.append(line(bx + 24, cy, bx + 66, cy))
-            out.append(line(bx + 66, cy, bx + 59, cy - 5))
-            out.append(line(bx + 66, cy, bx + 59, cy + 5))
+    stops = (math.radians(200), math.radians(330))
+    seg = []
+    for i in range(361):
+        t = math.radians(i)
+        x, y = at(t)
+        near = False
+        for st in stops:
+            sx, sy = at(st)
+            if math.hypot(x - sx, y - sy) < 19:
+                near = True
+        if near:
+            if len(seg) > 1:
+                out.append(path("M" + " L".join("%s %s" % (f(px), f(py)) for px, py in seg), "b", ' stroke-dasharray="3 6"'))
+            seg = []
+        else:
+            seg.append((x, y))
+    if len(seg) > 1:
+        out.append(path("M" + " L".join("%s %s" % (f(px), f(py)) for px, py in seg), "b", ' stroke-dasharray="3 6"'))
+    for t, cls in ((math.radians(200), "a"), (math.radians(330), "a")):
+        x, y = at(t)
+        out.append(circle(x, y, 15, cls))
+    for t in (math.radians(255), math.radians(30), math.radians(120)):
+        x, y = at(t)
+        dx, dy = -rx * math.sin(t), ry * math.cos(t)
+        n = math.hypot(dx, dy); ux, uy = dx / n, dy / n
+        for sg in (-1, 1):
+            ang = math.radians(28) * sg
+            vx = ux * math.cos(ang) - uy * math.sin(ang); vy = ux * math.sin(ang) + uy * math.cos(ang)
+            out.append(line(x, y, x - 10 * vx, y - 10 * vy))
     return out
 
 
