@@ -45,6 +45,7 @@ BY_SLUG = {
     "what-spinoza-meant-by-hope-and-fear": "waver",
     "what-time-dilation-is": "ticks",
     "what-a-tesseract-is": "hypercube",
+    "what-the-research-says-about-love-languages": "channels",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -547,6 +548,15 @@ def hypercube(uid):
         out.append(line(x1, y1, x2, y2, "c", ' stroke-dasharray="2 4"'))
     return out
 
+
+def channels(uid):
+    """Love languages, read as a balanced diet: two people joined not by one
+    line but by several, of equal weight."""
+    out = [circle(110, 120, 16), circle(370, 120, 16)]
+    for k, off in enumerate((-56, -28, 0, 28, 56)):
+        out.append(path("M126 120 Q 240 %s 354 120" % (120 + off * 1.6), "a" if k % 2 == 0 else "b"))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -568,7 +578,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels)
 
 
 def cover(slug, subject):
