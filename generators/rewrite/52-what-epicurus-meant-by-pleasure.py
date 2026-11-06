@@ -38,6 +38,7 @@ ESSAY43 = '<a href="/writing/what-the-stoics-meant-by-what-is-up-to-us">what the
 ESSAY47 = '<a href="/writing/why-we-blame-the-people-we-love">why we blame the people we love</a>'
 ESSAY51 = '<a href="/writing/what-rumination-is">what rumination is</a>'
 ESSAY50 = '<a href="/writing/what-your-partner-does-with-your-good-news">what your partner does with your good news</a>'
+ESSAY62 = '<a href="/writing/what-spinoza-meant-by-hope-and-fear">what Spinoza meant by hope and fear</a>'
 
 POST = dict(
     slug="what-epicurus-meant-by-pleasure", num=52, cat="Philosophy", read="auto",
@@ -116,7 +117,7 @@ POST = dict(
         ("What this offers, and what it does not", [
             "Read in his own words, Epicurus offers a demanding idea dressed in an inviting one. Pleasure is the goal, but the pleasure in question is calm: needs met simply, fears examined and dropped, and life shared with friends. That asks for restraint as much as enjoyment, and for prudence above everything.",
             "It does not offer a full account of a good life for everyone. " + a(MW, "Merriam-Webster’s note") + " describes his ideal as a secluded life, which many people neither want nor can have, and the promise of the four-part cure, that the terrible is easily endured, will sound too hopeful to anyone in serious pain. Any borrowing here is a borrowing of an attitude, not an endorsement of the whole system.",
-            "Other essays here meet Epicurus at different points. The essay on the Stoics, linked above, sets out the rival school’s answer to the same question of how to live calmly. " + ESSAY51.replace(">what rumination", ">What rumination") + " describes, in modern psychological terms, one of the mental disturbances Epicurus wanted to remove. And " + ESSAY50 + " looks at what modern research says about sharing good things with others, which he would have recognised.",
+            "Other essays here meet Epicurus at different points. The essay on the Stoics, linked above, sets out the rival school’s answer to the same question of how to live calmly. " + ESSAY51.replace(">what rumination", ">What rumination") + " describes, in modern psychological terms, one of the mental disturbances Epicurus wanted to remove. " + ESSAY62.replace(">what Spinoza", ">What Spinoza") + " follows a later philosopher who also tied fear to false belief, and argued that hope cannot cure it. And " + ESSAY50 + " looks at what modern research says about sharing good things with others, which he would have recognised.",
         ]),
     ],
     note=[
