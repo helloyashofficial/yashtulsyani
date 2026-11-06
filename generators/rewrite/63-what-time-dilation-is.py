@@ -83,10 +83,10 @@ POST = dict(
             "They raised one clock by 33 centimetres, about a foot, and, in NIST’s words, sure enough, the higher clock ran at a slightly faster rate than the lower clock, exactly as predicted. They also made the ion in one clock move at speeds equivalent to several metres per second, and saw the moving clock run slow, at speeds comparable to a car travelling about 20 miles per hour.",
             "The release translated the height result into a human scale: you age faster when you stand a couple of steps higher on a staircase. The difference is much too small for humans to perceive directly, it added, adding up to approximately 90 billionths of a second over a 79-year lifetime. That is the sense in which your head ages faster than your feet: measurably, and by almost nothing.",
             "HTML:" + K.stages("Four tests of time dilation", [
-                ("1960", "Harvard tower", "Light over 74 feet showed the gravitational shift, within about 10 per cent."),
-                ("1977", "Storage ring", "Circling muons lived about 29 times longer, agreeing to about two parts in a thousand."),
-                ("1977", "First GPS satellite", "Its clock’s shift matched the calculation to better than 1 per cent."),
-                ("2010", "NIST clocks", "Clocks 33 centimetres apart in height ticked at measurably different rates."),
+                ("1", "1960 · Harvard tower", "Light over 74 feet showed the gravitational shift, within about 10 per cent."),
+                ("2", "1977 · Storage ring", "Circling muons lived about 29 times longer, agreeing to about two parts in a thousand."),
+                ("3", "1977 · First GPS satellite", "Its clock’s shift matched the calculation to better than 1 per cent."),
+                ("4", "2010 · NIST clocks", "Clocks 33 centimetres apart in height ticked at measurably different rates."),
             ], source='Sources: <a href="' + POUND + '" target="_blank" rel="noopener">Pound and Rebka (1960)</a>; <a href="' + MUON + '" target="_blank" rel="noopener">Bailey and others (1977)</a>; <a href="' + ASHBY + '" target="_blank" rel="noopener">Ashby (2002)</a>; <a href="' + NIST + '" target="_blank" rel="noopener">NIST (2010)</a>.'),
         ]),
         ("Why your phone needs it", [
