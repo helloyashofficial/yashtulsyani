@@ -44,6 +44,7 @@ INGENIUM = "https://ingeniumcanada.org/channel/articles/the-death-of-stars"
 ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">what the observer effect actually says</a>'
 ESSAY48 = '<a href="/writing/why-time-has-a-direction">why time has a direction</a>'
 ESSAY44 = '<a href="/writing/what-it-means-to-call-time-the-fourth-dimension">what it means to call time the fourth dimension</a>'
+ESSAY63 = '<a href="/writing/what-time-dilation-is">what time dilation is</a>'
 
 POST = dict(
     slug="why-looking-at-the-sky-means-looking-into-the-past", num=58, cat="Physics and time", read="auto",
@@ -123,7 +124,7 @@ POST = dict(
         ("What this does and does not say", [
             "Read literally, the claim is simple and well established. Light has a finite, fixed speed, so every view of the sky is a view of the past, by an amount that grows with distance. For nearby objects the delay is seconds to centuries; for distant galaxies, billions of years, with expansion complicating the arithmetic. The sky is not a live picture, and most of it is not news of anything recent.",
             "Here is the one borrowing in this essay, labelled as such. As a metaphor only, the delay is a reminder that what we see of anything distant, a person far away included, arrives as it was, not as it is. In physics that is a fact about the speed of light; in a life it is only a resemblance, and nothing here suggests the physics governs it.",
-            "Other essays here carry the physics further. " + ESSAY44.replace(">what it means", ">What it means") + " explains how relativity joins space and time into one structure. And " + ESSAY48 + " asks why records, including the light from the sky, point only to the past.",
+            "Other essays here carry the physics further. " + ESSAY44.replace(">what it means", ">What it means") + " explains how relativity joins space and time into one structure. " + ESSAY63.replace(">what time", ">What time") + " looks at the measured fact that clocks run at different rates with speed and height. And " + ESSAY48 + " asks why records, including the light from the sky, point only to the past.",
         ]),
     ],
     note=[

@@ -43,6 +43,7 @@ BY_SLUG = {
     "what-the-demand-withdraw-pattern-is": "pursue",
     "what-learned-helplessness-actually-showed": "barrier",
     "what-spinoza-meant-by-hope-and-fear": "waver",
+    "what-time-dilation-is": "ticks",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -507,6 +508,20 @@ def waver(uid):
     out.append(dot(420, cy, 3))
     return out
 
+
+def ticks(uid):
+    """Time dilation: two clocks drawn as tick tracks, one above the other.
+    Over the same stretch the upper track fits one more tick, because the
+    higher clock runs a little faster."""
+    out = []
+    for y, n, c in ((92, 13, "a"), (156, 12, "b")):
+        out.append(line(90, y, 390, y, c))
+        for i in range(n + 1):
+            x = 90 + 300.0 * i / n
+            out.append(line(x, y - 9, x, y + 9, c))
+    out.append(line(240, 112, 240, 136, "c", ' stroke-dasharray="2 4"'))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -528,7 +543,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks)
 
 
 def cover(slug, subject):

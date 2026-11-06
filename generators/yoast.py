@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-time-dilation-is": dict(
+        focus="time dilation",
+        title="Time dilation: why your head ages faster than your feet",
+        desc="Time dilation explained: why moving clocks and lower clocks run slow, the experiments that measured it, Einstein's 1905 slip, and why GPS depends on it."),
     "what-spinoza-meant-by-hope-and-fear": dict(
         focus="Spinoza hope and fear",
         title="Spinoza on hope and fear: why they come together",
