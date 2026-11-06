@@ -44,6 +44,7 @@ BY_SLUG = {
     "what-learned-helplessness-actually-showed": "barrier",
     "what-spinoza-meant-by-hope-and-fear": "waver",
     "what-time-dilation-is": "ticks",
+    "what-a-tesseract-is": "hypercube",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -522,6 +523,30 @@ def ticks(uid):
     out.append(line(240, 112, 240, 136, "c", ' stroke-dasharray="2 4"'))
     return out
 
+
+def hypercube(uid):
+    """The tesseract as it is usually drawn: a cube inside a cube, each
+    corner of the inner one joined to the matching corner of the outer."""
+    def cube(cx, cy, w, d):
+        h = w / 2.0
+        front = [(cx - h, cy - h), (cx + h, cy - h), (cx + h, cy + h), (cx - h, cy + h)]
+        back = [(x + d, y - d) for x, y in front]
+        return front, back
+    out = []
+    of, ob = cube(232, 128, 150, 34)
+    inf, inb = cube(232, 128, 62, 14)
+    for (fr, bk), c in (((of, ob), "a"), ((inf, inb), "b")):
+        for ring in (fr, bk):
+            for i in range(4):
+                x1, y1 = ring[i]
+                x2, y2 = ring[(i + 1) % 4]
+                out.append(line(x1, y1, x2, y2, c))
+        for (x1, y1), (x2, y2) in zip(fr, bk):
+            out.append(line(x1, y1, x2, y2, c))
+    for (x1, y1), (x2, y2) in zip(of + ob, inf + inb):
+        out.append(line(x1, y1, x2, y2, "c", ' stroke-dasharray="2 4"'))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -543,7 +568,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube)
 
 
 def cover(slug, subject):
