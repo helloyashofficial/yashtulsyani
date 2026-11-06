@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-spinoza-meant-by-hope-and-fear": dict(
+        focus="Spinoza hope and fear",
+        title="Spinoza on hope and fear: why they come together",
+        desc="Spinoza on hope and fear: how he defined them, why he said there is no hope without fear, how fear breeds superstition, and his remedy of understanding."),
     "what-learned-helplessness-actually-showed": dict(
         focus="learned helplessness",
         title="Learned helplessness: what it showed and what changed",

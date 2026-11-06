@@ -42,6 +42,7 @@ BY_SLUG = {
     "what-physicists-mean-by-extra-dimensions": "curled",
     "what-the-demand-withdraw-pattern-is": "pursue",
     "what-learned-helplessness-actually-showed": "barrier",
+    "what-spinoza-meant-by-hope-and-fear": "waver",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -487,6 +488,25 @@ def pursue(uid):
     return out
 
 
+
+def waver(uid):
+    """Spinoza on hope and fear: a line swinging between two faint limits,
+    the swings shrinking as it goes, until it runs level between them."""
+    cy = 120
+    out = [line(60, cy - 44, 420, cy - 44, "c", ' stroke-dasharray="2 5"'),
+           line(60, cy + 44, 420, cy + 44, "c", ' stroke-dasharray="2 5"')]
+    pts = []
+    n = 600
+    for i in range(n + 1):
+        x = 60 + 300.0 * i / n
+        amp = 40 * (1 - float(i) / n) ** 1.6
+        y = cy - amp * math.sin(i / float(n) * 7 * 2 * math.pi)
+        pts.append((x, y))
+    out.append(path("M" + " L".join("%s %s" % (f(x), f(y)) for x, y in pts[::3])))
+    out.append(line(360, cy, 420, cy))
+    out.append(dot(420, cy, 3))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -508,7 +528,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver)
 
 
 def cover(slug, subject):
