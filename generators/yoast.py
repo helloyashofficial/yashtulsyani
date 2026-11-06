@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-a-tesseract-is": dict(
+        focus="tesseract",
+        title="What a tesseract is: the four-dimensional cube explained",
+        desc="What a tesseract is: the four-dimensional cube, how it is built from a point, the Victorian who named it, his coloured cubes, and what its images show."),
     "what-time-dilation-is": dict(
         focus="time dilation",
         title="Time dilation: why your head ages faster than your feet",

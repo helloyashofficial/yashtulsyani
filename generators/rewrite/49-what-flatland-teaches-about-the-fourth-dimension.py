@@ -50,6 +50,7 @@ EXTRA = '<a href="/writing/what-physicists-mean-by-extra-dimensions">what physic
 ESSAY44 = '<a href="/writing/what-it-means-to-call-time-the-fourth-dimension">what it means to call time the fourth dimension</a>'
 ESSAY48 = '<a href="/writing/why-time-has-a-direction">why time has a direction</a>'
 ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">the essay on the observer effect</a>'
+ESSAY64 = '<a href="/writing/what-a-tesseract-is">what a tesseract is</a>'
 
 POST = dict(
     slug="what-flatland-teaches-about-the-fourth-dimension", num=49, cat="Fourth dimension", read="auto",
@@ -151,7 +152,7 @@ POST = dict(
             "Read literally, the book teaches three things. A being cannot picture a dimension beyond its own. It can still reason about one, by analogy, and get the right answers, as the Square does with the tesseract. And it can learn to see a higher shape in slices and shadows, as mathematicians still do. The book does not show that a fourth dimension of space exists, it does not say that time is that dimension, and it did not foresee relativity.",
             "The story ends badly for its narrator. In " + a(SE22, "the last chapter") + " his efforts to spread the theory of three dimensions end in a sentence of perpetual imprisonment. Writing later, he says, “Seven years have elapsed and I am still a prisoner,” and hopes his memoir may stir up “a race of rebels who shall refuse to be confined to limited Dimensionality.”",
             "Here is the one borrowing in this essay, labelled as such. As a metaphor only, the Sphere is the most useful figure in the book: someone who can see further than others, explains it well, and then refuses the next step up with “There is no such land.” Most people are the Sphere about something. In the book that is a point about dimensions; in a life it is only a resemblance, and nothing here suggests geometry governs it.",
-            "The essay on time as the fourth dimension, linked above, sets out the physics of the other fourth dimension, the one that is time. And " + ESSAY48 + " asks why that dimension, unlike any direction in space, seems to run only one way.",
+            "The essay on time as the fourth dimension, linked above, sets out the physics of the other fourth dimension, the one that is time. " + ESSAY64.replace(">what a", ">What a") + " follows the Square’s four-dimensional figure further, through the man who named it and the pictures used to show it. And " + ESSAY48 + " asks why that dimension, unlike any direction in space, seems to run only one way.",
         ]),
     ],
     note=[
