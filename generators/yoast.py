@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-research-says-about-love-languages": dict(
+        focus="love languages",
+        title="Love languages: what the research actually says",
+        desc="Do love languages hold up? What studies found on one primary language, the five categories and matching partners, and the balanced diet idea instead."),
     "what-a-tesseract-is": dict(
         focus="tesseract",
         title="What a tesseract is: the four-dimensional cube explained",
