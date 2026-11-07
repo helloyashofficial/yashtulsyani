@@ -38,6 +38,7 @@ ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">why reassurance is
 ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">what attachment styles actually measure</a>'
 ESSAY51 = '<a href="/writing/what-rumination-is">what rumination is</a>'
 ESSAY46 = '<a href="/writing/what-self-silencing-is">what self-silencing is</a>'
+ESSAY66 = '<a href="/writing/what-the-impostor-phenomenon-is">what the impostor phenomenon is</a>'
 
 POST = dict(
     slug="what-the-spotlight-effect-is", num=56, cat="Psychology", read="auto",
@@ -113,7 +114,7 @@ POST = dict(
         ("What this does and does not say", [
             "Read carefully, the research supports a modest and useful claim. When you feel conspicuous, other people are probably noticing less than you think, and judging less harshly, because they are seeing the moment from outside and are mostly occupied with their own. That is not the same as saying nobody notices: in the T-shirt study, about a quarter of the room did.",
             "The practical lesson is to discount the feeling, not to dismiss other people. The vividness of your own experience is real; it is just a poor guide to theirs.",
-            "This connects to other essays here. " + ESSAY51.replace(">what rumination", ">What rumination") + " describes how going over a problem again and again can keep low mood going. " + ESSAY46.replace(">what self-silencing", ">What self-silencing") + " looks at holding back what you think for fear of how others will react, a fear the spotlight research suggests is often larger than the reaction. And " + ESSAY40 + " looks at a related loop in relationships, where the fear of how one is seen keeps asking to be answered.",
+            "This connects to other essays here. " + ESSAY51.replace(">what rumination", ">What rumination") + " describes how going over a problem again and again can keep low mood going. " + ESSAY46.replace(">what self-silencing", ">What self-silencing") + " looks at holding back what you think for fear of how others will react, a fear the spotlight research suggests is often larger than the reaction. " + ESSAY66.replace(">what the impostor", ">What the impostor") + " looks at a related fear, of being found out as less capable than others think. And " + ESSAY40 + " looks at a related loop in relationships, where the fear of how one is seen keeps asking to be answered.",
         ]),
     ],
     note=[

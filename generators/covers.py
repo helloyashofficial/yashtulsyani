@@ -46,6 +46,7 @@ BY_SLUG = {
     "what-time-dilation-is": "ticks",
     "what-a-tesseract-is": "hypercube",
     "what-the-research-says-about-love-languages": "channels",
+    "what-the-impostor-phenomenon-is": "doubled",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -557,6 +558,15 @@ def channels(uid):
         out.append(path("M126 120 Q 240 %s 354 120" % (120 + off * 1.6), "a" if k % 2 == 0 else "b"))
     return out
 
+
+def doubled(uid):
+    """The impostor phenomenon: a solid figure and, slightly behind it, a
+    dashed copy of the same figure, the self someone fears being seen as."""
+    out = [circle(214, 112, 30), path("M160 196 Q 214 132 268 196")]
+    out.append(circle(262, 104, 30, "c", ' stroke-dasharray="3 5"'))
+    out.append(path("M208 188 Q 262 124 316 188", "c", ' stroke-dasharray="3 5"'))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -578,7 +588,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled)
 
 
 def cover(slug, subject):
