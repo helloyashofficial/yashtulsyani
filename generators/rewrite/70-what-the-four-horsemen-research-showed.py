@@ -85,7 +85,7 @@ POST = dict(
             "Their target was partly an earlier Gottman study, published in 1998, which they said had received an extraordinary degree of professional and popular attention. That study reported 80 per cent correct divorce prediction, but, Heyman and Slep argued, did not break the figure down into how many divorcing and non-divorcing couples it caught, rested on only 60 couples, a sample small enough to raise concerns about overfitting.",
             "Their own demonstration, using survey data rather than Gottman’s laboratory design, makes the point concrete. An equation built on one half of their sample classified 90 per cent of couples correctly. Applied to the other half, it classified 69 per cent correctly, and of the couples it flagged as heading for divorce, only 29 per cent actually fitted that description. Reweighted to a more realistic 16 per cent divorce rate, that figure fell to about 21 per cent.",
             "HTML:" + K.compare("Two ways to read the prediction figures", [
-                ("Same-sample accuracy", ["Shows the measures are strongly related to divorce"], ["Built and tested on the same couples, so it overstates"], "Describes the sample."),
+                ("Same-sample accuracy", ["Shows the measures are strongly related to divorce"], ["Not tested on new couples, so it likely overstates"], "Describes the sample."),
                 ("New-sample accuracy", ["The honest test of a prediction"], ["Much lower in Heyman and Slep’s demonstration"], "What a couple can rely on."),
             ], source='Sources: <a href="' + GL2000 + '" target="_blank" rel="noopener">Gottman and Levenson (2000)</a>; <a href="' + HS + '" target="_blank" rel="noopener">Heyman and Slep (2001)</a>.'),
         ]),
