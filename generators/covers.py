@@ -50,6 +50,7 @@ BY_SLUG = {
     "what-montaigne-meant-by-because-it-was-he": "seam",
     "what-the-uncertainty-principle-says": "bells",
     "what-the-poincare-conjecture-says": "shrink",
+    "what-the-four-horsemen-research-showed": "horsemen",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -611,6 +612,18 @@ def shrink(uid):
     out.append(dot(cx, cy - 88, 3))
     return out
 
+
+def horsemen(uid):
+    """Gottman's four horsemen, kept abstract: two figures, and between them
+    four short slanted strokes, each a little nearer the second."""
+    out = [circle(90, 120, 16), circle(390, 120, 16)]
+    for k in range(4):
+        x = 170 + k * 46
+        out.append(line(x, 146, x + 18, 94, "a" if k == 1 else "b"))
+    out.append(line(106, 120, 150, 120, "c", ' stroke-dasharray="2 5"'))
+    out.append(line(330, 120, 374, 120, "c", ' stroke-dasharray="2 5"'))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -632,7 +645,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam, bells=bells, shrink=shrink)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam, bells=bells, shrink=shrink, horsemen=horsemen)
 
 
 def cover(slug, subject):
