@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-impostor-phenomenon-is": dict(
+        focus="impostor phenomenon",
+        title="The impostor phenomenon: why it is not a syndrome",
+        desc="The impostor phenomenon explained: what Clance and Imes described in 1978, the impostor cycle, what 62 studies found, and why it is not a diagnosis."),
     "what-the-research-says-about-love-languages": dict(
         focus="love languages",
         title="Love languages: what the research actually says",
