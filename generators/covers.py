@@ -621,7 +621,7 @@ def horsemen(uid):
         x = 170 + k * 46
         out.append(line(x, 146, x + 18, 94, "a" if k == 1 else "b"))
     out.append(line(106, 120, 150, 120, "c", ' stroke-dasharray="2 5"'))
-    out.append(line(330, 120, 374, 120, "c", ' stroke-dasharray="2 5"'))
+    out.append(line(344, 120, 374, 120, "c", ' stroke-dasharray="2 5"'))
     return out
 
 def barrier(uid):
