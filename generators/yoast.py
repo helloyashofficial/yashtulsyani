@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-poincare-conjecture-says": dict(
+        focus="Poincaré conjecture",
+        title="The Poincaré conjecture: what it says, simply explained",
+        desc="The Poincaré conjecture explained: the loop test, the 3-sphere in four dimensions, how Perelman proved it, and why he turned down two major prizes."),
     "what-the-uncertainty-principle-says": dict(
         focus="uncertainty principle",
         title="The uncertainty principle: what it says and does not",

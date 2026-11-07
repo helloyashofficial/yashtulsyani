@@ -1,0 +1,429 @@
+<!-- ============================================================
+     ESSAY  ·  what-the-poincare-conjecture-says
+     yashtulsyani.com  ·  Custom HTML block
+
+     THIS FILE IS THE TEMPLATE newpost.py BUILDS ESSAYS FROM. It is not
+     pasted anywhere and lives outside production-blocks on purpose.
+     Ported from FSDM's 48-post-content-audit.html (24 Oct 2026): the
+     same anatomy, with FSDM's content removed and this site's crumb,
+     byline, author card and closing link put in.
+
+     ONE BLOCK PER ESSAY. Paste it and nothing else into the Post body,
+     with the sidebar block reaching the page as on every other page.
+
+     The wrapper is a DIV with class yt-shell, not a <main>, so the
+     sidebar's fallback finds it and never adds padding to <body>.
+
+     The contents sit in a sticky right rail above 1240px and collapse
+     inline, above the article, below it. One element either way.
+
+     One small script at the bottom upgrades the category, date and read
+     time to the values WordPress and Yoast set. The build-time values are
+     already in the markup, so a failure leaves a correct page.
+
+     Regenerate with generators/rewrite/69-what-the-poincare-conjecture-says.py
+     FOCUS KEYPHRASE : Poincaré conjecture
+     SEO TITLE       : The Poincaré conjecture: what it says, simply explained  [55 chars]
+     META DESCRIPTION: The Poincaré conjecture explained: the loop test, the 3-sphere in four dimensions, how Perelman proved it, and why he turned down two major prizes.  [147 chars]
+     SLUG            : /writing/what-the-poincare-conjecture-says
+     ============================================================ -->
+<!-- Essay styling lives in 01-sidebar.html, emitted once for the whole
+     site. Re-paste the sidebar after any design change. -->
+<div class="yt-shell yt-post-shell">
+  <article class="yt-post">
+
+    <div class="yt-post__crumb">
+      <a class="yt-post__chip" href="/writing">Writing</a> · <span data-yt-cat>Fourth dimension</span>
+    </div>
+
+    <div class="yt-post__meta"><span data-yt-date>07 Nov 2026</span><span data-yt-updated></span> · <span data-yt-read>9 min read</span></div>
+
+    <h1 class="yt-post__title">What the Poincaré conjecture says, and why it needed four dimensions</h1>
+    <p class="yt-post__dek">In 1904 Henri Poincaré asked a deceptively simple question about the shape of three-dimensional spaces. Answering it took almost a century, a detour through higher dimensions, and a reclusive Russian mathematician who solved it and then turned down both the Fields Medal and a million dollars.</p>
+    <div class="yt-post__cover"><svg class="yt-cv" viewBox="0 0 480 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" fill="none" stroke-width="1" stroke-linecap="round"><circle class="yt-cv-a" cx="240" cy="120" r="92"/><path class="yt-cv-c" d="M148 120 A 92 22 0 0 0 332 120" stroke-dasharray="2 5"/><ellipse class="yt-cv-a" cx="240" cy="92" rx="70" ry="18"/><ellipse class="yt-cv-b" cx="240" cy="64" rx="44" ry="11"/><ellipse class="yt-cv-b" cx="240" cy="44" rx="20" ry="5"/><circle class="yt-cv-a yt-cv-dot" cx="240" cy="32" r="3"/></svg></div>
+
+    <div class="yt-post__byline">
+      <span class="yt-post__byline-avatar" aria-hidden="true">YT</span>
+      <div>
+        <div class="yt-post__byline-name">Yash Tulsyani</div>
+        <div class="yt-post__byline-role">Writer</div>
+      </div>
+    </div>
+
+    <aside class="yt-post__side">
+      <nav class="yt-post__toc" aria-label="On this page">
+        <div class="yt-post__toc-label">On this page</div>
+        <ol>
+            <li><a href="#what-the-poincar-conjecture-says">What the Poincaré conjecture says</a></li>
+            <li><a href="#a-question-about-loops">A question about loops</a></li>
+            <li><a href="#why-it-needs-four-dimensions">Why it needs four dimensions</a></li>
+            <li><a href="#poincar-s-first-mistake">Poincaré’s first mistake</a></li>
+            <li><a href="#higher-dimensions-went-first">Higher dimensions went first</a></li>
+            <li><a href="#how-it-was-solved">How it was solved</a></li>
+            <li><a href="#two-prizes-declined">Two prizes declined</a></li>
+            <li><a href="#is-the-universe-a-3-sphere">Is the universe a 3-sphere?</a></li>
+            <li><a href="#what-this-does-and-does-not-say">What this does and does not say</a></li>
+          </ol>
+      </nav>
+    </aside>
+
+    <div class="yt-post__body">
+        <h2 id="what-the-poincar-conjecture-says">What the Poincaré conjecture says</h2>
+        <p>The Poincaré conjecture says that a closed three-dimensional space in which every loop can be shrunk to a point must be a 3-sphere, the three-dimensional analogue of the surface of a ball. It was posed in 1904 and proved by Grigori Perelman in work posted from 2002. It is a statement about mathematical shapes, not about the universe.</p>
+        <aside class="yt-kt" aria-label="Key takeaways"><div class="yt-kt__h">Key takeaways</div><ul><li>It asks when a three-dimensional space must be a 3-sphere.</li><li>The 3-sphere is defined as points in four-dimensional space at distance one from the origin.</li><li>Poincaré posed it in 1904, after getting an earlier version wrong.</li><li>Higher dimensions were solved first: five and up around 1960, four in 1982.</li><li>Perelman proved the three-dimensional case using Hamilton’s Ricci flow.</li><li>He declined the Fields Medal in 2006 and the $1 million Clay prize in 2010.</li></ul></aside>
+        <p>This essay is in the literal register, like the others in this series on dimensions. It sets out what the conjecture asks, how it was solved, and what it does and does not say about the space we live in.</p>
+        <aside class="yt-cl yt-cl--definition"><div class="yt-cl__k">Definition</div><div class="yt-cl__t">The 3-sphere</div><div class="yt-cl__b"><p>In <a href="https://www.claymath.org/wp-content/uploads/2022/06/poincare.pdf" target="_blank" rel="noopener">John Milnor’s official description</a> for the Clay Mathematics Institute: the locus of all points (x, y, z, w) in four-dimensional Euclidean space which have distance exactly 1 from the origin. It is the three-dimensional version of the ordinary sphere’s surface.</p></div></aside>
+        <h2 id="a-question-about-loops">A question about loops</h2>
+        <p>Topology studies the properties of shapes that survive stretching and bending without tearing. The Clay Institute’s problem description, written by Milnor and preserved on a <a href="https://www.mi.sanu.ac.rs/~zorano/izazovi21vek/poincare.html" target="_blank" rel="noopener">mirror of the original page</a>, explains the key idea with fruit and pastry: “If we stretch a rubber band around the surface of an apple, then we can shrink it down to a point” without tearing it or letting it leave the surface. A surface where every such loop can be shrunk away is called simply connected.</p>
+        <p>A doughnut is different. The same page imagines a rubber band stretched in the appropriate direction around a doughnut: it cannot be shrunk to a point without breaking the band or the doughnut. So simple connectedness tells an apple’s surface apart from a doughnut’s, however either is squashed or stretched.</p>
+        <p>Poincaré asked whether the same test works one dimension up. Take a three-dimensional space that is closed, finite and without edges, and suppose every loop in it can be shrunk to a point. In <a href="https://www.claymath.org/wp-content/uploads/2022/06/poincare.pdf" target="_blank" rel="noopener">Milnor’s formulation</a>, the question is whether such a space must be homeomorphic to the 3-sphere, the same shape up to stretching. <a href="https://mathworld.wolfram.com/PoincareConjecture.html" target="_blank" rel="noopener">MathWorld</a> states the conjecture as every simply connected closed three-manifold being homeomorphic to the three-sphere.</p>
+        <p>Homeomorphic is the technical word for being the same shape in this stretchy sense: one space can be deformed into the other continuously, and back again, without tearing or gluing. A coffee mug and a doughnut are the classic example of two shapes a topologist treats as the same, because each has one hole that no amount of stretching removes.</p>
+        <h2 id="why-it-needs-four-dimensions">Why it needs four dimensions</h2>
+        <p>The difficulty is that the spaces in question cannot be seen. The ordinary sphere is a two-dimensional surface, and to draw it we need three dimensions. The 3-sphere is a three-dimensional space, and the natural way to define it, as in Milnor’s definition, is as a surface in four dimensions: all the points at distance one from the centre of a four-dimensional ball.</p>
+        <p>According to <a href="https://maa.org/news/perelman-awarded-1-million-prize-for-proving-poincar-conjecture" target="_blank" rel="noopener">the Mathematical Association of America</a>, Poincaré’s question concerns three-dimensional shapes that live in four-dimensional space, and because these cannot be visualised directly, he wanted a test that would recognise a 3-sphere however distorted it was. The loop test is that kind of test: it can be checked from the inside, without stepping into the fourth dimension to look.</p>
+        <p>This is the same move that runs through the other essays here on the fourth dimension. As in <a href="/writing/what-flatland-teaches-about-the-fourth-dimension">what Flatland teaches about the fourth dimension</a>, a being living inside a space can still reason about its overall shape. A flat being cannot see the ball it lives on, but it can drag loops around and notice that they all shrink.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Spheres by dimension</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Sphere</th>
+      <th>Its own dimension</th>
+      <th>Lives naturally in</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Circle</td>
+        <td>1</td>
+        <td>A flat plane, 2 dimensions</td>
+      </tr>
+      <tr>
+        <td>Ordinary sphere’s surface</td>
+        <td>2</td>
+        <td>Ordinary space, 3 dimensions</td>
+      </tr>
+      <tr>
+        <td>3-sphere</td>
+        <td>3</td>
+        <td>Four-dimensional space</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">The 3-sphere definition is from <a href="https://www.claymath.org/wp-content/uploads/2022/06/poincare.pdf" target="_blank" rel="noopener">Milnor (Clay Mathematics Institute)</a>.</div>
+</figure>
+        <h2 id="poincar-s-first-mistake">Poincaré’s first mistake</h2>
+        <p>The conjecture began with an error. According to <a href="https://www.claymath.org/wp-content/uploads/2022/06/poincare.pdf" target="_blank" rel="noopener">Milnor</a>, Poincaré first claimed, in 1900, that a closed space with the same homology as a sphere, a coarser algebraic fingerprint, must actually be a sphere. He then found that this was false. His 1904 paper gave a counterexample, a space assembled from pieces built on the icosahedron, which has the same homology as the 3-sphere yet contains a closed curve that cannot be shrunk to a point.</p>
+        <p>That discovery is why the loop condition matters. Having seen that the coarser test fails, Poincaré asked, in Milnor’s words, a corresponding question in dimension 3 using the finer test of whether loops can be shrunk. He did not claim to know the answer, and it stayed open for almost a century.</p>
+        <h2 id="higher-dimensions-went-first">Higher dimensions went first</h2>
+        <p>One of the strangest parts of the story is that the conjecture was proved in higher dimensions before the three-dimensional case. The question generalises naturally: is every space that looks like a sphere in the relevant sense actually a sphere, in any number of dimensions? <a href="https://mathworld.wolfram.com/PoincareConjecture.html" target="_blank" rel="noopener">MathWorld</a> gives the generalised form for n-dimensional spaces.</p>
+        <p>Stephen Smale announced a proof for high dimensions in 1960, according to <a href="https://www.claymath.org/wp-content/uploads/2022/06/poincare.pdf" target="_blank" rel="noopener">Milnor</a>, covering five dimensions and above. <a href="https://mathworld.wolfram.com/PoincareConjecture.html" target="_blank" rel="noopener">MathWorld</a> records the details: Smale proved the case of seven or more dimensions in 1961 and later extended it to five and above, with Zeeman handling five dimensions in 1961 and Stallings six in 1962. The four-dimensional case, Milnor notes, had to wait twenty years, for the work of Michael Freedman, published in 1982, for which Freedman received the Fields Medal in 1986.</p>
+        <p>The methods were different in each case. Smale, Milnor explains, built up his spaces by adding handles, attaching simple pieces one at a time and then cancelling them out. Freedman’s four-dimensional proof used non-differentiable methods, working with shapes too rough to allow the smooth tools that succeed in higher dimensions. Neither approach carried over to dimension three.</p>
+        <p>One loose way to picture why, offered here as an analogy rather than the mathematics, is that extra dimensions leave more room to move things out of each other’s way. Whatever the reason, dimensions three and four turned out to be the hard cases.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">The conjecture, dimension by dimension</figcaption>
+  <div class="yt-stages">
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">1</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">1904 · Poincaré</div>
+        <div class="yt-stage__txt">Asks the three-dimensional question after his 1900 claim fails.</div>
+      </div>
+    </div>
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">2</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">1960 to 1962 · Five and up</div>
+        <div class="yt-stage__txt">Smale, with Zeeman and Stallings, settles every dimension from five upward.</div>
+      </div>
+    </div>
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">3</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">1982 · Four</div>
+        <div class="yt-stage__txt">Freedman proves the four-dimensional case.</div>
+      </div>
+    </div>
+    <div class="yt-stage">
+      <div class="yt-stage__rail">
+        <div class="yt-stage__num">4</div>
+        <div class="yt-stage__line"></div>
+      </div>
+      <div class="yt-stage__body">
+        <div class="yt-stage__ttl">2002 to 2003 · Three</div>
+        <div class="yt-stage__txt">Perelman posts the work that settles the original question.</div>
+      </div>
+    </div>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://www.claymath.org/wp-content/uploads/2022/06/poincare.pdf" target="_blank" rel="noopener">Milnor</a>; <a href="https://mathworld.wolfram.com/PoincareConjecture.html" target="_blank" rel="noopener">MathWorld</a>; <a href="https://arxiv.org/abs/math/0211159" target="_blank" rel="noopener">Perelman (2002)</a>.</div>
+</figure>
+        <h2 id="how-it-was-solved">How it was solved</h2>
+        <p>The route to the three-dimensional case went through a bigger idea. In 1983, Milnor writes, William Thurston conjectured that every compact three-dimensional space can be cut up along spheres and tori into pieces that each carry one of a small number of simple geometric structures. This geometrization conjecture, if true, would imply the Poincaré conjecture.</p>
+        <p>The tool came from Richard Hamilton, who studied what is called the Ricci flow. In Milnor’s description, the shape’s measurements are required to change with time so that distances decrease in directions of positive curvature, which this essay would compare, loosely, to heat spreading out until a temperature is even. The hope was that any space satisfying Poincaré’s condition would flow into a perfectly round 3-sphere. The difficulty, Milnor notes, is that the flow may develop singularities, places where it breaks down.</p>
+        <p>Grigori Perelman overcame that difficulty. His first paper, <a href="https://arxiv.org/abs/math/0211159" target="_blank" rel="noopener">posted to arXiv on 11 November 2002</a>, says in its abstract that it verifies several assertions related to Richard Hamilton’s program for the proof of Thurston geometrization conjecture for closed three-manifolds, and gives a sketch of an eclectic proof of this conjecture. Further papers followed. <a href="https://mathworld.wolfram.com/PoincareConjecture.html" target="_blank" rel="noopener">MathWorld</a> notes that the work established the geometrization conjecture, from which the Poincaré conjecture follows immediately, and that it has since been verified.</p>
+        <h2 id="two-prizes-declined">Two prizes declined</h2>
+        <p>Recognition followed, and Perelman refused it. In August 2006, at the International Congress of Mathematicians in Madrid, he was awarded the Fields Medal for his work on Ricci flow, but did not accept it. According to <a href="https://www.nature.com/news/2006/060821/full/news060821-5.html" target="_blank" rel="noopener">Nature News</a>, the president of the International Mathematical Union, John Ball, said “I regret that Dr Perelman has declined to accept,” and that his reasons centred around his feeling of isolation from the mathematical community, and not wanting to be seen as a figurehead. Perelman told The Sunday Telegraph, Nature reported, “I do not think anything that I say can be of the slightest public interest.” The other medallists that year were Andrei Okounkov, Terence Tao and Wendelin Werner.</p>
+        <p>In 2010, the Clay Mathematics Institute awarded him its $1 million Millennium Prize. According to the <a href="https://maa.org/news/perelman-awarded-1-million-prize-for-proving-poincar-conjecture" target="_blank" rel="noopener">MAA</a>, the institute’s press release was dated 18 March 2010, making this the first of its seven Millennium Problems to be solved. The institute later published the lectures from a conference it held to celebrate the resolution, as a <a href="https://www.claymath.org/resource/the-poincare-conjecture/" target="_blank" rel="noopener">volume</a> with contributions from mathematicians including Michael Atiyah, Simon Donaldson and Gang Tian. The institute’s president, James Carlson, said: “Resolution of the Poincaré conjecture by Grigoriy Perelman brings to a close the century-long quest for the solution.”</p>
+        <p>Perelman turned that down too. <a href="https://physicstoday.aip.org/news/mathematician-turns-down-1-million-prize-for-proving-the-poincare-conjecture" target="_blank" rel="noopener">Physics Today</a> reported in July 2010 that he had turned down the award and the $1 million prize. The <a href="https://www.rdworldonline.com/russian-mathematician-rejects-1-million-millennium-prize/" target="_blank" rel="noopener">Associated Press</a>, citing the Russian news agency Interfax, reported that he considered the decision unfair, and that he believed his contribution to proving the conjecture was no greater than that of the American mathematician Richard Hamilton, who first suggested a programme for the solution.</p>
+        <h2 id="is-the-universe-a-3-sphere">Is the universe a 3-sphere?</h2>
+        <p>It is tempting to read the conjecture as a statement about the shape of the cosmos, and popular accounts sometimes do. It is not. The conjecture is a theorem about mathematical spaces: if a closed three-dimensional space passes the loop test, it is a 3-sphere. It says nothing about whether our universe is closed, or finite, or passes the test.</p>
+        <p>Whether physical space has any particular overall shape is a question for observation, not for topology alone. And the four-dimensional space in which the 3-sphere is drawn is a mathematical convenience; it does not mean there is a fourth spatial direction in the physical world. The essay on <a href="/writing/what-physicists-mean-by-extra-dimensions">what physicists mean by extra dimensions</a> sets out what physicists have looked for in that regard, and the essay on <a href="/writing/what-it-means-to-call-time-the-fourth-dimension">what it means to call time the fourth dimension</a> explains why the fourth dimension of relativity is time, a different idea again.</p>
+        <aside class="yt-cl yt-cl--warn"><div class="yt-cl__k">Watch out</div><div class="yt-cl__t">A note on metaphors</div><div class="yt-cl__b"><p>The image of shrinking every loop to a point is sometimes borrowed for life, as if every problem could be pulled tight and made to vanish. That is a metaphor, and a loose one. The theorem is about the topology of three-dimensional spaces, and it carries no lesson about people.</p></div></aside>
+        <h2 id="what-this-does-and-does-not-say">What this does and does not say</h2>
+        <p>Read plainly, the Poincaré conjecture says that one simple test, whether every loop shrinks to a point, is enough to recognise the 3-sphere among closed three-dimensional spaces. It took almost a century, a detour through higher dimensions, and a new way of letting shapes flow to prove it. It does not tell us the shape of the universe, and it does not require a physical fourth dimension.</p>
+        <p>Other essays here explore the same territory. <a href="/writing/what-a-tesseract-is">What a tesseract is</a> describes another shape that can only be built in four dimensions. The essay on Flatland, linked above, shows how a being can reason about a dimension it cannot see. And <a href="/writing/what-the-impostor-phenomenon-is">what the impostor phenomenon is</a> looks at a very different response to recognition, the feeling of not deserving it, which is not what Perelman described.</p>
+
+      <div class="yt-post__takeaway">
+        <div class="yt-post__takeaway-label">The short version</div>
+        <p>The Poincaré conjecture asks whether every closed three-dimensional space in which every loop can be shrunk to a point must be, topologically, a 3-sphere: the set of points in four-dimensional space at distance one from the origin. Poincaré posed it in 1904, after an earlier, mistaken version. The analogous statements in higher dimensions were proved first, by Stephen Smale and others around 1960 to 1962 for five or more dimensions, and by Michael Freedman in 1982 for four. The three-dimensional case fell to Grigori Perelman, who posted his work online from November 2002, building on Richard Hamilton’s Ricci flow and proving the broader geometrization conjecture of William Thurston. Perelman declined the Fields Medal in 2006 and, in 2010, the Clay Mathematics Institute’s $1 million Millennium Prize, reportedly saying his contribution was no greater than Hamilton’s. The conjecture is about mathematical spaces; whether our universe has this shape is a separate question.</p>
+      </div>
+    </div>
+
+    <div class="yt-opnote">
+      <div class="yt-opnote__label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Author's note</div>
+      <p>Perelman’s name is transliterated in different ways; the sources quoted use Grigory, Grigoriy and Grisha. The reasons given for his refusals are as reported by others; he has said little in public himself.</p>
+    </div>
+    <section class="yt-faq">
+      <h2 class="yt-faq__h" id="faq">Frequently asked</h2>
+      <details class="yt-faq__item">
+        <summary>What does the Poincaré conjecture say in simple terms?</summary>
+        <div class="yt-faq__a">That any closed three-dimensional space in which every loop can be shrunk to a point is, up to stretching, the 3-sphere, the three-dimensional analogue of the surface of a ball.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Why does the Poincaré conjecture involve four dimensions?</summary>
+        <div class="yt-faq__a">Because the 3-sphere is most naturally defined as the set of points in four-dimensional space at distance one from a centre, just as the ordinary sphere’s surface sits in three dimensions.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Who proved the Poincaré conjecture?</summary>
+        <div class="yt-faq__a">Grigori Perelman, in papers posted online from November 2002, building on Richard Hamilton’s Ricci flow. His work proved Thurston’s broader geometrization conjecture, from which the Poincaré conjecture follows.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Why did Perelman turn down the prizes?</summary>
+        <div class="yt-faq__a">He declined the 2006 Fields Medal and the 2010 Clay Millennium Prize. Reports said he felt isolated from the mathematical community, did not want to be a figurehead, and considered his contribution no greater than Hamilton’s.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Does the Poincaré conjecture mean the universe is a sphere?</summary>
+        <div class="yt-faq__a">No. It is a theorem about mathematical spaces. Whether our universe is closed or has any particular shape is a question for observation.</div>
+      </details>
+    </section>
+
+    <div class="yt-post__foot">
+      <div class="yt-post__foot-label">Related reading</div>
+      <div class="yt-post__related">
+          <a class="yt-post__rel" href="/writing/what-a-tesseract-is" aria-label="What a tesseract is, and how one Victorian tried to teach people to see it">
+            <span class="yt-post__rel-cat" aria-hidden="true">Fourth dimension</span>
+            <span class="yt-post__rel-title">What a tesseract is, and how one Victorian tried to teach people to see it</span>
+          </a>
+          <a class="yt-post__rel" href="/writing/what-flatland-teaches-about-the-fourth-dimension" aria-label="What Flatland teaches about the fourth dimension, and what it does not">
+            <span class="yt-post__rel-cat" aria-hidden="true">Fourth dimension</span>
+            <span class="yt-post__rel-title">What Flatland teaches about the fourth dimension, and what it does not</span>
+          </a>
+      </div>
+
+      <div class="yt-post__author">
+        <span class="yt-post__avatar" aria-hidden="true">YT</span>
+        <div>
+          <div class="yt-post__author-name">Yash Tulsyani</div>
+          <div class="yt-post__author-role">Writer</div>
+          <p class="yt-post__author-bio">I write about relationships, insecurity and attention, and about where the physics we borrow to describe them stops being literal. Two books so far, both unpublished.</p>
+          <div class="yt-post__author-links">
+            <a class="yt-post__author-link" href="/about">More about Yash Tulsyani</a>
+            <a class="yt-post__author-link" href="/books">The books</a>
+            <a class="yt-post__author-link" href="/contact">Write to me</a>
+            <a class="yt-post__author-link" href="https://linkedin.com/in/yashtulsyani" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-post__cta">
+        <div class="yt-post__cta-h">The longer version</div>
+        <p>Both books take this argument further than an essay can, and both hold the same line about where the physics stops.</p>
+        <a class="yt-post__btn" href="/books">Read about the books</a>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+/* Upgrades the category and date to what is set in WordPress. Progressive
+   enhancement only: the build-time values are already rendered above, so a
+   failure here leaves a correct page rather than a blank one.
+
+   Reads markup WordPress has already emitted. No network request.
+   Hardened per HANDOVER section 3: zero and-and, zero pipe-pipe, ASCII only,
+   addEventListener only. */
+(function(){
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun',
+                'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function metaOf(prop){
+    var m = document.querySelector('meta[property="' + prop + '"]');
+    if(!m){ return ''; }
+    var v = m.getAttribute('content');
+    return v ? v : '';
+  }
+
+  /* Dates are shown in the site's own time (Settings > General is
+     Asia/Kolkata, UTC+5:30; ytconf.SITE_TIMEZONE), not the reader's, so
+     every reader sees the same date and it matches the /writing card.
+     India has no daylight saving, so a fixed offset is exact. */
+  var SITE_OFFSET_MIN = 330;
+  function fmt(v){
+    if(!v){ return ''; }
+    var d = new Date(v);
+    if(isNaN(d.getTime())){ return ''; }
+    var s = new Date(d.getTime() + SITE_OFFSET_MIN * 60000);
+    var day = s.getUTCDate();
+    var dd = day < 10 ? '0' + day : '' + day;
+    return dd + ' ' + MONTHS[s.getUTCMonth()] + ' ' + s.getUTCFullYear();
+  }
+
+  function ldNodes(){
+    var out = [];
+    var tags = document.querySelectorAll('script[type="application/ld+json"]');
+    for(var i = 0; i < tags.length; i++){
+      var data;
+      try { data = JSON.parse(tags[i].textContent); }
+      catch(e){ continue; }
+      var graph = data['@graph'] ? data['@graph'] : [data];
+      for(var j = 0; j < graph.length; j++){ out.push(graph[j]); }
+    }
+    return out;
+  }
+
+  function category(){
+    /* Yoast puts the primary category on the Article node. Some setups do not,
+       so fall back to the middle item of its BreadcrumbList, which is the
+       category step between Home and the post. */
+    var nodes = ldNodes();
+    var i;
+    for(i = 0; i < nodes.length; i++){
+      var sec = nodes[i].articleSection;
+      if(!sec){ continue; }
+      if(Object.prototype.toString.call(sec) === '[object Array]'){
+        if(sec.length){ return String(sec[0]); }
+      } else {
+        return String(sec);
+      }
+    }
+    for(i = 0; i < nodes.length; i++){
+      if(nodes[i]['@type'] !== 'BreadcrumbList'){ continue; }
+      var list = nodes[i].itemListElement;
+      if(!list){ continue; }
+      if(list.length < 3){ continue; }
+      var mid = list[list.length - 2];
+      if(!mid){ continue; }
+      if(mid.name){ return String(mid.name); }
+    }
+    return '';
+  }
+
+  function setAll(sel, text){
+    if(!text){ return; }
+    var els = document.querySelectorAll(sel);
+    for(var i = 0; i < els.length; i++){ els[i].textContent = text; }
+  }
+
+  /* Reading time is NOT taken from Yoast. On this site every post begins
+     with the sidebar synced pattern, and Yoast counts that pattern's code as
+     words, so its estimate (twitter:data2) came out two to three times too
+     long (a live audit on 3 Nov 2026 found 24 to 29 minutes for essays of
+     2,000 to 2,700 words). The baked value is the body at 225 words a minute,
+     and the /writing card shows the same figure. */
+
+  function start(){
+    setAll('[data-yt-cat]', category());
+
+    var pub = metaOf('article:published_time');
+    setAll('[data-yt-date]', fmt(pub));
+
+    /* "Updated" only when the post was genuinely revised. WordPress stamps
+       modified_time on every save, so a same-day one says nothing. */
+    var modRaw = metaOf('article:modified_time');
+    if(!modRaw){ return; }
+    var mod = new Date(modRaw);
+    if(isNaN(mod.getTime())){ return; }
+    var p = new Date(pub);
+    if(!isNaN(p.getTime())){
+      if((mod.getTime() - p.getTime()) / 86400000 < 1){ return; }
+    }
+    var slot = document.querySelector('[data-yt-updated]');
+    if(!slot){ return; }
+    var DOT = String.fromCharCode(183);   /* middot, kept out of the source
+       because WordPress mangles non-ASCII in a Custom HTML block's JS */
+    slot.textContent = ' ' + DOT + ' Updated: ' + fmt(modRaw);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://yashtulsyani.com/writing/what-the-poincare-conjecture-says/#faq",
+      "mainEntityOfPage": "https://yashtulsyani.com/writing/what-the-poincare-conjecture-says/",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does the Poincaré conjecture say in simple terms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That any closed three-dimensional space in which every loop can be shrunk to a point is, up to stretching, the 3-sphere, the three-dimensional analogue of the surface of a ball."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the Poincaré conjecture involve four dimensions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the 3-sphere is most naturally defined as the set of points in four-dimensional space at distance one from a centre, just as the ordinary sphere’s surface sits in three dimensions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who proved the Poincaré conjecture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Grigori Perelman, in papers posted online from November 2002, building on Richard Hamilton’s Ricci flow. His work proved Thurston’s broader geometrization conjecture, from which the Poincaré conjecture follows."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did Perelman turn down the prizes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "He declined the 2006 Fields Medal and the 2010 Clay Millennium Prize. Reports said he felt isolated from the mathematical community, did not want to be a figurehead, and considered his contribution no greater than Hamilton’s."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the Poincaré conjecture mean the universe is a sphere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is a theorem about mathematical spaces. Whether our universe is closed or has any particular shape is a question for observation."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
