@@ -87,7 +87,7 @@ POST = dict(
         ]),
         ("Phenomenon, not syndrome", [
             "The popular name gets one thing wrong in its originator’s eyes. According to the " + a(MON, "APA’s Monitor on Psychology") + " in 2021, Clance prefers the words phenomenon or experience to syndrome, and notes that impostor phenomenon isn’t a clinical diagnosis. “It’s a phenomenon experienced by many, and remembering that can help normalize it,” she said.",
-            "The distinction matters. A syndrome sounds like a disorder that some people have and others do not, located inside the person. A phenomenon is something that happens to people, often in particular situations. That opens the question of what situations make it more likely.",
+            "The distinction matters. A syndrome sounds like a disorder that some people have and others do not, located inside the person. A phenomenon is something that happens to people, often in particular situations. That opens the question of what situations make it more likely, and it changes how people can talk about it: as something many share, rather than as a private defect.",
         ]),
         ("The role of the setting", [
             "Researchers have increasingly argued that impostor feelings are not only an individual trait. A " + a(FEEN, "2020 paper in Frontiers in Psychology") + " by Feenstra and colleagues, which puts syndrome in quotation marks in its title, argues that research has mostly treated the feelings as an individual problem, and calls for attention to the role of the environment in eliciting their impostor feelings and for more structural and effective solutions.",
