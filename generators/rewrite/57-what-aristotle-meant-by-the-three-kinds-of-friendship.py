@@ -32,6 +32,7 @@ PAKALUK = "https://www.cambridge.org/core/product/FF4BF4BC53565712F75BFC3B7BD634
 ESSAY43 = '<a href="/writing/what-the-stoics-meant-by-what-is-up-to-us">what the Stoics meant by what is up to us</a>'
 ESSAY52 = '<a href="/writing/what-epicurus-meant-by-pleasure">what Epicurus meant by pleasure</a>'
 ESSAY55 = '<a href="/writing/what-the-michelangelo-phenomenon-says">what the Michelangelo phenomenon says</a>'
+ESSAY67 = '<a href="/writing/what-montaigne-meant-by-because-it-was-he">what Montaigne meant by because it was he, because it was I</a>'
 
 POST = dict(
     slug="what-aristotle-meant-by-the-three-kinds-of-friendship", num=57, cat="Philosophy", read="auto",
@@ -105,7 +106,7 @@ POST = dict(
         ("What this offers, and what it does not", [
             "Read in his own words, Aristotle offers a clear test rather than a ranking of people: what, in this friendship, is actually loved? If it is mainly use or pleasure, the friendship may still be good, but it will probably not survive the end of the use or the pleasure. If it is the other person, for their own sake, it can.",
             "It also offers a realistic sense of scale. The best friendships take time, cannot be many, and depend on both people continuing to be who they are. That is not a counsel of despair; it is a reason to invest in the few.",
-            "Other essays here meet the idea at different points. " + ESSAY52.replace(">what Epicurus", ">What Epicurus") + " describes another ancient school that put friendship near the top of what makes a life good. And " + ESSAY55.replace(">what the Michelangelo", ">What the Michelangelo") + " looks at modern research on how close partners help each other become who they want to be, which echoes Aristotle’s idea of friends who want the good for each other.",
+            "Other essays here meet the idea at different points. " + ESSAY52.replace(">what Epicurus", ">What Epicurus") + " describes another ancient school that put friendship near the top of what makes a life good. " + ESSAY67.replace(">what Montaigne", ">What Montaigne") + " follows a Renaissance writer who described a friendship that, in his view, needed no reason at all. And " + ESSAY55.replace(">what the Michelangelo", ">What the Michelangelo") + " looks at modern research on how close partners help each other become who they want to be, which echoes Aristotle’s idea of friends who want the good for each other.",
         ]),
     ],
     note=[

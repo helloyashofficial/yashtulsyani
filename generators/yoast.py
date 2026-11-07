@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-montaigne-meant-by-because-it-was-he": dict(
+        focus="Montaigne friendship",
+        title="Montaigne on friendship: because it was he, because it was I",
+        desc="Montaigne on friendship: what he meant by because it was he, because it was I, his bond with La Boétie, and why perfect friendship allows no rival."),
     "what-the-impostor-phenomenon-is": dict(
         focus="impostor phenomenon",
         title="The impostor phenomenon: why it is not a syndrome",

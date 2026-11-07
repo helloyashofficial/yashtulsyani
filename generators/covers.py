@@ -47,6 +47,7 @@ BY_SLUG = {
     "what-a-tesseract-is": "hypercube",
     "what-the-research-says-about-love-languages": "channels",
     "what-the-impostor-phenomenon-is": "doubled",
+    "what-montaigne-meant-by-because-it-was-he": "seam",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -567,6 +568,17 @@ def doubled(uid):
     out.append(path("M208 188 Q 262 124 316 188", "c", ' stroke-dasharray="3 5"'))
     return out
 
+
+def seam(uid):
+    """Montaigne on friendship: two lines that come in from apart and run
+    together into one, with no sign of the seam where they joined."""
+    out = [path("M60 70 C 170 70, 200 120, 260 120"),
+           path("M60 170 C 170 170, 200 120, 260 120"),
+           line(260, 120, 420, 120)]
+    out.append(dot(60, 70, 3))
+    out.append(dot(60, 170, 3))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -588,7 +600,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam)
 
 
 def cover(slug, subject):
