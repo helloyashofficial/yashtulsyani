@@ -49,6 +49,7 @@ BY_SLUG = {
     "what-the-impostor-phenomenon-is": "doubled",
     "what-montaigne-meant-by-because-it-was-he": "seam",
     "what-the-uncertainty-principle-says": "bells",
+    "what-the-poincare-conjecture-says": "shrink",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -598,6 +599,18 @@ def bells(uid):
     out.append(path(bell(330, 34, 42), "b"))
     return out
 
+
+def shrink(uid):
+    """The Poincare conjecture's test: a loop on a sphere, drawn at three
+    stages as it slides and shrinks down to a single point."""
+    cx, cy, r = 240, 120, 92
+    out = [circle(cx, cy, r)]
+    out.append(path("M%s %s A %s 22 0 0 0 %s %s" % (cx - r, cy, r, cx + r, cy), "c", ' stroke-dasharray="2 5"'))
+    for k, (rx, ry, oy) in enumerate(((70, 18, -28), (44, 11, -56), (20, 5, -76))):
+        out.append('<ellipse class="yt-cv-%s" cx="%s" cy="%s" rx="%s" ry="%s"/>' % ("a" if k == 0 else "b", f(cx), f(cy + oy), f(rx), f(ry)))
+    out.append(dot(cx, cy - 88, 3))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -619,7 +632,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam, bells=bells)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam, bells=bells, shrink=shrink)
 
 
 def cover(slug, subject):

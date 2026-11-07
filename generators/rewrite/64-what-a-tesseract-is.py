@@ -36,6 +36,7 @@ ESSAY49 = '<a href="/writing/what-flatland-teaches-about-the-fourth-dimension">w
 ESSAY59 = '<a href="/writing/what-physicists-mean-by-extra-dimensions">what physicists mean by extra dimensions</a>'
 ESSAY63 = '<a href="/writing/what-time-dilation-is">what time dilation is</a>'
 ESSAY41 = '<a href="/writing/what-the-observer-effect-actually-says">what the observer effect actually says</a>'
+ESSAY69 = '<a href="/writing/what-the-poincare-conjecture-says">what the Poincaré conjecture says</a>'
 
 POST = dict(
     slug="what-a-tesseract-is", num=64, cat="Fourth dimension", read="auto",
@@ -112,7 +113,7 @@ POST = dict(
         ]),
         ("What this does and does not say", [
             "Read literally, a tesseract is the next shape in a sequence that runs from point to line to square to cube: sixteen corners, eight cubes, and a shadow in our space that looks like a cube inside a cube. The man who named it believed people could learn to sense it directly, and built a strange and memorable method for trying. Whether anyone succeeded is something the sources do not say.",
-            "Other essays here explore the same territory. The essay on Flatland, linked above, follows the flat-world analogy in the novel that made it famous. " + ESSAY63.replace(">what time dilation", ">What time dilation") + " looks at the measured physics of time that the fourth dimension of relativity describes. And the essay on time as the fourth dimension, linked above, explains how that idea differs from Hinton’s.",
+            "Other essays here explore the same territory. The essay on Flatland, linked above, follows the flat-world analogy in the novel that made it famous. " + ESSAY63.replace(">what time dilation", ">What time dilation") + " looks at the measured physics of time that the fourth dimension of relativity describes. " + ESSAY69.replace(">what the", ">What the") + " follows another shape that lives most naturally in four dimensions, the 3-sphere, and the century-long effort to understand it. And the essay on time as the fourth dimension, linked above, explains how that idea differs from Hinton’s.",
         ]),
     ],
     note=[
