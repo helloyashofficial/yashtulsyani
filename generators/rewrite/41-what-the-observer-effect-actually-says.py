@@ -17,6 +17,7 @@ SEPDEC = '<a href="https://plato.stanford.edu/entries/qm-decoherence/"%s>the Sta
 NOBEL = '<a href="https://www.nobelprize.org/prizes/physics/2022/press-release/"%s>the Royal Swedish Academy of Sciences&rsquo; 2022 prize announcement</a>' % EXT
 ENT = '<a href="/writing/what-entanglement-is">what quantum entanglement actually is</a>'
 ESSAY1 = '<a href="/writing/why-reassurance-is-never-enough">why reassurance is never enough</a>'
+UNC = '<a href="/writing/what-the-uncertainty-principle-says">what the uncertainty principle actually says</a>'
 BOOKS = '<a href="/books">both books</a>'
 
 POST = dict(
@@ -100,7 +101,7 @@ POST = dict(
         ("What entanglement does and does not mean", [
             "Entanglement is the other quantum word that travels furthest from physics, usually into claims that two people are mysteriously linked. The physics is precise. In " + NOBEL + ", entanglement is described as a state where two particles behave like a single unit even when they are separated, and where what happens to one particle determines what happens to the other.",
             "The prize recognised experiments showing that this correlation is stronger than any theory based on hidden local properties could produce, by violating what are called Bell inequalities. The announcement concludes that quantum mechanics cannot be replaced by a theory that uses hidden variables. (Physicists usually add the word local: hidden variables of the kind those experiments test.)",
-            "What the result is about is correlations between measurement outcomes on physical systems. Entanglement itself is not rare: as the decoherence section showed, everyday objects become entangled with their surroundings all the time. That is exactly why a clean, usable correlation between two particular objects is so hard to keep, and why the Nobel experiments needed carefully isolated particles. None of it is about people, feelings or intentions. Two people thinking of each other is not entanglement in this sense, and nothing in the Nobel work suggests it is. The full story of entanglement, from Einstein's objection to the 2015 experiments, is told in " + ENT + ".",
+            "What the result is about is correlations between measurement outcomes on physical systems. Entanglement itself is not rare: as the decoherence section showed, everyday objects become entangled with their surroundings all the time. That is exactly why a clean, usable correlation between two particular objects is so hard to keep, and why the Nobel experiments needed carefully isolated particles. None of it is about people, feelings or intentions. Two people thinking of each other is not entanglement in this sense, and nothing in the Nobel work suggests it is. The full story of entanglement, from Einstein's objection to the 2015 experiments, is told in " + ENT + ". A related idea, often mixed up with the observer effect, is set out in " + UNC + ".",
         ]),
         ("Three tests for a physics metaphor", [
             "None of this means quantum vocabulary has no place in writing about people. Metaphors are how ideas move between fields, and the books on this site use these words deliberately. The difference between an honest borrowing and a misleading one comes down to three tests.",

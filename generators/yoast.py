@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-uncertainty-principle-says": dict(
+        focus="uncertainty principle",
+        title="The uncertainty principle: what it says and does not",
+        desc="The uncertainty principle explained: what Heisenberg claimed in 1927, why it is about spreads not just disturbance, and what 2012 experiments found."),
     "what-montaigne-meant-by-because-it-was-he": dict(
         focus="Montaigne friendship",
         title="Montaigne on friendship: because it was he, because it was I",
