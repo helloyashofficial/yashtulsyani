@@ -1,0 +1,385 @@
+<!-- ============================================================
+     ESSAY  ·  what-the-uncertainty-principle-says
+     yashtulsyani.com  ·  Custom HTML block
+
+     THIS FILE IS THE TEMPLATE newpost.py BUILDS ESSAYS FROM. It is not
+     pasted anywhere and lives outside production-blocks on purpose.
+     Ported from FSDM's 48-post-content-audit.html (24 Oct 2026): the
+     same anatomy, with FSDM's content removed and this site's crumb,
+     byline, author card and closing link put in.
+
+     ONE BLOCK PER ESSAY. Paste it and nothing else into the Post body,
+     with the sidebar block reaching the page as on every other page.
+
+     The wrapper is a DIV with class yt-shell, not a <main>, so the
+     sidebar's fallback finds it and never adds padding to <body>.
+
+     The contents sit in a sticky right rail above 1240px and collapse
+     inline, above the article, below it. One element either way.
+
+     One small script at the bottom upgrades the category, date and read
+     time to the values WordPress and Yoast set. The build-time values are
+     already in the markup, so a failure leaves a correct page.
+
+     Regenerate with generators/rewrite/68-what-the-uncertainty-principle-says.py
+     FOCUS KEYPHRASE : uncertainty principle
+     SEO TITLE       : The uncertainty principle: what it says and does not  [52 chars]
+     META DESCRIPTION: The uncertainty principle explained: what Heisenberg claimed in 1927, why it is about spreads not just disturbance, and what 2012 experiments found.  [148 chars]
+     SLUG            : /writing/what-the-uncertainty-principle-says
+     ============================================================ -->
+<!-- Essay styling lives in 01-sidebar.html, emitted once for the whole
+     site. Re-paste the sidebar after any design change. -->
+<div class="yt-shell yt-post-shell">
+  <article class="yt-post">
+
+    <div class="yt-post__crumb">
+      <a class="yt-post__chip" href="/writing">Writing</a> · <span data-yt-cat>Physics and time</span>
+    </div>
+
+    <div class="yt-post__meta"><span data-yt-date>07 Nov 2026</span><span data-yt-updated></span> · <span data-yt-read>9 min read</span></div>
+
+    <h1 class="yt-post__title">What the uncertainty principle actually says, and what it does not</h1>
+    <p class="yt-post__dek">The uncertainty principle is often summed up as “measuring something disturbs it.” That is how Heisenberg first explained it in 1927, but it is only part of the story. The modern form is about the spread of a quantum state itself, and experiments in 2012 showed that measurement need not disturb as much as Heisenberg’s original formula suggested.</p>
+    <div class="yt-post__cover"><svg class="yt-cv" viewBox="0 0 480 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" fill="none" stroke-width="1" stroke-linecap="round"><line class="yt-cv-c" x1="40" y1="180" x2="440" y2="180"/><path class="yt-cv-a" d="M92 180 L94 179.9 L96 179.9 L98 179.7 L100 179.5 L102 179.2 L104 178.7 L106 177.8 L108 176.6 L110 174.7 L112 172.1 L114 168.5 L116 163.8 L118 157.6 L120 150.1 L122 141 L124 130.7 L126 119.2 L128 107.2 L130 95.2 L132 83.9 L134 74.1 L136 66.5 L138 61.7 L140 60 L142 61.7 L144 66.5 L146 74.1 L148 83.9 L150 95.2 L152 107.2 L154 119.2 L156 130.7 L158 141 L160 150.1 L162 157.6 L164 163.8 L166 168.5 L168 172.1 L170 174.7 L172 176.6 L174 177.8 L176 178.7 L178 179.2 L180 179.5 L182 179.7 L184 179.9 L186 179.9 L188 180"/><path class="yt-cv-b" d="M194 180 L196 180 L198 180 L200 180 L202 180 L204 180 L206 179.9 L208 179.9 L210 179.9 L212 179.9 L214 179.9 L216 179.8 L218 179.8 L220 179.8 L222 179.7 L224 179.7 L226 179.6 L228 179.5 L230 179.4 L232 179.3 L234 179.2 L236 179.1 L238 178.9 L240 178.7 L242 178.5 L244 178.3 L246 178 L248 177.7 L250 177.4 L252 177 L254 176.5 L256 176.1 L258 175.5 L260 175 L262 174.3 L264 173.6 L266 172.9 L268 172 L270 171.1 L272 170.2 L274 169.2 L276 168.1 L278 167 L280 165.8 L282 164.5 L284 163.2 L286 161.8 L288 160.4 L290 159 L292 157.5 L294 156 L296 154.5 L298 153 L300 151.5 L302 150.1 L304 148.6 L306 147.3 L308 145.9 L310 144.7 L312 143.5 L314 142.4 L316 141.4 L318 140.5 L320 139.8 L322 139.1 L324 138.6 L326 138.3 L328 138.1 L330 138 L332 138.1 L334 138.3 L336 138.6 L338 139.1 L340 139.8 L342 140.5 L344 141.4 L346 142.4 L348 143.5 L350 144.7 L352 145.9 L354 147.3 L356 148.6 L358 150.1 L360 151.5 L362 153 L364 154.5 L366 156 L368 157.5 L370 159 L372 160.4 L374 161.8 L376 163.2 L378 164.5 L380 165.8 L382 167 L384 168.1 L386 169.2 L388 170.2 L390 171.1 L392 172 L394 172.9 L396 173.6 L398 174.3 L400 175 L402 175.5 L404 176.1 L406 176.5 L408 177 L410 177.4 L412 177.7 L414 178 L416 178.3 L418 178.5 L420 178.7 L422 178.9 L424 179.1 L426 179.2 L428 179.3 L430 179.4 L432 179.5 L434 179.6 L436 179.7 L438 179.7 L440 179.8 L442 179.8 L444 179.8 L446 179.9 L448 179.9 L450 179.9 L452 179.9 L454 179.9 L456 180 L458 180 L460 180 L462 180 L464 180 L466 180"/></svg></div>
+
+    <div class="yt-post__byline">
+      <span class="yt-post__byline-avatar" aria-hidden="true">YT</span>
+      <div>
+        <div class="yt-post__byline-name">Yash Tulsyani</div>
+        <div class="yt-post__byline-role">Writer</div>
+      </div>
+    </div>
+
+    <aside class="yt-post__side">
+      <nav class="yt-post__toc" aria-label="On this page">
+        <div class="yt-post__toc-label">On this page</div>
+        <ol>
+            <li><a href="#what-the-uncertainty-principle-says">What the uncertainty principle says</a></li>
+            <li><a href="#heisenberg-s-1927-paper">Heisenberg’s 1927 paper</a></li>
+            <li><a href="#not-quite-a-disturbance-story">Not quite a disturbance story</a></li>
+            <li><a href="#the-exact-form-spreads-not-nudges">The exact form: spreads, not nudges</a></li>
+            <li><a href="#the-2012-experiments">The 2012 experiments</a></li>
+            <li><a href="#a-disagreement-about-definitions">A disagreement about definitions</a></li>
+            <li><a href="#scale-time-and-the-name">Scale, time and the name</a></li>
+            <li><a href="#what-it-does-not-mean">What it does not mean</a></li>
+            <li><a href="#what-this-does-and-does-not-say">What this does and does not say</a></li>
+          </ol>
+      </nav>
+    </aside>
+
+    <div class="yt-post__body">
+        <h2 id="what-the-uncertainty-principle-says">What the uncertainty principle says</h2>
+        <p>The uncertainty principle says that some pairs of quantities, such as a particle’s position and momentum, cannot both be sharply defined at once. The more narrowly one is pinned down, the more spread out the other must be. In its standard modern form it is a statement about quantum states, not about clumsy instruments.</p>
+        <aside class="yt-kt" aria-label="Key takeaways"><div class="yt-kt__h">Key takeaways</div><ul><li>Heisenberg proposed it in 1927, illustrating it with light disturbing an electron.</li><li>Kennard gave the first exact form the same year, about statistical spreads.</li><li>That form concerns how sharply a state defines two quantities, not disturbance.</li><li>In 2012, experiments showed measurement can disturb less than Heisenberg’s formula implied.</li><li>Other physicists proved a Heisenberg-type trade-off using different definitions.</li><li>Nothing in it involves consciousness or minds.</li></ul></aside>
+        <p>This essay is in the literal register, like <a href="/writing/what-the-observer-effect-actually-says">what the observer effect actually says</a>. It sets out what Heisenberg wrote, what the later mathematics says, and what the experiments found, and keeps any borrowing for human life to one labelled box near the end.</p>
+        <aside class="yt-cl yt-cl--definition"><div class="yt-cl__k">Definition</div><div class="yt-cl__t">Uncertainty relation</div><div class="yt-cl__b"><p>In the form due to Kennard (1927), described in the <a href="https://plato.stanford.edu/ENTRIES/qt-uncertainty/" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a>: the product of the standard deviations of position and momentum is at least ħ/2, where ħ is the reduced Planck constant. Standard deviation measures how spread out a quantity’s possible values are.</p></div></aside>
+        <h2 id="heisenberg-s-1927-paper">Heisenberg’s 1927 paper</h2>
+        <p>The principle comes from a 1927 paper by Werner Heisenberg in the Zeitschrift für Physik. Its English translation, issued by NASA in 1983 as <a href="https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19840008978.pdf" target="_blank" rel="noopener">Technical Memorandum 77379</a>, states the core claim in its abstract: “Canonically conjugated variables are determined simultaneously only with a characteristic uncertainty.” Position and momentum are the standard example of such a pair. In the mathematics of the theory, the paper ties this to the fact that the two quantities do not commute: multiplying them in one order gives a different result from multiplying them in the other, as expressed in the relation Pq − qP = h/2πi.</p>
+        <p>Heisenberg made the idea concrete with a thought experiment, often called the gamma-ray microscope. To see where an electron is, you must shine light on it, and to locate it very precisely you need light of very short wavelength. But such light carries a large kick, and when it scatters off the electron it changes the electron’s momentum by an amount that cannot be fully controlled. In the <a href="https://ncatlab.org/nlab/files/Heisenberg-ActualContent.pdf" target="_blank" rel="noopener">NASA translation</a>: “That is, the more precisely the position is determined, the more imprecisely will the impulse be known, and vice-versa.” Impulse is the translation’s word for momentum.</p>
+        <p>Heisenberg drew strong conclusions from this. The paper says that the classical “orbit” of an electron “only comes into being by our observing it,” and that “quantum mechanics once and for all establishes the invalidity of the law of causality.” The law he meant is stated in the paper as “If we know the present precisely, we can calculate the future,” and his point was that the premise fails: the present cannot be known precisely in all its parameters. These sentences have been widely debated, and they are Heisenberg’s interpretation, not the only one physicists hold.</p>
+        <h2 id="not-quite-a-disturbance-story">Not quite a disturbance story</h2>
+        <p>Heisenberg’s microscope makes uncertainty sound like a practical problem: we disturb things when we look at them. That reading was challenged at once. According to the <a href="https://plato.stanford.edu/ENTRIES/qt-uncertainty/" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a>, Niels Bohr objected that it is not the change in the electron’s momentum that matters, but that this change cannot be precisely determined in the same experiment. For Bohr the limit lay in what any single experimental arrangement can define, not in a nudge.</p>
+        <p>Heisenberg himself did not settle on one name for the idea. The encyclopedia notes that his favourite terms were Ungenauigkeitsrelationen, inaccuracy relations, and Unbestimmtheitsrelationen, indeterminacy relations. The two words point in different directions: one suggests our measurements are imprecise, the other that the quantities themselves are not fully determined.</p>
+        <p>The English word uncertainty blurs the difference, and much popular confusion starts there. It sounds as if the particle has an exact position and momentum that we simply cannot find out. In the standard modern reading, that is not what the mathematics says.</p>
+        <h2 id="the-exact-form-spreads-not-nudges">The exact form: spreads, not nudges</h2>
+        <p>The first mathematically exact formulation, the <a href="https://plato.stanford.edu/ENTRIES/qt-uncertainty/" target="_blank" rel="noopener">encyclopedia</a> records, is due to Kennard in 1927: an inequality stating that the product of the standard deviations of position and momentum is at least ħ/2. In 1929, Robertson generalised it to any pair of observables, with the size of the bound set by how the two fail to commute.</p>
+        <p>This version says nothing about measuring devices. It concerns the spreads of the probability distributions that a quantum state assigns to the two quantities. Prepare many particles in the same state, measure position on some and momentum on others, and the spreads in the two sets of results cannot both be made arbitrarily small. The encyclopedia distinguishes these statements about the spreads of the probability distributions from disturbance-type relations, which ask “how much one variable is disturbed by the accurate measurement of another.”</p>
+        <p>So there are really two questions under one name. One is about states: how sharply can a quantum state define two quantities at once? The other is about measurements: how accurately can you measure one quantity without disturbing another? Kennard’s inequality answers the first. Heisenberg’s microscope was an attempt to answer the second.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Two questions under one name</figcaption>
+  <div class="yt-table__wrap">
+  <table class="yt-table">
+    <thead><tr>
+      <th>Question</th>
+      <th>About</th>
+      <th>Classic answer</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>How sharply can a state define both?</td>
+        <td>The quantum state itself</td>
+        <td>Kennard 1927, Robertson 1929</td>
+      </tr>
+      <tr>
+        <td>How much does measuring one disturb the other?</td>
+        <td>The measuring process</td>
+        <td>Heisenberg’s 1927 microscope argument</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="yt-viz__src">Source: <a href="https://plato.stanford.edu/ENTRIES/qt-uncertainty/" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy, The Uncertainty Principle</a>.</div>
+</figure>
+        <h2 id="the-2012-experiments">The 2012 experiments</h2>
+        <p>The measurement question was tested directly in 2012. A Vienna team led by Yuji Hasegawa, working with the Japanese theorist Masanao Ozawa, used neutrons. Rather than position and momentum, the <a href="https://www.eurekalert.org/pub_releases/2012-01/vuot-ayc011612.php" target="_blank" rel="noopener">release</a> explains, they measured the spin of neutrons in two different directions, which obey an uncertainty relation of the same kind. Their <a href="https://arxiv.org/pdf/1201.1833" target="_blank" rel="noopener">paper in Nature Physics</a> reports a neutron optical experiment that records the error of a spin-component measurement and the disturbance it causes. In its words, “The results confirm that both error and disturbance completely obey the new, more general relation,” the one Ozawa had proposed, “but violate the old one in a wide range of an experimental parameter.”</p>
+        <p>The Vienna University of Technology <a href="https://www.eurekalert.org/pub_releases/2012-01/vuot-ayc011612.php" target="_blank" rel="noopener">release</a> is careful about what that means. “The uncertainty principle is of course still true,” it says, but the uncertainty “does not always come from the disturbing influence of the measurement.” Hasegawa is quoted: “The smaller the error in one measurement, the larger the disturbance of the other - this rule still holds.” What failed was Heisenberg’s particular formula for the trade-off, not the existence of a trade-off.</p>
+        <p>Later that year, a group at the University of Toronto reached a similar conclusion with single photons. According to <a href="https://utoronto.ca/news/u-t-scientists-cast-doubt-uncertainty-principle" target="_blank" rel="noopener">University of Toronto News</a>, Lee Rozema and colleagues in Aephraim Steinberg’s group used weak measurements, gentle enough to barely affect the system, and found that “the disturbance induced by the measurement is less than Heisenberg’s precision-disturbance relation would require.” Each weak measurement told them very little on its own; “Each shot only gave us a tiny bit of information about the disturbance,” Rozema said, but repeating the experiment many times built up a reliable picture. “The results force us to adjust our view of exactly what limits quantum mechanics places on measurement,” Rozema said. The article stresses that the quantum world remains uncertain.</p>
+        <h2 id="a-disagreement-about-definitions">A disagreement about definitions</h2>
+        <p>Not everyone accepted that Heisenberg had been shown wrong. In a 2013 paper in Physical Review Letters titled <a href="https://www.arxiv.org/abs/1306.1565" target="_blank" rel="noopener">Proof of Heisenberg’s error-disturbance relation</a>, Paul Busch, Pekka Lahti and Reinhard Werner argued that “Heisenberg-type inequalities can be proven that describe a trade-off between the precision of a position measurement” and the disturbance it causes to momentum.</p>
+        <p>The difference lies in how error and disturbance are defined. Busch, Lahti and Werner use measures that are properties of the measuring device, which they call state independent and which give worst-case estimates across all states. With those definitions, a relation of Heisenberg’s form holds.</p>
+        <p>The disagreement is largely about which quantities best capture Heisenberg’s idea. The fair summary is that the measurement side of the uncertainty principle is subtler than the textbook microscope story, and that whether Heisenberg’s formula is violated depends on how its terms are made precise. The state side, Kennard’s inequality, is not in dispute.</p>
+        <figure class="yt-viz">
+  <figcaption class="yt-viz__cap">Was Heisenberg’s measurement trade-off wrong?</figcaption>
+  <div class="yt-cmp">
+    <div class="yt-cmp__col"><div class="yt-cmp__t">Yes, as stated</div><div class="yt-cmp__k">Strengths</div><ul class="yt-cmp__pro"><li>Vienna and Toronto results, 2012</li><li>In Vienna, Ozawa’s more general relation held</li></ul><div class="yt-cmp__k">Limits</div><ul class="yt-cmp__con"><li>Uses state-dependent definitions</li></ul><div class="yt-cmp__v">The formula needs revising.</div></div>
+    <div class="yt-cmp__col"><div class="yt-cmp__t">No, if defined differently</div><div class="yt-cmp__k">Strengths</div><ul class="yt-cmp__pro"><li>A 2013 proof with device-based, worst-case measures</li></ul><div class="yt-cmp__k">Limits</div><ul class="yt-cmp__con"><li>Answers a slightly different question</li></ul><div class="yt-cmp__v">A trade-off of his form holds.</div></div>
+  </div>
+  <div class="yt-viz__src">Sources: <a href="https://arxiv.org/pdf/1201.1833" target="_blank" rel="noopener">Erhart and others (2012)</a>; <a href="https://utoronto.ca/news/u-t-scientists-cast-doubt-uncertainty-principle" target="_blank" rel="noopener">University of Toronto News (2012)</a>; <a href="https://www.arxiv.org/abs/1306.1565" target="_blank" rel="noopener">Busch, Lahti and Werner (2013)</a>.</div>
+</figure>
+        <h2 id="scale-time-and-the-name">Scale, time and the name</h2>
+        <p>The bound in Kennard’s inequality is set by Planck’s constant, which is extremely small. For objects of everyday size, the spreads it requires are extremely small, which is why a thrown ball seems to have a perfectly definite position and speed. The principle matters for electrons and atoms.</p>
+        <p>Time is a special case. Heisenberg also discussed an uncertainty relation between energy and time, and it is often quoted alongside the position and momentum version. But the <a href="https://plato.stanford.edu/ENTRIES/qt-uncertainty/" target="_blank" rel="noopener">Stanford Encyclopedia</a> notes that the status of the time variable in his illustrations is “not at all clear,” and that “most physical systems do not have a time operator.” That gives the relation between energy and time a different status from the one between position and momentum, and it has to be interpreted with more care, which matters for anyone reading it as a statement about time itself.</p>
+        <p>Is it even a principle? The philosopher Popper argued, according to the encyclopedia, that since the relations follow from the rest of quantum theory, they cannot be a principle. The encyclopedia’s authors reply that the argument is correct but misses the point: many statements in physics are called principles even though they are in fact derivable from other statements in the theory. The name has stuck either way.</p>
+        <p>It also does not mean that measurement in daily life is hopeless, or that anything can happen. Quantum mechanics still makes statistical predictions. What it denies is that both members of certain pairs of quantities can be sharp at the same time.</p>
+        <h2 id="what-it-does-not-mean">What it does not mean</h2>
+        <p>The uncertainty principle is often stretched beyond its subject. It does not say that observation by a conscious mind changes reality; Heisenberg’s disturbance came from light hitting an electron, and the modern inequality concerns quantum states, with no observer in it. It does not say that everything is uncertain, or that knowledge in general is impossible. And it does not apply to people, decisions or relationships.</p>
+        <aside class="yt-cl yt-cl--warn"><div class="yt-cl__k">Watch out</div><div class="yt-cl__t">A metaphor, labelled as one</div><div class="yt-cl__b"><p>People sometimes borrow the uncertainty principle to say that you cannot study something without changing it, or that precision about one thing costs precision about another. As a figure of speech that is harmless, but it is a metaphor, not physics. The principle concerns specific pairs of quantities in quantum systems, and it gives no support to claims about minds, people or the observer creating reality.</p></div></aside>
+        <h2 id="what-this-does-and-does-not-say">What this does and does not say</h2>
+        <p>Read plainly, the uncertainty principle has two parts. One is firm and mathematical: a quantum state cannot sharply define both position and momentum. The other, about how much measuring one disturbs the other, turned out to be subtler than Heisenberg’s microscope suggested, and physicists still debate how best to state it. Neither part involves consciousness, and neither licenses the idea that reality is whatever we expect.</p>
+        <p>Other essays here follow the same physics. The essay on the observer effect, linked above, explains what measurement does in quantum mechanics and what it does not. <a href="/writing/what-entanglement-is">What entanglement is</a> describes correlations that Einstein found troubling. And <a href="/writing/what-spinoza-meant-by-hope-and-fear">what Spinoza meant by hope and fear</a> looks at a philosopher who held that everything follows necessarily from its causes, a view Heisenberg’s 1927 paper rejected for physics.</p>
+
+      <div class="yt-post__takeaway">
+        <div class="yt-post__takeaway-label">The short version</div>
+        <p>In 1927 Werner Heisenberg argued that, for pairs of quantities such as position and momentum, the more precisely one is determined, the less precisely the other can be known. He illustrated this with a thought experiment in which observing an electron with light disturbs it. The same year, Kennard gave the first mathematically exact form, an inequality on the statistical spreads of the two quantities, which Robertson generalised in 1929. That version is not about disturbance at all: it describes how sharply a quantum state can define both quantities at once. In 2012, experiments in Vienna and Toronto found that a Heisenberg-style trade-off between measurement error and disturbance can be beaten; in the Vienna experiment, a more general relation proposed by Masanao Ozawa held. Other physicists showed that, with different definitions, a Heisenberg-type error-disturbance relation can be proved. Either way, the intrinsic uncertainty of quantum states remains. None of this concerns consciousness.</p>
+      </div>
+    </div>
+
+    <div class="yt-opnote">
+      <div class="yt-opnote__label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Author's note</div>
+      <p>Heisenberg’s words are quoted from the 1983 NASA translation of his 1927 paper. The symbols in Kennard’s inequality follow the Stanford Encyclopedia of Philosophy.</p>
+    </div>
+    <section class="yt-faq">
+      <h2 class="yt-faq__h" id="faq">Frequently asked</h2>
+      <details class="yt-faq__item">
+        <summary>What does the uncertainty principle say in simple terms?</summary>
+        <div class="yt-faq__a">That some pairs of quantities, such as position and momentum, cannot both be sharply defined at once: the more narrowly one is pinned down, the more spread out the other must be.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Is the uncertainty principle just about measurement disturbing things?</summary>
+        <div class="yt-faq__a">No. Heisenberg first explained it that way, but its standard exact form, due to Kennard in 1927, is about the spreads of quantities in a quantum state, whatever is done to measure them.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Was Heisenberg’s uncertainty principle proved wrong?</summary>
+        <div class="yt-faq__a">No. Experiments in 2012 found that Heisenberg’s specific formula for the trade-off between measurement error and disturbance can be beaten under one set of definitions, but the uncertainty of quantum states remains, and a 2013 paper proved a Heisenberg-type relation under other definitions.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Why don’t we notice uncertainty in everyday life?</summary>
+        <div class="yt-faq__a">Because the limit is set by Planck’s constant, which is extremely small. For everyday objects the required spreads are extremely small.</div>
+      </details>
+      <details class="yt-faq__item">
+        <summary>Does the uncertainty principle mean the observer creates reality?</summary>
+        <div class="yt-faq__a">No. It involves no conscious observer. Heisenberg’s example involved light hitting an electron, and the modern inequality is a property of quantum states.</div>
+      </details>
+    </section>
+
+    <div class="yt-post__foot">
+      <div class="yt-post__foot-label">Related reading</div>
+      <div class="yt-post__related">
+          <a class="yt-post__rel" href="/writing/what-the-observer-effect-actually-says" aria-label="What the observer effect actually says, and what it does not">
+            <span class="yt-post__rel-cat" aria-hidden="true">Physics and time</span>
+            <span class="yt-post__rel-title">What the observer effect actually says, and what it does not</span>
+          </a>
+          <a class="yt-post__rel" href="/writing/what-entanglement-is" aria-label="What quantum entanglement actually is, and what it is not">
+            <span class="yt-post__rel-cat" aria-hidden="true">Physics and time</span>
+            <span class="yt-post__rel-title">What quantum entanglement actually is, and what it is not</span>
+          </a>
+      </div>
+
+      <div class="yt-post__author">
+        <span class="yt-post__avatar" aria-hidden="true">YT</span>
+        <div>
+          <div class="yt-post__author-name">Yash Tulsyani</div>
+          <div class="yt-post__author-role">Writer</div>
+          <p class="yt-post__author-bio">I write about relationships, insecurity and attention, and about where the physics we borrow to describe them stops being literal. Two books so far, both unpublished.</p>
+          <div class="yt-post__author-links">
+            <a class="yt-post__author-link" href="/about">More about Yash Tulsyani</a>
+            <a class="yt-post__author-link" href="/books">The books</a>
+            <a class="yt-post__author-link" href="/contact">Write to me</a>
+            <a class="yt-post__author-link" href="https://linkedin.com/in/yashtulsyani" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-post__cta">
+        <div class="yt-post__cta-h">The longer version</div>
+        <p>Both books take this argument further than an essay can, and both hold the same line about where the physics stops.</p>
+        <a class="yt-post__btn" href="/books">Read about the books</a>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+<script>
+/* Upgrades the category and date to what is set in WordPress. Progressive
+   enhancement only: the build-time values are already rendered above, so a
+   failure here leaves a correct page rather than a blank one.
+
+   Reads markup WordPress has already emitted. No network request.
+   Hardened per HANDOVER section 3: zero and-and, zero pipe-pipe, ASCII only,
+   addEventListener only. */
+(function(){
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun',
+                'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function metaOf(prop){
+    var m = document.querySelector('meta[property="' + prop + '"]');
+    if(!m){ return ''; }
+    var v = m.getAttribute('content');
+    return v ? v : '';
+  }
+
+  /* Dates are shown in the site's own time (Settings > General is
+     Asia/Kolkata, UTC+5:30; ytconf.SITE_TIMEZONE), not the reader's, so
+     every reader sees the same date and it matches the /writing card.
+     India has no daylight saving, so a fixed offset is exact. */
+  var SITE_OFFSET_MIN = 330;
+  function fmt(v){
+    if(!v){ return ''; }
+    var d = new Date(v);
+    if(isNaN(d.getTime())){ return ''; }
+    var s = new Date(d.getTime() + SITE_OFFSET_MIN * 60000);
+    var day = s.getUTCDate();
+    var dd = day < 10 ? '0' + day : '' + day;
+    return dd + ' ' + MONTHS[s.getUTCMonth()] + ' ' + s.getUTCFullYear();
+  }
+
+  function ldNodes(){
+    var out = [];
+    var tags = document.querySelectorAll('script[type="application/ld+json"]');
+    for(var i = 0; i < tags.length; i++){
+      var data;
+      try { data = JSON.parse(tags[i].textContent); }
+      catch(e){ continue; }
+      var graph = data['@graph'] ? data['@graph'] : [data];
+      for(var j = 0; j < graph.length; j++){ out.push(graph[j]); }
+    }
+    return out;
+  }
+
+  function category(){
+    /* Yoast puts the primary category on the Article node. Some setups do not,
+       so fall back to the middle item of its BreadcrumbList, which is the
+       category step between Home and the post. */
+    var nodes = ldNodes();
+    var i;
+    for(i = 0; i < nodes.length; i++){
+      var sec = nodes[i].articleSection;
+      if(!sec){ continue; }
+      if(Object.prototype.toString.call(sec) === '[object Array]'){
+        if(sec.length){ return String(sec[0]); }
+      } else {
+        return String(sec);
+      }
+    }
+    for(i = 0; i < nodes.length; i++){
+      if(nodes[i]['@type'] !== 'BreadcrumbList'){ continue; }
+      var list = nodes[i].itemListElement;
+      if(!list){ continue; }
+      if(list.length < 3){ continue; }
+      var mid = list[list.length - 2];
+      if(!mid){ continue; }
+      if(mid.name){ return String(mid.name); }
+    }
+    return '';
+  }
+
+  function setAll(sel, text){
+    if(!text){ return; }
+    var els = document.querySelectorAll(sel);
+    for(var i = 0; i < els.length; i++){ els[i].textContent = text; }
+  }
+
+  /* Reading time is NOT taken from Yoast. On this site every post begins
+     with the sidebar synced pattern, and Yoast counts that pattern's code as
+     words, so its estimate (twitter:data2) came out two to three times too
+     long (a live audit on 3 Nov 2026 found 24 to 29 minutes for essays of
+     2,000 to 2,700 words). The baked value is the body at 225 words a minute,
+     and the /writing card shows the same figure. */
+
+  function start(){
+    setAll('[data-yt-cat]', category());
+
+    var pub = metaOf('article:published_time');
+    setAll('[data-yt-date]', fmt(pub));
+
+    /* "Updated" only when the post was genuinely revised. WordPress stamps
+       modified_time on every save, so a same-day one says nothing. */
+    var modRaw = metaOf('article:modified_time');
+    if(!modRaw){ return; }
+    var mod = new Date(modRaw);
+    if(isNaN(mod.getTime())){ return; }
+    var p = new Date(pub);
+    if(!isNaN(p.getTime())){
+      if((mod.getTime() - p.getTime()) / 86400000 < 1){ return; }
+    }
+    var slot = document.querySelector('[data-yt-updated]');
+    if(!slot){ return; }
+    var DOT = String.fromCharCode(183);   /* middot, kept out of the source
+       because WordPress mangles non-ASCII in a Custom HTML block's JS */
+    slot.textContent = ' ' + DOT + ' Updated: ' + fmt(modRaw);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://yashtulsyani.com/writing/what-the-uncertainty-principle-says/#faq",
+      "mainEntityOfPage": "https://yashtulsyani.com/writing/what-the-uncertainty-principle-says/",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does the uncertainty principle say in simple terms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That some pairs of quantities, such as position and momentum, cannot both be sharply defined at once: the more narrowly one is pinned down, the more spread out the other must be."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the uncertainty principle just about measurement disturbing things?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Heisenberg first explained it that way, but its standard exact form, due to Kennard in 1927, is about the spreads of quantities in a quantum state, whatever is done to measure them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was Heisenberg’s uncertainty principle proved wrong?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Experiments in 2012 found that Heisenberg’s specific formula for the trade-off between measurement error and disturbance can be beaten under one set of definitions, but the uncertainty of quantum states remains, and a 2013 paper proved a Heisenberg-type relation under other definitions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why don’t we notice uncertainty in everyday life?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the limit is set by Planck’s constant, which is extremely small. For everyday objects the required spreads are extremely small."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the uncertainty principle mean the observer creates reality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It involves no conscious observer. Heisenberg’s example involved light hitting an electron, and the modern inequality is a property of quantum states."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
