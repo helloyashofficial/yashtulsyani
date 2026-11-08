@@ -51,6 +51,7 @@ BY_SLUG = {
     "what-the-uncertainty-principle-says": "bells",
     "what-the-poincare-conjecture-says": "shrink",
     "what-the-four-horsemen-research-showed": "horsemen",
+    "what-cognitive-dissonance-is": "dissonance",
 }
 BY_SUBJECT = {
     "Relationships": "overlap",
@@ -624,6 +625,15 @@ def horsemen(uid):
     out.append(line(344, 120, 374, 120, "c", ' stroke-dasharray="2 5"'))
     return out
 
+
+def dissonance(uid):
+    """Cognitive dissonance: two lines meant to run together that do not
+    quite meet, and a third that bends to close the gap."""
+    out = [line(60, 100, 230, 100), line(250, 140, 420, 140)]
+    out.append(path("M230 100 C 240 100, 240 140, 250 140", "c", ' stroke-dasharray="2 4"'))
+    out.append(line(60, 170, 420, 170, "b"))
+    return out
+
 def barrier(uid):
     """The shuttle box, reduced to lines: a floor with a low barrier in the
     middle, a figure still on the first side, and the arc of the jump it
@@ -645,7 +655,7 @@ def overlap(uid):
     return [circle(205, 120, 72), circle(275, 120, 72), circle(205, 120, 92, "c"), circle(275, 120, 92, "c")]
 
 
-MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam, bells=bells, shrink=shrink, horsemen=horsemen)
+MOTIFS = dict(loop=loop, fringes=fringes, scatter=scatter, dichotomy=dichotomy, cone=cone, repair=repair, overlap=overlap, muted=muted, regard=regard, spread=spread, slice=slice, echo=echo, coil=coil, settle=settle, pair=pair, series=series, ideal=ideal, spotlight=spotlight, three=three, lookback=lookback, curled=curled, pursue=pursue, barrier=barrier, waver=waver, ticks=ticks, hypercube=hypercube, channels=channels, doubled=doubled, seam=seam, bells=bells, shrink=shrink, horsemen=horsemen, dissonance=dissonance)
 
 
 def cover(slug, subject):
