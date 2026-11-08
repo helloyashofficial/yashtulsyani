@@ -32,6 +32,7 @@ ESSAY42 = '<a href="/writing/what-attachment-styles-actually-measure">what attac
 ESSAY56 = '<a href="/writing/what-the-spotlight-effect-is">what the spotlight effect is</a>'
 ESSAY61 = '<a href="/writing/what-learned-helplessness-actually-showed">what learned helplessness actually showed</a>'
 ESSAY62 = '<a href="/writing/what-spinoza-meant-by-hope-and-fear">what Spinoza meant by hope and fear</a>'
+ESSAY71 = '<a href="/writing/what-cognitive-dissonance-is">what cognitive dissonance is</a>'
 
 POST = dict(
     slug="what-the-impostor-phenomenon-is", num=66, cat="Psychology", read="auto",
@@ -109,7 +110,7 @@ POST = dict(
         ]),
         ("What this does and does not say", [
             "Read carefully, the research supports a modest picture. Many capable people feel like frauds, men and women alike; the feeling has a recognisable shape; it often travels with anxiety and low mood; and the setting matters as well as the person. It does not support treating impostor syndrome as a diagnosis, quoting a precise share of people who have it, or claiming that any particular technique has been shown to cure it.",
-            "Other essays here meet the same ground from different directions. " + ESSAY56.replace(">what the spotlight", ">What the spotlight") + " looks at how much less others notice us than we fear. " + ESSAY61.replace(">what learned", ">What learned") + " describes how the way people explain their setbacks shapes what follows, the mirror image of discounting success. " + ESSAY62.replace(">what Spinoza", ">What Spinoza") + " traces an older argument that fear thrives on doubt. And " + ESSAY42 + " looks at another set of questionnaires whose numbers depend on how they are scored.",
+            "Other essays here meet the same ground from different directions. " + ESSAY56.replace(">what the spotlight", ">What the spotlight") + " looks at how much less others notice us than we fear. " + ESSAY61.replace(">what learned", ">What learned") + " describes how the way people explain their setbacks shapes what follows, the mirror image of discounting success. " + ESSAY62.replace(">what Spinoza", ">What Spinoza") + " traces an older argument that fear thrives on doubt. " + ESSAY71.replace(">what cognitive", ">What cognitive") + " looks at another classic idea about how people square what they do with what they believe. And " + ESSAY42 + " looks at another set of questionnaires whose numbers depend on how they are scored.",
         ]),
     ],
     note=[

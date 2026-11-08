@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-cognitive-dissonance-is": dict(
+        focus="cognitive dissonance",
+        title="Cognitive dissonance: what it is and how the evidence holds",
+        desc="Cognitive dissonance explained: the 1959 one-dollar experiment, When Prophecy Fails, and what a 39-lab replication in 2024 found about the classic theory."),
     "what-the-four-horsemen-research-showed": dict(
         focus="four horsemen",
         title="Gottman's four horsemen: what the research showed",
