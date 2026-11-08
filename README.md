@@ -75,3 +75,7 @@ Every outside claim in an essay links to a primary source that was actually read
 - An essay with no link to a book, the reading list or an essay in another subject.
 - Any em-dash, any `&&` or `||` in a script, or any non-ASCII character in a script. WordPress breaks these.
 - A heading with no colour of its own, which disappears in dark mode.
+
+## Copyright
+
+Copyright (c) 2026 Yash Tulsyani. All rights reserved. The repository is public so the build can be seen, not reused; see `LICENSE`.
