@@ -42,6 +42,7 @@ UCLA = "https://www.psych.ucla.edu/faculty-page/achriste/"
 ESSAY40 = '<a href="/writing/why-reassurance-is-never-enough">why reassurance is never enough</a>'
 ESSAY45 = '<a href="/writing/what-repair-after-an-argument-actually-involves">what repair after an argument involves</a>'
 ESSAY51 = '<a href="/writing/what-rumination-is">what rumination is</a>'
+ESSAY70 = '<a href="/writing/what-the-four-horsemen-research-showed">what the four horsemen research showed</a>'
 
 POST = dict(
     slug="what-the-demand-withdraw-pattern-is", num=60, cat="Relationships", read="auto",
@@ -127,7 +128,7 @@ POST = dict(
         ("What this does and does not say", [
             "Read carefully, the research supports a clear and useful picture. The demand-withdraw loop is common, it is linked to worse outcomes in either direction, and the roles in it depend largely on who wants the change. That makes it a pattern between two people, not a flaw in one of them. The causal story is less certain than the loop makes it feel, and the pattern is not harmful in every circumstance.",
             "In practice, this essay’s suggestion, drawing on the research above, is naming the loop together rather than blaming the other person for their part in it, and noticing which role each person tends to take on which issue. The person withdrawing may need a break to calm down; the person demanding may need to know the issue will actually be returned to.",
-            "Other essays here meet the pattern at different points. " + ESSAY45.replace(">what repair", ">What repair") + " covers what helps after an argument, including breaks and returning to the issue. " + ESSAY40.replace(">why reassurance", ">Why reassurance") + " describes another loop with a similar shape, where asking again brings less relief each time. And " + ESSAY51 + " looks at the inward version of going round in circles.",
+            "Other essays here meet the pattern at different points. " + ESSAY45.replace(">what repair", ">What repair") + " covers what helps after an argument, including breaks and returning to the issue. " + ESSAY40.replace(">why reassurance", ">Why reassurance") + " describes another loop with a similar shape, where asking again brings less relief each time. " + ESSAY70.replace(">what the four", ">What the four") + " looks at the best-known research on conflict and divorce, and how far its predictions go. And " + ESSAY51 + " looks at the inward version of going round in circles.",
         ]),
     ],
     note=[

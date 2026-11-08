@@ -27,6 +27,10 @@ YOAST = {
         focus="observer effect",
         title="The observer effect: what quantum physics actually says",
         desc="The observer effect, explained from the sources: the observer is a detector, not a mind, decoherence is everywhere, and the real puzzle is still open."),
+    "what-the-four-horsemen-research-showed": dict(
+        focus="four horsemen",
+        title="Gottman's four horsemen: what the research showed",
+        desc="Gottman's four horsemen explained: criticism, contempt, defensiveness and stonewalling, what the 14-year study found, and how well they predict divorce."),
     "what-the-poincare-conjecture-says": dict(
         focus="Poincaré conjecture",
         title="The Poincaré conjecture: what it says, simply explained",
